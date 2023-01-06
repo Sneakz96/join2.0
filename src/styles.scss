@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+/*GLOBALS*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--fs-m);
+}
+
+//CLASSES
+.d-none {
+    display: none;
+}
+
+//HEADERS
+h1 {
+    color: var(--dark-navy);
+    font-size: var(--fs-hl);
+    font-weight: 700;
+    margin-top: var(--m5p);
+    margin-left: var(--m5p);
+}
+
+h2{
+     color: var(--dark-navy);
+    font-size: var(--fs-l);
+    margin-top: var(--m20);
+    margin-left: var(--m5p);
+}
+
+h4{
+    color: var(--dark-navy);
+    font-size: var(--fs-l);
+    margin-left: var(--m5p);
+    margin-top: var(--m20);
+}
+
+h5{
+    color: var(--dark-navy);
+    margin-bottom: 3px;
+}
+
+//FONT ROOT
+:root {
+    --fs-m: 18px;
+    --fs-l: 24px;
+    --fs-xl: 30px;
+    --fs-hl: 42px;
+}
+
+//MARGIN ROOT
+:root {
+    --m5: 5px;
+    --m5p: 5%;
+    --m10: 10px;
+    --m10p: 10%;
+    --m20: 20px;
+    --m20p: 20%;
+    --m25: 25px;
+    --m50: 50px;
+}
+
+//COLOR ROOT
+:root {
+    --dark-navy: rgb(42, 54, 71);
+    --menu-active: rgb(9, 25, 49);
+    --light-grey: rgb(205, 205, 205);
+    --white: rgb(246, 247, 248);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

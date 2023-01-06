@@ -1,0 +1,48 @@
+.content {
+    height: 80px;
+    top: 0;
+    right: 0;
+    left: var(--m10p);
+    width: 90%;
+    background-color: #FFFFFF;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+    p {
+        margin-left: var(--m5p);
+    }
+}
+
+.img-content {
+    display: flex;
+    align-items: center;
+    margin-right: var(--m5p);
+}
+
+.faq {
+    height: 20px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.profile-logged {
+    height: 40px;
+    width: 40px;
+    margin-left: var(--m20);
+    border-radius: 50%;
+    background: url(/assets/img/jahleel.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid var(--dark-navy);
+
+    &:hover {
+        cursor: pointer;
+    }
+}

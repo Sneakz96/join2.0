@@ -1,0 +1,126 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    width: 90%;
+    background-color: var(--white);
+}
+
+.headline {
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 18px;
+        font-weight: 100;
+    }
+}
+
+.summery {
+    margin-top: var(--m5p);
+    margin-left: var(--m5p);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+}
+
+.row-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--m25);
+}
+
+.row {
+    display: flex;
+}
+
+.container {
+    width: 200px;
+    height: 150px;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-right: var(--m25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.urgency-date {
+    width: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.urgency {
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 50px;
+    }
+}
+
+.line{
+    width: 0px;
+    height: 75%;
+    border: 1px solid var(--light-grey);
+}
+
+.deadline{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: var(--m10);
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 50px;
+    }
+}
+
+.info {
+    margin-left: var(--m10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.number {
+    font-size: var(--fs-hl);
+    font-weight: bold;
+}
+
+.label {
+    font-size: var(--fs-l);
+    font-weight: 100;
+}
+
+.side-container {
+    p {
+        font-size: var(--fs-hl);
+    }
+}

@@ -1,0 +1,23 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    width: 90%;
+    background-color: var(--white);
+
+    p {
+        margin-right: var(--m5p);
+        margin-left: var(--m5p);
+    }
+}
+
+ul {
+    list-style: none;
+    margin-right: var(--m5p);
+    margin-left: var(--m5p);
+}
+
+.one {
+    margin-top: var(--m5p);
+}

@@ -1,0 +1,54 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    width: 90%;
+    background-color: var(--white);
+}
+
+.overview {
+    margin-top: var(--m50);
+    margin-left: var(--m5p);
+    margin-right: var(--m5p);
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header-container {
+    width: 100%;
+    margin-bottom: var(--m10);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.plus {
+    height: 30px;
+
+    margin-left: var(--m25);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+
+
+//CONTAINER STYLE FOR TS GENERATE 
+.content-container {
+    background-color: white;
+    width: 250px;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+}

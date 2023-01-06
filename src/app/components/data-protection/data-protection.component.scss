@@ -1,0 +1,22 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    height: fit-content;
+    width: 90%;
+    background-color: var(--white);
+    overflow-x: scroll;
+
+    p {
+        margin-right: var(--m5p);
+        margin-left: var(--m5p);
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+.one{
+    margin-top: var(--m5p);
+}

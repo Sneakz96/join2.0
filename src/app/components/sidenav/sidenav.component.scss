@@ -1,0 +1,89 @@
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-navy);
+    height: 100vh;
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    font-size: var(--fs-m);
+
+}
+
+.logo {
+    margin-top: var(--m50);
+
+    :hover {
+        cursor: pointer;
+    }
+}
+
+.menu {
+    width: 55%;
+}
+
+.menu-ul {
+    li {
+        display: flex;
+        list-style: none;
+        margin-bottom: var(--m25);
+
+        &:active {
+            background-color: var(--menu-active);
+        }
+
+        a {
+            color: var(--light-grey);
+            text-decoration: none;
+
+            img {
+                padding-top: 2px;
+                height: 16px;
+                margin-right: var(--m10);
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+
+}
+
+.sub-menu-ul {
+    margin-bottom: var(--m50);
+
+    li {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin-bottom: var(--m10);
+
+        &:hover {
+            background-color: var(--menu-active);
+        }
+
+        &:active {
+            background-color: var(--menu-active);
+        }
+
+        a {
+            color: var(--light-grey);
+            text-decoration: none;
+
+            img {
+                padding-top: 2px;
+                height: 16px;
+                margin-right: var(--m10);
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

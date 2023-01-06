@@ -1,0 +1,194 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    width: 90%;
+    background-color: var(--white);
+}
+
+.create-new-task {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.vector {
+    position: absolute;
+    width: 0px;
+    height: 95%;
+    left: 49%;
+    top: 5%;
+    border: 1px solid var(--light-grey);
+}
+
+.row {
+    margin: var(--m20);
+    width: 400px;
+
+    input {
+        box-sizing: border-box;
+        margin-bottom: var(--m20);
+        width: 90%;
+        padding: 13px 21px;
+        background: white;
+        border: 1px solid var(--light-grey);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &::placeholder {
+            color: var(--light-grey);
+        }
+    }
+
+    select {
+        box-sizing: border-box;
+        margin-bottom: var(--m20);
+        width: 90%;
+        padding: 13px 21px;
+        background: white;
+        border: 1px solid var(--light-grey);
+        border-radius: 10px;
+    }
+}
+
+#dueDate {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.textaria {
+    box-sizing: border-box;
+    background: white;
+    margin-bottom: var(--m20);
+    width: 90%;
+    height: 120px;
+    padding: 13px 21px;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
+
+}
+
+.priority {
+    margin-bottom: var(--m20);
+
+    button {
+        padding: var(--m10) var(--m20);
+        margin: 3px;
+        background-color: var(--white);
+        border: none;
+        border-radius: var(--m10);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+        img {
+            margin-left: var(--m5);
+        }
+
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    }
+}
+
+.subtask {
+    position: relative;
+    display: flex;
+
+    input {
+        margin-bottom: none !important;
+        width: 90%;
+    }
+}
+
+.plus {
+    position: absolute;
+    top: 15px;
+    left: 79%;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.checkbox-container {
+    display: flex;
+
+    input {
+        width: 20px;
+        margin-top: 5px;
+    }
+}
+
+//BTN
+
+.btn-container {
+    position: absolute;
+    bottom: 0px;
+}
+
+.clear-btn {
+    border: none;
+    border-radius: var(--m10);
+    padding: var(--m10) var(--m20);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+    img {
+        margin-left: var(--m10);
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.05);
+        }
+
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+
+.create-task-btn {
+    border: none;
+    padding: var(--m10) var(--m20);
+    margin-left: var(--m20);
+    background-color: var(--dark-navy);
+    border-radius: var(--m10);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+
+    img {
+        margin-left: var(--m10);
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.05);
+        }
+
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+
+.subtasks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 120px;
+    overflow-y: scroll;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        input {
+            width: 20px;
+            margin-top: 10px;
+        }
+    }
+}
