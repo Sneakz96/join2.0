@@ -1,0 +1,62 @@
+.contact-list {
+    background-color: white;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 80px;
+    bottom: 0;
+    width: 20%;
+    margin-left: 10%;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+}
+
+.first-child{
+    height: 40px;
+    width: 65%;
+    margin-left: 20%;
+    align-items: flex-start !important;
+    &:first-child{
+        margin-top: 40px;
+    }
+}
+
+.horizontal-line {
+    margin: 5px;
+    width: 75%;
+    border: 1px solid var(--light-grey);
+    border-radius: 3px;
+}
+
+//CONTACT
+
+.contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 80px;
+    &:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+
+.contact-info{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: var(--m10);
+}
+
+.mail{
+    color: blue;
+}
+.bg-pic {
+    height: 40px;
+    width: 40px;
+    background-color: aquamarine;
+    border-radius: 50%;
+}

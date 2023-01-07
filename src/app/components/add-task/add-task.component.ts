@@ -27,9 +27,6 @@ export class AddTaskComponent implements OnInit {
   @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
 
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
-
-
-
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
 
   constructor(
@@ -143,4 +140,5 @@ export class AddTaskComponent implements OnInit {
     this.clearAllValues();
   }
 
+  
 }

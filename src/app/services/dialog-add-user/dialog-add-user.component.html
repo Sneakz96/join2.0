@@ -1,0 +1,40 @@
+<div class="content">
+    <h1>Contacts | Better with a team</h1>
+    <div class="contact">
+        <div class="contact-head">
+            <div class="circle">
+                <div class="initials">
+                    <span>BL</span>
+                </div>
+            </div>
+            <div class="name">
+                <p>Beatrix<input type="text" [(ngModel)]="constact.firstName"></p>
+                <p>Lauren<input type="text" [(ngModel)]="constact.lastName"></p>
+                <span> <img src="/assets/img/icons/addblue.png">Add Task</span>
+            </div>
+        </div>
+
+        <div class="contact-information">
+            <span>Contact-Information</span>
+            <span class="edit" (click)="editTask()">
+                <img src="/assets/img/icons/edit1.png">Edit Contact
+            </span>
+            <div class="mail">
+                <span>Email</span>
+                <p>BeaLauren@gmail.com</p>
+                <input type="text" [(ngModel)]="constact.email">
+            </div>
+            <div class="phone">
+                <span>Phone</span>
+                <p>+01234567890</p>
+                <input type="text" [(ngModel)]="constact.phone">
+            </div>
+        </div>
+
+
+        <button class="btn" (click)="onSelect('contacts')">
+            Add Contact
+            <img src="/assets/img/icons/new-contact.png">
+        </button>
+    </div>
+</div>

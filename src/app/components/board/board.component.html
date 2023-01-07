@@ -1,32 +1,161 @@
 <div class="content">
     <h1>Board</h1>
-    <div class="searchbox">
+    <div class="box">
         <!--SEARCHBOX HERE-->
+        <input class="searchbox" type="text" placeholder="Find task" #searchedTask><img class="toggle"
+            (click)="searchTask($event)" src="/assets/img/icons/search.png">
+
+        <button class="btn" (click)="addTask()">Add task<img src="/assets/img/icons/add-task.png"></button>
     </div>
+
+
     <div class="overview">
         <div class="column">
             <div class="header-container">
-                <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus">
+                <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
-            <div class="content-container"></div>
+            <div class="content-container">
+
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_1"></div>
+                                <div class="circle_2"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus">
+                <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
-            <div class="content-container"></div>
+            <div class="content-container">
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_4"></div>
+                                <div class="circle_5"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_3"></div>
+                                <div class="circle_2"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus">
+                <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
-            <div class="content-container"></div>
+            <div class="content-container">
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_2"></div>
+                                <div class="circle_3"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus">
+                <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
-            <div class="content-container"></div>
+            <div class="content-container">
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_2"></div>
+                                <div class="circle_4"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
+                        </div>
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_1"></div>
+                                <div class="circle_5"></div>
+                            </div>
+                            <img src="/assets/img/icons/high.png" class="urgency">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

@@ -14,8 +14,7 @@
             <input type="text" class="input-field" placeholder="Enter a title" #title>
 
             <h5>Description</h5>
-            <textarea class="textaria" rows="10" placeholder="Enter a Description"
-                #description></textarea>
+            <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
             <h5>Category</h5>
             <select #category>
                 <option value="" disabled selected hidden>Select task category</option>
@@ -42,11 +41,9 @@
         </div>
         <div class="row row-right">
             <h5>Due date</h5>
-            
+
             <input type="date" id="dueDate" #dueDate>
 
-
-            
             <h5>Prio</h5>
             <div class="priority">
                 <button (click)="setPrio('Urgent')">Urgent<img src="/assets/img/icons/high.png"></button>
@@ -61,7 +58,7 @@
                 <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
             </div>
             <div class="subtasks" #subtasks>
-          
+
             </div>
             <div class="btn-container">
                 <button class="clear-btn" (click)="clearAllValues()">Clear<img src="/assets/img/icons/x.png"></button>

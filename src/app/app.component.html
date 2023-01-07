@@ -5,7 +5,8 @@
     <app-summary *ngIf="loadedFeature === 'summary'"></app-summary>
     <app-board *ngIf="loadedFeature === 'board'"></app-board>
     <app-add-task *ngIf="loadedFeature === 'addTask'"></app-add-task>
-    <app-contacts *ngIf="loadedFeature === 'contacts'"></app-contacts>
+    <app-contact-wrapper *ngIf="loadedFeature === 'contacts'"></app-contact-wrapper>
+
     <app-data-protection *ngIf="loadedFeature === 'dataProtection'"></app-data-protection>
     <app-legal-notice *ngIf="loadedFeature === 'legalNotice'"></app-legal-notice>
     <app-help-section *ngIf="loadedFeature === 'help'"></app-help-section>

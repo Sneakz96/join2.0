@@ -1,0 +1,8 @@
+<div class="contact-list">
+<app-contact-list></app-contact-list>
+</div>
+
+<div class="content">
+<app-contacts *ngIf="loadedFeature === 'contacts'"></app-contacts>
+<app-dialog-add-user *ngIf="loadedFeature === 'addUser'"></app-dialog-add-user>
+</div>

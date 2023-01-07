@@ -2,9 +2,9 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Inter';
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-style: normal;
-    font-weight: 400;
+  
     font-size: var(--fs-m);
 }
 
@@ -15,30 +15,31 @@
 
 //HEADERS
 h1 {
-    color: var(--dark-navy);
-    font-size: var(--fs-hl);
-    font-weight: 700;
-    margin-top: var(--m5p);
-    margin-left: var(--m5p);
+    color: var(--dark-navy) !important;
+    font-size: var(--fs-hl) !important;
+    font-weight: 700 !important;
+    margin-top: var(--m5p) !important;
+    margin-left: var(--m5p) !important;
 }
 
 h2{
-     color: var(--dark-navy);
-    font-size: var(--fs-l);
-    margin-top: var(--m20);
-    margin-left: var(--m5p);
+     color: var(--dark-navy) !important;
+    font-size: var(--fs-l) !important;
+    margin-top: var(--m20) !important;
+    margin-left: var(--m5p) !important;
 }
 
 h4{
-    color: var(--dark-navy);
-    font-size: var(--fs-l);
-    margin-left: var(--m5p);
-    margin-top: var(--m20);
+    color: var(--dark-navy) !important;
+    font-size: var(--fs-l) !important;
+    margin-left: var(--m5p) !important;
+    margin-top: var(--m20) !important;
 }
 
 h5{
-    color: var(--dark-navy);
-    margin-bottom: 3px;
+    color: var(--dark-navy) !important;
+    font-size: var(--fs-m) !important;
+    margin-bottom: 3px !important;
 }
 
 //FONT ROOT
@@ -68,5 +69,3 @@ h5{
     --light-grey: rgb(205, 205, 205);
     --white: rgb(246, 247, 248);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

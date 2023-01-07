@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +20,9 @@ import { LoggedWrapperComponent } from './components/logged-wrapper/logged-wrapp
 import { LoginComponent } from './services/login/login.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { DialogAddUserComponent } from './services/dialog-add-user/dialog-add-user.component';
+import { ContactWrapperComponent } from './components/contact-wrapper/contact-wrapper.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 
 @NgModule({
@@ -32,7 +37,10 @@ import { SummaryComponent } from './components/summary/summary.component';
     ContactsComponent,
     LoginComponent,
     LoggedWrapperComponent,
-    HelpSectionComponent
+    HelpSectionComponent,
+    DialogAddUserComponent,
+    ContactWrapperComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +49,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   providers: [
     MatDatepickerModule,

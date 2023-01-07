@@ -1,0 +1,123 @@
+.content {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    width: 70%;
+    background-color: var(--white);
+}
+
+.contact {
+    margin-top: var(--m5p);
+    margin-left: var(--m5p);
+    width: 100%;
+}
+
+.contact-head {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: var(--m5p);
+}
+
+.circle {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: purple;
+}
+
+.initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+
+    span {
+        font-size: var(--fs-xl);
+    }
+}
+
+.name {
+    margin-left: var(--m5p);
+    width: fit-content;
+
+    p {
+        font-size: var(--fs-xl);
+    }
+
+    span {
+        color: #29ABE2;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.mail {
+    margin-top: var(--m5p);
+    font-weight: bold;
+
+    p {
+        font-weight: 400;
+        margin-top: var(--m10);
+        color: #29ABE2;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.phone {
+    margin-top: var(--m5p);
+    font-weight: bold;
+
+    p {
+        font-weight: 400;
+        margin-top: var(--m10);
+        color: #29ABE2;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.edit {
+    margin-left: var(--m10p);
+
+    img {
+        width: 20px;
+        height: 25px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn {
+    position: fixed;
+    bottom: var(--m10p);
+    right: var(--m10p);
+    display: flex;
+    align-items: center;
+    padding: var(--m10) var(--m20);
+    background-color: var(--dark-navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--m10);
+
+    img {
+        height: 20px;
+        margin-left: var(--m5);
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}

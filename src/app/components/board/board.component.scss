@@ -7,6 +7,68 @@
     background-color: var(--white);
 }
 
+.box {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    margin-right: var(--m5p);
+    margin-top: var(--m50);
+    right: 0;
+    top: 80px;
+}
+
+.btn {
+    margin-top: var(--m20);
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--m10) var(--m20);
+    background-color: var(--dark-navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--m10);
+
+    img {
+        margin-left: var(--m10);
+        height: 16px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}
+
+.searchbox {
+    margin-top: var(--m20);
+    border: 1px solid lightgray;
+    padding: var(--m10) var(--m20);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.toggle {
+    margin-top: var(--m20);
+    border: 1px solid lightgray;
+
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white !important;
+    padding: var(--m10) var(--m10);
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}
+
 .overview {
     margin-top: var(--m50);
     margin-left: var(--m5p);
@@ -16,7 +78,7 @@
 }
 
 .column {
-    width: 250px;
+    width: 20%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -40,15 +102,114 @@
     }
 }
 
-
-
-
 //CONTAINER STYLE FOR TS GENERATE 
 .content-container {
-    background-color: white;
-    width: 250px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     height: 500px;
     border-radius: 15px;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    overflow-y: scroll;
     border-radius: 30px;
+}
+
+//CREATED TASKS
+.task {
+    border-radius: 20px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    margin: 10px;
+    width: 90%;
+    height: fit-content;
+    background-color: white;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}
+
+.task-container {
+    margin: 16px;
+}
+
+.category {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.task-category {
+    color: white;
+    background-color: olive;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.task-content {
+    p {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        color: gray;
+    }
+}
+
+.title {
+    font-weight: bold;
+
+}
+
+.labels {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.assignedTo {
+    max-height: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.urgency {
+    margin-right: 5%;
+    width: 26px;
+}
+
+.circle_1 {
+    width: 20px;
+    height: 20px;
+    background-color: violet;
+    border-radius: 50%;
+}
+
+.circle_2 {
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 50%;
+}
+
+.circle_3 {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 0, 60);
+    border-radius: 50%;
+}
+
+.circle_4 {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(28, 113, 6);
+    border-radius: 50%;
+}
+
+.circle_5 {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(17, 0, 255);
+    border-radius: 50%;
 }
