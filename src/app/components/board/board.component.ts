@@ -24,6 +24,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
+    this.filterTasks();
   }
 
   searchTask(event: Event) {
@@ -40,5 +41,42 @@ export class BoardComponent implements OnInit {
     this.allTasks = JSON.parse((tasks) || '{}');
     console.log(this.allTasks[0].assignedTo);
   }
+
+  //DRAG AND DROP FUNCTION
+  moveTo(){
+    console.log('Task dragged');
+
+  }
+
+  filterTasks() {
+    //FILTER ALL TASK ON STATUS IN WHICH SECTION THE TASK SHOULD BE
+    // this.allTasks = this.allTasks.filter((task) => {
+    //   return task.status === 'toDo';
+    // });
+
+    if (this.allTasks[0].status == 'toDo') {
+      console.log('status is todo');
+
+    } 
+
+    if (this.allTasks[0].status == 'inProgress') {
+  
+      console.log('status is in Progress');
+    }
+
+    if (this.allTasks[0].status == 'awaitingFeedback') {
+  
+      console.log('status: Task is awaiting feedback');
+    }
+
+    if (this.allTasks[0].status == 'done') {
+  
+      console.log('status: Task is Done');
+    }
+
+  }
+
+
+
 
 }

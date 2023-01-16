@@ -20,6 +20,6 @@ export class Task {
         this.priority = task ? task.priority : '';
         this.subtasks = task ? task.subtasks : [];
         this.createdAt = task ? task.createdAt : '';
-        this.status = task ? task.status : '';
+        this.status = 'toDo';
     }
 }

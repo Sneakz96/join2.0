@@ -47,7 +47,7 @@ export class AddTaskComponent implements OnInit {
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
   @ViewChild('category', { static: true }) categoryElement: ElementRef;
-  @ViewChild('assignedTo', { static: true }) assignedToElement: ElementRef;
+  @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
   @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
@@ -58,18 +58,18 @@ export class AddTaskComponent implements OnInit {
     titleElement: ElementRef,
     descriptionElement: ElementRef,
     categoryElement: ElementRef,
-    assignedToElement: ElementRef,
     dueDateElement: ElementRef,
     subInputElement: ElementRef,
     substasksElement: ElementRef,
+    dropdown: ElementRef,
   ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
     this.categoryElement = categoryElement;
-    this.assignedToElement = assignedToElement;
     this.dueDateElement = dueDateElement;
     this.subInputElement = subInputElement;
     this.subtasksElement = substasksElement;
+    this.dropdown = dropdown;
   }
 
   ngOnInit(): void {
@@ -87,6 +87,7 @@ export class AddTaskComponent implements OnInit {
 
   //FETCH ALL INPUT.VALUES
   addTask() {
+
     this.setId();
     this.setDate();
     this.getAllInputs();
@@ -96,6 +97,8 @@ export class AddTaskComponent implements OnInit {
     this.saveToLocalStorage();
     console.log('lc storage set');
   }
+
+
 
   setId() {
     var id = new Date().getTime();
@@ -115,10 +118,10 @@ export class AddTaskComponent implements OnInit {
 
   //CREATE SUBTASK
   addSubTask() {
-    console.log('new subTask should be added');
     this.subTaskCreationStatus = 'sub created';
+    console.log(this.subTaskCreationStatus, this.addSubInput);
     this.addedSubTasks.push(this.addSubInput);
-    this.subInputElement.nativeElement.value = '';
+    this.addSubInput = '';
   }
 
 
@@ -129,7 +132,11 @@ export class AddTaskComponent implements OnInit {
     this.form.dueDate = this.dueDateElement.nativeElement.value;
     this.form.assignedTo = this.selectedContacts;
     this.form.subtasks = this.addedSubTasks;
+
+
+
     console.log(this.selectedContacts);
+    console.log(this.addedSubTasks);
   }
 
   //GET CONTACTS COMPONENTS
@@ -147,6 +154,13 @@ export class AddTaskComponent implements OnInit {
     this.titleElement.nativeElement.value = '';
     this.descriptionElement.nativeElement.value = '';
     this.categoryElement.nativeElement.value = '';
+
+
+    //this.dropdown.nativeElement.value = '';
+
+
+    this.selectedContacts = [''];
+
     this.dueDateElement.nativeElement.value = '';
     this.priority = '';
 
@@ -154,7 +168,6 @@ export class AddTaskComponent implements OnInit {
     this.addedSubTasks = [''];
     this.subtasks = [];
 
-    this.selectedContacts = [''];
   }
 
   //SAVE DATA TO JSON FILE
