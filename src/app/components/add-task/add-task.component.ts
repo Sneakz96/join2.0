@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { first } from 'rxjs';
 // import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 @Component({
@@ -143,6 +144,7 @@ export class AddTaskComponent implements OnInit {
   getContacts() {
     this.assignedTo = this.selectedContacts;
 
+
   }
 
   updateSubTask(event: any) {
@@ -213,8 +215,13 @@ export class AddTaskComponent implements OnInit {
 
   contactColorService() {
     // SHOULD SELECT COLOR OF CIRCLE
-    // this.contacts.lastName.charAt(0) = firstLetter;
+    //  firstLetter = this.assignedTo.contact.charAt(0);
+    
 
+    this.assignedTo.forEach(acontact => {
+      let element = document.createElement("assignedCircle");
+      element.innerText = '-';
+    });
     // if (this.firstLetter == 'b, g, s, y') {
     // yellow
     // }
@@ -232,7 +239,7 @@ export class AddTaskComponent implements OnInit {
     // }
 
     // if (this.firstLetter == 'e, q, w') {
-    // green
+    // element.style.color = "green";
     // }
 
     // if (this.firstLetter == 'f, l, r, x') {
@@ -243,6 +250,11 @@ export class AddTaskComponent implements OnInit {
     // grey
     // }
 
+    // document.body.appendChild(contact);
 
   }
+
+
+
+
 }

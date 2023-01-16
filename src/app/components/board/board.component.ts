@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -10,22 +10,102 @@ import { Task } from 'src/app/models/task.class';
 
 export class BoardComponent implements OnInit {
 
+  //BOARD ARRAYS
   public allTasks: Task[] = [];
+
+  toDo = [];
+  inProgress: [] = [];
+  awatingFeedback: [] = [];
+  done = [];
+
+
+
   assignedContacts: [] = [];
   searchedTask: string = '';
+
+  curentDraggedElement: string[] = [];
+
+
 
   @Input() task: Task | any;
   @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
 
+  // @ViewChild('todoContainer', { static: true }) todoContainer: ElementRef;
+  // @ViewChild('inProgressContainer', { static: true }) inProgressContainer: ElementRef;
+  // @ViewChild('awaitingFeedbackContainer', { static: true }) awaitingFeedbackContainer: ElementRef;
+  // @ViewChild('doneContainer', { static: true }) doneContainer: ElementRef;
 
-  constructor(searchedTaskElement: ElementRef) {
+  constructor(
+    searchedTaskElement: ElementRef,
+    todoContainer: ElementRef,
+    inProgressContainer: ElementRef,
+    awaitingFeedbackContainer: ElementRef,
+    doneContainer: ElementRef,
+  ) {
     this.searchedTaskElement = searchedTaskElement;
+    // this.todoContainer = todoContainer;
+    // this.inProgressContainer = inProgressContainer;
+    // this.awaitingFeedbackContainer = awaitingFeedbackContainer;
+    // this.doneContainer = doneContainer;
   }
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
     this.filterTasks();
   }
+
+  loadFromLocalStorage() {
+    var tasks = localStorage.getItem('tasks');
+    this.allTasks = JSON.parse((tasks) || '{}');
+    console.log(this.allTasks[0].assignedTo);
+  }
+
+
+  filterTasks() {
+
+    // let toDo = this.allTasks.filter(t => t.status == 'toDo');
+
+    // let toDoContainer = document.getElementById('toDo') as HTMLInputElement;
+
+    // console.log(toDoContainer);
+
+    // let inProgress = this.allTasks.filter(t => t.status == 'inProgress');
+    // console.log(inProgress);
+
+    // let awaitingFeedback = this.allTasks.filter(t => t.status == 'awaitingFeedback');
+    // console.log(awaitingFeedback);
+
+    // let done = this.allTasks.filter(t => t.status == 'done');
+    // console.log(done);
+  }
+
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   searchTask(event: Event) {
     console.log('search task');
@@ -36,47 +116,10 @@ export class BoardComponent implements OnInit {
     console.log('addTask');
   }
 
-  loadFromLocalStorage() {
-    var tasks = localStorage.getItem('tasks');
-    this.allTasks = JSON.parse((tasks) || '{}');
-    console.log(this.allTasks[0].assignedTo);
-  }
 
   //DRAG AND DROP FUNCTION
-  moveTo(){
+  moveTo() {
     console.log('Task dragged');
-
   }
-
-  filterTasks() {
-    //FILTER ALL TASK ON STATUS IN WHICH SECTION THE TASK SHOULD BE
-    // this.allTasks = this.allTasks.filter((task) => {
-    //   return task.status === 'toDo';
-    // });
-
-    if (this.allTasks[0].status == 'toDo') {
-      console.log('status is todo');
-
-    } 
-
-    if (this.allTasks[0].status == 'inProgress') {
-  
-      console.log('status is in Progress');
-    }
-
-    if (this.allTasks[0].status == 'awaitingFeedback') {
-  
-      console.log('status: Task is awaiting feedback');
-    }
-
-    if (this.allTasks[0].status == 'done') {
-  
-      console.log('status: Task is Done');
-    }
-
-  }
-
-
-
 
 }

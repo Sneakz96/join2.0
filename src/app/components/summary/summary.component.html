@@ -6,15 +6,15 @@
         <div class="row-container">
             <div class="row">
                 <div class="container">
-                    <span id="" class="number">{{ 3 }}</span>
+                    <span id="" class="number">{{ todos }}</span>
                     <span id="" class="label">Tasks on Board</span>
                 </div>
                 <div class="container">
-                    <span id="" class="number">4</span>
+                    <span id="" class="number">{{ inProgress }}</span>
                     <span id="" class="label">Tasks in Progress</span>
                 </div>
                 <div class="container">
-                    <span id="" class="number">3</span>
+                    <span id="" class="number">{{ feedback }}</span>
                     <span id="" class="label">Awaiting Feedback</span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="info-container">
                         <img src="/assets/img/icons/edit-2.png">
                         <div class="info">
-                            <span id="" class="number">2</span>
+                            <span id="" class="number">{{todos}}</span>
                             <span id="" class="label">To-do</span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="info-container">
                         <img src="/assets/img/icons/right.png">
                         <div class="info">
-                            <span id="" class="number">1</span>
+                            <span id="" class="number">{{ done }}</span>
                             <span id="" class="label">Done</span>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="side-container">
-            <span>#GOOD MORNING</span>
+            <span>#{{ dayTime }}</span>
             <span>#JAHLEEL</span>
         </div>
     </div>

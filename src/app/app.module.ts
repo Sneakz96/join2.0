@@ -28,6 +28,7 @@ import { ContactListComponent } from './components/contact-list/contact-list.com
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     WelcomeComponent
   ],
   imports: [
+    DragDropModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
