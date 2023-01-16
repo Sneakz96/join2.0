@@ -39,6 +39,10 @@
         cursor: pointer;
         transform: scale(1.05);
     }
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .searchbox {
@@ -176,40 +180,21 @@
 
 .urgency {
     margin-right: 5%;
-    width: 26px;
+    height: 12px;
+    width: 16px;
 }
 
-.circle_1 {
+
+.circle_ {
     width: 20px;
     height: 20px;
     background-color: violet;
     border-radius: 50%;
 }
 
-.circle_2 {
+.assignedContact {
     width: 20px;
     height: 20px;
-    background-color: orange;
-    border-radius: 50%;
-}
-
-.circle_3 {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(255, 0, 60);
-    border-radius: 50%;
-}
-
-.circle_4 {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(28, 113, 6);
-    border-radius: 50%;
-}
-
-.circle_5 {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(17, 0, 255);
+    background-color: cadetblue;
     border-radius: 50%;
 }

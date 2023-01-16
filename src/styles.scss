@@ -4,7 +4,7 @@
     padding: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-style: normal;
-  
+
     font-size: var(--fs-m);
 }
 
@@ -22,24 +22,29 @@ h1 {
     margin-left: var(--m5p) !important;
 }
 
-h2{
-     color: var(--dark-navy) !important;
+h2 {
+    color: var(--dark-navy) !important;
     font-size: var(--fs-l) !important;
     margin-top: var(--m20) !important;
     margin-left: var(--m5p) !important;
 }
 
-h4{
+h4 {
     color: var(--dark-navy) !important;
     font-size: var(--fs-l) !important;
     margin-left: var(--m5p) !important;
     margin-top: var(--m20) !important;
 }
 
-h5{
+h5 {
     color: var(--dark-navy) !important;
     font-size: var(--fs-m) !important;
     margin-bottom: 3px !important;
+}
+
+h6{
+    color: var(--dark-navy) !important;
+    font-size: var(--fs-l) !important;
 }
 
 //FONT ROOT
@@ -68,4 +73,14 @@ h5{
     --menu-active: rgb(9, 25, 49);
     --light-grey: rgb(205, 205, 205);
     --white: rgb(246, 247, 248);
+
+    //CONTACTCOLORSERVICE
+    --yellow: rgb(212, 255, 0);
+    --orange: rgb(255, 191, 0);
+    --red: rgb(255, 0, 0);
+    --blue: rgb(0, 64, 255);
+    --green: rgb(0, 255, 17);
+    --purple: rgb(200, 0, 255);
+    --grey: rgb(129, 129, 125);
+
 }

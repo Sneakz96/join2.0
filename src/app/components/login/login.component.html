@@ -1,0 +1,33 @@
+<div class="wrapper">
+    <h6>Sign in to Join</h6>
+    <div class="form-container">
+
+        <div class="google-container">
+            <button class="google-login" mat-stroked-button>
+                <img class="google-icon" src=""/>
+                <span class="continue-text">Continue with Google</span>
+            </button>
+            <span class="bottom-text">Or</span>
+        </div>
+
+        <form [formGroup]="loginForm" class="reg-form" ngNativeValidate (ngSubmit)="loginUser()">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput type="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput type="password">
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button class="login">Login</button>
+                <button mat-raised-button class="guest-login" (click)="openDialog()">Try as guest</button>
+            </div>
+        </form>
+        <div class="login-container">
+            <a href="#">Forgot password?</a>
+            <a routerLink="/sign-up">Sign up</a>
+        </div>
+    </div>
+</div>

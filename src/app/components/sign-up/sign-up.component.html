@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <h6>Join registration</h6>
+    <div class="form-container">
+        <form [formGroup]="signForm" class="reg-form" ngNativeValidate (ngSubmit)="signUp()">
+            <mat-form-field appearance="outline">
+                <mat-label>Display name</mat-label>
+                <input matInput #nameField formControlName="displayName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email"  #emailField formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password"  #passwordField formControlName="password">
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button type="submit" class="sign-up">Sign up</button>
+                <button mat-raised-button [disabled]="false" class="guest-login" (click)="openDialog()">Try as guest</button>
+            </div>
+        </form>
+
+        <div class="google-container">
+            <span class="top-text">Or</span>
+            <button class="google-login" mat-stroked-button>
+                <img class="google-icon" src="" />
+                <span class="continue-text">Continue with Google</span>
+            </button>
+        </div>
+
+        <div class="login-container">
+            <span class="all-ready-use">You already use Join?</span>
+            <a routerLink="/login">Log in to an existing workspace</a>
+        </div>
+    </div>
+
+</div>

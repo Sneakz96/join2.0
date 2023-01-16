@@ -1,4 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Task } from 'src/app/models/task.class';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+// import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 @Component({
   selector: 'app-add-task',
@@ -8,137 +12,224 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 export class AddTaskComponent implements OnInit {
 
+  @Input() task: Task | any;
+
+
+
+  public allTasks: any[] = [];
+
+  //SUBTASKS
+  subTaskCreationStatus = 'no subtask created';
+  addSubInput: string = '';
+  addedSubTasks: string[] = [];
+
+  //CONTACTS
+  contact = new FormControl();
+  selectedContacts: string[] = [];
+  contactList: string[] = ['Anna', 'Musti', 'Olivia', 'Verena', 'Peter', 'Max'];
+  dropdownSettings: IDropdownSettings = {};
+  dropDownForm!: FormGroup;
+
   //INPUT FIELDS
+  id!: number;
   title: string = '';
   description: string = '';
   category: string = '';
-  assignedTo: string = '';
+  assignedTo: string[] = [];
   dueDate: string = '';
   priority: string = '';
   createdAt!: number;
-
-  subtasks: string = '';
+  subtasks: string[] = [];
   subInput: string = '';
 
+  form = new Task();
+
   @ViewChild('title', { static: true }) titleElement: ElementRef;
-  @ViewChild('description', { static: true }) descripitionElement: ElementRef;
+  @ViewChild('description', { static: true }) descriptionElement: ElementRef;
   @ViewChild('category', { static: true }) categoryElement: ElementRef;
   @ViewChild('assignedTo', { static: true }) assignedToElement: ElementRef;
   @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
-
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
 
+
   constructor(
+    private fb: FormBuilder,
     titleElement: ElementRef,
-    descripitionElement: ElementRef,
+    descriptionElement: ElementRef,
     categoryElement: ElementRef,
     assignedToElement: ElementRef,
     dueDateElement: ElementRef,
-
     subInputElement: ElementRef,
     substasksElement: ElementRef,
-
   ) {
     this.titleElement = titleElement;
-    this.descripitionElement = descripitionElement;
+    this.descriptionElement = descriptionElement;
     this.categoryElement = categoryElement;
     this.assignedToElement = assignedToElement;
     this.dueDateElement = dueDateElement;
-
-
     this.subInputElement = subInputElement;
     this.subtasksElement = substasksElement;
   }
 
   ngOnInit(): void {
     this.getContacts();
+    this.dropdownSettings = {
+      allowSearchFilter: true,
+      // idField: 'contact_id',
+      // textField: 'contact_name',
+    };
+    this.dropDownForm = this.fb.group({
+      myContacts: [this.selectedContacts]
+    });
+
   }
 
   //FETCH ALL INPUT.VALUES
-  fetchInputValues(event: Event) {
-    this.title = this.titleElement.nativeElement.value;
-    this.description = this.descripitionElement.nativeElement.value;
-    this.category = this.categoryElement.nativeElement.value;
-    this.dueDate = this.dueDateElement.nativeElement.value;
-    this.assignedTo = this.assignedToElement.nativeElement.value;
+  addTask() {
+    this.setId();
     this.setDate();
+    this.getAllInputs();
+    //this.contactColorService();
     this.saveDataToJson();
+    this.clearAllValues();
+    this.saveToLocalStorage();
+    console.log('lc storage set');
   }
 
-  //GET CONTACTS COMPONENTS
-  getContacts() {
-    console.log('get Contacts');
-  }
-
-  //LOG PRIORITY
-  setPrio(prio: string) {
-    this.priority = prio;
+  setId() {
+    var id = new Date().getTime();
+    this.form.id = id / 1000000000;
   }
 
   //SET CREATION TIME
   setDate() {
     var date = new Date().getTime();
-    this.createdAt = date;
+    this.form.createdAt = date;
+  }
+
+  //LOG PRIORITY
+  setPrio(prio: string) {
+    this.form.priority = prio;
   }
 
   //CREATE SUBTASK
   addSubTask() {
-    this.subInput = this.subInputElement.nativeElement.value;
-    this.subtasks = this.subtasksElement.nativeElement.value;
-    if (this.subInput === '') {
-      console.log('error');
-    } else {
-      this.subtasks;
-      this.addSubTask_Template();
-
-    }
+    console.log('new subTask should be added');
+    this.subTaskCreationStatus = 'sub created';
+    this.addedSubTasks.push(this.addSubInput);
     this.subInputElement.nativeElement.value = '';
   }
 
-  addSubTask_Template() {
-    console.log('subTask created');
-    return `<div class="_2">
-    <input type="checkbox">
-    <label for="checkbox">Subtask 2</label>
-    </div>`;
+
+  getAllInputs() {
+    this.form.title = this.titleElement.nativeElement.value;
+    this.form.description = this.descriptionElement.nativeElement.value;
+    this.form.category = this.categoryElement.nativeElement.value;
+    this.form.dueDate = this.dueDateElement.nativeElement.value;
+    this.form.assignedTo = this.selectedContacts;
+    this.form.subtasks = this.addedSubTasks;
+    console.log(this.selectedContacts);
+  }
+
+  //GET CONTACTS COMPONENTS
+  getContacts() {
+    this.assignedTo = this.selectedContacts;
+
+  }
+
+  updateSubTask(event: any) {
+    this.addSubInput = event.target.value;
   }
 
   //CLEAR ALL INPUT.VALUES
   clearAllValues() {
     this.titleElement.nativeElement.value = '';
-    this.descripitionElement.nativeElement.value = '';
+    this.descriptionElement.nativeElement.value = '';
     this.categoryElement.nativeElement.value = '';
-    this.assignedToElement.nativeElement.value = '';
     this.dueDateElement.nativeElement.value = '';
     this.priority = '';
+
     this.subInputElement.nativeElement.value = '';
-    this.subtasks = '';
+    this.addedSubTasks = [''];
+    this.subtasks = [];
+
+    this.selectedContacts = [''];
   }
 
   //SAVE DATA TO JSON FILE
   saveDataToJson() {
-    var obj = {
-      title: this.title,
-      description: this.description,
-      category: this.category,
-      assignedTo: this.assignedTo,
-      dueDate: this.dueDate,
-      priority: this.priority,
-      subtasks: this.subtasks,
-      createdAt: this.createdAt,
-    }
-
-    const tasksInJson = JSON.stringify(obj);
-    console.log(tasksInJson);
+    this.allTasks.push(this.form);
+    console.log(this.form);
   }
 
-  //CREATE NEW TASK
-  createTask() {
-    this.saveDataToJson();
-    console.log('task created');
-    this.clearAllValues();
+  saveToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(this.allTasks));
   }
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+  onContactSelect(item: any) {
+    this.selectedContacts.push(item);
+    console.log('onItemSelect', this.selectedContacts);
+  }
+  onContactDeSelect(item: any) {
+    this.selectedContacts.splice(item, 1);
+    console.log('onItemDeSelect', this.selectedContacts);
+  }
+  onSelectAll(items: any) {
+    this.selectedContacts.push(items);
+    console.log('onSelectAll', this.selectedContacts);
+  }
+  onUnSelectAll() {
+    this.selectedContacts = [''];
+    console.log('onUnSelectAll fires', this.selectedContacts);
+  }
+
+
+
+  contactColorService() {
+    // SHOULD SELECT COLOR OF CIRCLE
+    // this.contacts.lastName.charAt(0) = firstLetter;
+
+    // if (this.firstLetter == 'b, g, s, y') {
+    // yellow
+    // }
+
+    // if (this.firstLetter ==  'h, n, t, z ') {
+    // orange
+    // }
+
+    // if (this.firstLetter == 'c, u, i, o') {
+    // red
+    // }
+
+    // if (this.firstLetter == 'd, k, p, v') {
+    // blue
+    // }
+
+    // if (this.firstLetter == 'e, q, w') {
+    // green
+    // }
+
+    // if (this.firstLetter == 'f, l, r, x') {
+    // purple
+    // }
+
+    // if (this.firstLetter == 'a, m, j') {
+    // grey
+    // }
+
+
+  }
 }

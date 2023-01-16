@@ -13,7 +13,7 @@ export class ContactWrapperComponent implements OnInit {
   }
 
 
-  loadedFeature = 'addUser';
+  loadedFeature = 'contacts';
   
   onNavigate(feature: string) {
     this.loadedFeature = feature;

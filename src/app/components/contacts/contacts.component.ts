@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddUserComponent } from 'src/app/services/dialog-add-user/dialog-add-user.component'
+import { DialogAddUserComponent } from 'src/app/components/dialogs/dialog-add-user/dialog-add-user.component'
 import { Contact } from 'src/app/models/contact.class';
 
 @Component({

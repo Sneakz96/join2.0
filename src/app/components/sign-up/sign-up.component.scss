@@ -1,0 +1,140 @@
+a,
+a:visited {
+    color: #40D9E1;
+    transition: 125ms ease-in-out;
+}
+
+a:hover {
+    transform: scale(1.05);
+    transition: 125ms ease-in-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+
+input,
+::placeholder,
+mat-label {
+    color: black;
+    font-size: 12px !important;
+}
+
+button {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.sign-up {
+    background-color: var(--dark-navy) !important;
+    color: var(--white) !important;
+    border: none;
+    padding: 3px;
+
+    &::hover {
+        cursor: pointer !important;
+    }
+}
+
+.guest-login {
+    background-color: var(--white) !important;
+    border: none;
+    padding: 3px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    gap: 32px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    min-width: 400px;
+    font-size: 16px;
+}
+
+.reg-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+
+}
+
+.google-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid var(--dark-navy);
+    margin-top: 48px;
+    width: 100%;
+}
+
+.top-text {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    width: 40px;
+    transform: translateY(-10px);
+}
+
+.google-login {
+    position: relative;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: break-spaces;
+    background-color: #fff !important;
+    border: 2px solid var(--dark-navy) !important;
+    color: var(--dark-navy) !important;
+    width: 100%;
+    padding: 4px;
+
+
+
+
+    &:active {
+        color: #4285f4;
+    }
+}
+
+.google-icon {
+    position: absolute;
+    top: -4px;
+    left: -32px;
+    margin-right: 16px;
+    height: 25px;
+    width: auto;
+
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+    gap: 16px
+}
+
+.all-ready-use {
+    font-weight: 500;
+}

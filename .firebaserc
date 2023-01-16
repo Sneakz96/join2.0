@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "join-50c76": {
+      "hosting": {
+        "join.new": [
+          "join-50c76"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "join-50c76"
+  }
+}

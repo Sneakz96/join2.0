@@ -7,6 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
+  menuIsActive = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -16,5 +18,28 @@ export class SidenavComponent implements OnInit {
 
   onSelect(feature: string) {
     this.featureSelected.emit(feature);
+
+    console.log(feature);
+
+    if (feature === 'summary') {
+      this.menuIsActive = true;
+    }
+    if (feature === 'board') {
+      this.menuIsActive = false;
+    }
+  }
+
+
+
+
+
+
+  
+  changeMenuBgColor() {
+    this.menuIsActive = !this.menuIsActive;
+  }
+
+  bgColorService() {
+
   }
 }

@@ -11,12 +11,14 @@
         <!--#CREATE TASK SECTION-->
         <div class="row row-left">
             <h5>Title</h5>
-            <input type="text" class="input-field" placeholder="Enter a title" #title>
+            <input type="text" class="input-field" placeholder="Enter a title" #title required>
 
             <h5>Description</h5>
-            <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
+            <textarea class="textaria" rows="10" placeholder="Enter a Description" #description required>
+            </textarea>
+
             <h5>Category</h5>
-            <select #category>
+            <select #category required>
                 <option value="" disabled selected hidden>Select task category</option>
                 <option value="Management">Management</option>
                 <option value="Marketing">Marketing</option>
@@ -28,13 +30,17 @@
                 <option value="Production">Production</option>
                 <option value="Team">Team</option>
             </select>
+
             <h5>Assigned to</h5>
-            <select #assignedTo>
-                <option value="" disabled selected hidden>Select contacts to assign</option>
-                <!--RENDER CONTACTS HERE-->
-                <option value="a">teast a</option>
-                <option value="b">test b</option>
-            </select>
+            <form [formGroup]="dropDownForm">
+                <ng-multiselect-dropdown #dropdown  class="drop" [placeholder]="'Select contacts'" [settings]="dropdownSettings"
+                    [data]="contactList" formControlName="myContacts" (onSelect)="onContactSelect($event)"
+                    (onSelectAll)="onSelectAll($event)" (onDeSelect)="onContactDeSelect($event)"
+                    (onDeSelectAll)="onUnSelectAll()">
+                </ng-multiselect-dropdown>
+            </form>
+
+
         </div>
         <div class="vector">
 
@@ -42,27 +48,32 @@
         <div class="row row-right">
             <h5>Due date</h5>
 
-            <input type="date" id="dueDate" #dueDate>
+            <input type="date" id="dueDate" #dueDate required>
 
             <h5>Prio</h5>
             <div class="priority">
-                <button (click)="setPrio('Urgent')">Urgent<img src="/assets/img/icons/high.png"></button>
-                <button (click)="setPrio('Medium')">Medium<img src="/assets/img/icons/normal.png"></button>
-                <button (click)="setPrio('Low')">Low<img src="/assets/img/icons/low.png"></button>
+                <button (click)="setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
+                <button (click)="setPrio('Medium')">Medium<img src="/assets/img/icons/Medium.png"></button>
+                <button (click)="setPrio('Low')">Low<img src="/assets/img/icons/Low.png"></button>
             </div>
 
             <h5>Subtasks</h5>
 
             <div class="subtask">
-                <input type="text" placeholder="Add new subtask" #subInput>
+                <input type="text" (input)="updateSubTask($event)" placeholder="Add new subtask" #subInput
+                    [(ngModel)]="addSubInput">
                 <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
             </div>
             <div class="subtasks" #subtasks>
 
+                <div class="_2" *ngFor="let subtasks of addedSubTasks">
+                    <input type="checkbox" checked>
+                    <label for="checkbox">{{ subtasks }}</label>
+                </div>
             </div>
             <div class="btn-container">
                 <button class="clear-btn" (click)="clearAllValues()">Clear<img src="/assets/img/icons/x.png"></button>
-                <button class="create-task-btn" (click)="fetchInputValues($event)">Create Task<img
+                <button class="create-task-btn" (click)="addTask()">Create Task<img
                         src="/assets/img/icons/create.png"></button>
             </div>
         </div>

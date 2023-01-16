@@ -70,7 +70,48 @@
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+}
 
+
+
+form {
+    box-sizing: border-box;
+    background: white;
+    width: 90%;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
+}
+
+::ng-deep .drop {
+    width: 100% !important;
+}
+
+::ng-deep .dropdown-btn {
+    width: 90% !important;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 10px;
+    border: none !important;
+}
+
+::ng-deep .selected-item {
+    background-color: var(--dark-navy) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 10px !important;
+}
+
+::ng-deep .dropdown-list {
+    border-radius: 10px !important;
+}
+
+::ng-deep .multiselect-item-checkbox {
+    ::before {
+        border: 2px solid var(--dark-navy) !important;
+    }
+}
+
+.multiselect-dropdown {
+    width: 90% !important;
 }
 
 .priority {
@@ -180,6 +221,7 @@
     width: 100%;
     height: 120px;
     overflow-y: scroll;
+    margin-bottom: var(--m10p);
 
     div {
         display: flex;

@@ -12,7 +12,8 @@ export class AppComponent {
   }
 
 
-  loadedFeature = 'board';
+
+  loadedFeature = 'addTask';
 
   onNavigate(feature: string) {
     this.loadedFeature = feature;
