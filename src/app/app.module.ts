@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { FirestoreModule } from "@angular/fire/firestore";
@@ -30,6 +31,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +50,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DialogGuestLoginComponent,
     SignUpComponent,
     LoginComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     DragDropModule,
@@ -62,6 +64,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatNativeDateModule,
     MatDialogModule,
     FirestoreModule,
+    MatSelectModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     NgMultiSelectDropDownModule.forRoot(),
   ],

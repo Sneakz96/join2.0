@@ -1,6 +1,10 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
+import { MatDialog } from '@angular/material/dialog';
+
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AddTaskComponent } from '../add-task/add-task.component';
+import { Contact } from 'src/app/models/contact.class';
 
 @Component({
   selector: 'app-board',
@@ -10,75 +14,70 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 export class BoardComponent implements OnInit {
 
+  @Input() task: any;
+  @Input() contact!: string[];
+
+  @Output() close = new EventEmitter<boolean>();
+
   //BOARD ARRAYS
   public allTasks: Task[] = [];
 
-  toDo = [];
-  inProgress: [] = [];
-  awatingFeedback: [] = [];
-  done = [];
+  open = false;
+  dueDate: any;
 
+  // toDo = [];
+  // inProgress: [] = [];
+  // awatingFeedback: [] = [];
+  // done = [];
+  // curentDraggedElement: string[] = [];
+  // @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
 
-
-  assignedContacts: [] = [];
-  searchedTask: string = '';
-
-  curentDraggedElement: string[] = [];
-
-
-
-  @Input() task: Task | any;
-  @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
-
-  // @ViewChild('todoContainer', { static: true }) todoContainer: ElementRef;
-  // @ViewChild('inProgressContainer', { static: true }) inProgressContainer: ElementRef;
-  // @ViewChild('awaitingFeedbackContainer', { static: true }) awaitingFeedbackContainer: ElementRef;
-  // @ViewChild('doneContainer', { static: true }) doneContainer: ElementRef;
-
-  constructor(
-    searchedTaskElement: ElementRef,
-    todoContainer: ElementRef,
-    inProgressContainer: ElementRef,
-    awaitingFeedbackContainer: ElementRef,
-    doneContainer: ElementRef,
-  ) {
-    this.searchedTaskElement = searchedTaskElement;
-    // this.todoContainer = todoContainer;
-    // this.inProgressContainer = inProgressContainer;
-    // this.awaitingFeedbackContainer = awaitingFeedbackContainer;
-    // this.doneContainer = doneContainer;
+  constructor(public dialog: MatDialog) {
+    // this.searchedTaskElement = searchedTaskElement;
   }
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
-    this.filterTasks();
+    //this.changeDateAppearance();
+    // setTimeout(() => {
+    //   this.open = true;
+    // }, 125);
   }
 
   loadFromLocalStorage() {
     var tasks = localStorage.getItem('tasks');
     this.allTasks = JSON.parse((tasks) || '{}');
     console.log(this.allTasks[0].assignedTo);
+    // console.log(this.allTasks[0].assignedTo[0].charAt(0));
+   
   }
 
+  // changeDateAppearance() {
+  //   let date = new Date(this.task.dueDate.date);
+  //   let day = date.getDate();
+  //   let month = date.getMonth() + 1;
+  //   let year = date.getFullYear();
+  //   this.dueDate = day + '.' + month + '.' + year;
+  // }
 
-  filterTasks() {
+  // editTask(task: any) {
+  //   const dialogRef = this.dialog.open(AddTaskComponent, {
+  //     width: '100%',
+  //     data: {
+  //       task
+  //     },
+  //   });
+  //   dialogRef.componentInstance.openedAsDialogEditTask = true;
+  //   this.closeOverlay();
+  // }
 
-    // let toDo = this.allTasks.filter(t => t.status == 'toDo');
+  // closeOverlay() {
+  //   this.close.emit();
+  // }
 
-    // let toDoContainer = document.getElementById('toDo') as HTMLInputElement;
-
-    // console.log(toDoContainer);
-
-    // let inProgress = this.allTasks.filter(t => t.status == 'inProgress');
-    // console.log(inProgress);
-
-    // let awaitingFeedback = this.allTasks.filter(t => t.status == 'awaitingFeedback');
-    // console.log(awaitingFeedback);
-
-    // let done = this.allTasks.filter(t => t.status == 'done');
-    // console.log(done);
-  }
-
+  // stopProp(event: any) {
+  //   event.stopPropagation();
+  // }
 
 
   drop(event: CdkDragDrop<string[]>) {
@@ -94,9 +93,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-
-
-
+ 
 
 
 
@@ -109,7 +106,7 @@ export class BoardComponent implements OnInit {
 
   searchTask(event: Event) {
     console.log('search task');
-    this.searchedTaskElement.nativeElement.value = '';
+    // this.searchedTaskElement.nativeElement.value = '';
   }
 
   plusTask() {

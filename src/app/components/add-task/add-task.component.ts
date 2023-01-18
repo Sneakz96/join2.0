@@ -2,8 +2,11 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
-import { first } from 'rxjs';
-// import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { first, Observable } from 'rxjs';
+import { ContactListComponent } from '../contact-list/contact-list.component';
+import { Contact } from 'src/app/models/contact.class';
+import { UIService } from 'src/app/services/ui.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-add-task',
@@ -12,9 +15,15 @@ import { first } from 'rxjs';
 })
 
 export class AddTaskComponent implements OnInit {
-
+  dropdownList = [];
   @Input() task: Task | any;
 
+  contactForm = new FormControl('');
+
+
+  // @Input() openedAsDialogNewTask: boolean = false;
+  // @Input() openedAsDialogEditTask: boolean = false;
+  // @Input() openedAsDialogNewTaskContact: boolean = false;
 
 
   public allTasks: any[] = [];
@@ -27,7 +36,7 @@ export class AddTaskComponent implements OnInit {
   //CONTACTS
   contact = new FormControl();
   selectedContacts: string[] = [];
-  contactList: string[] = ['Anna', 'Musti', 'Olivia', 'Verena', 'Peter', 'Max'];
+
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
 
@@ -49,6 +58,7 @@ export class AddTaskComponent implements OnInit {
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
   @ViewChild('category', { static: true }) categoryElement: ElementRef;
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
   @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
@@ -62,7 +72,9 @@ export class AddTaskComponent implements OnInit {
     dueDateElement: ElementRef,
     subInputElement: ElementRef,
     substasksElement: ElementRef,
-    dropdown: ElementRef,
+    assignedContactsElement: ElementRef,
+     dropdown: ElementRef,
+    public dataService: DataService,
   ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
@@ -70,36 +82,38 @@ export class AddTaskComponent implements OnInit {
     this.dueDateElement = dueDateElement;
     this.subInputElement = subInputElement;
     this.subtasksElement = substasksElement;
-    this.dropdown = dropdown;
+    this.assignedContacts = assignedContactsElement;
+
+     this.dropdown = dropdown;
   }
 
   ngOnInit(): void {
-    this.getContacts();
-    this.dropdownSettings = {
-      allowSearchFilter: true,
-      // idField: 'contact_id',
-      // textField: 'contact_name',
-    };
-    this.dropDownForm = this.fb.group({
-      myContacts: [this.selectedContacts]
-    });
 
+    // this.dropdownList =[ 
+    //   { item_id: 3, item_text: 'asd'},
+    //   { item_id: 4, item_text: 'asd'}
+    // ];
+    // this.dropdownSettings = {
+    //   allowSearchFilter: true,
+    //   idField: 'item_id',
+    //   textField: 'item_text',
+    // };
+    // this.dropDownForm = this.fb.group({
+    //   myContacts: []
+    // });
+      console.log(this.dataService.contactList[1].firstName + this.dataService.contactList[1].lastName);
   }
 
   //FETCH ALL INPUT.VALUES
   addTask() {
-
     this.setId();
     this.setDate();
+    this.getAssignedContacts();
     this.getAllInputs();
-    //this.contactColorService();
     this.saveDataToJson();
     this.clearAllValues();
     this.saveToLocalStorage();
-    console.log('lc storage set');
   }
-
-
 
   setId() {
     var id = new Date().getTime();
@@ -125,25 +139,24 @@ export class AddTaskComponent implements OnInit {
     this.addSubInput = '';
   }
 
-
   getAllInputs() {
     this.form.title = this.titleElement.nativeElement.value;
     this.form.description = this.descriptionElement.nativeElement.value;
     this.form.category = this.categoryElement.nativeElement.value;
     this.form.dueDate = this.dueDateElement.nativeElement.value;
-    this.form.assignedTo = this.selectedContacts;
+    // this.form.assignedTo = this.assignedContacts.nativeElement.value;
     this.form.subtasks = this.addedSubTasks;
 
 
-
-    console.log(this.selectedContacts);
-    console.log(this.addedSubTasks);
+    // console.log(this.addedSubTasks);
   }
 
   //GET CONTACTS COMPONENTS
-  getContacts() {
+  getAssignedContacts() {
     this.assignedTo = this.selectedContacts;
 
+    console.log(this.assignedContacts.nativeElement);
+    console.log('fetched contacts:', this.assignedTo);
 
   }
 
@@ -175,7 +188,7 @@ export class AddTaskComponent implements OnInit {
   //SAVE DATA TO JSON FILE
   saveDataToJson() {
     this.allTasks.push(this.form);
-    console.log(this.form);
+    // console.log(this.form);
   }
 
   saveToLocalStorage() {
@@ -213,46 +226,7 @@ export class AddTaskComponent implements OnInit {
 
 
 
-  contactColorService() {
-    // SHOULD SELECT COLOR OF CIRCLE
-    //  firstLetter = this.assignedTo.contact.charAt(0);
-    
 
-    this.assignedTo.forEach(acontact => {
-      let element = document.createElement("assignedCircle");
-      element.innerText = '-';
-    });
-    // if (this.firstLetter == 'b, g, s, y') {
-    // yellow
-    // }
-
-    // if (this.firstLetter ==  'h, n, t, z ') {
-    // orange
-    // }
-
-    // if (this.firstLetter == 'c, u, i, o') {
-    // red
-    // }
-
-    // if (this.firstLetter == 'd, k, p, v') {
-    // blue
-    // }
-
-    // if (this.firstLetter == 'e, q, w') {
-    // element.style.color = "green";
-    // }
-
-    // if (this.firstLetter == 'f, l, r, x') {
-    // purple
-    // }
-
-    // if (this.firstLetter == 'a, m, j') {
-    // grey
-    // }
-
-    // document.body.appendChild(contact);
-
-  }
 
 
 

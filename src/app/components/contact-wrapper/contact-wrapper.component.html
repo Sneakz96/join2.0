@@ -1,8 +1,8 @@
 <div class="contact-list">
-<app-contact-list></app-contact-list>
+    <app-contact-list (sideSelected)="onSelect($any($event))"></app-contact-list>
 </div>
 
 <div class="content">
-<app-contacts *ngIf="loadedFeature === 'contacts'"></app-contacts>
-<app-dialog-add-user *ngIf="loadedFeature === 'addUser'"></app-dialog-add-user>
+    <app-contacts *ngIf="sideSelect === 'contacts'"></app-contacts>
+    <app-dialog-add-user *ngIf="sideSelect === 'addUser'"></app-dialog-add-user>
 </div>

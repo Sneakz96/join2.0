@@ -198,3 +198,18 @@
     background-color: cadetblue;
     border-radius: 50%;
 }
+
+.assigned-to {
+
+    div {
+        height: 20px;
+        width: 20px;
+        padding: 5px;
+        font-size: var(--fs-s);
+        color: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

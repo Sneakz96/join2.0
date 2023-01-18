@@ -18,14 +18,15 @@ export class ContactsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Output() featureSelect = new EventEmitter<string>();
+  @Output() sideSelect = new EventEmitter<string>();
 
   onSelect(feature: string) {
-    this.featureSelect.emit(feature);
-    console.log(feature);
+    this.sideSelect.emit(feature);
+    console.log('should display', feature);
+    console.log(this.sideSelect, feature);
   }
 
-  openDialog() {
-    this.dialog.open(DialogAddUserComponent);
-  }
+  // openDialog() {
+  //   this.dialog.open(DialogAddUserComponent);
+  // }
 }

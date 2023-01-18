@@ -40,19 +40,19 @@ export class SummaryComponent implements OnInit {
   }
 
   getData() {
-     this.allTasks$.subscribe(allTasks => {
-      this.clear();
-      allTasks.forEach((task: any, index: any) => {
-        this.count(task);
-        //this.getLowestDueDate(task, index);
-      });
-     });
+    //  this.allTasks$.subscribe(allTasks => {
+    //   this.clear();
+    //   allTasks.forEach((task: any, index: any) => {
+    //     this.count(task);
+    //     //this.getLowestDueDate(task, index);
+    //   });
+    //  });
   }
 
   getLowestDueDate(task: any, index: any) {
-    if (index == 0) {
-      this.deadline = this.changeDateAppearance(new Date(task.dueDate.date));
-    }
+    // if (index == 0) {
+    //   this.deadline = this.changeDateAppearance(new Date(task.dueDate.date));
+    // }
   }
 
   changeDateAppearance(date: any) {

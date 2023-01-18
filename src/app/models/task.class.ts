@@ -3,7 +3,7 @@ export class Task {
     title: string;
     description: string;
     category: string;
-    assignedTo: string[] = [];
+    assignedTo: any;
     dueDate: string;
     priority: string;
     subtasks: string[] = [];
@@ -15,7 +15,7 @@ export class Task {
         this.title = task ? task.title : '';
         this.description = task ? task.description : '';
         this.category = task ? task.category : '';
-        this.assignedTo = task ? task.assignedTo : [];
+        this.assignedTo = task ? task.assignedTo : '';
         this.dueDate = task ? task.dueDate : '';
         this.priority = task ? task.priority : '';
         this.subtasks = task ? task.subtasks : [];

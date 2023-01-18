@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './contact-wrapper.component.html',
   styleUrls: ['./contact-wrapper.component.scss']
 })
+
 export class ContactWrapperComponent implements OnInit {
 
   constructor() { }
@@ -13,10 +14,10 @@ export class ContactWrapperComponent implements OnInit {
   }
 
 
-  loadedFeature = 'contacts';
-  
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-    
+
+  sideSelect = 'contacts';
+
+  onSelect(feature: string) {
+    this.sideSelect = feature;
   }
 }

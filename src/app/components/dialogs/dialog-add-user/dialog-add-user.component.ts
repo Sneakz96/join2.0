@@ -8,21 +8,25 @@ import { Contact } from 'src/app/models/contact.class';
   styleUrls: ['./dialog-add-user.component.scss']
 })
 export class DialogAddUserComponent implements OnInit {
-  constact = new Contact();
+  
+  contact = new Contact();
 
   constructor() {
-
   }
 
   ngOnInit(): void {
   }
-  @Output() featureSelect = new EventEmitter<string>();
+
+  @Output() sideSelect = new EventEmitter<string>();
 
   onSelect(feature: string) {
-    this.featureSelect.emit(feature);
+    this.sideSelect.emit(feature);
     console.log(feature);
   }
+
   editTask() {
     console.log('edit');
   }
+
+
 }

@@ -32,13 +32,20 @@
             </select>
 
             <h5>Assigned to</h5>
-            <form [formGroup]="dropDownForm">
-                <ng-multiselect-dropdown #dropdown  class="drop" [placeholder]="'Select contacts'" [settings]="dropdownSettings"
-                    [data]="contactList" formControlName="myContacts" (onSelect)="onContactSelect($event)"
-                    (onSelectAll)="onSelectAll($event)" (onDeSelect)="onContactDeSelect($event)"
-                    (onDeSelectAll)="onUnSelectAll()">
+            <mat-form-field appearance="fill">
+                <mat-select [formControl]="contactForm" [placeholder]="'Select contacts'" multiple #assignedContacts>
+                  <mat-option *ngFor="let contact of dataService.contactList" [value]="contact">{{contact.firstName}} {{contact.lastName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            <!-- <form [formGroup]="dropDownForm">
+                <ng-multiselect-dropdown #dropdown class="drop" [placeholder]="'Select contacts'"
+                    [settings]="dropdownSettings" [data]="dropdownList" formControlName="myContacts"
+                    (onSelect)="onContactSelect($event)" (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="onContactDeSelect($event)" (onDeSelectAll)="onUnSelectAll()">
                 </ng-multiselect-dropdown>
-            </form>
+            </form> -->
 
 
         </div>

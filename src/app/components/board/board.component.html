@@ -11,115 +11,113 @@
 
 
 
+    <div class="overview">
+        <div class="column">
+            <div class="header-container">
+                <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+            </div>
+            <!--#RENDER BACKLOG TASKS HERE-->
+            <div class="content-container" id="toDo">
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="overview">
-    <div class="column">
-        <div class="header-container">
-            <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
-        </div>
-        <!--#RENDER BACKLOG TASKS HERE-->
-        <div class="content-container" id="toDo">
-
-            <div class="task" draggable="true"
-                *ngFor="let taskToDo of allTasks">
-                <div class="task-container">
-                    <div class="category">
-                        <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
-                        <span class="task-category">{{ taskToDo.category }}</span>
-                    </div>
-                    <div class="task-content">
-                        <!--EDIT TITLE TO VARIABLES FROM JSON-->
-                        <span class="title">{{ taskToDo.title }}</span>
-                        <p>{{ taskToDo.description }}</p>
-                    </div>
-                    <div class="labels">
-                        <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-                        <div class="assignedTo">
-                            <div class="assignedContact" *ngFor="let contacts of assignedContacts"></div>
+                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks">
+                    <div class="task-container">
+                        <div class="category">
+                            <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+                            <span class="task-category">{{ taskToDo.category }}</span>
                         </div>
-                        <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-                        <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
-                        {{ taskToDo.status }}
+                        <div class="task-content">
+                            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+                            <span class="title">{{ taskToDo.title }}</span>
+                            <p>{{ taskToDo.description }}</p>
+                        </div>
+                        <div class="labels">
+                            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+                            <div class="assignedTo">
+
+
+
+                                
+                                <div class="assigned-to" *ngFor=" let assignedContact of taskToDo.assignedTo">
+                                    <div [ngStyle]="{'background-color': 'orange'}">
+                                        {{ assignedContact.charAt(0) }}
+                                        {{ assignedContact.charAt(0) }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+                            <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
+                            {{ taskToDo.status }}
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-    </div>
-    <div class="column">
-        <div class="header-container">
-            <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
-        </div>
-        <div class="content-container" id="inProgress" #inProgress>
+        <div class="column">
+            <div class="header-container">
+                <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+            </div>
+            <div class="content-container" id="inProgress" #inProgress>
 
+            </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="header-container">
-            <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
-        </div>
-        <div class="content-container" draggable="true" id="awaitingFeedback" #awaitingFeedback>
+        <div class="column">
+            <div class="header-container">
+                <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+            </div>
+            <div class="content-container" draggable="true" id="awaitingFeedback" #awaitingFeedback>
 
-            <div class="task">
-                <div class="task-container">
-                    <div class="category">
-                        <span class="task-category">Category</span>
-                    </div>
-                    <div class="task-content">
-                        <span class="title">test title</span>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                    </div>
-                    <div class="labels">
-                        <div class="assignedTo">
-                            <div class="circle_"></div>
-                            <div class="circle_"></div>
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
                         </div>
-                        <img src="/assets/img/icons/Urgent.png" class="urgency">
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_"></div>
+                                <div class="circle_"></div>
+                            </div>
+                            <img src="/assets/img/icons/Urgent.png" class="urgency">
+                        </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
-    <div class="column">
-        <div class="header-container">
-            <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
-        </div>
-        <div class="content-container" id="done" #done >
+        <div class="column">
+            <div class="header-container">
+                <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+            </div>
+            <div class="content-container" id="done" #done>
 
-            <div class="task">
-                <div class="task-container">
-                    <div class="category">
-                        <span class="task-category">Category</span>
-                    </div>
-                    <div class="task-content">
-                        <span class="title">test title</span>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                    </div>
-                    <div class="labels">
-                        <div class="assignedTo">
-                            <div class="circle_"></div>
-                            <div class="circle_"></div>
+                <div class="task">
+                    <div class="task-container">
+                        <div class="category">
+                            <span class="task-category">Category</span>
                         </div>
-                        <img src="/assets/img/icons/Low.png" class="urgency">
+                        <div class="task-content">
+                            <span class="title">test title</span>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        </div>
+                        <div class="labels">
+                            <div class="assignedTo">
+                                <div class="circle_"></div>
+                                <div class="circle_"></div>
+                            </div>
+                            <img src="/assets/img/icons/Low.png" class="urgency">
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
 </div>
