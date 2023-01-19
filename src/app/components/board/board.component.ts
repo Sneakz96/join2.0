@@ -3,8 +3,8 @@ import { Task } from 'src/app/models/task.class';
 import { MatDialog } from '@angular/material/dialog';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { AddTaskComponent } from '../add-task/add-task.component';
-import { Contact } from 'src/app/models/contact.class';
+import { DataService } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-board',
@@ -32,7 +32,10 @@ export class BoardComponent implements OnInit {
   // curentDraggedElement: string[] = [];
   // @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    public data: DataService,
+    ) {
     // this.searchedTaskElement = searchedTaskElement;
   }
 

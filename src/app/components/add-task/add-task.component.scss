@@ -114,6 +114,47 @@ form {
     width: 90% !important;
 }
 
+::ng-deep .mat-form-field-wrapper {
+
+    border-radius: 10px !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white !important;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px !important;
+}
+
+::ng-deep .assigned {
+    width: 90%;
+
+}
+
+::ng-deep .mat-form-field-infix {
+    border-top: none;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-select-placeholder {
+    color: var(--light-grey) !important;
+}
+
+::ng-deep .mat-option-text {
+    color: var(--dark-navy);
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
+    background-color: var(--dark-navy);
+}
+
+::ng-deep .mat-select-panel {
+    max-width: 90% !important;
+}
+
+
 .priority {
     margin-bottom: var(--m20);
 

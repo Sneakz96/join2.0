@@ -15,6 +15,8 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class AddTaskComponent implements OnInit {
+
+
   dropdownList = [];
   @Input() task: Task | any;
 
@@ -40,12 +42,17 @@ export class AddTaskComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
 
+  assignedCollegues: string[] = [];
+
+
+
+
   //INPUT FIELDS
   id!: number;
   title: string = '';
   description: string = '';
   category: string = '';
-  assignedTo: string[] = [];
+  assignedTo: any[] = [];
   dueDate: string = '';
   priority: string = '';
   createdAt!: number;
@@ -73,7 +80,7 @@ export class AddTaskComponent implements OnInit {
     subInputElement: ElementRef,
     substasksElement: ElementRef,
     assignedContactsElement: ElementRef,
-     dropdown: ElementRef,
+    dropdown: ElementRef,
     public dataService: DataService,
   ) {
     this.titleElement = titleElement;
@@ -84,7 +91,7 @@ export class AddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
 
-     this.dropdown = dropdown;
+    this.dropdown = dropdown;
   }
 
   ngOnInit(): void {
@@ -101,14 +108,13 @@ export class AddTaskComponent implements OnInit {
     // this.dropDownForm = this.fb.group({
     //   myContacts: []
     // });
-      console.log(this.dataService.contactList[1].firstName + this.dataService.contactList[1].lastName);
+    // console.log(this.dataService.contactList[1].firstName + this.dataService.contactList[1].lastName);
   }
 
   //FETCH ALL INPUT.VALUES
   addTask() {
     this.setId();
     this.setDate();
-    this.getAssignedContacts();
     this.getAllInputs();
     this.saveDataToJson();
     this.clearAllValues();
@@ -144,20 +150,8 @@ export class AddTaskComponent implements OnInit {
     this.form.description = this.descriptionElement.nativeElement.value;
     this.form.category = this.categoryElement.nativeElement.value;
     this.form.dueDate = this.dueDateElement.nativeElement.value;
-    // this.form.assignedTo = this.assignedContacts.nativeElement.value;
+    this.form.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
     this.form.subtasks = this.addedSubTasks;
-
-
-    // console.log(this.addedSubTasks);
-  }
-
-  //GET CONTACTS COMPONENTS
-  getAssignedContacts() {
-    this.assignedTo = this.selectedContacts;
-
-    console.log(this.assignedContacts.nativeElement);
-    console.log('fetched contacts:', this.assignedTo);
-
   }
 
   updateSubTask(event: any) {
@@ -169,26 +163,18 @@ export class AddTaskComponent implements OnInit {
     this.titleElement.nativeElement.value = '';
     this.descriptionElement.nativeElement.value = '';
     this.categoryElement.nativeElement.value = '';
-
-
-    //this.dropdown.nativeElement.value = '';
-
-
-    this.selectedContacts = [''];
-
+    this.assignedCollegues = [];
     this.dueDateElement.nativeElement.value = '';
     this.priority = '';
-
     this.subInputElement.nativeElement.value = '';
-    this.addedSubTasks = [''];
+    this.addedSubTasks = [];
     this.subtasks = [];
-
   }
 
   //SAVE DATA TO JSON FILE
   saveDataToJson() {
     this.allTasks.push(this.form);
-    // console.log(this.form);
+    console.log(this.form);
   }
 
   saveToLocalStorage() {
@@ -215,14 +201,14 @@ export class AddTaskComponent implements OnInit {
     this.selectedContacts.splice(item, 1);
     console.log('onItemDeSelect', this.selectedContacts);
   }
-  onSelectAll(items: any) {
-    this.selectedContacts.push(items);
-    console.log('onSelectAll', this.selectedContacts);
-  }
-  onUnSelectAll() {
-    this.selectedContacts = [''];
-    console.log('onUnSelectAll fires', this.selectedContacts);
-  }
+  // onSelectAll(items: any) {
+  //   this.selectedContacts.push(items);
+  //   console.log('onSelectAll', this.selectedContacts);
+  // }
+  // onUnSelectAll() {
+  //   this.selectedContacts = [''];
+  //   console.log('onUnSelectAll fires', this.selectedContacts);
+  // }
 
 
 

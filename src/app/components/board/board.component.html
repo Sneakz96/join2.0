@@ -38,9 +38,9 @@
 
                                 
                                 <div class="assigned-to" *ngFor=" let assignedContact of taskToDo.assignedTo">
-                                    <div [ngStyle]="{'background-color': 'orange'}">
-                                        {{ assignedContact.charAt(0) }}
-                                        {{ assignedContact.charAt(0) }}
+                                    <div [ngStyle]="{'background-color': 'orange'}"> <!--ADD assignedContact.color -->
+                                        <!-- {{ assignedContact.charAt(0) }}
+                                        {{ assignedContact.charAt(0) }} -->
                                     </div>
                                 </div>
 

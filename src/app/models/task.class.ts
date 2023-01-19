@@ -3,7 +3,7 @@ export class Task {
     title: string;
     description: string;
     category: string;
-    assignedTo: any;
+    assignedTo: string[]=[];
     dueDate: string;
     priority: string;
     subtasks: string[] = [];
