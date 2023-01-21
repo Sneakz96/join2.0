@@ -29,20 +29,16 @@ export class DialogAddUserComponent implements OnInit {
   ngOnInit(): void {
     this.setForm();
     this.setUserID();
-    this.saveInputs();
   }
 
   setForm() {
     this.contactForm = new FormGroup({
-      'firstName': new FormControl('', Validators.required),
-      'lastName': new FormControl('', Validators.required),
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'phone': new FormControl('', Validators.required),
+      'firstName': new FormControl(this.contact.firstName, [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      'lastName': new FormControl(this.contact.lastName, Validators.required),
+      'email': new FormControl(this.contact.email, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
+      'phone': new FormControl(this.contact.phone, [Validators.required, Validators.pattern('[- +()0-9]+')]),
     });
-  }
-
-  saveInputs() {
-    // this.contactForm = this.contact;
+    console.log(this.contact.firstName);
   }
 
   setUserID() {
@@ -50,24 +46,60 @@ export class DialogAddUserComponent implements OnInit {
     console.log(this.contact.id);
   }
 
+  setColor() {
+    switch (this.contact.lastName.charCodeAt(0) % 6) {
+      case 0:
+        this.contact.color = 'lightgreen'
+        break;
+      case 1:
+        this.contact.color = 'lightgrey'
+        break;
+      case 2:
+        this.contact.color = 'lightblue'
+        break;
+      case 3:
+        this.contact.color = 'red'
+        break;
+      case 4:
+        this.contact.color = 'yellow'
+        break;
+      case 5:
+        this.contact.color = 'orange'
+        break;
+      case 6:
+        this.contact.color = 'purple'
+        break;
+      case 7:
+        this.contact.color = 'pink'
+        break;
+      default:
+    }
+  }
+
+  setUser() {
+    this.contact.firstName = this.contactForm.value.firstName;
+    this.contact.lastName = this.contactForm.value.lastName;
+    this.setColor();
+    this.contact.email = this.contactForm.value.email;
+    this.contact.phone = this.contactForm.value.phone;
+  }
 
   addUser() {
-    console.log(this.contactForm.value);
-
+    this.setUser();
     this.saveUserToFirestore();
-
     setTimeout(() => {
       this.router.navigate(['/kanbanboard/contacts']);
     }, 500)
   }
 
   saveUserToFirestore() {
-    console.log('should store User in Firestore');
-    // const coll = collection(this.firestore, 'allUser');
-    // setDoc(doc(coll, "s"), this.contactForm);
+    console.log('should store User in Firestore', this.contact);
+
+    const coll = collection(this.firestore, 'allContacts');
+    console.log(coll);
+    setDoc(doc(coll), this.contact.toJSON());
     // s = UNIQUE ID
   }
-
 
   editTask() {
     console.log('edit');

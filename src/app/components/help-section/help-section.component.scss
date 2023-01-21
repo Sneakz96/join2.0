@@ -1,4 +1,4 @@
-.content{
+.content {
     position: fixed;
     right: 0;
     top: 80px;
@@ -7,3 +7,35 @@
     background-color: var(--white);
 }
 
+.description-container{
+    margin-top: var(--m5p);
+}
+
+.description {
+    margin-top: var(--m10);
+    margin-left: var(--m5p);
+    margin-right: var(--m5p);
+}
+
+.content-container {
+    margin-left: var(--m5p);
+    margin-right: var(--m5p);
+    margin-top: var(--m10);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.number {
+    p {
+        text-align: center;
+        font-size: var(--fs-l);
+        color: var(--dark-navy);
+    }
+}
+
+.text {
+    p {
+        margin-left: var(--m10);
+    }
+}

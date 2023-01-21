@@ -12,16 +12,17 @@ export class Contact {
         this.lastName = obj ? obj.lastName : '';
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
+        
     }
 
-    // public toJSON() {
-    //     return {
-    //         id: this.id,
-    //         firstName: this.firstName,
-    //         lastName: this.lastName,
-    //         email: this.email,
-    //         phone: this.phone,
-    //         color: this.color
-    //     }
-    // }
+    public toJSON() {
+        return {
+            id: this.id,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            phone: this.phone,
+            color: this.color
+        }
+    }
 }

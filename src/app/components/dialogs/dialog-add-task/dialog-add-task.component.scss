@@ -1,3 +1,10 @@
+.headline {
+    font-size: var(--fs-hl);
+    font-weight: bold;
+    color: var(--dark-navy);
+    margin-left: var(--m20);
+}
+
 .vector {
     position: absolute;
     width: 0px;
@@ -260,10 +267,10 @@ form {
     }
 }
 
-#alert{
-   margin-top: var(--m20);
-   margin-bottom: var(--m20);
-   margin-left: var(--m5p);
+#alert {
+    margin-top: var(--m20);
+    margin-bottom: var(--m20);
+    margin-left: var(--m5p);
     color: red;
     height: fit-content;
     padding: 8px;

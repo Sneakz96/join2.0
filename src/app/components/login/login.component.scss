@@ -8,6 +8,13 @@
     gap: 32px;
 }
 
+.logo{
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    height: 100px;
+}
+
 a,
 a:visited {
     color: #40D9E1;
@@ -80,7 +87,12 @@ button {
     border: 2px solid var(--dark-navy) !important;
     color: var(--dark-navy) !important;
     width: 100%;
-    padding: 4px;
+    padding: 8px;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
 
     &:active {
         color: var(--dark-navy);
@@ -88,12 +100,8 @@ button {
 }
 
 .google-icon {
-    position: absolute;
-    top: -4px;
-    left: -32px;
-    margin-right: 16px;
-    height: 25px;
-    width: auto;
+    height: 40px;
+    width: 40px;
 }
 
 .bottom-text {
@@ -110,16 +118,23 @@ button {
     background-color: var(--dark-navy) !important;
     color: #fff !important;
     border: none;
-    padding: 5px;
-    :hover{
+    padding: 8px;
+
+    &:hover {
+        transform: scale(1.05);
         cursor: pointer;
     }
 }
 
 .guest-login {
-    background-color: var(--white)!important;
+    background-color: var(--white) !important;
     border: none;
-    padding: 3px;
+    padding: 8px;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
 }
 
 .login-container {

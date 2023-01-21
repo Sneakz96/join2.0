@@ -2,12 +2,14 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { Task } from 'src/app/models/task.class';
 import { MatDialog } from '@angular/material/dialog';
 
+
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 
 
 @Component({
@@ -19,10 +21,6 @@ import { Router } from '@angular/router';
 export class BoardComponent implements OnInit {
 
   @Input() task: any;
-
-
-  @Output() close = new EventEmitter<boolean>();
-
   //BOARD ARRAYS
   public allTasks: Task[] = [];
 
@@ -44,39 +42,52 @@ export class BoardComponent implements OnInit {
     public data: DataService,
     private router: Router,
   ) {
-    // this.searchedTaskElement = searchedTaskElement;
     const coll = collection(firestore, 'allTasks');
-    this.allTasks$ = collectionData(coll);
-    this.allTasks$.subscribe(()=>{
-      console.log(this.allTasks$);
+    this.allTasks$ = collectionData(coll, { idField: 'customIdName' });
+    this.allTasks$.subscribe((changes: any) => {
+      console.log(changes);
     });
   }
 
   ngOnInit(): void {
-
-    //this.changeDateAppearance();
-    // setTimeout(() => {
-    //   this.open = true;
-    // }, 125);
+    this.sortTasksByStatus();
   }
 
-  openDialog() {
+  openTask() {
     const dialogRef = this.dialog.open(TaskDialogComponent);
-    // this.router.navigate(['/kanbanboard/contacts'])
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/kanbanboard/board/'])
+    });
+  }
+
+  addTask() {
+    const dialogRef = this.dialog.open(DialogAddTaskComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
+  searchTask(event: Event) {
+    console.log('search task');
+  }
+
+  sortTasksByStatus() {
+    //GET OBSERVABEL IN NORMAL ARRAY
+    for (let i = 0; i < this.allTasks.length; i++) {
+      console.log(this.allTasks[i]);
+
+    }
+    // status = 'ToDo';
+
+    // status = 'InProgress';
+
+    // status = 'AwaitingFeedback';
+
+    // status = 'Done';
+  }
 
 
-  // changeDateAppearance() {
-  //   let date = new Date(this.task.dueDate.date);
-  //   let day = date.getDate();
-  //   let month = date.getMonth() + 1;
-  //   let year = date.getFullYear();
-  //   this.dueDate = day + '.' + month + '.' + year;
-  // }
+
 
   // editTask(task: any) {
   //   const dialogRef = this.dialog.open(AddTaskComponent, {
@@ -88,15 +99,6 @@ export class BoardComponent implements OnInit {
   //   dialogRef.componentInstance.openedAsDialogEditTask = true;
   //   this.closeOverlay();
   // }
-
-  // closeOverlay() {
-  //   this.close.emit();
-  // }
-
-  // stopProp(event: any) {
-  //   event.stopPropagation();
-  // }
-
 
   // drop(event: CdkDragDrop<string[]>) {
   //   if (event.previousContainer === event.container) {
@@ -112,14 +114,7 @@ export class BoardComponent implements OnInit {
   // }
 
 
-  searchTask(event: Event) {
-    console.log('search task');
-    // this.searchedTaskElement.nativeElement.value = '';
-  }
 
-  plusTask() {
-    console.log('addTask');
-  }
 
 
 

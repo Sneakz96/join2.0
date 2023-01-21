@@ -7,7 +7,7 @@
 
 
 
-    <div class="contact" *ngFor="let contact of allContacts">
+    <div class="contact" *ngFor="let contact of allContacts$ | async">
         <div class="bg-pic"  [ngStyle]="{'background-color': contact.color}">
             <span>{{ contact.firstName.charAt(0) }} {{ contact.lastName.charAt(0) }}</span>
         </div>

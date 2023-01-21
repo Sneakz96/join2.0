@@ -27,23 +27,6 @@ button {
     border-radius: 10px;
 }
 
-.sign-up {
-    background-color: var(--dark-navy) !important;
-    color: var(--white) !important;
-    border: none;
-    padding: 3px;
-
-    &::hover {
-        cursor: pointer !important;
-    }
-}
-
-.guest-login {
-    background-color: var(--white) !important;
-    border: none;
-    padding: 3px;
-}
-
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -52,6 +35,13 @@ button {
     height: 100vh;
     width: 100vw;
     gap: 32px;
+}
+
+.logo{
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    height: 100px;
 }
 
 .form-container {
@@ -75,6 +65,29 @@ button {
     width: 100%;
     gap: 16px;
 
+}
+
+.sign-up {
+    background-color: var(--dark-navy) !important;
+    color: var(--white) !important;
+    border: none;
+    padding: 8px;
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+
+.guest-login {
+    background-color: var(--white) !important;
+    border: none;
+    padding: 8px;
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
 }
 
 .google-container {
@@ -109,8 +122,10 @@ button {
     width: 100%;
     padding: 4px;
 
-
-
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
 
     &:active {
         color: #4285f4;
@@ -118,13 +133,8 @@ button {
 }
 
 .google-icon {
-    position: absolute;
-    top: -4px;
-    left: -32px;
-    margin-right: 16px;
-    height: 25px;
-    width: auto;
-
+    height: 40px;
+    width: 40px;
 }
 
 .login-container {

@@ -16,18 +16,4 @@ export class SidenavComponent implements OnInit {
 
   @Output() featureSelected = new EventEmitter<string>();
 
-  onSelect(feature: string) {
-    this.featureSelected.emit(feature);
-
-    console.log(feature);
-
-    if (feature === 'summary') {
-      this.menuIsActive = true;
-    }
-    if (feature === 'board') {
-      this.menuIsActive = false;
-    }
-  }
-
-
 }

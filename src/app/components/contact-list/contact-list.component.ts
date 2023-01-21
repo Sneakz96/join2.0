@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
 
@@ -10,21 +12,23 @@ import { DataService } from 'src/app/services/data.service';
 
 export class ContactListComponent implements OnInit {
 
-  allContacts: Contact[] = this.dataService.contactList;
+  allContacts$: Observable<any>;
 
   constructor(
+    firestore: Firestore,
     public dataService: DataService,
   ) {
-    this.getAllContacts();
-    
+    const coll = collection(firestore, 'allContacts');
+    this.allContacts$ = collectionData(coll);
+    this.allContacts$.subscribe(()=>{
+      // console.log(this.allContacts$);
+    });
   }
 
   ngOnInit(): void {
+    
   }
-
-  getAllContacts() {
-    //LOAD CONTACTS FROM FIRESTORE IN ARRAY 
-    // this.allContacts.push(this.testContact1, this.testContact2, this.testContact3);
-    console.log(this.allContacts);
+  sortContacts() {
+    // this.contactList.sort((a, b) => a.firstName.localeCompare(b.firstName))
   }
 }

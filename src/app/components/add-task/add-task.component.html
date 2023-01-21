@@ -1,21 +1,21 @@
 <div class="content">
     <h1>Add task</h1>
     <div [ngClass]="{'d-none': taskCreated === true}" id="alert" role="alert">
-            All Input fields are requested!
-        </div>
+        All Input fields are requested!
+    </div>
     <div class="create-new-task">
         <!--#ALERTS-->
         <div ngClass="" class="alert alert-success d-none" id="successAlert" role="alert">
             The Task is created!
         </div>
-        
+
 
 
         <!--#CREATE TASK SECTION-->
         <div class="create">
             <div class="row row-left">
                 <h5>Title</h5>
-                <input type="text" class="input-field" placeholder="Enter a title" #title >
+                <input type="text" class="input-field" placeholder="Enter a title" #title>
 
                 <h5>Description</h5>
                 <textarea class="textaria" rows="10" placeholder="Enter a Description" #description>
@@ -39,7 +39,7 @@
                 <mat-form-field class="assigned" appearance="fill">
                     <mat-select class="assigned-field" [(value)]="assignedCollegues" [formControl]="contactForm"
                         [placeholder]="'Select contacts'" multiple #assignedContacts>
-                        <mat-option *ngFor="let contact of dataService.contactList" [value]="contact">
+                        <mat-option *ngFor="let contact of allContacts$ |async" [value]="contact">
                             {{contact.firstName}} {{contact.lastName}}</mat-option>
                     </mat-select>
                 </mat-form-field>

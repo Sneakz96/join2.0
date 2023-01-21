@@ -131,7 +131,7 @@
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -146,7 +146,7 @@
 
 .task-category {
     color: white;
-    background-color: olive;
+    background-color: var(--dark-navy);
     padding: 5px 15px;
     border-radius: 10px;
 }

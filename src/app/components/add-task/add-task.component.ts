@@ -2,13 +2,10 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
-import { first, Observable } from 'rxjs';
-import { ContactListComponent } from '../contact-list/contact-list.component';
-import { Contact } from 'src/app/models/contact.class';
-import { UIService } from 'src/app/services/ui.service';
+import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { Firestore, collectionData, collection, docData } from '@angular/fire/firestore';
-import { addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-add-task',
@@ -18,16 +15,9 @@ import { addDoc, doc, setDoc } from "firebase/firestore";
 
 export class AddTaskComponent implements OnInit {
 
-  dropdownList = [];
   @Input() task: Task | any;
 
   contactForm = new FormControl('');
-
-
-  // @Input() openedAsDialogNewTask: boolean = false;
-  // @Input() openedAsDialogEditTask: boolean = false;
-  // @Input() openedAsDialogNewTaskContact: boolean = false;
-
 
   public allTasks: any[] = [];
 
@@ -62,6 +52,8 @@ export class AddTaskComponent implements OnInit {
 
   newTask = new Task();
 
+  allContacts$: Observable<any>;
+
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
   @ViewChild('category', { static: true }) categoryElement: ElementRef;
@@ -93,10 +85,15 @@ export class AddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
+    const coll = collection(firestore, 'allContacts');
+    this.allContacts$ = collectionData(coll);
+    this.allContacts$.subscribe(() => {
+      // console.log(this.allContacts$);
+    });
   }
 
-  ngOnInit(): void {}
-  ngOnChanges() {}
+  ngOnInit(): void { }
+  ngOnChanges() { }
 
   //ADD TASK TO LOCAL STORAGE
   addTask() {
@@ -173,10 +170,9 @@ export class AddTaskComponent implements OnInit {
     this.subtasks = [];
   }
 
-
   saveTaskToFirestore() {
     const coll = collection(this.firestore, 'allTasks');
-    setDoc(doc(coll, "s"), this.newTask.toJSON()); 
+    setDoc(doc(coll), this.newTask.toJSON());
     // s = UNIQUE ID
   }
 

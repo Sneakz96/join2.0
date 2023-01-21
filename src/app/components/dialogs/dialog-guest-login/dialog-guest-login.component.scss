@@ -1,0 +1,30 @@
+::ng-deep .mat-dialog-container {
+    width: 350px;
+    border-radius: var(--m10);
+    position: relative;
+}
+
+
+.wrapper {
+    span {
+        font-size: var(--fs-xl);
+    }
+
+    p {
+        margin-top: var(--m5p);
+        margin-bottom: var(--m10);
+    }
+}
+
+.login {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px;
+    border-radius: var(--m10);
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}

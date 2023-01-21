@@ -5,7 +5,7 @@
         <input class="searchbox" type="text" placeholder="Find task" #searchedTask><img class="toggle"
             (click)="searchTask($event)" src="/assets/img/icons/search.png">
 
-        <button class="btn" (click)="plusTask()">Add task<img src="/assets/img/icons/add-task.png"></button>
+        <button class="btn" (click)="addTask()">Add task<img src="/assets/img/icons/add-task.png"></button>
     </div>
 
 
@@ -14,12 +14,12 @@
     <div class="overview">
         <div class="column">
             <div class="header-container">
-                <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+                <h2>To do</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
             <!--#RENDER BACKLOG TASKS HERE-->
             <div class="content-container" id="toDo">
 
-                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks$ | async" (click)="openDialog()">
+                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks$ | async" (click)="openTask()" [routerLink]="[taskToDo.customIdName]">
                     <div class="task-container">
                         <div class="category">
                             <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
@@ -55,7 +55,7 @@
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+                <h2>In progress</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
             <div class="content-container" id="inProgress" #inProgress>
 
@@ -63,7 +63,7 @@
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+                <h2>Awaiting Feedback</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
             <div class="content-container" draggable="true" id="awaitingFeedback" #awaitingFeedback>
 
@@ -90,7 +90,7 @@
         </div>
         <div class="column">
             <div class="header-container">
-                <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="plusTask()">
+                <h2>Done</h2><img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
             </div>
             <div class="content-container" id="done" #done>
 
