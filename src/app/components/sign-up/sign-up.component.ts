@@ -20,15 +20,19 @@ export class SignUpComponent {
   constructor(public dialog: MatDialog, private router: Router, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
+    this.setFormGroup();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogGuestLoginComponent);
+  }
+
+  setFormGroup() {
     this.signForm = new FormGroup({
       'displayName': new FormControl('', Validators.required),
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', Validators.required)
     });
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogGuestLoginComponent);
   }
 
   /* Sign up */
@@ -40,10 +44,10 @@ export class SignUpComponent {
       .createUserWithEmailAndPassword(this.signForm.value.email, this.signForm.value.password)
       .then(res => {
         if (res.credential == null) {
+          res.user.updateProfile({ displayName: this.signForm.value.displayName });
           console.log('You are Successfully signed up!', res);
-          this.router.navigate(['/summary'])
+          this.router.navigate(['/kanbanboard/summary'])
         }
-
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);

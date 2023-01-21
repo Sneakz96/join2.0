@@ -6,10 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
-import { FirestoreModule } from "@angular/fire/firestore";
+import { FirestoreModule, provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
@@ -30,6 +30,12 @@ import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TaskDialogComponent } from './components/dialogs/task-dialog/task-dialog.component';
+import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
+import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
 
 
 @NgModule({
@@ -51,6 +57,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     SignUpComponent,
     LoginComponent,
     WelcomeComponent,
+    TaskDialogComponent,
+    DialogAddTaskComponent,
+    ContentWrapperComponent,
   ],
   imports: [
     DragDropModule,
@@ -67,6 +76,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSelectModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     NgMultiSelectDropDownModule.forRoot(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     MatDatepickerModule,

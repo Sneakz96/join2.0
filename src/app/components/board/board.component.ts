@@ -4,6 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { DataService } from 'src/app/services/data.service';
+import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +19,7 @@ import { DataService } from 'src/app/services/data.service';
 export class BoardComponent implements OnInit {
 
   @Input() task: any;
-  @Input() contact!: string[];
+
 
   @Output() close = new EventEmitter<boolean>();
 
@@ -29,31 +33,42 @@ export class BoardComponent implements OnInit {
   // inProgress: [] = [];
   // awatingFeedback: [] = [];
   // done = [];
-  // curentDraggedElement: string[] = [];
+  // currentDraggedElement: string[] = [];
   // @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
 
+  allTasks$: Observable<any>;
+
   constructor(
+    firestore: Firestore,
     public dialog: MatDialog,
     public data: DataService,
-    ) {
+    private router: Router,
+  ) {
     // this.searchedTaskElement = searchedTaskElement;
+    const coll = collection(firestore, 'allTasks');
+    this.allTasks$ = collectionData(coll);
+    this.allTasks$.subscribe(()=>{
+      console.log(this.allTasks$);
+    });
   }
 
   ngOnInit(): void {
-    this.loadFromLocalStorage();
+
     //this.changeDateAppearance();
     // setTimeout(() => {
     //   this.open = true;
     // }, 125);
   }
 
-  loadFromLocalStorage() {
-    var tasks = localStorage.getItem('tasks');
-    this.allTasks = JSON.parse((tasks) || '{}');
-    console.log(this.allTasks[0].assignedTo);
-    // console.log(this.allTasks[0].assignedTo[0].charAt(0));
-   
+  openDialog() {
+    const dialogRef = this.dialog.open(TaskDialogComponent);
+    // this.router.navigate(['/kanbanboard/contacts'])
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
+
+
 
   // changeDateAppearance() {
   //   let date = new Date(this.task.dueDate.date);
@@ -83,28 +98,18 @@ export class BoardComponent implements OnInit {
   // }
 
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
-
- 
-
-
-
-
-
-
-
-
+  // drop(event: CdkDragDrop<string[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     transferArrayItem(
+  //       event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex,
+  //     );
+  //   }
+  // }
 
 
   searchTask(event: Event) {
@@ -117,9 +122,5 @@ export class BoardComponent implements OnInit {
   }
 
 
-  //DRAG AND DROP FUNCTION
-  moveTo() {
-    console.log('Task dragged');
-  }
 
 }

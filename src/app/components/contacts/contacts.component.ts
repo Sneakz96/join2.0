@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from 'src/app/components/dialogs/dialog-add-user/dialog-add-user.component'
 import { Contact } from 'src/app/models/contact.class';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
@@ -12,8 +13,8 @@ import { Contact } from 'src/app/models/contact.class';
 export class ContactsComponent implements OnInit {
 
   contact = new Contact();
-  
-  constructor(public dialog: MatDialog) { }
+
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +27,8 @@ export class ContactsComponent implements OnInit {
     console.log(this.sideSelect, feature);
   }
 
-  // openDialog() {
-  //   this.dialog.open(DialogAddUserComponent);
-  // }
+  addNewContact() {
+    this.router.navigate(['/kanbanboard/contacts/add-user'])
+  }
+
 }

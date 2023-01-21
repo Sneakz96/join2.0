@@ -72,13 +72,13 @@
     }
 }
 
-.line{
+.line {
     width: 0px;
     height: 75%;
     border: 1px solid var(--light-grey);
 }
 
-.deadline{
+.deadline {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -121,7 +121,20 @@
 }
 
 .side-container {
+    color: var(--dark-navy);
+    display: flex;
+    flex-direction: column;
+
     p {
         font-size: var(--fs-hl);
     }
+}
+
+.daytime {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--m5p);
+}
+
+.logged-name {
+    font-size: var(--fs-xl);
 }

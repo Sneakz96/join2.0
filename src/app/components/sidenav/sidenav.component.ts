@@ -30,16 +30,4 @@ export class SidenavComponent implements OnInit {
   }
 
 
-
-
-
-
-  
-  changeMenuBgColor() {
-    this.menuIsActive = !this.menuIsActive;
-  }
-
-  bgColorService() {
-
-  }
 }

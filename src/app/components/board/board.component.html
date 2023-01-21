@@ -19,7 +19,7 @@
             <!--#RENDER BACKLOG TASKS HERE-->
             <div class="content-container" id="toDo">
 
-                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks">
+                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks$ | async" (click)="openDialog()">
                     <div class="task-container">
                         <div class="category">
                             <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
@@ -30,30 +30,27 @@
                             <span class="title">{{ taskToDo.title }}</span>
                             <p>{{ taskToDo.description }}</p>
                         </div>
+                        {{ taskToDo.status }}
                         <div class="labels">
                             <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
                             <div class="assignedTo">
-
-
-
-                                
-                                <div class="assigned-to" *ngFor=" let assignedContact of taskToDo.assignedTo">
-                                    <div [ngStyle]="{'background-color': 'orange'}"> <!--ADD assignedContact.color -->
-                                        <!-- {{ assignedContact.charAt(0) }}
-                                        {{ assignedContact.charAt(0) }} -->
+                                <div class="assigned-to" *ngFor=" let contact of taskToDo.assignedTo">
+                                    <div [ngStyle]="{'background-color': contact.color}">
+                                        {{ contact.firstName.charAt(0)}}
+                                        {{ contact.lastName.charAt(0)}} 
                                     </div>
                                 </div>
-
-
                             </div>
                             <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
                             <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
-                            {{ taskToDo.status }}
+                            
                         </div>
                     </div>
                 </div>
 
 
+
+                
             </div>
         </div>
         <div class="column">

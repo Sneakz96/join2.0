@@ -1,0 +1,137 @@
+::ng-deep .mat-dialog-container {
+    border-radius: 10px !important;
+}
+
+.task {
+    height: fit-content;
+    width: 450px;
+}
+
+.task-category {
+    padding: 8px;
+    background-color: lightseagreen;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.title {
+    margin-top: var(--m5p);
+    margin-bottom: var(--m5p);
+    font-weight: 400;
+    font-size: var(--fs-hl);
+}
+
+.description {
+    margin-bottom: var(--m5p);
+}
+
+.due-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--m5p);
+    width: 50%;
+
+    p {
+        font-weight: bold;
+    }
+}
+
+.priority {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--m5p);
+    width: 50%;
+
+    p {
+        font-weight: bold;
+    }
+}
+
+.urgency-btn {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+.assigned-to {
+    font-weight: bold;
+
+}
+
+.assignedTo {
+    margin-top: var(--m5p);
+    display: flex;
+    flex-direction: column;
+}
+
+.assigned-contact {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circle {
+    height: 40px;
+    width: 40px;
+    background-color: lightcoral;
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle1 {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(128, 240, 175);
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle2 {
+    height: 40px;
+    width: 40px;
+    background-color: lightskyblue;
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle3 {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(240, 229, 128);
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn{
+    position: relative;
+    left: 97%;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.edit-btn{
+    position: relative;
+    left: 90%;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}

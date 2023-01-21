@@ -1,27 +1,9 @@
-.content {
-    position: fixed;
-    right: 0;
-    top: 80px;
-    bottom: 0;
-    width: 90%;
-    background-color: var(--white);
-}
-
-.create-new-task {
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    flex-direction: column;
-}
-
 .vector {
     position: absolute;
     width: 0px;
-    height: 95%;
+    height: 50%;
     left: 49%;
-    top: 5%;
+    top: 25%;
     border: 1px solid var(--light-grey);
 }
 
@@ -212,7 +194,7 @@ form {
 
 .btn-container {
     position: absolute;
-    bottom: 0px;
+    bottom: 25%;
 }
 
 .clear-btn {

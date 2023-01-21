@@ -106,11 +106,14 @@ button {
     transform: translateY(10px);
 }
 
-.login {
+::ng-deep .login {
     background-color: var(--dark-navy) !important;
     color: #fff !important;
     border: none;
-    padding: 3px;
+    padding: 5px;
+    :hover{
+        cursor: pointer;
+    }
 }
 
 .guest-login {

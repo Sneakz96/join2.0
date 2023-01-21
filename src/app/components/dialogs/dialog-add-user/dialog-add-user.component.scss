@@ -42,13 +42,12 @@
 .name {
     margin-left: var(--m5p);
     width: fit-content;
-
-    p {
-        font-size: var(--fs-xl);
-    }
+    display: flex;
+    flex-direction: column;
 
     span {
         color: #29ABE2;
+        margin-top: var(--m5p);
 
         &:hover {
             cursor: pointer;
@@ -56,9 +55,33 @@
     }
 }
 
+.first-name {
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid var(--dark-navy);
+}
+
+.last-name {
+    padding: 3px;
+    margin-top: 3px;
+    border-radius: 5px;
+    border: 1px solid var(--dark-navy);
+}
+
+
 .mail {
     margin-top: var(--m5p);
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+
+    input {
+        margin-top: var(--m10);
+        width: 20%;
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid var(--dark-navy);
+    }
 
     p {
         font-weight: 400;
@@ -72,8 +95,18 @@
 }
 
 .phone {
-    margin-top: var(--m5p);
+    margin-top: var(--m50);
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+
+    input {
+        margin-top: var(--m10);
+        width: 20%;
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid var(--dark-navy);
+    }
 
     p {
         font-weight: 400;

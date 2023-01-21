@@ -3,7 +3,7 @@ export class Task {
     title: string;
     description: string;
     category: string;
-    assignedTo: string[]=[];
+    assignedTo: any[]=[];
     dueDate: string;
     priority: string;
     subtasks: string[] = [];
@@ -21,5 +21,20 @@ export class Task {
         this.subtasks = task ? task.subtasks : [];
         this.createdAt = task ? task.createdAt : '';
         this.status = 'toDo';
+    }
+
+    public toJSON(){
+        return{
+            id: this.id,
+            title: this.title,
+            description: this.description,
+            category: this.category,
+            assignedTo: this.assignedTo,
+            dueDate: this.dueDate,
+            priority: this.priority,
+            subtasks: this.subtasks,
+            createdAt: this.createdAt,
+            status: this.status
+        }
     }
 }

@@ -12,11 +12,4 @@ export class AppComponent {
     throw new Error('Method not implemented.');
   }
 
-
-
-  loadedFeature = 'addTask';
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 }

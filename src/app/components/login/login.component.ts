@@ -35,7 +35,7 @@ export class LoginComponent {
     this.afAuth
       .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
       .then(res => {
-        this.router.navigate(['/summary']);
+        this.router.navigate(['/kanbanboard']);
         console.log('login successfull', res);
       })
       .catch(err => {

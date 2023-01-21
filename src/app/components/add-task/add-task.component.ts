@@ -1,12 +1,14 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { first, Observable } from 'rxjs';
 import { ContactListComponent } from '../contact-list/contact-list.component';
 import { Contact } from 'src/app/models/contact.class';
 import { UIService } from 'src/app/services/ui.service';
 import { DataService } from 'src/app/services/data.service';
+import { Firestore, collectionData, collection, docData } from '@angular/fire/firestore';
+import { addDoc, doc, setDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-add-task',
@@ -15,7 +17,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class AddTaskComponent implements OnInit {
-
 
   dropdownList = [];
   @Input() task: Task | any;
@@ -44,22 +45,22 @@ export class AddTaskComponent implements OnInit {
 
   assignedCollegues: string[] = [];
 
+  taskCreated = true;
 
-
-
+  titel: string = 'alert';
   //INPUT FIELDS
   id!: number;
   title: string = '';
   description: string = '';
   category: string = '';
-  assignedTo: any[] = [];
+  assignedTo: [] = [];
   dueDate: string = '';
   priority: string = '';
   createdAt!: number;
   subtasks: string[] = [];
   subInput: string = '';
 
-  form = new Task();
+  newTask = new Task();
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -72,6 +73,7 @@ export class AddTaskComponent implements OnInit {
 
 
   constructor(
+    private firestore: Firestore,
     private fb: FormBuilder,
     titleElement: ElementRef,
     descriptionElement: ElementRef,
@@ -90,51 +92,41 @@ export class AddTaskComponent implements OnInit {
     this.subInputElement = subInputElement;
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
-
     this.dropdown = dropdown;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  ngOnChanges() {}
 
-    // this.dropdownList =[ 
-    //   { item_id: 3, item_text: 'asd'},
-    //   { item_id: 4, item_text: 'asd'}
-    // ];
-    // this.dropdownSettings = {
-    //   allowSearchFilter: true,
-    //   idField: 'item_id',
-    //   textField: 'item_text',
-    // };
-    // this.dropDownForm = this.fb.group({
-    //   myContacts: []
-    // });
-    // console.log(this.dataService.contactList[1].firstName + this.dataService.contactList[1].lastName);
-  }
-
-  //FETCH ALL INPUT.VALUES
+  //ADD TASK TO LOCAL STORAGE
   addTask() {
-    this.setId();
-    this.setDate();
     this.getAllInputs();
-    this.saveDataToJson();
-    this.clearAllValues();
-    this.saveToLocalStorage();
+    if (this.taskCreated === true) {
+      this.setId();
+      this.setDate();
+      this.saveTaskToFirestore();
+      this.clearAllValues();
+      console.log('task is created', this.taskCreated);
+    } else {
+      console.log('something wrong');
+    }
   }
 
+  //SET TASK ID
   setId() {
     var id = new Date().getTime();
-    this.form.id = id / 1000000000;
+    this.newTask.id = id / 1000000000;
   }
 
   //SET CREATION TIME
   setDate() {
     var date = new Date().getTime();
-    this.form.createdAt = date;
+    this.newTask.createdAt = date;
   }
 
   //LOG PRIORITY
   setPrio(prio: string) {
-    this.form.priority = prio;
+    this.newTask.priority = prio;
   }
 
   //CREATE SUBTASK
@@ -145,15 +137,25 @@ export class AddTaskComponent implements OnInit {
     this.addSubInput = '';
   }
 
+  //GET TASK INPUTS
   getAllInputs() {
-    this.form.title = this.titleElement.nativeElement.value;
-    this.form.description = this.descriptionElement.nativeElement.value;
-    this.form.category = this.categoryElement.nativeElement.value;
-    this.form.dueDate = this.dueDateElement.nativeElement.value;
-    this.form.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
-    this.form.subtasks = this.addedSubTasks;
+    this.newTask.title = this.titleElement.nativeElement.value;
+    this.newTask.description = this.descriptionElement.nativeElement.value;
+    this.newTask.category = this.categoryElement.nativeElement.value;
+    this.newTask.dueDate = this.dueDateElement.nativeElement.value;
+    this.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
+    this.newTask.subtasks = this.addedSubTasks;
+
+    console.log(this.categoryElement.nativeElement.value);
+    if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '') {
+      this.taskCreated = false;
+      console.log('Please enter infos', this.titleElement.nativeElement.value);
+    } else if (this.titleElement.nativeElement.value.length >= 1) {
+      this.taskCreated = true;
+    }
   }
 
+  //DISPLAYS ALL CREATED SUBTASKS
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
@@ -171,50 +173,11 @@ export class AddTaskComponent implements OnInit {
     this.subtasks = [];
   }
 
-  //SAVE DATA TO JSON FILE
-  saveDataToJson() {
-    this.allTasks.push(this.form);
-    console.log(this.form);
+
+  saveTaskToFirestore() {
+    const coll = collection(this.firestore, 'allTasks');
+    setDoc(doc(coll, "s"), this.newTask.toJSON()); 
+    // s = UNIQUE ID
   }
-
-  saveToLocalStorage() {
-    localStorage.setItem('tasks', JSON.stringify(this.allTasks));
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  onContactSelect(item: any) {
-    this.selectedContacts.push(item);
-    console.log('onItemSelect', this.selectedContacts);
-  }
-  onContactDeSelect(item: any) {
-    this.selectedContacts.splice(item, 1);
-    console.log('onItemDeSelect', this.selectedContacts);
-  }
-  // onSelectAll(items: any) {
-  //   this.selectedContacts.push(items);
-  //   console.log('onSelectAll', this.selectedContacts);
-  // }
-  // onUnSelectAll() {
-  //   this.selectedContacts = [''];
-  //   console.log('onUnSelectAll fires', this.selectedContacts);
-  // }
-
-
-
-
-
-
-
 
 }

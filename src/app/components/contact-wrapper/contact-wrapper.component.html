@@ -1,8 +1,7 @@
 <div class="contact-list">
-    <app-contact-list (sideSelected)="onSelect($any($event))"></app-contact-list>
+    <app-contact-list></app-contact-list>
 </div>
 
-<div class="content">
-    <app-contacts *ngIf="sideSelect === 'contacts'"></app-contacts>
-    <app-dialog-add-user *ngIf="sideSelect === 'addUser'"></app-dialog-add-user>
+<div class="contact-content">
+    <router-outlet></router-outlet>
 </div>

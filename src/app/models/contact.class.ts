@@ -13,4 +13,15 @@ export class Contact {
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
     }
+
+    // public toJSON() {
+    //     return {
+    //         id: this.id,
+    //         firstName: this.firstName,
+    //         lastName: this.lastName,
+    //         email: this.email,
+    //         phone: this.phone,
+    //         color: this.color
+    //     }
+    // }
 }

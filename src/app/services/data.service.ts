@@ -7,7 +7,7 @@ import { Contact } from 'src/app/models/contact.class';
 
 export class DataService {
 
-
+  allTasks: Task[] = [];
 
   contactList: Contact[] = [
     {
@@ -68,7 +68,7 @@ export class DataService {
 
   sortContacts() {
     this.contactList.sort((a, b) => a.firstName.localeCompare(b.firstName))
-}
+  }
 
   // SHOULD SET COLOR OF CIRCLE
   setColor() {
