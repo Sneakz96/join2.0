@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Contact } from 'src/app/models/contact.class';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,24 @@ import { Contact } from 'src/app/models/contact.class';
 export class DataService {
 
   allTasks: Task[] = [];
-
+  taskId: any;
   contactList: Contact[] = [];
 
-  constructor() {
-
+  constructor(
+    private route: ActivatedRoute,
+  ) {
   }
 
+  getRouteParamsOfTasks() {
+    const id = this.route.snapshot.paramMap.get('/:id');
+    console.log('route params:', id);
+
+
+    this.route.paramMap.subscribe(paramMap => {
+      this.taskId = paramMap.get('id');
+
+      console.log('the task id is', this.taskId);
+      console.log(paramMap);
+    });
+  }
 }

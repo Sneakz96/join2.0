@@ -21,8 +21,9 @@ import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-ta
 export class BoardComponent implements OnInit {
 
   @Input() task: any;
-  //BOARD ARRAYS
-  public allTasks: Task[] = [];
+  public allTasks: Task[] = [];//ARRAY FOR SORTING 
+  allTasks$: Observable<any>;
+
 
   open = false;
   dueDate: any;
@@ -34,7 +35,6 @@ export class BoardComponent implements OnInit {
   // currentDraggedElement: string[] = [];
   // @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
 
-  allTasks$: Observable<any>;
 
   constructor(
     firestore: Firestore,
