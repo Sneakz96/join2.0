@@ -11,20 +11,24 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TaskDialogComponent implements OnInit {
 
+  taskOnDialog: any; 
+
   constructor(
     // private firestore: Firestore,
     public dialogRef: MatDialogRef<any>,
     private router: Router,
     public data: DataService,
   ) {
-    this.getTaskData();
+
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this.getTaskData();
+  }
 
   closeDialog() {
     this.dialogRef.close();
-    this.router.navigate(['/kanbanboard/board'])
+    // this.router.navigate(['/kanbanboard/board'])
   }
 
   getTaskData() {

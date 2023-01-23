@@ -21,6 +21,7 @@ import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-ta
 export class BoardComponent implements OnInit {
 
   @Input() task: any;
+  
   public allTasks: Task[] = [];//ARRAY FOR SORTING 
   allTasks$: Observable<any>;
 
@@ -53,10 +54,11 @@ export class BoardComponent implements OnInit {
     this.sortTasksByStatus();
   }
 
-  openTask() {
+  openTask(taskToOpen: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent);
+    dialogRef.componentInstance.taskOnDialog = taskToOpen;
     dialogRef.afterClosed().subscribe(() => {
-      this.router.navigate(['/kanbanboard/board/'])
+      // this.router.navigate(['/kanbanboard/board/'])
     });
   }
 

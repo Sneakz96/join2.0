@@ -14,6 +14,4 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Output() featureSelected = new EventEmitter<string>();
-
 }

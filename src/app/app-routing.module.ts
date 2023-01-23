@@ -19,14 +19,11 @@ const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'kanbanboard', redirectTo: 'kanbanboard/summary' },
   {
     path: 'kanbanboard', component: ContentWrapperComponent, children: [
       { path: 'summary', component: SummaryComponent },
-      {
-        path: 'board', component: BoardComponent, children: [
-          { path: ':id', component: TaskDialogComponent },
-        ]
-      },
+      { path: 'board', component: BoardComponent },
       { path: 'add-task', component: AddTaskComponent },
       { path: 'help', component: HelpSectionComponent },
       { path: 'data-protection', component: DataProtectionComponent },
@@ -40,6 +37,7 @@ const routes: Routes = [
       },
     ]
   },
+
 
 ];
 
