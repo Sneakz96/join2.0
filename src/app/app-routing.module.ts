@@ -13,7 +13,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
 import { DialogAddUserComponent } from './components/dialogs/dialog-add-user/dialog-add-user.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
-import { TaskDialogComponent } from './components/dialogs/task-dialog/task-dialog.component';
+import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -32,7 +32,7 @@ const routes: Routes = [
         path: 'contacts', component: ContactWrapperComponent, children: [
           { path: '', component: ContactsComponent },
           { path: 'add-user', component: DialogAddUserComponent },
-
+          { path: 'edit-user/:id', component: EditContactComponent },
         ]
       },
     ]

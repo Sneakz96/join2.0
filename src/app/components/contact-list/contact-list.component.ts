@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
@@ -13,22 +13,40 @@ import { DataService } from 'src/app/services/data.service';
 export class ContactListComponent implements OnInit {
 
   allContacts$: Observable<any>;
+  contactUniqueId: any;
+  allContacts = [];
 
   constructor(
-    firestore: Firestore,
+    private firestore: AngularFirestore,
     public dataService: DataService,
   ) {
-    const coll = collection(firestore, 'allContacts');
-    this.allContacts$ = collectionData(coll);
-    this.allContacts$.subscribe(()=>{
-      // console.log(this.allContacts$);
-    });
+
   }
 
   ngOnInit(): void {
-    
+    this.loadContacts();
+
   }
+
+  loadContacts() {
+    this.firestore
+      .collection('allContacts')
+      .valueChanges({ idField: 'customIdName' })
+      .subscribe((changes: any) => {
+        console.log('fs:', changes);
+        this.allContacts = changes;
+        console.log(this.allContacts);
+      });
+    this.sortContacts();
+  }
+
   sortContacts() {
-    // this.contactList.sort((a, b) => a.firstName.localeCompare(b.firstName))
+    console.log('sort contacts');
+    this.allContacts.sort((a, b) => a.firstName.localeCompare(b.firstName))
+  }
+
+  editContact() {
+
+    console.log('open contact edit');
   }
 }

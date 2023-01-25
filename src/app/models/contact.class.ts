@@ -12,7 +12,7 @@ export class Contact {
         this.lastName = obj ? obj.lastName : '';
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
-        
+        this.color= obj ? obj.color : 'blue';
     }
 
     public toJSON() {

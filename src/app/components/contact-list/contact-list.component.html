@@ -7,9 +7,9 @@
 
 
 
-    <div class="contact" *ngFor="let contact of allContacts$ | async">
+    <div class="contact" *ngFor="let contact of allContacts" [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]" routerLinkActive="active-user" >
         <div class="bg-pic"  [ngStyle]="{'background-color': contact.color}">
-            <span>{{ contact.firstName.charAt(0) }} {{ contact.lastName.charAt(0) }}</span>
+            <span>{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}</span>
         </div>
         <div class="contact-info">
             <span>{{ contact.firstName }} {{ contact.lastName }}</span>

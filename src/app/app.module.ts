@@ -1,16 +1,13 @@
+//ANGULAR_
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSelectModule } from '@angular/material/select';
-import { environment } from "src/environments/environment";
-import { AngularFireModule } from '@angular/fire/compat';
-import { FirestoreModule, provideFirestore, getFirestore } from "@angular/fire/firestore";
+
+//ROUTER_
 import { AppRoutingModule } from './app-routing.module';
+
+//COMPONENTS_
 import { AppComponent } from './app.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { BoardComponent } from './components/board/board.component';
@@ -28,14 +25,28 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
+import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
+import { EditContactComponent } from './components/edit-contact/edit-contact.component';
+
+//ANGULAR_MATERIAL_
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+
+
+//ANGULAR_FIRE_
+import { environment } from "src/environments/environment";
+import { AngularFireModule } from '@angular/fire/compat';
+import { FirestoreModule, provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskDialogComponent } from './components/dialogs/task-dialog/task-dialog.component';
 import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
-import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
 
 
 @NgModule({
@@ -60,6 +71,7 @@ import { ContentWrapperComponent } from './components/content-wrapper/content-wr
     TaskDialogComponent,
     DialogAddTaskComponent,
     ContentWrapperComponent,
+    EditContactComponent,
   ],
   imports: [
     DragDropModule,
