@@ -5,6 +5,11 @@
     bottom: 0;
     width: 90%;
     background-color: var(--white);
+
+    @media(max-width: 1080px) {
+        bottom: 10%;
+        width: 100%;
+    }
 }
 
 .box {
@@ -30,6 +35,12 @@
     border: none;
     border-radius: var(--m10);
 
+    p {
+        @media(max-width: 1080px) {
+            display: none;
+        }
+    }
+
     img {
         margin-left: var(--m10);
         height: 16px;
@@ -43,6 +54,11 @@
     &:active {
         cursor: grabbing;
     }
+
+    @media(max-width: 1080px) {
+            width: 30px;
+            height: 30px;
+        }
 }
 
 .searchbox {
@@ -79,6 +95,11 @@
     margin-right: var(--m5p);
     display: flex;
     justify-content: space-between;
+
+    @media(max-width: 1080px) {
+        flex-direction: column;
+        overflow-y: scroll;
+    }
 }
 
 .column {
@@ -86,6 +107,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    @media(max-width: 1080px) {
+        width: 100%;
+    }
 }
 
 .header-container {

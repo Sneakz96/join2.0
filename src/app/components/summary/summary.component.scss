@@ -5,6 +5,11 @@
     bottom: 0;
     width: 90%;
     background-color: var(--white);
+
+    @media(max-width: 1080px) {
+        bottom: 10%;
+        width: 100%;
+    }
 }
 
 .headline {
@@ -14,6 +19,14 @@
     span {
         font-size: 18px;
         font-weight: 100;
+
+    }
+
+}
+
+.stroke {
+    @media(max-width: 1080px) {
+        display: none;
     }
 }
 
@@ -24,6 +37,11 @@
     justify-content: flex-start;
     align-items: center;
     width: 90%;
+
+    @media(max-width: 1080px) {
+        flex-direction: column;
+        margin-top: var(--m20p);
+    }
 }
 
 .row-container {
@@ -36,6 +54,8 @@
 
 .row {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
@@ -53,6 +73,11 @@
     &:hover {
         transform: scale(1.05);
     }
+
+    @media(max-width: 720px) {
+        width: 90px;
+        height: 90px;
+    }
 }
 
 .urgency-date {
@@ -61,6 +86,10 @@
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
+
+    @media(max-width: 720px) {
+        width: 320px;
+    }
 }
 
 .urgency {
@@ -69,6 +98,10 @@
 
     img {
         height: 50px;
+
+        @media(max-width: 1080px) {
+            height: 35px;
+        }
     }
 }
 
@@ -98,6 +131,10 @@
 
     img {
         height: 50px;
+
+        @media(max-width: 1080px) {
+            height: 35px;
+        }
     }
 }
 
@@ -113,11 +150,19 @@
     font-size: var(--fs-hl);
     font-weight: bold;
     margin-bottom: 16px;
+
+    @media(max-width: 1080px) {
+        font-size: var(--fs-l);
+    }
 }
 
 .label {
     font-size: var(--fs-l);
     font-weight: 100;
+
+    @media(max-width: 1080px) {
+        font-size: var(--fs-s);
+    }
 }
 
 .side-container {
@@ -127,6 +172,10 @@
 
     p {
         font-size: var(--fs-hl);
+    }
+
+    @media(max-width: 1080px) {
+        margin-top: var(--m10p);
     }
 }
 

@@ -1,4 +1,4 @@
-.content-wrapper{
+.content-wrapper {
     position: fixed;
     height: 100vh;
     top: 80px;
@@ -6,4 +6,8 @@
     bottom: 0;
     width: 90%;
     background-color: lightblue;
+
+    @media (max-width:1080px) {
+        width: 100%;
+    }
 }

@@ -11,6 +11,7 @@
     flex-direction: column;
 
     span {
+        text-align: center;
         font-weight: bold;
         font-size: var(--fs-hl);
         color: var(--dark-navy);
@@ -18,7 +19,7 @@
 }
 
 .blue-line {
-    width: var(--m50p);
+    width: var(--m20p);
     border-bottom: 3px solid var(--secondary);
     border-radius: 12px;
     margin-top: var(--m5p);
@@ -29,12 +30,11 @@
     margin-top: var(--m10p);
     width: 50%;
     height: 51px;
-    background-color: white;
+    background-color: var(--dark-navy);
     border: none;
     padding: 8px;
-    border: 1px solid var(--dark-navy);
     border-radius: 8px;
-    color: var(--dark-navy);
+    color: white;
     font-weight: bold;
 
     &:hover {

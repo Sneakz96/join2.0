@@ -3,6 +3,9 @@
     top: 80px;
     right: 0;
     bottom: 0;
-   
     width: 70%;
+    @media (max-width: 1080px) {
+        left: 0 !important;
+        width: 100% !important;
+    }
 }

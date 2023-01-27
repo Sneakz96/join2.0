@@ -5,10 +5,18 @@
     bottom: 0;
     width: 90%;
     background-color: var(--white);
+
+    @media(max-width: 1080px) {
+        width: 100%;
+    }
 }
 
-.description-container{
+.description-container {
     margin-top: var(--m5p);
+
+    @media(max-width: 1080px) {
+        overflow-y: scroll;
+    }
 }
 
 .description {

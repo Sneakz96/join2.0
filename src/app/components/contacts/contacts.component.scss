@@ -5,6 +5,9 @@
     bottom: 0;
     width: 70%;
     background-color: var(--white);
+    @media (max-width:1080px) {
+        width: 75%;
+    }
 }
 
 .new-contact-btn {
