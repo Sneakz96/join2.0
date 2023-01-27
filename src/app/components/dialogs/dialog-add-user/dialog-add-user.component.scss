@@ -25,6 +25,7 @@
     width: 120px;
     border-radius: 50%;
     background-color: purple;
+    border: 3px solid white;
 }
 
 .initials {
@@ -59,6 +60,7 @@
     padding: 3px;
     border-radius: 5px;
     border: 1px solid var(--dark-navy);
+    padding: 12px;
 }
 
 .last-name {
@@ -66,6 +68,7 @@
     margin-top: 3px;
     border-radius: 5px;
     border: 1px solid var(--dark-navy);
+    padding: 12px;
 }
 
 
@@ -81,6 +84,7 @@
         padding: 3px;
         border-radius: 5px;
         border: 1px solid var(--dark-navy);
+        padding: 12px;
     }
 
     p {
@@ -106,6 +110,7 @@
         padding: 3px;
         border-radius: 5px;
         border: 1px solid var(--dark-navy);
+        padding: 12px;
     }
 
     p {

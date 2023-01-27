@@ -37,6 +37,7 @@ export class SignUpComponent {
 
   /* Sign up */
   signUp() {
+    console.log('signUp called');
     if (this.signForm.invalid) {
       return;
     }

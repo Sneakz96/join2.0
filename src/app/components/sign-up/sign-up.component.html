@@ -1,40 +1,43 @@
 <div class="wrapper">
     <img src="./assets/img/Capa 1.png" class="logo">
-    <h6>Join registration</h6>
-    <div class="form-container">
-        <form [formGroup]="signForm" class="reg-form" ngNativeValidate (ngSubmit)="signUp()">
-            <mat-form-field appearance="outline">
-                <mat-label>Display name</mat-label>
+    <div class="form-container pos-r">
+        <p>Sign up</p>
+        <mat-icon class="arrow-back">arrow_back</mat-icon>
+        <form [formGroup]="signForm" class="reg-form" ngNativeValidate >
+            <mat-form-field class="pos-r" appearance="outline">
+                <mat-label>Name</mat-label>
                 <input matInput #nameField formControlName="displayName">
+                <mat-icon class="icon">person_outline</mat-icon>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field class="pos-r" appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="email"  #emailField formControlName="email">
+                <mat-icon class="icon">mail_outline</mat-icon>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field class="pos-r" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput type="password"  #passwordField formControlName="password">
+                <mat-icon class="icon">lock</mat-icon>
             </mat-form-field>
             <div class="button-container">
-                <button mat-raised-button type="submit" class="sign-up">Sign up</button>
-                <button mat-raised-button [disabled]="false" class="guest-login" (click)="openDialog()">Try as guest</button>
+                <button mat-raised-button type="submit" class="sign-up-btn" (click)="signUp()">Sign up</button>
             </div>
         </form>
-
+<!-- 
         <div class="google-container">
             <span class="top-text">Or</span>
             <button class="google-login" mat-stroked-button>
                 <span class="continue-text">Continue with Google</span>
                 <img class="google-icon" src="./assets/img/google.png">
             </button>
-        </div>
+        </div> -->
 
-        <div class="login-container">
+        <!-- <div class="login-container">
             <span class="all-ready-use">You already use Join?</span>
             <a routerLink="/login">Log in to an existing workspace</a>
-        </div>
+        </div> -->
     </div>
 
 </div>

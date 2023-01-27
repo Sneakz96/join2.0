@@ -35,7 +35,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatIconModule } from '@angular/material/icon';
 
 //ANGULAR_FIRE_
 import { environment } from "src/environments/environment";
@@ -86,6 +86,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     MatDialogModule,
     FirestoreModule,
     MatSelectModule,
+    MatIconModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

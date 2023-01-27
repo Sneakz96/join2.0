@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
 
@@ -12,7 +11,6 @@ import { DataService } from 'src/app/services/data.service';
 
 export class ContactListComponent implements OnInit {
 
-  allContacts$: Observable<any>;
   contactUniqueId: any;
   allContacts = [];
 
@@ -25,9 +23,9 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadContacts();
-
   }
 
+  //LOAD CONTACTS FROM FIRESTORE
   loadContacts() {
     this.firestore
       .collection('allContacts')
@@ -36,14 +34,25 @@ export class ContactListComponent implements OnInit {
         console.log('fs:', changes);
         this.allContacts = changes;
         console.log(this.allContacts);
+        this.sortContacts();
       });
-    this.sortContacts();
   }
 
+  //SORT CONTACTS ON ALPHABET
   sortContacts() {
-    console.log('sort contacts');
-    this.allContacts.sort((a, b) => a.firstName.localeCompare(b.firstName))
+    this.allContacts.sort((a, b) => {
+      if (a.firstName < b.firstName) {
+        return -1;
+      }
+      if (a.firstName > b.firstName) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(this.allContacts);
   }
+
+
 
   editContact() {
 

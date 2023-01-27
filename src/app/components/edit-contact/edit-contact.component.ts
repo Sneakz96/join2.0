@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
+
 @Component({
   selector: 'app-edit-contact',
   templateUrl: './edit-contact.component.html',
@@ -13,6 +14,7 @@ export class EditContactComponent implements OnInit {
 
   userId = "";
   user: any = {};
+  
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,

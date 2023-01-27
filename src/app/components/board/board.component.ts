@@ -21,7 +21,7 @@ import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-ta
 export class BoardComponent implements OnInit {
 
   @Input() task: any;
-  
+
   public allTasks: Task[] = [];//ARRAY FOR SORTING 
   allTasks$: Observable<any>;
 
@@ -77,7 +77,9 @@ export class BoardComponent implements OnInit {
     //GET OBSERVABEL IN NORMAL ARRAY
     for (let i = 0; i < this.allTasks.length; i++) {
       console.log(this.allTasks[i]);
-
+      if (this.task.status === 'toDo') {
+        console.log(i++)
+      }
     }
     // status = 'ToDo';
 
@@ -90,6 +92,21 @@ export class BoardComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+
+  filterTasks() {
+    //GET FILTER.INPUT ELEMENT
+    // let filterInput = 
+    //ADD EVENTLISTENER
+    //  filterInput.addEventListener('keyup', filterTasks);
+  }
 
   // editTask(task: any) {
   //   const dialogRef = this.dialog.open(AddTaskComponent, {

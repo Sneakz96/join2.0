@@ -6,25 +6,56 @@
 
 
 .wrapper {
-    span {
-        font-size: var(--fs-xl);
-    }
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
-    p {
-        margin-top: var(--m5p);
-        margin-bottom: var(--m10);
+    span {
+        font-weight: bold;
+        font-size: var(--fs-hl);
+        color: var(--dark-navy);
     }
 }
 
-.login {
+.blue-line {
+    width: var(--m50p);
+    border-bottom: 3px solid var(--secondary);
+    border-radius: 12px;
+    margin-top: var(--m5p);
+    margin-bottom: var(--m10p);
+}
+
+.login-btn {
+    margin-top: var(--m10p);
+    width: 50%;
+    height: 51px;
+    background-color: white;
+    border: none;
+    padding: 8px;
+    border: 1px solid var(--dark-navy);
+    border-radius: 8px;
+    color: var(--dark-navy);
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: 125ms ease-in-out;
+    }
+}
+
+.pos-r {
+    position: relative;
+}
+
+.icon {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    padding: 8px;
-    border-radius: var(--m10);
+    color: var(--dark-navy);
 
     &:hover {
         transform: scale(1.05);
-        cursor: pointer;
+        transition: 125ms ease-in-out;
     }
 }

@@ -49,13 +49,13 @@
         color: #29ABE2;
         margin-top: var(--m5p);
 
-        &:hover {
-            cursor: pointer;
-        }
+        // &:hover {
+        //     cursor: pointer;
+        // }
     }
 }
 
-.contact-informations{
+.contact-information{
     position: relative;
 }
 
@@ -64,12 +64,15 @@
     margin-top: var(--m20);
     left: var(--m25p);
     display: flex;
-    
+    align-items: center;
+
     &:hover {
         cursor: pointer;
+        transform: scale(1.05);
     }
 
     span {
+        margin-left: 3px;
         font-weight: bold;
     }
 }

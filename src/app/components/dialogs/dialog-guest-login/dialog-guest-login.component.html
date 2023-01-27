@@ -1,9 +1,10 @@
 <div class="wrapper">
     <span>Login as Guest</span>
-    <p>Please enter your Display Name</p>
-    <mat-form-field appearance="outline">
+    <div class="blue-line"></div>
+    <mat-form-field class="pos-r" appearance="outline">
         <mat-label>Display name</mat-label>
-        <input matInput type="text">
+        <input maxlength="10" matInput type="text">
+        <mat-icon class="icon">person_outline</mat-icon>
     </mat-form-field>
-    <button mat-raised-button class="login" (click)="openUrl()">Login</button>
+    <button mat-raised-button class="login-btn" (click)="openUrl()">Login</button>
 </div>
