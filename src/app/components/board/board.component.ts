@@ -78,7 +78,7 @@ export class BoardComponent implements OnInit {
     for (let i = 0; i < this.allTasks.length; i++) {
       console.log(this.allTasks[i]);
       if (this.task.status === 'toDo') {
-        console.log(i++)
+        console.log(this.task.status)
       }
     }
     // status = 'ToDo';

@@ -104,10 +104,6 @@
             }
         }
     }
-
-
-
-
 }
 
 .sub-menu-ul {
@@ -127,6 +123,10 @@
         width: 100%;
 
         &:active {
+            @media(max-width: 1080px) {
+                height: 100px !important;
+            }
+
             background-color: var(--menu-active);
             transform: scale(1.1);
         }
@@ -140,7 +140,6 @@
             display: flex;
             align-items: center;
 
-
             img {
                 padding-top: 2px;
                 height: 16px;
@@ -153,4 +152,10 @@
 
 .active {
     background-color: var(--menu-active);
+    height: 100px;
+
+    @media(max-width: 1080px) {
+        height: 100px !important;
+
+    }
 }

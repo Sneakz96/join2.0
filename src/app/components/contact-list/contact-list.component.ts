@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class ContactListComponent implements OnInit {
 
   contactUniqueId: any;
-  allContacts = [];
+   allContacts = this.dataService.allContacts;
 
   constructor(
     private firestore: AngularFirestore,
@@ -51,6 +51,7 @@ export class ContactListComponent implements OnInit {
     });
     console.log(this.allContacts);
   }
+
 
 
 
