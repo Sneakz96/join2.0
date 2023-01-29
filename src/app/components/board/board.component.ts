@@ -1,16 +1,10 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/task.class';
 import { MatDialog } from '@angular/material/dialog';
-
-
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
-
 
 @Component({
   selector: 'app-board',
@@ -23,35 +17,20 @@ export class BoardComponent implements OnInit {
   @Input() task: any;
 
   public allTasks: Task[] = [];//ARRAY FOR SORTING 
-  allTasks$: Observable<any>;
-
 
   open = false;
   dueDate: any;
-
-  // toDo = [];
-  // inProgress: [] = [];
-  // awatingFeedback: [] = [];
-  // done = [];
-  // currentDraggedElement: string[] = [];
-  // @ViewChild('searchedTask', { static: true }) searchedTaskElement: ElementRef;
-
+  tasks: any = [];
 
   constructor(
-    firestore: Firestore,
+    public firestore: Firestore,
     public dialog: MatDialog,
     public data: DataService,
-    private router: Router,
   ) {
-    const coll = collection(firestore, 'allTasks');
-    this.allTasks$ = collectionData(coll, { idField: 'customIdName' });
-    this.allTasks$.subscribe((changes: any) => {
-      console.log(changes);
-    });
   }
 
   ngOnInit(): void {
-    this.sortTasksByStatus();
+
   }
 
   openTask(taskToOpen: any) {

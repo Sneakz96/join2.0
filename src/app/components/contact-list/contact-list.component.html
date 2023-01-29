@@ -1,17 +1,18 @@
 <div class="contact-list">
     <!--RENDER CONTACT LIST HERE-->
-    <div *ngIf="">
+    <div *ngFor=" let initial of contactFirstName" class="category">
 
-        <span class="first-child">A</span>
+        <span class="letter">{{ initial }}</span>
         <div class="horizontal-line"></div>
 
     </div>
 
 
 
-
-    <div class="contact" *ngFor="let contact of allContacts"
+    <div class="contact" *ngFor="let contact of dataService.allContacts"
         [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]" routerLinkActive="active-user">
+
+
         <div class="bg-pic" [ngStyle]="{'background-color': contact.color}">
             <span>{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}</span>
         </div>
@@ -19,6 +20,8 @@
             <span>{{ contact.firstName }} {{ contact.lastName }}</span>
             <span class="mail">{{ contact.email }}</span>
         </div>
+    
+    
     </div>
 
 

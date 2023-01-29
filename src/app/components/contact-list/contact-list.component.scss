@@ -8,6 +8,7 @@
     top: 80px;
     bottom: 0;
     width: 20%;
+    border-top: 1px solid var(--white);
  
     @media (max-width:1080px) {
         width: 25%;
@@ -40,6 +41,7 @@
     justify-content: flex-start;
     width: 80%;
     height: 50px;
+    padding: 8px;
 
     &:hover {
         transform: scale(1.05);

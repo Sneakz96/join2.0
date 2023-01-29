@@ -7,10 +7,6 @@
 
         <button class="btn" (click)="addTask()"> <p> Add task</p><img src="/assets/img/icons/add-task.png"></button>
     </div>
-
-
-
-
     <div class="overview">
         <div class="column">
             <div class="header-container">
@@ -19,7 +15,9 @@
             <!--#RENDER BACKLOG TASKS HERE-->
             <div class="content-container" id="toDo">
 
-                <div class="task" draggable="true" *ngFor="let taskToDo of allTasks$ | async" (click)="openTask(taskToDo)">
+
+
+                <div class="task" draggable="true" *ngFor="let taskToDo of data.allTasks" (click)="openTask(taskToDo)">
                     <div class="task-container">
                         <div class="category">
                             <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
@@ -67,24 +65,7 @@
             </div>
             <div class="content-container" draggable="true" id="awaitingFeedback" #awaitingFeedback>
 
-                <div class="task">
-                    <div class="task-container">
-                        <div class="category">
-                            <span class="task-category">Category</span>
-                        </div>
-                        <div class="task-content">
-                            <span class="title">test title</span>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                        </div>
-                        <div class="labels">
-                            <div class="assignedTo">
-                                <div class="circle_"></div>
-                                <div class="circle_"></div>
-                            </div>
-                            <img src="/assets/img/icons/Urgent.png" class="urgency">
-                        </div>
-                    </div>
-                </div>
+               
 
             </div>
         </div>
@@ -94,24 +75,7 @@
             </div>
             <div class="content-container" id="done" #done>
 
-                <div class="task">
-                    <div class="task-container">
-                        <div class="category">
-                            <span class="task-category">Category</span>
-                        </div>
-                        <div class="task-content">
-                            <span class="title">test title</span>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                        </div>
-                        <div class="labels">
-                            <div class="assignedTo">
-                                <div class="circle_"></div>
-                                <div class="circle_"></div>
-                            </div>
-                            <img src="/assets/img/icons/Low.png" class="urgency">
-                        </div>
-                    </div>
-                </div>
+               
 
 
             </div>

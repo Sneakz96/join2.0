@@ -5,6 +5,7 @@
     bottom: 0;
     width: 90%;
     background-color: lightblue;
+    overflow-y: scroll;
 
     @media (max-width:1080px) {
         width: 100%;

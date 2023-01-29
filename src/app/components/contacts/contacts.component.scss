@@ -10,6 +10,46 @@
     }
 }
 
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    p {
+        margin-left: 5px;
+        margin-top: 6%;
+        font-size: 18px;
+        font-weight: 100;
+    }
+
+    @media(max-width: 1080px) {
+        flex-direction: column;
+        height: 100px !important;
+        align-items: flex-start;
+        margin-left: var(--m5p);
+
+        h1 {
+            margin-left: 0 !important;
+        }
+
+        p {
+            margin-top: 5px;
+            color: var(--secondary);
+        }
+    }
+}
+
+.stroke {
+    margin-left: 5px;
+    margin-top: 70px;
+    color: var(--secondary);
+    font-size: 50px;
+
+    @media(max-width: 1080px) {
+        display: none;
+    }
+}
+
 .new-contact-btn {
     position: fixed;
     bottom: var(--m10p);
