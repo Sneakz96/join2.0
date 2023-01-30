@@ -18,10 +18,9 @@
 
 .list-header {
     width: 90%;
-    &:first-child{
-        margin-top: var(--m10p);
-    }
+    margin-top: var(--m10p);
 }
+
 
 .letter {
     margin-left: var(--m5p);
@@ -53,6 +52,7 @@
 }
 
 .contact-info {
+    overflow-x: scroll;
     display: flex;
     align-items: flex-start;
     justify-content: center;

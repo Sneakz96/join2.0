@@ -10,8 +10,8 @@ import { DataService } from 'src/app/services/data.service';
 
 export class ContactListComponent implements OnInit {
 
-  contactUniqueId: any;
-  contactFirstName: string[] = [];
+  // contactUniqueId: any;
+  // contactFirstName: string[] = [];
 
   constructor(
     public dataService: DataService,
@@ -21,6 +21,11 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
    
+  }
+
+  
+  getFirstLetterFromContact(contact: any) {
+    return contact.firstName.charAt(0);
   }
 
   editContact() {

@@ -5,6 +5,7 @@
     bottom: 0;
     width: 90%;
     background-color: var(--white);
+    overflow-y: scroll;
 
     @media(max-width: 1080px) {
         bottom: 10%;
@@ -56,9 +57,9 @@
     }
 
     @media(max-width: 1080px) {
-            width: 30px;
-            height: 30px;
-        }
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .searchbox {

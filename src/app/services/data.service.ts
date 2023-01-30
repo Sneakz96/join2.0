@@ -44,7 +44,7 @@ export class DataService implements OnInit {
   //GET LOGGED USER
   getLoggedUser() {
     console.log(this.guestUser.displayName);
-    
+
     if (this.guestUser.displayName) {
       this.userName = this.guestUser.displayName;
     } else {
@@ -117,9 +117,6 @@ export class DataService implements OnInit {
 
   }
 
-  getFirstLetterFromContact(contact: string) {
-    return contact.charAt(0);
-  }
 
 
 
