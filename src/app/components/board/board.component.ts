@@ -16,7 +16,6 @@ export class BoardComponent implements OnInit {
 
   @Input() task: any;
 
-  public allTasks: Task[] = [];//ARRAY FOR SORTING 
 
   open = false;
   dueDate: any;
@@ -48,14 +47,10 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  searchTask(event: Event) {
-    console.log('search task');
-  }
-
   sortTasksByStatus() {
     //GET OBSERVABEL IN NORMAL ARRAY
-    for (let i = 0; i < this.allTasks.length; i++) {
-      console.log(this.allTasks[i]);
+    for (let i = 0; i < this.data.allTasks.length; i++) {
+      console.log(this.data.allTasks[i]);
       if (this.task.status === 'toDo') {
         console.log(this.task.status)
       }
@@ -80,12 +75,29 @@ export class BoardComponent implements OnInit {
 
 
 
-  filterTasks() {
+  searchTasks(event: Event) {
     //GET FILTER.INPUT ELEMENT
     // let filterInput = 
     //ADD EVENTLISTENER
     //  filterInput.addEventListener('keyup', filterTasks);
+    console.log()
+    //GET ALL TASKS TO FILTER
+    this.data.allTasks;
+    console.log(this.data.allTasks.filter);
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
   // editTask(task: any) {
   //   const dialogRef = this.dialog.open(AddTaskComponent, {

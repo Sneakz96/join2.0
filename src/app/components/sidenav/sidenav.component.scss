@@ -56,6 +56,7 @@
         height: 46px;
         display: flex;
         align-items: center;
+        
 
         img {
             padding-left: 16px;
@@ -82,6 +83,7 @@
 
         li {
             flex-direction: column;
+            justify-content: center;       
         }
     }
 }
@@ -117,22 +119,6 @@
 
     &:hover {
         cursor: pointer;
-    }
-
-    @media(max-width: 1080px) {
-        display: flex;
-        align-items: center;
-        a{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-
-        li {
-            flex-direction: column;
-        }
     }
 }
 

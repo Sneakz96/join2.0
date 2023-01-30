@@ -1,15 +1,15 @@
 <div class="contact-list">
     <!--RENDER CONTACT LIST HERE-->
-    <div *ngFor=" let initial of contactFirstName" class="category">
+    <div *ngFor=" let initial of dataService.initialsFirstNames" class="list-header">
 
         <span class="letter">{{ initial }}</span>
         <div class="horizontal-line"></div>
 
+
+
     </div>
 
-
-
-    <div class="contact" *ngFor="let contact of dataService.allContacts"
+    <div class="contact" *ngFor="let contact of dataService.allContacts; index as i"
         [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]" routerLinkActive="active-user">
 
 
@@ -20,8 +20,8 @@
             <span>{{ contact.firstName }} {{ contact.lastName }}</span>
             <span class="mail">{{ contact.email }}</span>
         </div>
-    
-    
+
+
     </div>
 
 

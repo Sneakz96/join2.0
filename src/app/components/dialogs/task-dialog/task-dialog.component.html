@@ -1,12 +1,12 @@
 <div class="task" draggable="true">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="closeDialog()">
     <div class="category">
-        <p class="task-category">Category</p>
+        <p class="task-category">{{ task.category }}</p>
         <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
         <!-- <span class="task-category">{{ taskToDo.category }}</span> -->
     </div>
     <div class="task-content">
-        <p class="title">Call potential Clients</p>
+        <p class="title">{{ task.title }}</p>
         <p class="description">Make product presentation to prospective buyers</p>
         <!--EDIT TITLE TO VARIABLES FROM JSON-->
         <!-- <span class="title">{{ taskToDo.title }}</span>

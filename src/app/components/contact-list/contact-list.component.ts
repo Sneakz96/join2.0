@@ -12,10 +12,8 @@ export class ContactListComponent implements OnInit {
 
   contactUniqueId: any;
   contactFirstName: string[] = [];
-  db = '';
 
   constructor(
-    private firestore: AngularFirestore,
     public dataService: DataService,
   ) {
 
@@ -24,11 +22,6 @@ export class ContactListComponent implements OnInit {
   ngOnInit(): void {
    
   }
-
-  // firstNames: string[] = this.allContacts.map(function(allContacts){
-  //   return allContacts.firstName;
-  // });
-
 
   editContact() {
 

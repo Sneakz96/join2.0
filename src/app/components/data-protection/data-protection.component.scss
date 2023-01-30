@@ -2,7 +2,7 @@
     position: fixed;
     right: 0;
     top: 80px;
-    height: fit-content;
+    bottom: 0;
     width: 90%;
     background-color: var(--white);
     overflow-y: scroll;
@@ -10,13 +10,24 @@
     p {
         margin-right: var(--m5p);
         margin-left: var(--m5p);
+        a{
+            color: var(--secondary);
+        }
     }
 }
 
 ul {
     list-style: none;
+    li{
+        margin-left: var(--m5p);
+        margin-right: var(--m5p);
+    }
 }
 
-.one{
+.one {
     margin-top: var(--m5p);
+}
+
+.last{
+    margin-bottom: var(--m5p);
 }

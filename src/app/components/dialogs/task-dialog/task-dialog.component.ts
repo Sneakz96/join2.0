@@ -11,8 +11,10 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TaskDialogComponent implements OnInit {
 
-  taskOnDialog: any; 
+  taskOnDialog: any;
+  @Input() task: any;
 
+  
   constructor(
     // private firestore: Firestore,
     public dialogRef: MatDialogRef<any>,

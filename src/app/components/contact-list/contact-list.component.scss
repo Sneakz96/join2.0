@@ -9,28 +9,31 @@
     bottom: 0;
     width: 20%;
     border-top: 1px solid var(--white);
- 
+    overflow-y: scroll;
+
     @media (max-width:1080px) {
         width: 25%;
     }
 }
 
-.first-child {
-    height: 40px;
-    width: 65%;
-    margin-left: 20%;
-    align-items: flex-start !important;
-
-    &:first-child {
-        margin-top: 40px;
+.list-header {
+    width: 90%;
+    &:first-child{
+        margin-top: var(--m10p);
     }
 }
 
+.letter {
+    margin-left: var(--m5p);
+    color: var(--dark-navy);
+}
+
 .horizontal-line {
-    margin: 5px;
-    width: 75%;
+    margin-top: var(--m10p);
+    margin-bottom: var(--m10p);
+    width: 100%;
     border: 1px solid var(--light-grey);
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 //CONTACT
@@ -88,8 +91,9 @@
             color: white;
         }
     }
-    .contact-info{
-        .mail{
+
+    .contact-info {
+        .mail {
             color: aqua;
         }
     }

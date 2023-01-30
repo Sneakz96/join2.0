@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.class';
 import { ActivatedRoute, RouterState } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +15,27 @@ export class DataService implements OnInit {
   id: string;
 
 
-  public allTasks$: Observable<any>;
-
   allTasks = [];
+
   allContacts = [];
+  firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
+  initialsFirstNames: string[] = [];
 
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
   ) {
-    console.log('dataservice called');
+    // console.log('dataservice called');
     this.loadContacts();
     this.loadTasks();
   }
 
   ngOnInit(): void {
 
-
   }
 
 
-  
+
   //LOAD ALL TASKS FROM FIRESTORE
   loadTasks() {
     this.firestore
@@ -43,7 +43,7 @@ export class DataService implements OnInit {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allTasks = changes;
-        console.log(this.allTasks);
+        // console.log(this.allTasks);
       });
   }
 
@@ -55,10 +55,9 @@ export class DataService implements OnInit {
       .collection('allContacts')
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
-        console.log('fs:', changes);
         this.allContacts = changes;
-        console.log(this.allContacts);
         this.sortContacts();
+        this.getFirstNames();
       });
   }
 
@@ -73,8 +72,44 @@ export class DataService implements OnInit {
       }
       return 0;
     });
-    console.log(this.allContacts);
+    // console.log(this.allContacts);
   }
+
+
+  getFirstNames() {
+    let names = [];
+    for (let contact of this.allContacts) {
+      names.push(contact.firstName.charAt(0));
+    }
+    this.checkFirstLetters(names);
+  }
+
+
+  //CHECK FIRST LETTERS
+  checkFirstLetters(names: any) {
+    console.log(names);
+
+    names.forEach((firstLetter: any[]) => {
+      let initial = firstLetter[0];
+      if (!this.initialsFirstNames.includes(initial)) {
+        this.initialsFirstNames.push(initial);
+      }
+      console.log(this.initialsFirstNames);
+    })
+
+  }
+
+  getFirstLetterFromContact(contact: string) {
+    return contact.charAt(0);
+  }
+
+
+
+
+
+
+
+
 
 
 
