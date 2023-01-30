@@ -10,40 +10,18 @@
     align-items: center;
     flex-direction: column;
     font-size: var(--fs-m);
-
-    @media(max-width: 1080px) {
-        flex-direction: row;
-        top: 90%;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
-        width: 100% !important;
-        z-index: 999;
-    }
 }
 
 .logo {
     margin-top: var(--m50);
 
-    :hover {
+    &:hover {
         cursor: pointer;
-    }
-
-    @media(max-width: 1080px) {
-        display: none;
     }
 }
 
 .menu {
     width: 100%;
-    height: 120px;
-
-    @media(max-width: 1080px) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 }
 
 .menu-ul {
@@ -56,7 +34,7 @@
         height: 46px;
         display: flex;
         align-items: center;
-        
+
 
         img {
             padding-left: 16px;
@@ -69,23 +47,6 @@
     &:hover {
         cursor: pointer;
     }
-
-    @media(max-width: 1080px) {
-        display: flex;
-        align-items: center;
-        a{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-
-        li {
-            flex-direction: column;
-            justify-content: center;       
-        }
-    }
 }
 
 
@@ -93,9 +54,7 @@
     width: 100%;
     margin-bottom: var(--m50);
 
-    @media(max-width: 1080px) {
-        display: none;
-    }
+    
 }
 
 .sub-menu-ul {
@@ -125,9 +84,60 @@
 .active {
     background-color: var(--menu-active);
     height: 100px;
+}
 
-    @media(max-width: 1080px) {
+
+@media(max-width: 1080px) {
+    .sidenav {
+        flex-direction: row;
+        top: 90%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        width: 100% !important;
+        z-index: 999;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-ul {
+        display: flex;
+        align-items: center;
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        li {
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+    .sub-menu{
+        @media(max-width: 1080px) {
+            display: none;
+        }
+    }
+    .active{
         height: 100px !important;
-
     }
 }
+
+@media(max-width: 760px) {}
+
+@media(max-width: 420px) {}
+
+@media(max-width: 300px) {}

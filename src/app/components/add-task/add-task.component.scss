@@ -5,6 +5,7 @@
     bottom: 0;
     width: 90%;
     background-color: var(--white);
+    overflow-y: scroll;
 
     @media (max-width: 1080px) {
         width: 100%;
@@ -301,3 +302,27 @@ form {
 .create {
     display: flex;
 }
+
+
+
+@media(max-width: 420px) {
+
+    .vector {
+        display: none;
+    }
+
+    .create {
+        width: 90%;
+        flex-direction: column;
+        margin-left: 56px;
+    }
+
+}
+
+@media(max-width: 1080px) {}
+
+@media(max-width: 760px) {}
+
+@media(max-width: 420px) {}
+
+@media(max-width: 300px) {}

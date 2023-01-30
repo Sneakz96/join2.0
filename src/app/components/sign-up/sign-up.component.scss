@@ -13,9 +13,6 @@ a:hover {
     position: relative;
     margin: 8px;
     width: 80%;
-    @media(max-width: 720px) {
-        width: 100%;   
-    }
 }
 
 input,
@@ -63,11 +60,6 @@ mat-label {
     top: 50px;
     left: 50px;
     height: 100px;
-
-    @media(max-width: 720px) {
-        top: 30px;
-        left: 30px;
-    }
 }
 
 .form-container {
@@ -87,12 +79,6 @@ mat-label {
         font-weight: bold;
         font-size: var(--fs-hl);
         color: var(--dark-navy);
-    }
-
-    @media(max-width: 720px) {
-        margin-top: 70px;
-        width: 200px !important;
-        min-width: 250px;
     }
 }
 
@@ -149,70 +135,24 @@ mat-label {
     }
 }
 
+@media(max-width: 1080px) {}
 
+@media(max-width: 760px) {
+    .pos-r{
+        width: 100%;  
+    }
+    .logo{
+        top: 30px;
+        left: 30px;
+        height: 75px;
+    }
+    .form-container{
+        margin-top: 70px;
+        width: 200px !important;
+        min-width: 250px;
+    }
+}
 
+@media(max-width: 420px) {}
 
-
-
-
-
-
-
-
-
-
-
-
-// .google-icon {
-//     height: 40px;
-//     width: 40px;
-// }
-
-// .google-login {
-//     position: relative;
-//     margin-top: 16px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     white-space: break-spaces;
-//     background-color: #fff !important;
-//     border: 2px solid var(--dark-navy) !important;
-//     color: var(--dark-navy) !important;
-//     width: 100%;
-//     padding: 4px;
-
-//     &:hover {
-//         transform: scale(1.05);
-//         cursor: pointer;
-//     }
-
-//     &:active {
-//         color: #4285f4;
-//     }
-// }
-
-// .top-text {
-//     font-size: 1rem;
-//     font-weight: 700;
-//     display: flex;
-//     justify-content: center;
-//     background-color: #fff;
-//     width: 40px;
-//     transform: translateY(-10px);
-// }
-
-// .google-container {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     border-top: 1px solid var(--dark-navy);
-//     margin-top: 48px;
-//     width: 100%;
-// }
-// .login-container {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin-top: 32px;
-//     gap: 16px
-// }
+@media(max-width: 300px) {}
