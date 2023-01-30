@@ -15,10 +15,6 @@
             color: var(--secondary);
         }
     }
-
-    @media (max-width:1080px) {
-        width: 100%;
-    }
 }
 
 ul {
@@ -39,7 +35,11 @@ ul {
 }
 
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .content{
+        width: 100%;
+    }
+}
 
 @media(max-width: 760px) {}
 

@@ -6,10 +6,6 @@
     width: 90%;
     background-color: var(--white);
     overflow-y: scroll;
-
-    @media (max-width: 1080px) {
-        width: 100%;
-    }
 }
 
 .create-new-task {
@@ -19,10 +15,6 @@
     align-items: center;
     position: relative;
     flex-direction: column;
-
-    @media (max-width: 1080px) {
-        margin-top: var(--m5p);
-    }
 }
 
 .vector {
@@ -303,10 +295,19 @@ form {
     display: flex;
 }
 
+@media(max-width: 1080px) {
+    .content {
+        width: 100%;
+    }
 
+    .create-new-task {
+        margin-top: var(--m5p);
+    }
+}
+
+@media(max-width: 760px) {}
 
 @media(max-width: 420px) {
-
     .vector {
         display: none;
     }
@@ -316,13 +317,6 @@ form {
         flex-direction: column;
         margin-left: 56px;
     }
-
 }
-
-@media(max-width: 1080px) {}
-
-@media(max-width: 760px) {}
-
-@media(max-width: 420px) {}
 
 @media(max-width: 300px) {}

@@ -10,10 +10,6 @@
     width: 20%;
     border-top: 1px solid var(--white);
     overflow-y: scroll;
-
-    @media (max-width:1080px) {
-        width: 25%;
-    }
 }
 
 .list-header {
@@ -99,7 +95,11 @@
     }
 }
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .contact-list {
+        width: 25%;
+    }
+}
 
 @media(max-width: 760px) {}
 

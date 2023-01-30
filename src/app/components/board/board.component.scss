@@ -6,11 +6,6 @@
     width: 90%;
     background-color: var(--white);
     overflow-y: scroll;
-
-    @media(max-width: 1080px) {
-        bottom: 10%;
-        width: 100%;
-    }
 }
 
 .box {
@@ -36,12 +31,6 @@
     border: none;
     border-radius: var(--m10);
 
-    p {
-        @media(max-width: 1080px) {
-            display: none;
-        }
-    }
-
     img {
         margin-left: var(--m10);
         height: 16px;
@@ -54,11 +43,6 @@
 
     &:active {
         cursor: grabbing;
-    }
-
-    @media(max-width: 1080px) {
-        width: 30px;
-        height: 30px;
     }
 }
 
@@ -96,11 +80,6 @@
     margin-right: var(--m5p);
     display: flex;
     justify-content: space-between;
-
-    @media(max-width: 1080px) {
-        flex-direction: column;
-        overflow-y: scroll;
-    }
 }
 
 .column {
@@ -108,10 +87,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-
-    @media(max-width: 1080px) {
-        width: 100%;
-    }
 }
 
 .header-container {
@@ -210,14 +185,6 @@
     width: 16px;
 }
 
-
-.circle_ {
-    width: 20px;
-    height: 20px;
-    background-color: violet;
-    border-radius: 50%;
-}
-
 .assignedContact {
     width: 20px;
     height: 20px;
@@ -240,7 +207,28 @@
     }
 }
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .content {
+        bottom: 10%;
+        width: 100%;
+    }
+
+    .btn {
+        width: 30px;
+        height: 30px;
+
+        p {
+            display: none;
+        }
+    }
+    .overview{
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+    .column{
+        width: 100%;
+    }
+}
 
 @media(max-width: 760px) {}
 

@@ -6,13 +6,13 @@
     width: 90%;
     background-color: lightblue;
     overflow-y: scroll;
+}
 
-    @media (max-width:1080px) {
+@media(max-width: 1080px) {
+    .content-wrapper{
         width: 100%;
     }
 }
-
-@media(max-width: 1080px) {}
 
 @media(max-width: 760px) {}
 

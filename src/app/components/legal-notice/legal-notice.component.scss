@@ -10,12 +10,10 @@
     p {
         margin-right: var(--m5p);
         margin-left: var(--m5p);
-        a{
+
+        a {
             color: var(--secondary);
         }
-    }
-    @media (max-width:1080px) {
-        width: 100%;
     }
 }
 
@@ -29,11 +27,15 @@ ul {
     margin-top: var(--m5p);
 }
 
-.last{
+.last {
     margin-bottom: var(--m5p);
 }
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .content {
+        width: 100%;
+    }
+}
 
 @media(max-width: 760px) {}
 
