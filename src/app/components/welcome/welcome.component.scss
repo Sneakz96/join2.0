@@ -1,8 +1,36 @@
-.start-picture{
-    position: fixed;
+.start-picture {
+    position: absolute;
     height: 100px;
     top: 40%;
     left: 50%;
 
+    animation: slideLogo 3s;
+
+    @media(max-width: 1080px) {
+        animation: slidePic 3s !important;
+    }
 }
 
+@keyframes slideLogo {
+    50% {
+        top: 20%;
+        left: 20%;
+    }
+
+    100% {
+        top: 50px;
+        left: 50px;
+    }
+}
+
+@keyframes slidePic {
+    50% {
+        top: 20%;
+        left: 20%;
+    }
+
+    100% {
+        top: 20px;
+        left: 20px;
+    }
+}
