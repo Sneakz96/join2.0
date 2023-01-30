@@ -6,6 +6,8 @@ import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.componen
 import { Firestore } from '@angular/fire/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 
+
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -17,6 +19,7 @@ export class BoardComponent implements OnInit {
   @Input() task: any;
 
 
+
   open = false;
   dueDate: any;
   tasks: any = [];
@@ -25,7 +28,9 @@ export class BoardComponent implements OnInit {
     public firestore: Firestore,
     public dialog: MatDialog,
     public data: DataService,
+
   ) {
+
   }
 
   ngOnInit(): void {
@@ -65,7 +70,7 @@ export class BoardComponent implements OnInit {
   }
 
 
-
+ 
 
 
 

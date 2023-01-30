@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dialog-guest-login.component.scss']
 })
 export class DialogGuestLoginComponent {
+  displayName: string;
 
   constructor(
     public router: Router,
@@ -17,6 +18,7 @@ export class DialogGuestLoginComponent {
     this.router.navigateByUrl('/kanbanboard/summary');
     // const dialogRef = this.dialog.close();
     this.closeDialog();
+    console.log(this.displayName);
   }
   closeDialog() {
     this.dialogRef.close();

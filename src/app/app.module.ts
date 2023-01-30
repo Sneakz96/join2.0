@@ -33,7 +33,7 @@ import { EditContactComponent } from './components/edit-contact/edit-contact.com
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -47,6 +47,7 @@ import { TaskDialogComponent } from './components/dialogs/task-dialog/task-dialo
 import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     EditContactComponent,
   ],
   imports: [
+    HttpClientModule,
     DragDropModule,
     BrowserModule,
     AppRoutingModule,
@@ -95,7 +97,9 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     provideFirestore(() => getFirestore()),
   ],
   providers: [
+    DialogGuestLoginComponent,
     MatDatepickerModule,
+    { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],
   bootstrap: [

@@ -3,6 +3,7 @@ import { Contact } from 'src/app/models/contact.class';
 import { ActivatedRoute, RouterState } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { first, Observable } from 'rxjs';
+import { DialogGuestLoginComponent } from '../components/dialogs/dialog-guest-login/dialog-guest-login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,29 +12,46 @@ import { first, Observable } from 'rxjs';
 export class DataService implements OnInit {
 
   taskId: any;
-  // contactList: Contact[] = [];
   id: string;
-
-
   allTasks = [];
 
   allContacts = [];
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
 
+
+  loggedUser: string[] = [];
+  userName: string;
+
+
+
+
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
+    public guestUser: DialogGuestLoginComponent,
   ) {
-    // console.log('dataservice called');
-    this.loadContacts();
+    console.log('dataservice called');
+    this.getLoggedUser();
     this.loadTasks();
+    this.loadContacts();
   }
 
   ngOnInit(): void {
 
   }
 
+  //GET LOGGED USER
+  getLoggedUser() {
+    console.log(this.guestUser.displayName);
+    
+    if (this.guestUser.displayName) {
+      this.userName = this.guestUser.displayName;
+    } else {
+      this.userName = 'Guest';
+      console.log(this.userName);
+    }
+  }
 
 
   //LOAD ALL TASKS FROM FIRESTORE

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from 'src/app/models/task.class';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-summary',
@@ -8,6 +8,7 @@ import { Task } from 'src/app/models/task.class';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
+
 export class SummaryComponent implements OnInit {
   tasksOnBoard: string[] = [];
 
@@ -23,21 +24,21 @@ export class SummaryComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    // public guestUser: DialogGuestLoginComponent,
+    public dataService: DataService,
+  ) {
+
+  }
 
   ngOnInit(): void {
     // this.allTasks$ = this.firebaseService.getAllTasks();
     //this.getData();
     this.getDayTime();
-    this.getUser();
   }
 
-  getUser() {
-    // let userID = JSON.parse(localStorage.getItem('user')!);
-    // this.firebaseService.getOneUser(userID).subscribe(user => {
-    //   this.currentUser = user;
-    // });
-  }
+
+
 
   getData() {
     //  this.allTasks$.subscribe(allTasks => {

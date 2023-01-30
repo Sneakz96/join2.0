@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+
 @Component({
   selector: 'app-logged-wrapper',
   templateUrl: './logged-wrapper.component.html',
@@ -7,15 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class LoggedWrapperComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-  
-  @Output() featureSelected = new EventEmitter<string>();
+  ngOnInit(): void {}
 
-  onSelect(feature: string) {
-    console.log(this.featureSelected);
-    this.featureSelected.emit(feature);
-  }
 }
