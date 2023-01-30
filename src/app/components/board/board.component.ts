@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 import { Firestore } from '@angular/fire/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
+import { Router } from '@angular/router';
 
 
 
@@ -28,7 +29,7 @@ export class BoardComponent implements OnInit {
     public firestore: Firestore,
     public dialog: MatDialog,
     public data: DataService,
-
+    private router: Router,
   ) {
 
   }
@@ -41,7 +42,6 @@ export class BoardComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskDialogComponent);
     dialogRef.componentInstance.taskOnDialog = taskToOpen;
     dialogRef.afterClosed().subscribe(() => {
-      // this.router.navigate(['/kanbanboard/board/'])
     });
   }
 
@@ -70,7 +70,7 @@ export class BoardComponent implements OnInit {
   }
 
 
- 
+
 
 
 

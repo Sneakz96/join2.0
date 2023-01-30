@@ -8,10 +8,6 @@
     gap: 32px;
     background-color: var(--white);
     position: relative;
-
-    @media(max-width: 760px) {
-        height: fit-content;
-    }
 }
 
 .logo {

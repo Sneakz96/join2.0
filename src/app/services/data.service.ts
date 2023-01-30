@@ -20,10 +20,9 @@ export class DataService implements OnInit {
   initialsFirstNames: string[] = [];
 
 
-  loggedUser: string[] = [];
+  loggedUser: string = '';
+
   userName: string;
-
-
 
 
   constructor(
@@ -43,13 +42,13 @@ export class DataService implements OnInit {
 
   //GET LOGGED USER
   getLoggedUser() {
-    console.log(this.guestUser.displayName);
+    console.log(this.loggedUser);
 
-    if (this.guestUser.displayName) {
-      this.userName = this.guestUser.displayName;
+    if (this.loggedUser) {
+      this.userName = this.loggedUser;
+      console.log(this.userName);
     } else {
       this.userName = 'Guest';
-      console.log(this.userName);
     }
   }
 
@@ -90,7 +89,7 @@ export class DataService implements OnInit {
       }
       return 0;
     });
-    // console.log(this.allContacts);
+
   }
 
 
@@ -105,36 +104,12 @@ export class DataService implements OnInit {
 
   //CHECK FIRST LETTERS
   checkFirstLetters(names: any) {
-    console.log(names);
-
     names.forEach((firstLetter: any[]) => {
       let initial = firstLetter[0];
       if (!this.initialsFirstNames.includes(initial)) {
         this.initialsFirstNames.push(initial);
       }
-      console.log(this.initialsFirstNames);
     })
 
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  getRouteParamsOfTasks() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    console.log('route params:', this.id);
-    this.route.paramMap.subscribe(paramMap => {
-      this.taskId = paramMap.get('id');
-
-      console.log('the task id is', this.taskId);
-    });
   }
 }

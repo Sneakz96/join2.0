@@ -10,7 +10,9 @@
             </div>
             <div class="name">
                 {{ user.firstName}}
+                <input type="text" contenteditable="true" value="{{ user.firstName}}">
                 {{ user.lastName}}
+                <input type="text" contenteditable="true" value="{{ user.lastName}}">
                 <span> <img src="./assets/img/icons/addblue.png">Add Task</span>
             </div>
         </div>
@@ -25,10 +27,12 @@
             <div class="mail">
                 <span>Email</span>
                 <p>{{ user.email }}</p>
+                <input type="text" contenteditable="true" value="{{ user.email }}">
             </div>
             <div class="phone">
                 <span>Phone</span>
                 <p>{{ user.phone }}</p>
+                <input type="text" contenteditable="edit" value="{{ user.phone }}">
             </div>
         </div>
 

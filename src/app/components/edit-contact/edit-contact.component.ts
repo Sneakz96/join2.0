@@ -12,9 +12,11 @@ import { Contact } from 'src/app/models/contact.class';
 
 export class EditContactComponent implements OnInit {
 
+  edit = false;
+
   userId = "";
   user: any = {};
-  
+
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
@@ -35,15 +37,17 @@ export class EditContactComponent implements OnInit {
       .valueChanges()
       .subscribe((user: any) => {
         this.user = new Contact(user);
-        
+
         console.log(this.user);
       })
   }
 
   editUser() {
-
+    this.edit = true;
+    console.log(this.edit);
   }
   save() {
-
+    this.edit = false;
+    console.log(this.edit);
   }
 }

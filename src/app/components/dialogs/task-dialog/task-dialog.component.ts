@@ -12,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class TaskDialogComponent implements OnInit {
 
   taskOnDialog: any;
+  
   @Input() task: any;
 
   
@@ -25,15 +26,10 @@ export class TaskDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getTaskData();
+
   }
 
   closeDialog() {
     this.dialogRef.close();
-    // this.router.navigate(['/kanbanboard/board'])
-  }
-
-  getTaskData() {
-    this.data.getRouteParamsOfTasks();
   }
 }

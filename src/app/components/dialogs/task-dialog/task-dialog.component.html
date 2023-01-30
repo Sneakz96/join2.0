@@ -1,57 +1,39 @@
 <div class="task" draggable="true">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="closeDialog()">
     <div class="category">
-        <p class="task-category">{{ task.category }}</p>
+        <p class="task-category">{{ taskOnDialog.category }}</p>
         <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
         <!-- <span class="task-category">{{ taskToDo.category }}</span> -->
     </div>
     <div class="task-content">
-        <p class="title">{{ task.title }}</p>
-        <p class="description">Make product presentation to prospective buyers</p>
+        <p class="title">{{ taskOnDialog.title }}</p>
+        <p class="description">{{ taskOnDialog.description }}</p>
         <!--EDIT TITLE TO VARIABLES FROM JSON-->
         <!-- <span class="title">{{ taskToDo.title }}</span>
-            <p>{{ taskToDo.description }}</p> -->
+            <p></p> -->
     </div>
-    <!-- {{ taskToDo.status }} -->
+    {{ taskOnDialog.status }}
 
     <div class="due-date">
         <p>Due Date:</p>
-        <span>10/22/2022</span>
+        <span>{{ taskOnDialog.dueDate }}</span>
     </div>
     <div class="priority">
         <p>Priority:</p>
         <div class="urgency-btn">
-            <span>Urgent</span>
-            <img src="./assets/img/icons/Urgent.png">
+            <img src="./assets/img/icons/{{ taskOnDialog.priority }}.png">
         </div>
     </div>
     <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
     <span class="assigned-to">Assigned To:</span>
-    <div class="assignedTo">
-        <div class="assigned-contact">
-            <div class="circle">
-                <span>FL</span>
-            </div>
-            <span class="name">Froschliebhaber96</span>
+    <div class="assigned-contact" *ngFor="let contact of taskOnDialog.assignedTo">
+        <div class="circle" [ngStyle]="{'background-color': contact.color}">
+            {{ contact.firstName.charAt(0)}}
+            {{ contact.lastName.charAt(0)}}
         </div>
-        <div class="assigned-contact">
-            <div class="circle1">
-                <span>CC</span>
-            </div>
-            <span class="name">Costa Cordales</span>
-        </div>
-        <div class="assigned-contact">
-            <div class="circle2">
-                <span>PZ</span>
-            </div>
-            <span class="name">Peter Zwegat</span>
-        </div>
-        <div class="assigned-contact">
-            <div class="circle3">
-                <span>AS</span>
-            </div>
-            <span class="name">Anna Schweiger</span>
-        </div>
+        {{ contact.firstName }}
+        {{ contact.lastName }}
     </div>
-        <img class="edit-btn" src="./assets/img/icons/edit.png">
+
+    <img class="edit-btn" src="./assets/img/icons/edit.png">
 </div>

@@ -9,7 +9,8 @@
 
 .task-category {
     padding: 8px;
-    background-color: lightseagreen;
+    background-color: var(--dark-navy);
+    color: var(--white);
     border-radius: 10px;
     width: fit-content;
 }
@@ -50,7 +51,7 @@
 }
 
 .urgency-btn {
-    border: 1px solid black;
+    // border: 1px solid black;
     border-radius: 10px;
     padding: 6px;
 }
@@ -76,46 +77,16 @@
 .circle {
     height: 40px;
     width: 40px;
-    background-color: lightcoral;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    padding: 8px;
 }
 
-.circle1 {
-    height: 40px;
-    width: 40px;
-    background-color: rgb(128, 240, 175);
-    border-radius: 50%;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.circle2 {
-    height: 40px;
-    width: 40px;
-    background-color: lightskyblue;
-    border-radius: 50%;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.circle3 {
-    height: 40px;
-    width: 40px;
-    background-color: rgb(240, 229, 128);
-    border-radius: 50%;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .close-btn{
     position: relative;
