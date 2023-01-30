@@ -220,7 +220,12 @@
     }
 
     @media(max-width: 1080px) {
-        margin-top: var(--m10p);
+        margin-top: var(--m10);
+        flex-direction: row;
+    }
+
+    @media(max-width: 720px) {
+        flex-direction: column;
     }
 }
 
@@ -231,4 +236,13 @@
 
 .logged-name {
     font-size: var(--fs-xl);
+
+    @media(max-width: 1080px) {
+        margin-left: var(--m10);
+
+    }
+
+    @media(max-width: 720px) {
+        margin-left: var(--m10);
+    }
 }
