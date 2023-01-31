@@ -6,7 +6,7 @@ import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.componen
 import { Firestore } from '@angular/fire/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 import { Router } from '@angular/router';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -19,11 +19,18 @@ export class BoardComponent implements OnInit {
 
   @Input() task: any;
 
-
-
   open = false;
   dueDate: any;
   tasks: any = [];
+
+
+  
+  toDo:string[]=[];
+  inProgress:string[]=[];  
+  awaitFeedback:string[]=[];
+  done:string[]=[];
+
+
 
   constructor(
     public firestore: Firestore,
@@ -51,6 +58,34 @@ export class BoardComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+
+awaitingFeed = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+progress = ['Get ups', 'Brush teeths', 'Take a shower', 'Check e-mail', 'Walk dog'];
+dones = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   sortTasksByStatus() {
     //GET OBSERVABEL IN NORMAL ARRAY
