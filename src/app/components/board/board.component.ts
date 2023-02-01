@@ -72,6 +72,7 @@ export class BoardComponent implements OnInit {
 
   changeStatusByDrop(task: any, status: any) {
     console.log(task);
+    console.log(task[0].customIdName);
     task.status = status;
     console.log(task.status);
 
@@ -85,14 +86,15 @@ export class BoardComponent implements OnInit {
 
     } else if (task.status === 'cdk-drop-list-2') {
       task.status = 'awaitingFeedback';
+      console.log(task.status);
 
     } else if (task.status === 'cdk-drop-list-3') {
       task.status = 'done';
+      console.log(task.status);
     }
 
-    this.updateTask(task);
 
-
+    this.updateTask(task)
     // const docRef = doc(this.firestore, `/${task.customIdName}`);
     // return updateDoc(docRef, { ...task });
 
@@ -103,14 +105,15 @@ export class BoardComponent implements OnInit {
 
 
   updateTask(task: any) {
-
     this.firestore
-      .collection("allTasks")
-      .doc(task.customIdName)
-      .update({ status: 'inProgress' })
-      .then(() => {
-        console.log("Frank food updated");
-      });
+    .collection("allTasks")
+    .doc(task.customIdName)
+
+    .update({ status: 'inProgress' })
+    .then(() => {
+      console.log("status updated");
+    });
+   
   }
 
 
