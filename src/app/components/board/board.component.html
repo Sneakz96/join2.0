@@ -2,157 +2,103 @@
   <h1>Board</h1>
   <div class="box">
     <!--SEARCHBOX HERE-->
-    <input
-      class="searchbox"
-      type="text"
-      placeholder="Find task"
-      #searchedTask
-    /><img
-      class="toggle"
-      (click)="searchTasks($event)"
-      src="/assets/img/icons/search.png"
-    />
+    <input class="searchbox" type="text" placeholder="Find task" #searchedTask><img class="toggle"
+      (click)="searchTasks($event)" src="/assets/img/icons/search.png">
 
     <button class="btn" (click)="addTask()">
       <p>Add task</p>
-      <img src="/assets/img/icons/add-task.png" />
+      <img src="/assets/img/icons/add-task.png">
     </button>
   </div>
-  <div class="overview">
+
+  <div class="overview" cdkDropListGroup>
+    <!-- 1 -->
     <div class="column">
       <div class="header-container">
         <h2>To do</h2>
-        <img
-          src="/assets/img/icons/plus1.png"
-          class="plus"
-          (click)="addTask()"
-        />
+        <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-      <div class="content-container" #toDo>
-        <div
-        class="task-container"
-          cdkDropList
-          #toDoList="cdkDropList"
-          [cdkDropListData]="data.allTasks"
-          [cdkDropListConnectedTo]="[
-            progressList,
-            awatingFeedbackList,
-            doneList
-          ]"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div
-            class="task"
-            *ngFor="let taskToDo of data.allTasks"
-            (click)="openTask(taskToDo)"
-            cdkDrag
-          >
-            <div class="category">
-              <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
-              <span class="task-category">{{ taskToDo.category }}</span>
-            </div>
-            <div class="task-content">
-              <!--EDIT TITLE TO VARIABLES FROM JSON-->
-              <span class="title">{{ taskToDo.title }}</span>
-              <p>{{ taskToDo.description }}</p>
-            </div>
-            {{ taskToDo.status }}
-            <div class="labels">
-              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-              <div class="assignedTo">
-                <div
-                  class="assigned-to"
-                  *ngFor="let contact of taskToDo.assignedTo"
-                >
-                  <div [ngStyle]="{ 'background-color': contact.color }">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
-                  </div>
+
+      <div class="content-container" #toDo cdkDropList [cdkDropListData]="data.allTasks"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task" *ngFor="let taskToDo of data.allTasks" (click)="openTask(taskToDo)" cdkDrag
+          [cdkDragData]="task">
+          <div class="category">
+            <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+            <span class="task-category">{{ taskToDo.category }}</span>
+          </div>
+          <div class="task-content">
+            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+            <span class="title">{{ taskToDo.title }}</span>
+            <!--EDIT DESCRIPTION TO TASK -->
+            <p>{{ taskToDo.description }}</p>
+          </div>
+          {{ taskToDo.status }}
+          <div class="labels">
+            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+            <div class="assignedTo">
+              <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo">
+                <div [ngStyle]="{ 'background-color': contact.color }">
+                  {{ contact.firstName.charAt(0) }}
+                  {{ contact.lastName.charAt(0) }}
                 </div>
               </div>
-              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-              <img
-                src="/assets/img/icons/{{ taskToDo.priority }}.png"
-                class="urgency"
-              />
             </div>
+            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+            <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
           </div>
         </div>
       </div>
     </div>
+    <!-- 1 -->
 
+    <!-- 2 -->
     <div class="column">
       <div class="header-container">
         <h2>In progress</h2>
-        <img
-          src="/assets/img/icons/plus1.png"
-          class="plus"
-          (click)="addTask()"
-        />
+        <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-      <div class="content-container" #inProgress>
-        <div
-          cdkDropList
-          #progressList="cdkDropList"
-          [cdkDropListData]="progress"
-          [cdkDropListConnectedTo]="[toDoList, awatingFeedbackList, doneList]"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div class="task" *ngFor="let item of progress" cdkDrag>
-            {{ item }}
-          </div>
+      <div class="content-container" #inProgress cdkDropList [cdkDropListData]="data.allTasks"
+        (cdkDropListDropped)="drop($event)">
+        <div class="" *ngFor="let taskInProgress of data.allTasks" cdkDrag>
+          <div class="task" *ngIf="taskInProgress.status === 'inProgress'"></div>
         </div>
       </div>
     </div>
+    <!-- 2 -->
 
+    <!-- 3 -->
     <div class="column">
       <div class="header-container">
         <h2>Awaiting Feedback</h2>
-        <img
-          src="/assets/img/icons/plus1.png"
-          class="plus"
-          (click)="addTask()"
-        />
+        <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-      <div class="content-container" #awaitingFeedback>
-        <div
-          cdkDropList
-          #awatingFeedbackList="cdkDropList"
-          [cdkDropListData]="awaitingFeed"
-          [cdkDropListConnectedTo]="[toDoList, doneList, progressList]"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div class="task" *ngFor="let item of awaitingFeed" cdkDrag>
-            {{ item }}
+      <div class="content-container" #awaitingFeedback cdkDropList [cdkDropListData]="data.allTasks"
+        (cdkDropListDropped)="drop($event)">
+        <div class="" *ngFor="let item of data.allTasks" cdkDrag>
+          <div class="task" *ngIf="item.status === 'awaitingFeedback'">
+            {{ item.title }}
           </div>
         </div>
       </div>
     </div>
+    <!-- 3 -->
 
+    <!-- 4 -->
     <div class="column">
       <div class="header-container">
         <h2>Done</h2>
-        <img
-          src="/assets/img/icons/plus1.png"
-          class="plus"
-          (click)="addTask()"
-        />
+        <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
 
-      <div
-        class="content-container"
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="dones"
-        [cdkDropListConnectedTo]="[toDoList, progressList, awatingFeedbackList]"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="task" *ngFor="let item of dones" cdkDrag>
-          {{ item }}
+      <div class="content-container" cdkDropList [cdkDropListData]="data.allTasks" (cdkDropListDropped)="drop($event)">
+        <div class="" *ngFor="let item of data.allTasks" cdkDrag>
+          <div class="task" *ngIf="item.status === 'done'">
+            {{ item.title }}
+          </div>
         </div>
       </div>
     </div>
+    <!-- 4 -->
   </div>
 </div>
-
-<!-- *ngFor="-->

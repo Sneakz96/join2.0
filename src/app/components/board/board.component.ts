@@ -3,7 +3,7 @@ import { Task } from 'src/app/models/task.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
-import { Firestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -24,16 +24,9 @@ export class BoardComponent implements OnInit {
   tasks: any = [];
 
 
-  
-  toDo:string[]=[];
-  inProgress:string[]=[];  
-  awaitFeedback:string[]=[];
-  done:string[]=[];
-
-
 
   constructor(
-    public firestore: Firestore,
+    public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
     private router: Router,
@@ -60,51 +53,65 @@ export class BoardComponent implements OnInit {
   }
 
 
-awaitingFeed = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-progress = ['Get ups', 'Brush teeths', 'Take a shower', 'Check e-mail', 'Walk dog'];
-dones = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
 
-  drop(event: CdkDragDrop<string[]>) {
+
+
+  drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
+      transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
+    this.changeStatusByDrop(event.item.dropContainer.data, event.container.id);
   }
 
+  changeStatusByDrop(task: any, status: any) {
+    console.log(task);
+    task.status = status;
+    console.log(task.status);
 
+    if (task.status === 'cdk-drop-list-0') {
+      task.status = 'toDo';
+      console.log(task.status);
 
+    } else if (task.status === 'cdk-drop-list-1') {
+      task.status = 'inProgress';
+      console.log(task.status);
 
+    } else if (task.status === 'cdk-drop-list-2') {
+      task.status = 'awaitingFeedback';
 
-
-
-
-
-
-  sortTasksByStatus() {
-    //GET OBSERVABEL IN NORMAL ARRAY
-    for (let i = 0; i < this.data.allTasks.length; i++) {
-      console.log(this.data.allTasks[i]);
-      if (this.task.status === 'toDo') {
-        console.log(this.task.status)
-      }
+    } else if (task.status === 'cdk-drop-list-3') {
+      task.status = 'done';
     }
-    // status = 'ToDo';
 
-    // status = 'InProgress';
+    this.updateTask(task);
 
-    // status = 'AwaitingFeedback';
 
-    // status = 'Done';
+    // const docRef = doc(this.firestore, `/${task.customIdName}`);
+    // return updateDoc(docRef, { ...task });
+
+
   }
 
 
+
+
+  updateTask(task: any) {
+
+    this.firestore
+      .collection("allTasks")
+      .doc(task.customIdName)
+      .update({ status: 'inProgress' })
+      .then(() => {
+        console.log("Frank food updated");
+      });
+  }
 
 
 
@@ -148,24 +155,5 @@ dones = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
   //   });
   //   dialogRef.componentInstance.openedAsDialogEditTask = true;
   //   this.closeOverlay();
-  // }
-
-  // drop(event: CdkDragDrop<string[]>) {
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  //   } else {
-  //     transferArrayItem(
-  //       event.previousContainer.data,
-  //       event.container.data,
-  //       event.previousIndex,
-  //       event.currentIndex,
-  //     );
-  //   }
-  // }
-
-
-
-
-
-
+  // 
 }
