@@ -60,62 +60,78 @@ export class BoardComponent implements OnInit {
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      // debugger;
     } else {
-      transferArrayItem(event.previousContainer.data,
+      // debugger;
+      transferArrayItem(
+        event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     }
-    this.changeStatusByDrop(event.item.dropContainer.data, event.container.id);
+    // console.log(event.container.data);
+    // console.log(event.container.id);
+    console.log(event.item.data);
+    console.log(event.item);
+    this.changeStatusByDrop(event.item.data, event.container.id);
   }
 
   changeStatusByDrop(task: any, status: any) {
-    console.log(task);
-    console.log(task[0].customIdName);
+    // debugger;
+
+    // console.log(task[0].customIdName);
     task.status = status;
     console.log(task.status);
 
     if (task.status === 'cdk-drop-list-0') {
       task.status = 'toDo';
-      console.log(task.status);
+      console.log(task);
 
     } else if (task.status === 'cdk-drop-list-1') {
       task.status = 'inProgress';
-      console.log(task.status);
+      this.updateTask(task, task.status);
+      console.log(task);
 
     } else if (task.status === 'cdk-drop-list-2') {
       task.status = 'awaitingFeedback';
-      console.log(task.status);
+      this.updateTask(task, task.status);
+      console.log(task);
 
     } else if (task.status === 'cdk-drop-list-3') {
       task.status = 'done';
-      console.log(task.status);
+      this.updateTask(task, task.status);
+      console.log(task);
     }
-
-
-    this.updateTask(task)
-    // const docRef = doc(this.firestore, `/${task.customIdName}`);
-    // return updateDoc(docRef, { ...task });
-
-
+    this.updateTask(task, task.status);
   }
 
-
-
-
-  updateTask(task: any) {
+  // UPDATE TASK STATUS IN DB
+  updateTask(task: any, status: any) {
+    // console.log(status);
     this.firestore
-    .collection("allTasks")
-    .doc(task.customIdName)
-
-    .update({ status: 'inProgress' })
-    .then(() => {
-      console.log("status updated");
-    });
-   
+      .collection("allTasks")
+      .doc(task.customIdName)
+      .update({ status: status })
+      .then(() => {
+        // console.log("status updated");
+      });
   }
 
+
+
+  deleteDoneTasks() {
+    console.log(this.data.allTasks);
+    //if task.status === "done" then 
+    // setTimeout(() => {
+    //   this.task = this.data.allTasks.filter(item => {
+    //     let now = new Date();
+    //     let diff = now.getTime() - item.createdAt.getTime();
+    //     let days = diff / (1000 * 60 * 60 * 24);
+    //     return days < 3;
+    //   });
+    // }, 1000 * 60 * 60 * 24 * 3);
+  }
 
 
 
@@ -136,6 +152,10 @@ export class BoardComponent implements OnInit {
     console.log(this.data.allTasks.filter);
 
   }
+
+
+
+
 
 
 

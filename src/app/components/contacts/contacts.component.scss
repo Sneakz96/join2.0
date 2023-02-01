@@ -51,9 +51,10 @@
 }
 
 @media(max-width: 1080px) {
-    .contact-content{
+    .contact-content {
         width: 75%;
     }
+
     .headline {
         flex-direction: column;
         height: 100px !important;
@@ -69,8 +70,12 @@
             color: var(--secondary);
         }
     }
-    .stroke{
+
+    .stroke {
         display: none;
+    }
+    .new-contact-btn{
+        bottom: var(--m20p);
     }
 }
 

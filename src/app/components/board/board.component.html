@@ -18,35 +18,36 @@
         <h2>To do</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-
       <div class="content-container" #toDo cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="task" *ngFor="let taskToDo of data.allTasks" (click)="openTask(taskToDo)" cdkDrag
-          [cdkDragData]="task">
-          <div class="category">
-            <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
-            <span class="task-category">{{ taskToDo.category }}</span>
-          </div>
-          <div class="task-content">
-            <!--EDIT TITLE TO VARIABLES FROM JSON-->
-            <span class="title">{{ taskToDo.title }}</span>
-            <!--EDIT DESCRIPTION TO TASK -->
-            <p>{{ taskToDo.description }}</p>
-          </div>
-          {{ taskToDo.status }}
-          <div class="labels">
-            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-            <div class="assignedTo">
-              <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo">
-                <div [ngStyle]="{ 'background-color': contact.color }">
-                  {{ contact.firstName.charAt(0) }}
-                  {{ contact.lastName.charAt(0) }}
+        <div *ngFor="let taskToDo of data.allTasks" cdkDrag [cdkDragData]="taskToDo">
+          <div class="task" *ngIf="taskToDo.status === 'toDo'" (click)="openTask(taskToDo)">
+            <div class="category">
+              <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+              <span class="task-category">{{ taskToDo.category }}</span>
+            </div>
+            <div class="task-content">
+              <!--EDIT TITLE TO VARIABLES FROM JSON-->
+              <span class="title">{{ taskToDo.title }}</span>
+              <!--EDIT DESCRIPTION TO TASK -->
+              <p>{{ taskToDo.description }}</p>
+            </div>
+            {{ taskToDo.status }}
+            <div class="labels">
+              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+              <div class="assignedTo">
+                <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo">
+                  <div [ngStyle]="{ 'background-color': contact.color }">
+                    {{ contact.firstName.charAt(0) }}
+                    {{ contact.lastName.charAt(0) }}
+                  </div>
                 </div>
               </div>
+              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+              <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
             </div>
-            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-            <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
           </div>
+
         </div>
       </div>
     </div>
@@ -60,12 +61,52 @@
       </div>
       <div class="content-container" #inProgress cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="" *ngFor="let taskInProgress of data.allTasks" cdkDrag>
-          <div class="task" *ngIf="taskInProgress.status === 'inProgress'"></div>
+        <div class="" *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress">
+          <div class="task" *ngIf="taskInProgress.status === 'inProgress'" (click)="openTask(taskInProgress)">
+
+
+            <div class="category">
+              <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+              <span class="task-category">{{ taskInProgress.category }}</span>
+            </div>
+            <div class="task-content">
+              <!--EDIT TITLE TO VARIABLES FROM JSON-->
+              <span class="title">{{ taskInProgress.title }}</span>
+              <!--EDIT DESCRIPTION TO TASK -->
+              <p>{{ taskInProgress.description }}</p>
+            </div>
+            {{ taskInProgress.status }}
+            <div class="labels">
+              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+              <div class="assignedTo">
+                <div class="assigned-to" *ngFor="let contact of taskInProgress.assignedTo">
+                  <div [ngStyle]="{ 'background-color': contact.color }">
+                    {{ contact.firstName.charAt(0) }}
+                    {{ contact.lastName.charAt(0) }}
+                  </div>
+                </div>
+              </div>
+              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+              <img src="/assets/img/icons/{{ taskInProgress.priority }}.png" class="urgency">
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+          </div>
         </div>
       </div>
     </div>
     <!-- 2 -->
+
+
 
     <!-- 3 -->
     <div class="column">
@@ -73,16 +114,45 @@
         <h2>Awaiting Feedback</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
+
       <div class="content-container" #awaitingFeedback cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="" *ngFor="let item of data.allTasks" cdkDrag>
-          <div class="task" *ngIf="item.status === 'awaitingFeedback'">
-            {{ item.title }}
+        <div *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback">
+          <div class="task" *ngIf="taskAwaitingFeedback.status === 'awaitingFeedback'"
+            (click)="openTask(taskAwaitingFeedback)">
+            <div class="category">
+              <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+              <span class="task-category">{{ taskAwaitingFeedback.category }}</span>
+            </div>
+            <div class="task-content">
+              <!--EDIT TITLE TO VARIABLES FROM JSON-->
+              <span class="title">{{ taskAwaitingFeedback.title }}</span>
+              <!--EDIT DESCRIPTION TO TASK -->
+              <p>{{ taskAwaitingFeedback.description }}</p>
+            </div>
+            {{ taskAwaitingFeedback.status }}
+            <div class="labels">
+              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+              <div class="assignedTo">
+                <div class="assigned-to" *ngFor="let contact of taskAwaitingFeedback.assignedTo">
+                  <div [ngStyle]="{ 'background-color': contact.color }">
+                    {{ contact.firstName.charAt(0) }}
+                    {{ contact.lastName.charAt(0) }}
+                  </div>
+                </div>
+              </div>
+              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+              <img src="/assets/img/icons/{{ taskAwaitingFeedback.priority }}.png" class="urgency">
+            </div>
           </div>
+
         </div>
       </div>
+
     </div>
     <!-- 3 -->
+
+
 
     <!-- 4 -->
     <div class="column">
@@ -90,12 +160,36 @@
         <h2>Done</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-
-      <div class="content-container" cdkDropList [cdkDropListData]="data.allTasks" (cdkDropListDropped)="drop($event)">
-        <div class="" *ngFor="let item of data.allTasks" cdkDrag>
-          <div class="task" *ngIf="item.status === 'done'">
-            {{ item.title }}
+      <div class="content-container" #toDo cdkDropList [cdkDropListData]="data.allTasks"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone">
+          <div class="task" *ngIf="taskDone.status === 'done'" (click)="openTask(taskDone)">
+            <div class="category">
+              <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
+              <span class="task-category">{{ taskDone.category }}</span>
+            </div>
+            <div class="task-content">
+              <!--EDIT TITLE TO VARIABLES FROM JSON-->
+              <span class="title">{{ taskDone.title }}</span>
+              <!--EDIT DESCRIPTION TO TASK -->
+              <p>{{ taskDone.description }}</p>
+            </div>
+            {{ taskDone.status }}
+            <div class="labels">
+              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+              <div class="assignedTo">
+                <div class="assigned-to" *ngFor="let contact of taskDone.assignedTo">
+                  <div [ngStyle]="{ 'background-color': contact.color }">
+                    {{ contact.firstName.charAt(0) }}
+                    {{ contact.lastName.charAt(0) }}
+                  </div>
+                </div>
+              </div>
+              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+              <img src="/assets/img/icons/{{ taskDone.priority }}.png" class="urgency">
+            </div>
           </div>
+
         </div>
       </div>
     </div>

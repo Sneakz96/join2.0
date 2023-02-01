@@ -144,10 +144,11 @@ export class AddTaskComponent implements OnInit {
     this.newTask.subtasks = this.addedSubTasks;
 
     console.log(this.categoryElement.nativeElement.value);
-    if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '') {
-      this.taskCreated = false;
+    if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '' || this.descriptionElement.nativeElement.value === '' || this.dueDateElement.nativeElement.value === '' || this.newTask.priority === '') {
+        this.taskCreated = false;
+      this.clearAllValues();
       console.log('Please enter infos', this.titleElement.nativeElement.value);
-    } else if (this.titleElement.nativeElement.value.length >= 1) {
+    } else if (this.titleElement.nativeElement.value.length >= 1 && this.categoryElement.nativeElement.value.length == 1 && this.newTask.assignedTo.length > 0) {
       this.taskCreated = true;
     }
   }
