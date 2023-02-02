@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from 'src/app/models/task.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';

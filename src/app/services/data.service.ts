@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { DialogGuestLoginComponent } from '../components/dialogs/dialog-guest-login/dialog-guest-login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,6 @@ export class DataService implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-    public guestUser: DialogGuestLoginComponent,
   ) {
     console.log('dataservice called');
     this.getLoggedUser();

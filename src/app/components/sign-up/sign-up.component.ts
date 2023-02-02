@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DialogGuestLoginComponent } from 'src/app/components/dialogs/dialog-guest-login/dialog-guest-login.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,9 +22,6 @@ export class SignUpComponent {
     this.setFormGroup();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogGuestLoginComponent);
-  }
 
   setFormGroup() {
     this.signForm = new FormGroup({

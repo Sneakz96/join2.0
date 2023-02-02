@@ -20,7 +20,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { DialogAddUserComponent } from './components/dialogs/dialog-add-user/dialog-add-user.component';
 import { ContactWrapperComponent } from './components/contact-wrapper/contact-wrapper.component';
-import { DialogGuestLoginComponent } from './components/dialogs/dialog-guest-login/dialog-guest-login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { LoginComponent } from './components/login/login.component';
@@ -65,7 +64,6 @@ import { HttpClientModule } from '@angular/common/http';
     DialogAddUserComponent,
     ContactWrapperComponent,
     ContactListComponent,
-    DialogGuestLoginComponent,
     SignUpComponent,
     LoginComponent,
     WelcomeComponent,
@@ -97,7 +95,6 @@ import { HttpClientModule } from '@angular/common/http';
     provideFirestore(() => getFirestore()),
   ],
   providers: [
-    DialogGuestLoginComponent,
     MatDatepickerModule,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }

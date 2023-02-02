@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogGuestLoginComponent } from 'src/app/components/dialogs/dialog-guest-login/dialog-guest-login.component';
 
 
 @Component({
@@ -24,7 +23,6 @@ export class LoginComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogGuestLoginComponent);
   }
 
   onSubmit() {
