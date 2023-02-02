@@ -102,6 +102,7 @@ export class BoardComponent implements OnInit {
       task.status = 'done';
       this.updateTask(task, task.status);
       console.log(task);
+      this.deleteDoneTasks(task);
     }
     this.updateTask(task, task.status);
   }
@@ -118,19 +119,18 @@ export class BoardComponent implements OnInit {
       });
   }
 
-
-
-  deleteDoneTasks() {
-    console.log(this.data.allTasks);
-    //if task.status === "done" then 
-    // setTimeout(() => {
-    //   this.task = this.data.allTasks.filter(item => {
-    //     let now = new Date();
-    //     let diff = now.getTime() - item.createdAt.getTime();
-    //     let days = diff / (1000 * 60 * 60 * 24);
-    //     return days < 3;
-    //   });
-    // }, 1000 * 60 * 60 * 24 * 3);
+// DELETE TASK AFTER 3 DAYS IF IT'S DONE
+  deleteDoneTasks(task: any) {
+    console.log('time is runnning to delete task');
+    console.log(task.createdAt);
+    setTimeout(() => {
+      this.task = this.data.allTasks.filter(item => {
+        let now = new Date();
+        let diff = now.getTime() - task.createdAt.getTime();
+        let days = diff / (1000 * 60 * 60 * 24);
+        return days < 3;
+      });
+    }, 1000 * 60 * 60 * 24 * 3);
   }
 
 

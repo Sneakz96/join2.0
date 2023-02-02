@@ -124,6 +124,7 @@ export class AddTaskComponent implements OnInit {
   //LOG PRIORITY
   setPrio(prio: string) {
     this.newTask.priority = prio;
+    console.log(prio);
   }
 
   //CREATE SUBTASK
@@ -145,7 +146,7 @@ export class AddTaskComponent implements OnInit {
 
     console.log(this.categoryElement.nativeElement.value);
     if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '' || this.descriptionElement.nativeElement.value === '' || this.dueDateElement.nativeElement.value === '' || this.newTask.priority === '') {
-        this.taskCreated = false;
+      this.taskCreated = false;
       this.clearAllValues();
       console.log('Please enter infos', this.titleElement.nativeElement.value);
     } else if (this.titleElement.nativeElement.value.length >= 1 && this.categoryElement.nativeElement.value.length == 1 && this.newTask.assignedTo.length > 0) {
