@@ -297,4 +297,11 @@
 
 @media(max-width: 420px) {}
 
-@media(max-width: 300px) {}
+@media(max-width: 300px) {
+    .btn{
+        display: none;
+    }
+    .box{
+        display: none;
+    }
+}
