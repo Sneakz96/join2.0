@@ -1,11 +1,11 @@
-####TO_DO - 08 - 31 jan 2023
+####TO_DO - 08 -> 15 feb 2023
 
 ##  NEXT  
 
 
 ##  BOARD
 
-    -ADD EDIT TASK
+    -MAKE TASKS EDITABLE
     -SEARCH ON ALLTASKSONBOARD 
 
 ##  CONTACTS
@@ -17,8 +17,8 @@
 ##  ALL_OVER
     
     -RESPONSIVENESS
-    -ADD LOGGED NAME TO SUMMARY?
 
+    -FIND BUG ON CDK_LIST ++
     -PENETRATION | TEST <-> FINISH 
   
 
