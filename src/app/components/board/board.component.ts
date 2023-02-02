@@ -19,9 +19,8 @@ export class BoardComponent implements OnInit {
 
   open = false;
   dueDate: any;
-  tasks: any = [];
 
-
+  searchField: string;
 
   constructor(
     public firestore: AngularFirestore,
@@ -32,7 +31,9 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    document.getElementById('searchField').addEventListener('keyup', (e) => {
+      this.searchTasks();
+    })
   }
 
   openTask(taskToOpen: any) {
@@ -50,7 +51,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-// DRAG AND DROP FUNCTION
+  // DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -111,16 +112,9 @@ export class BoardComponent implements OnInit {
 
 
 
-  searchTasks(event: Event) {
-    //GET FILTER.INPUT ELEMENT
-    // let filterInput = 
-    //ADD EVENTLISTENER
-    //  filterInput.addEventListener('keyup', filterTasks);
-    console.log()
-    //GET ALL TASKS TO FILTER
-    this.data.allTasks;
-    console.log(this.data.allTasks.filter);
+  searchTasks() {
 
+   
   }
 
 
@@ -134,19 +128,14 @@ export class BoardComponent implements OnInit {
 
 
 
-
-
-
-
-
-  // editTask(task: any) {
-  //   const dialogRef = this.dialog.open(AddTaskComponent, {
-  //     width: '100%',
-  //     data: {
-  //       task
-  //     },
-  //   });
-  //   dialogRef.componentInstance.openedAsDialogEditTask = true;
-  //   this.closeOverlay();
-  // 
-}
+    // editTask(task: any) {
+    //   const dialogRef = this.dialog.open(AddTaskComponent, {
+    //     width: '100%',
+    //     data: {
+    //       task
+    //     },
+    //   });
+    //   dialogRef.componentInstance.openedAsDialogEditTask = true;
+    //   this.closeOverlay();
+    // 
+  }

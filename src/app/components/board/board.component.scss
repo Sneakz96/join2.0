@@ -213,39 +213,6 @@
     }
 }
 
-@media(max-width: 1080px) {
-    .content {
-        bottom: 10%;
-        width: 100%;
-    }
-
-    .btn {
-        width: 30px;
-        height: 30px;
-
-        p {
-            display: none;
-        }
-    }
-
-    .overview {
-        flex-direction: column;
-        overflow-y: scroll;
-    }
-
-    .column {
-        width: 100%;
-    }
-}
-
-@media(max-width: 760px) {}
-
-@media(max-width: 420px) {}
-
-@media(max-width: 300px) {}
-
-
-
 .example-container {
     width: 400px;
     max-width: 100%;
@@ -300,3 +267,34 @@
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+@media(max-width: 1080px) {
+    .content {
+        bottom: 10%;
+        width: 100%;
+    }
+
+    .btn {
+        width: 30px;
+        height: 30px;
+
+        p {
+            display: none;
+        }
+    }
+
+    .overview {
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+
+    .column {
+        width: 100%;
+    }
+}
+
+@media(max-width: 760px) {}
+
+@media(max-width: 420px) {}
+
+@media(max-width: 300px) {}

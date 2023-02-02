@@ -54,12 +54,11 @@
     }
 }
 
-
 .sub-menu {
     width: 100%;
     margin-bottom: var(--m50);
-position: relative;
-bottom: 50px;
+    position: relative;
+    bottom: 50px;
 
 }
 
@@ -119,7 +118,7 @@ bottom: 50px;
     .menu-ul {
         display: flex;
         align-items: center;
-       
+
         a {
             display: flex;
             align-items: center;
@@ -149,6 +148,18 @@ bottom: 50px;
 
 @media(max-width: 760px) {}
 
-@media(max-width: 420px) {}
+@media(max-width: 420px) {
+    .active {
+        img {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+    .menu-ul {
+        li {
+            font-size: var(--fs-sm);
+        }
+    }
+}
 
 @media(max-width: 300px) {}

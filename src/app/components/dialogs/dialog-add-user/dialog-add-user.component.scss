@@ -160,7 +160,14 @@
     }
 }
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .content{
+        width: 80%;
+    }
+    .btn {
+        margin-bottom: var(--m50);
+    }
+}
 
 @media(max-width: 760px) {}
 
