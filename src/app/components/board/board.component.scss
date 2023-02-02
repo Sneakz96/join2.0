@@ -275,12 +275,11 @@
     }
 
     .btn {
-        width: 30px;
-        height: 30px;
+        display: none;
+    }
 
-        p {
-            display: none;
-        }
+    .box {
+        display: none;
     }
 
     .overview {
@@ -297,11 +296,4 @@
 
 @media(max-width: 420px) {}
 
-@media(max-width: 300px) {
-    .btn{
-        display: none;
-    }
-    .box{
-        display: none;
-    }
-}
+@media(max-width: 300px) {}

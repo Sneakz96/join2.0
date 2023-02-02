@@ -31,9 +31,7 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.getElementById('searchField').addEventListener('keyup', (e) => {
-      this.searchTasks();
-    })
+
   }
 
   openTask(taskToOpen: any) {
