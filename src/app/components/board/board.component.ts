@@ -5,7 +5,6 @@ import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
-import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 
@@ -29,7 +28,6 @@ export class BoardComponent implements OnInit {
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-    private router: Router,
   ) {
 
   }
@@ -45,6 +43,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  // OPEN ADD TASK DIALOG
   addTask() {
     const dialogRef = this.dialog.open(DialogAddTaskComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -52,17 +51,11 @@ export class BoardComponent implements OnInit {
     });
   }
 
-
-
-
-
-
+// DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // debugger;
     } else {
-      // debugger;
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -70,38 +63,20 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
-    // console.log(event.container.data);
-    // console.log(event.container.id);
-    console.log(event.item.data);
-    console.log(event.item);
     this.changeStatusByDrop(event.item.data, event.container.id);
   }
 
+  // CHANGE TASK STATUS BY DROP IN CONTAINERS
   changeStatusByDrop(task: any, status: any) {
-    // debugger;
-
-    // console.log(task[0].customIdName);
     task.status = status;
-    console.log(task.status);
-
     if (task.status === 'cdk-drop-list-0') {
       task.status = 'toDo';
-      console.log(task);
-
     } else if (task.status === 'cdk-drop-list-1') {
       task.status = 'inProgress';
-      this.updateTask(task, task.status);
-      console.log(task);
-
     } else if (task.status === 'cdk-drop-list-2') {
       task.status = 'awaitingFeedback';
-      this.updateTask(task, task.status);
-      console.log(task);
-
     } else if (task.status === 'cdk-drop-list-3') {
       task.status = 'done';
-      this.updateTask(task, task.status);
-      console.log(task);
       this.deleteDoneTasks(task);
     }
     this.updateTask(task, task.status);
@@ -109,17 +84,13 @@ export class BoardComponent implements OnInit {
 
   // UPDATE TASK STATUS IN DB
   updateTask(task: any, status: any) {
-    // console.log(status);
     this.firestore
       .collection("allTasks")
       .doc(task.customIdName)
-      .update({ status: status })
-      .then(() => {
-        // console.log("status updated");
-      });
+      .update({ status: status });
   }
 
-// DELETE TASK AFTER 3 DAYS IF IT'S DONE
+  // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {
     console.log('time is runnning to delete task');
     console.log(task.createdAt);
