@@ -74,12 +74,18 @@
     .stroke {
         display: none;
     }
-    .new-contact-btn{
+
+    .new-contact-btn {
         bottom: var(--m20p);
     }
 }
 
-@media(max-width: 760px) {}
+@media(max-width: 760px) {
+    .new-contact-btn {
+        display: none;
+    }
+
+}
 
 @media(max-width: 420px) {}
 

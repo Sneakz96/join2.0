@@ -31,7 +31,7 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log();
   }
 
   openTask(taskToOpen: any) {
@@ -53,30 +53,62 @@ export class BoardComponent implements OnInit {
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log(event.container.id);
+      console.log();
+      debugger;
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
-      );
+        );
+        debugger;
+      console.log(event.container.id);
+      this.changeStatusByDrop(event.item.data, event.container.id);
     }
-    this.changeStatusByDrop(event.item.data, event.container.id);
   }
 
   // CHANGE TASK STATUS BY DROP IN CONTAINERS
   changeStatusByDrop(task: any, status: any) {
-    task.status = status;
-    if (task.status === 'cdk-drop-list-0') {
-      task.status = 'toDo';
-    } else if (task.status === 'cdk-drop-list-1') {
-      task.status = 'inProgress';
-    } else if (task.status === 'cdk-drop-list-2') {
-      task.status = 'awaitingFeedback';
-    } else if (task.status === 'cdk-drop-list-3') {
-      task.status = 'done';
-      this.deleteDoneTasks(task);
+    // task.status = status;
+    debugger;
+    console.log(task.status);
+    console.log(status);
+
+
+
+    for (let i = 0; i < this.data.allTasks.length; i++) {
+      const element = this.data.allTasks[i].status;
+      console.log(element);
+      //CDK-0 SHOW TASKS WITH STATUS TODO
+      if (element === 'toDo') {
+        console.log(i, element)
+      } else if (element === 'inProgress') {
+        console.log(i, element)
+      } else if (element === 'awaitingFeedback') {
+        console.log(i, element)
+      } else if (element === 'done') {
+        console.log(i, element)
+      }
     }
+
+
+    // if (status === 'cdk-drop-list-0') {
+    //   task.status = 'toDo';
+    // } else if (status === 'cdk-drop-list-1') {
+    //   task.status = 'inProgress';
+
+
+    // } else if (status === 'cdk-drop-list-2') {
+    //   task.status = 'awaitingFeedback';
+    // } else if (status === 'cdk-drop-list-3') {
+    //   task.status = 'done';
+    // }
+    console.log(task);
+    console.log(task.status);
+
+    // this.deleteDoneTasks(task);
     this.updateTask(task, task.status);
   }
 
@@ -112,7 +144,7 @@ export class BoardComponent implements OnInit {
 
   searchTasks() {
 
-   
+
   }
 
 
@@ -126,14 +158,14 @@ export class BoardComponent implements OnInit {
 
 
 
-    // editTask(task: any) {
-    //   const dialogRef = this.dialog.open(AddTaskComponent, {
-    //     width: '100%',
-    //     data: {
-    //       task
-    //     },
-    //   });
-    //   dialogRef.componentInstance.openedAsDialogEditTask = true;
-    //   this.closeOverlay();
-    // 
-  }
+  // editTask(task: any) {
+  //   const dialogRef = this.dialog.open(AddTaskComponent, {
+  //     width: '100%',
+  //     data: {
+  //       task
+  //     },
+  //   });
+  //   dialogRef.componentInstance.openedAsDialogEditTask = true;
+  //   this.closeOverlay();
+  // 
+}

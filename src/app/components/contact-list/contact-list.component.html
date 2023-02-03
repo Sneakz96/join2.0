@@ -1,5 +1,11 @@
 <div class="contact-list">
-    <div *ngFor=" let initial of dataService.initialsFirstNames" class="list-header">
+    <div class="new-contact">
+        <button class="new-contact-btn" (click)="addNewContact()">
+            New contact
+            <img src="/assets/img/icons/new-contact.png">
+        </button>
+    </div>
+    <div class="list-header" *ngFor=" let initial of dataService.initialsFirstNames">
         <span class="letter">{{ initial }}</span>
         <div class="horizontal-line"></div>
         <div *ngFor="let contact of dataService.allContacts; index as i">

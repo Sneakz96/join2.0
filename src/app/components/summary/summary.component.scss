@@ -283,8 +283,8 @@
     }
 
     .line {
-       transform: rotate(90deg);
-       margin-bottom: -15px;
+        transform: rotate(90deg);
+        margin-bottom: -15px;
     }
 
     .urgency-date {
@@ -293,10 +293,16 @@
         width: 120%;
         justify-content: center !important;
     }
-    .urgency{
+
+    .urgency {
         margin-top: 35px;
     }
-    .deadline{
+
+    .deadline {
         margin-bottom: 15px;
+    }
+
+    .side-container {
+        margin-bottom: var(--m20p);
     }
 }

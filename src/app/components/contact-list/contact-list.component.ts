@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,26 +10,30 @@ import { DataService } from 'src/app/services/data.service';
 
 export class ContactListComponent implements OnInit {
 
-  // contactUniqueId: any;
-  // contactFirstName: string[] = [];
-
   constructor(
     public dataService: DataService,
+    private router: Router,
   ) {
 
   }
 
   ngOnInit(): void {
-   
+
   }
 
-  
+
   getFirstLetterFromContact(contact: any) {
     return contact.firstName.charAt(0);
   }
 
+
   editContact() {
 
     console.log('open contact edit');
+  }
+  
+  // 
+  addNewContact() {
+    this.router.navigate(['/kanbanboard/contacts/add-user'])
   }
 }

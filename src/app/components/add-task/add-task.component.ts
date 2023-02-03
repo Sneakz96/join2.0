@@ -144,7 +144,10 @@ export class AddTaskComponent implements OnInit {
     this.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
     this.newTask.subtasks = this.addedSubTasks;
 
-    console.log(this.categoryElement.nativeElement.value);
+    this.checkIfInputIsEmpty()
+  }
+
+  checkIfInputIsEmpty(){
     if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '' || this.descriptionElement.nativeElement.value === '' || this.dueDateElement.nativeElement.value === '' || this.newTask.priority === '') {
       this.taskCreated = false;
       this.clearAllValues();
