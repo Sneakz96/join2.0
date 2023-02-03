@@ -140,7 +140,7 @@
     }
 }
 
-.btn {
+.new-contact-btn {
     position: fixed;
     bottom: var(--m10p);
     right: var(--m10p);
@@ -152,13 +152,17 @@
     border: none;
     border-radius: var(--m10);
 
-
+    img {
+        height: 20px;
+        margin-left: var(--m5);
+    }
 
     &:hover {
         transform: scale(1.05);
         cursor: pointer;
     }
 }
+
 
 @media(max-width: 1080px) {}
 

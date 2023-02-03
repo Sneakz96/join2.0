@@ -4,8 +4,11 @@
         <div class="stroke">|</div>
         <p>Better with a team</p>
     </div>
-    <button class="new-contact-btn" (click)="addNewContact()">
+    <button class="add-new-contact-btn" (click)="data.addNewContact()">
         New contact
         <img src="/assets/img/icons/new-contact.png">
+    </button>
+    <button class="contact-created-btn" *ngIf="data.contactCreated">
+        Contact succesfully created
     </button>
 </div>

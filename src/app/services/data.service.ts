@@ -1,15 +1,18 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DataService implements OnInit {
+export class DataService implements OnChanges {
 
   taskId: any;
   id: string;
   allTasks = [];
+
+  contactCreated = false;
 
   todos!: number;
   inProgress!: number;
@@ -33,6 +36,7 @@ export class DataService implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
+    private router: Router,
   ) {
     console.log('dataservice called');
     this.getLoggedUser();
@@ -40,9 +44,21 @@ export class DataService implements OnInit {
     this.loadContacts();
     this.getDayTime();
     console.log(this.allTasks);
+    // this.checkNewTask();
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.sortContacts();
+
+  }
+
+  checkNewTask() {
+    if (!this.contactCreated) {
+      setTimeout(() => {
+        console.log('cc');
+      }, 2000);
+      this.contactCreated = false;
+    }
   }
 
   // GET CURRENT DAY TIME
@@ -155,7 +171,7 @@ export class DataService implements OnInit {
     });
 
   }
-// GET ALL FIRST NAMES OF CONTACT LIST
+  // GET ALL FIRST NAMES OF CONTACT LIST
   getFirstNames() {
     let names = [];
     for (let contact of this.allContacts) {
@@ -172,5 +188,9 @@ export class DataService implements OnInit {
         this.initialsFirstNames.push(initial);
       }
     });
+  }
+
+  addNewContact() {
+    this.router.navigate(['/kanbanboard/contacts/add-user']);
   }
 }

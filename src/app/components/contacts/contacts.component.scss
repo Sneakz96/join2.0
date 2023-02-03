@@ -27,7 +27,7 @@
     font-size: 50px;
 }
 
-.new-contact-btn {
+.add-new-contact-btn {
     position: fixed;
     bottom: var(--m10p);
     right: var(--m10p);
@@ -48,6 +48,19 @@
         transform: scale(1.05);
         cursor: pointer;
     }
+}
+
+.contact-created-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: var(--m10) var(--m20);
+    width: 326px;
+    border: none;
+    border-radius: var(--m10);
+    background-color: var(--dark-navy);
+    color: var(--white);
 }
 
 @media(max-width: 1080px) {

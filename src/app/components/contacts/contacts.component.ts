@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
-import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-contacts',
@@ -15,7 +15,7 @@ export class ContactsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private router: Router,
+    public data: DataService,
     ) { 
 
     }
@@ -23,10 +23,4 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-// 
-  addNewContact() {
-    this.router.navigate(['/kanbanboard/contacts/add-user'])
-  }
-
 }

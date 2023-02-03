@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
 
 @Component({
@@ -20,6 +19,7 @@ export class EditContactComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +40,10 @@ export class EditContactComponent implements OnInit {
 
         console.log(this.user);
       })
+  }
+
+  addNewContact() {
+    this.router.navigate(['/kanbanboard/contacts/add-user'])
   }
 
   editUser() {

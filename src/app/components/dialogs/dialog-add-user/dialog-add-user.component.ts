@@ -12,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss']
 })
+
 export class DialogAddUserComponent implements OnInit {
 
   contact = new Contact();
@@ -22,7 +23,7 @@ export class DialogAddUserComponent implements OnInit {
   constructor(
     private router: Router,
     private firestore: Firestore,
-    public dataService: DataService
+    public data: DataService,
   ) {
   }
 
@@ -87,9 +88,15 @@ export class DialogAddUserComponent implements OnInit {
   addUser() {
     this.setUser();
     this.saveUserToFirestore();
+    console.log(this.data.contactCreated);//f
+    this.router.navigate(['/kanbanboard/contacts']);
     setTimeout(() => {
-      this.router.navigate(['/kanbanboard/contacts']);
-    }, 500)
+      this.data.contactCreated = true;//t
+      console.log(this.data.contactCreated);
+    }, 500);
+
+    console.log(this.data.contactCreated);//f
+ 
   }
 
   saveUserToFirestore() {
@@ -98,7 +105,6 @@ export class DialogAddUserComponent implements OnInit {
     const coll = collection(this.firestore, 'allContacts');
     console.log(coll);
     setDoc(doc(coll), this.contact.toJSON());
-    // s = UNIQUE ID
   }
 
   editTask() {

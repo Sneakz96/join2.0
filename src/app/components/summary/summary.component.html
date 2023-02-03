@@ -7,15 +7,15 @@
     <div class="summary">
         <div class="row-container">
             <div class="row">
-                <div class="container">
+                <div class="container" routerLink="/kanbanboard/board">
                     <span class="number">{{ data.allTasks.length }}</span>
                     <span class="label">Tasks on Board</span>
                 </div>
-                <div class="container">
+                <div class="container" routerLink="/kanbanboard/board">
                     <span class="number">{{ data.inProgress }}</span>
                     <span class="label">Tasks in Progress</span>
                 </div>
-                <div class="container">
+                <div class="container" routerLink="/kanbanboard/board">
                     <span class="number">{{ data.feedback }}</span>
                     <span class="label">Awaiting Feedback</span>
                 </div>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="row">
-                <div class="container-last">
+                <div class="container-last"  routerLink="/kanbanboard/board">
                     <div class="info-container">
                         <img src="/assets/img/icons/edit-2.png">
                         <div class="info">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-last">
+                <div class="container-last"  routerLink="/kanbanboard/board">
                     <div class="info-container">
                         <img src="/assets/img/icons/right.png">
                         <div class="info">
