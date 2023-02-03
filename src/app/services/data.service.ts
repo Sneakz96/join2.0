@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 
-export class DataService implements OnChanges {
+export class DataService implements OnInit {
 
   taskId: any;
   id: string;
@@ -47,9 +47,9 @@ export class DataService implements OnChanges {
     // this.checkNewTask();
   }
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
     this.sortContacts();
-
+console.log('datas init called');
   }
 
   checkNewTask() {

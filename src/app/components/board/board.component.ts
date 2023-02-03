@@ -22,17 +22,18 @@ export class BoardComponent implements OnInit {
 
   searchField: string;
 
+
   constructor(
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-  ) {
+  ) {}
 
-  }
 
   ngOnInit(): void {
     console.log();
   }
+
 
   openTask(taskToOpen: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent);
@@ -51,64 +52,34 @@ export class BoardComponent implements OnInit {
 
   // DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
+
+    let index = event.currentIndex;
+    let indexBefore = event.previousIndex;
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(event.container.id);
-      console.log();
-      debugger;
+      moveItemInArray(event.container.data, indexBefore, index);
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
-        event.previousIndex,
-        event.currentIndex
-        );
-        debugger;
-      console.log(event.container.id);
+        indexBefore,
+        index
+      );
       this.changeStatusByDrop(event.item.data, event.container.id);
     }
   }
 
   // CHANGE TASK STATUS BY DROP IN CONTAINERS
   changeStatusByDrop(task: any, status: any) {
-    // task.status = status;
-    debugger;
-    console.log(task.status);
-    console.log(status);
-
-
-
-    for (let i = 0; i < this.data.allTasks.length; i++) {
-      const element = this.data.allTasks[i].status;
-      console.log(element);
-      //CDK-0 SHOW TASKS WITH STATUS TODO
-      if (element === 'toDo') {
-        console.log(i, element)
-      } else if (element === 'inProgress') {
-        console.log(i, element)
-      } else if (element === 'awaitingFeedback') {
-        console.log(i, element)
-      } else if (element === 'done') {
-        console.log(i, element)
-      }
+    if (status === 'dropList_0') {
+      task.status = 'toDo';
+    } else if (status === 'dropList_1') {
+      task.status = 'inProgress';
+    } else if (status === 'dropList_2') {
+      task.status = 'awaitingFeedback';
+    } else if (status === 'dropList_3') {
+      task.status = 'done';
+      this.deleteDoneTasks(task);
     }
-
-
-    // if (status === 'cdk-drop-list-0') {
-    //   task.status = 'toDo';
-    // } else if (status === 'cdk-drop-list-1') {
-    //   task.status = 'inProgress';
-
-
-    // } else if (status === 'cdk-drop-list-2') {
-    //   task.status = 'awaitingFeedback';
-    // } else if (status === 'cdk-drop-list-3') {
-    //   task.status = 'done';
-    // }
-    console.log(task);
-    console.log(task.status);
-
-    // this.deleteDoneTasks(task);
     this.updateTask(task, task.status);
   }
 
@@ -122,8 +93,6 @@ export class BoardComponent implements OnInit {
 
   // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {
-    console.log('time is runnning to delete task');
-    console.log(task.createdAt);
     setTimeout(() => {
       this.task = this.data.allTasks.filter(item => {
         let now = new Date();
