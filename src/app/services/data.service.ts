@@ -1,6 +1,8 @@
 import { Injectable, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogAddUserComponent } from '../components/dialogs/dialog-add-user/dialog-add-user.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class DataService implements OnInit {
 
   currentUser: any;
 
+  
   allContacts = [];
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
@@ -37,6 +40,7 @@ export class DataService implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
+    public dialog: MatDialog,
   ) {
     console.log('dataservice called');
     this.getLoggedUser();
@@ -190,7 +194,14 @@ console.log('datas init called');
     });
   }
 
+  // addNewContact() {
+  //   this.router.navigate(['/kanbanboard/contacts/add-user']);
+  // }
   addNewContact() {
-    this.router.navigate(['/kanbanboard/contacts/add-user']);
+   const dialogRef = this.dialog.open(DialogAddUserComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
+  
 }

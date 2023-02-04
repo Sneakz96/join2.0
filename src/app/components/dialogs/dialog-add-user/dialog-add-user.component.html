@@ -1,41 +1,54 @@
-<div class="content" [formGroup]="contactForm">
-    <h1>Contacts | Better with a team</h1>
+<div class="content">
     <div class="contact">
-        <div class="contact-head">
+
+        <div class="left">
+            <img src="./assets/img/Capa 2.png" class="logo">
+            <span class="title">Add contact</span>
+            <p>Tasks are better with a team!</p>
+            <div class="stroke">
+
+            </div>
+        </div>
+
+
+        <div class="mid">
             <div class="circle">
-                <div class="initials">
-                    <span>{{ contactForm.value.firstName.charAt(0) }}</span>
-                    <span>{{ contactForm.value.lastName.charAt(0) }}</span>
+                <div class="center">
+                    <img src="./assets/img/icons/person_empty.png">
                 </div>
             </div>
-            <div class="name">
-                <input class="first-name" type="text" formControlName="firstName" [placeholder]="'Enter first name'">
-                <input class="last-name" type="text" formControlName="lastName" [placeholder]="'Enter last name'">
-                <span routerLink="/kanbanboard/add-task"> <img src="/assets/img/icons/addblue.png">Add Task</span>
-            </div>
-        </div>
-
-        <div class="contact-information">
-            <span>Contact-Information</span>
-            <span class="edit" (click)="editTask()">
-                <img src="/assets/img/icons/edit1.png">Edit Contact
-            </span>
-            <div class="mail">
-                <span>E-mail</span>
-                <!-- <p>BeaLauren@gmail.com</p> -->
-                <input type="text" formControlName="email" [placeholder]="'Enter e-mail'">
-            </div>
-            <div class="phone">
-                <span>Phone</span>
-                <!-- <p>+01234567890</p> -->
-                <input type="text" formControlName="phone" [placeholder]="'Enter phone number'" >
-            </div>
         </div>
 
 
-        <button class="btn" (click)="addUser()">
-            Add Contact
-            <img src="/assets/img/icons/new-contact.png">
-        </button>
+        <div class="right">
+            <img src="./assets/img/icons/x.png" class="close" (click)="closeDialog()">
+
+            <form class="name" [formGroup]="contactForm">
+                <input type="text" formControlName="firstName" [placeholder]="'First name'">
+                <input type="text" formControlName="lastName" [placeholder]="'Last name'">
+                <input type="text" formControlName="email" [placeholder]="'E-mail'">
+                <input type="text" formControlName="phone" [placeholder]="'Phone number'">
+            </form>
+
+            <div class="btn-container">
+                <button class="cancel-btn" (click)="clearValues()">
+                    Cancel
+                    <img src="./assets/img/icons/x.png">
+                </button>
+                <button class="add-btn" (click)="addUser()">
+                    Add Contact
+                    <img src="./assets/img/icons/create.png">
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
     </div>
 </div>

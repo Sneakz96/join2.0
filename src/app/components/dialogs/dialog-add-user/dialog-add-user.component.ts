@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
@@ -18,14 +19,18 @@ export class DialogAddUserComponent implements OnInit {
   contact = new Contact();
   contactForm!: FormGroup;
 
+  userOnDialog: any;
+
   @Output() sideSelect = new EventEmitter<string>();
 
   constructor(
     private router: Router,
     private firestore: Firestore,
     public data: DataService,
+    public dialogRef: MatDialogRef<DialogAddUserComponent>
   ) {
   }
+
 
   ngOnInit(): void {
     this.setForm();
@@ -89,14 +94,15 @@ export class DialogAddUserComponent implements OnInit {
     this.setUser();
     this.saveUserToFirestore();
     console.log(this.data.contactCreated);//f
-    this.router.navigate(['/kanbanboard/contacts']);
+    // this.router.navigate(['/kanbanboard/contacts']);
+    // dialog.open();
     setTimeout(() => {
       this.data.contactCreated = true;//t
       console.log(this.data.contactCreated);
     }, 500);
 
     console.log(this.data.contactCreated);//f
- 
+
   }
 
   saveUserToFirestore() {
@@ -105,6 +111,21 @@ export class DialogAddUserComponent implements OnInit {
     const coll = collection(this.firestore, 'allContacts');
     console.log(coll);
     setDoc(doc(coll), this.contact.toJSON());
+  }
+
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  clearValues() {
+    console.log(this.contact.firstName);
+    this.contactForm.value.firstName = '';
+    this.contact.firstName = '';
+    // this.contactForm.value.lastName;
+    // this.contactForm.value.email;
+    // this.contactForm.value.phone;
+
   }
 
   editTask() {
