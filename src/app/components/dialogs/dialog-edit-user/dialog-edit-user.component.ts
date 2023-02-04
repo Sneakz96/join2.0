@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
 
@@ -10,9 +11,10 @@ import { Contact } from 'src/app/models/contact.class';
 export class DialogEditUserComponent implements OnInit {
 
   user: Contact;
-
+  userId: string;
   constructor(
-    public dialogRef: MatDialogRef<DialogEditUserComponent>
+    public dialogRef: MatDialogRef<DialogEditUserComponent>,
+    private firestore: AngularFirestore,
   ) { }
 
 
@@ -29,5 +31,9 @@ export class DialogEditUserComponent implements OnInit {
   save() {
     console.log('save called');
     this.closeDialog();
+    this.firestore
+    .collection('allContacts')
+    .doc(this.userId)
+    .update(this.user.toJSON());
   }
 }
