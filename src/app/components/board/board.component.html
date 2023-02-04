@@ -10,7 +10,6 @@
       <img src="/assets/img/icons/add-task.png">
     </button>
   </div>
-
   <div class="overview" cdkDropListGroup>
     <!-- 1 -->
     <div class="column">
@@ -32,7 +31,6 @@
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskToDo.description }}</p>
             </div>
-            {{ taskToDo.status }}
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -47,24 +45,20 @@
               <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
             </div>
           </div>
-
         </div>
       </div>
     </div>
     <!-- 1 -->
-
     <!-- 2 -->
     <div class="column">
       <div class="header-container">
         <h2>In progress</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-
-      <div class="content-container" id="dropList_1" #inProgress cdkDropList [cdkDropListData]="data.allTasks" (cdkDropListDropped)="drop($event)">
+      <div class="content-container" id="dropList_1" cdkDropList [cdkDropListData]="data.allTasks"
+        (cdkDropListDropped)="drop($event)">
         <div class="" *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress">
           <div class="task" *ngIf="taskInProgress.status === 'inProgress'" (click)="openTask(taskInProgress)">
-
-
             <div class="category">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskInProgress.category }}</span>
@@ -75,7 +69,6 @@
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskInProgress.description }}</p>
             </div>
-            {{ taskInProgress.status }}
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -89,33 +82,18 @@
               <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
               <img src="/assets/img/icons/{{ taskInProgress.priority }}.png" class="urgency">
             </div>
-
-
-
-
-
-
-
-
-
-
-
           </div>
         </div>
       </div>
     </div>
     <!-- 2 -->
-
-
-
     <!-- 3 -->
     <div class="column">
       <div class="header-container">
         <h2>Awaiting Feedback</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-
-      <div class="content-container" id="dropList_2" #awaitingFeedback cdkDropList [cdkDropListData]="data.allTasks"
+      <div class="content-container" id="dropList_2" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback">
           <div class="task" *ngIf="taskAwaitingFeedback.status === 'awaitingFeedback'"
@@ -130,7 +108,6 @@
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskAwaitingFeedback.description }}</p>
             </div>
-            {{ taskAwaitingFeedback.status }}
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -145,22 +122,17 @@
               <img src="/assets/img/icons/{{ taskAwaitingFeedback.priority }}.png" class="urgency">
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
     <!-- 3 -->
-
-
-
     <!-- 4 -->
     <div class="column">
       <div class="header-container">
         <h2>Done</h2>
         <img src="/assets/img/icons/plus1.png" class="plus" (click)="addTask()">
       </div>
-      <div class="content-container" id="dropList_3" #toDo cdkDropList [cdkDropListData]="data.allTasks"
+      <div class="content-container" id="dropList_3" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone">
           <div class="task" *ngIf="taskDone.status === 'done'" (click)="openTask(taskDone)">
@@ -174,7 +146,6 @@
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskDone.description }}</p>
             </div>
-            {{ taskDone.status }}
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -189,7 +160,6 @@
               <img src="/assets/img/icons/{{ taskDone.priority }}.png" class="urgency">
             </div>
           </div>
-        
         </div>
       </div>
     </div>
