@@ -14,12 +14,9 @@ import { DialogEditUserComponent } from '../dialogs/dialog-edit-user/dialog-edit
 
 export class EditContactComponent implements OnInit {
 
-  edit = false;
-
   userId = "";
   user: any = {};
 
-  
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
@@ -37,7 +34,7 @@ export class EditContactComponent implements OnInit {
     });
   }
 
-
+  // LOAD CURRENT USER FROM DB
   getUser() {
     this.firestore
       .collection('allContacts')
@@ -45,26 +42,24 @@ export class EditContactComponent implements OnInit {
       .valueChanges()
       .subscribe((user: any) => {
         this.user = new Contact(user);
-
-        console.log(this.user);
       })
   }
 
+  // ROUTER NAVIGATE TO ADD USER COMPONENT
   addNewContact() {
-    this.router.navigate(['/kanbanboard/contacts/add-user'])
+    this.router.navigate(['/kanbanboard/contacts/add-user']);
   }
 
   // OPEN DIALOG
   editUser() {
     const dialogRef = this.dialog.open(DialogEditUserComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.componentInstance.user = this.user;
   }
 
 
   save() {
-    this.edit = false;
-    console.log(this.edit);
+    console.log('save user called');
+
+
   }
 }

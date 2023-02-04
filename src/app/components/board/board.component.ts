@@ -27,14 +27,14 @@ export class BoardComponent implements OnInit {
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
     console.log();
   }
 
-
+  // 
   openTask(taskToOpen: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent);
     dialogRef.componentInstance.taskOnDialog = taskToOpen;

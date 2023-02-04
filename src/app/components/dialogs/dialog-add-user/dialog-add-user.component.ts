@@ -83,14 +83,7 @@ export class DialogAddUserComponent implements OnInit {
     }
   }
 
-  setUser() {
-    this.contact.firstName = this.contactForm.value.firstName;
-    this.contact.lastName = this.contactForm.value.lastName;
-    this.setColor();
-    this.contact.email = this.contactForm.value.email;
-    this.contact.phone = this.contactForm.value.phone;
-  }
-
+  // 
   addUser() {
     this.setUser();
     this.saveUserToFirestore();
@@ -103,6 +96,15 @@ export class DialogAddUserComponent implements OnInit {
 
     console.log(this.data.contactCreated);//f
 
+  }
+
+  // 
+  setUser() {
+    this.contact.firstName = this.contactForm.value.firstName;
+    this.contact.lastName = this.contactForm.value.lastName;
+    this.setColor();
+    this.contact.email = this.contactForm.value.email;
+    this.contact.phone = this.contactForm.value.phone;
   }
 
   // SAVE NEW USER TO DB
@@ -118,7 +120,8 @@ export class DialogAddUserComponent implements OnInit {
 
   // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {
-    console.log();
+    console.log('clear values called');
+    console.log(this.contactForm.value.firstName);
     this.contactForm.value.firstName = '';
     // this.contactForm.value.lastName;
     // this.contactForm.value.email;

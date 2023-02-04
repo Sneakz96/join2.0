@@ -4,17 +4,15 @@
         <div class="left">
             <img src="./assets/img/Capa 2.png" class="logo">
             <span class="title">Edit contact</span>
-            <div class="stroke">
-
-            </div>
+            <div class="stroke"></div>
         </div>
 
 
         <div class="mid">
             <div class="circle">
                 <div class="initials">
-                    A
-                    B
+                    {{ user.firstName.charAt(0) }}
+                    {{ user.lastName.charAt(0) }}
                 </div>
             </div>
         </div>
@@ -23,11 +21,23 @@
         <div class="right">
             <img src="./assets/img/icons/x.png" class="close" (click)="closeDialog()">
 
-            <div class="name" [formGroup]="">
-                <input type="text" [placeholder]="'First name'">
-                <input type="text" [placeholder]="'Last name'">
-                <input type="text" [placeholder]="'E-mail'">
-                <input type="text" [placeholder]="'Phone number'">
+            <div class="name" >
+                <div class="input-container">
+                    <input type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'">
+                    <mat-icon class="mat-icon">person_outline</mat-icon>
+                </div>
+                <div class="input-container">
+                    <input type="text" matInput [(ngModel)]="user.lastName" [placeholder]="'Last name'">
+                    <mat-icon class="mat-icon">person_outline</mat-icon>
+                </div>
+                <div class="input-container">
+                    <input type="text" matInput [(ngModel)]="user.email" [placeholder]="'E-mail'">
+                    <mat-icon class="mat-icon">mail_outline</mat-icon>
+                </div>
+                <div class="input-container">
+                    <input type="text" matInput [(ngModel)]="user.phone" [placeholder]="'Phone number'">
+                    <mat-icon class="mat-icon">phone</mat-icon>
+                </div>
             </div>
 
             <div class="btn-container">

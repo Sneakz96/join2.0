@@ -94,6 +94,11 @@
     display: flex;
     flex-direction: column;
     margin-top: var(--m5p);
+}
+
+.input-container {
+    display: flex;
+    position: relative;
 
     input {
         margin-top: var(--m10);
@@ -103,6 +108,12 @@
         border: 1px solid var(--dark-navy);
         padding: 12px;
     }
+}
+
+.mat-icon{
+    position: absolute;
+    top: 21px;
+    left: 82%;
 }
 
 .btn-container {
