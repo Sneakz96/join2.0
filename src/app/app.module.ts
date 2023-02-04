@@ -47,6 +47,7 @@ import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogEditUserComponent } from './components/dialogs/dialog-edit-user/dialog-edit-user.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { HttpClientModule } from '@angular/common/http';
     DialogAddTaskComponent,
     ContentWrapperComponent,
     EditContactComponent,
+    DialogEditUserComponent,
   ],
   imports: [
     HttpClientModule,

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
+import { DataService } from 'src/app/services/data.service';
+import { DialogEditUserComponent } from '../dialogs/dialog-edit-user/dialog-edit-user.component';
 
 @Component({
   selector: 'app-edit-contact',
@@ -16,11 +19,15 @@ export class EditContactComponent implements OnInit {
   userId = "";
   user: any = {};
 
+  
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
     private router: Router,
+    public data: DataService,
+    public dialog: MatDialog,
   ) { }
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -29,6 +36,7 @@ export class EditContactComponent implements OnInit {
       this.getUser();
     });
   }
+
 
   getUser() {
     this.firestore
@@ -46,10 +54,15 @@ export class EditContactComponent implements OnInit {
     this.router.navigate(['/kanbanboard/contacts/add-user'])
   }
 
+  // OPEN DIALOG
   editUser() {
-    this.edit = true;
-    console.log(this.edit);
+    const dialogRef = this.dialog.open(DialogEditUserComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(`Dialog result: ${result}`);
+    });
   }
+
+
   save() {
     this.edit = false;
     console.log(this.edit);

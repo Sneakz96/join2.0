@@ -37,6 +37,7 @@ export class DialogAddUserComponent implements OnInit {
     this.setUserID();
   }
 
+  // SET FORM OF NEW CONTACT
   setForm() {
     this.contactForm = new FormGroup({
       'firstName': new FormControl(this.contact.firstName, [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
@@ -47,11 +48,13 @@ export class DialogAddUserComponent implements OnInit {
     console.log(this.contact.firstName);
   }
 
+  // GIVE NEW USER RANDOM ID
   setUserID() {
     this.contact.id = 20000 * Math.random();
     console.log(this.contact.id);
   }
 
+  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
   setColor() {
     switch (this.contact.lastName.charCodeAt(0) % 6) {
       case 0:
@@ -94,8 +97,7 @@ export class DialogAddUserComponent implements OnInit {
     this.setUser();
     this.saveUserToFirestore();
     console.log(this.data.contactCreated);//f
-    // this.router.navigate(['/kanbanboard/contacts']);
-    // dialog.open();
+    this.closeDialog()
     setTimeout(() => {
       this.data.contactCreated = true;//t
       console.log(this.data.contactCreated);
@@ -105,27 +107,24 @@ export class DialogAddUserComponent implements OnInit {
 
   }
 
+  // SAVE NEW USER TO DB
   saveUserToFirestore() {
-    console.log('should store User in Firestore', this.contact);
-
     const coll = collection(this.firestore, 'allContacts');
-    console.log(coll);
     setDoc(doc(coll), this.contact.toJSON());
   }
 
-
+  // CLOSE DIALOG TO CREATE NEW USER
   closeDialog() {
     this.dialogRef.close();
   }
 
+  // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {
-    console.log(this.contact.firstName);
+    console.log();
     this.contactForm.value.firstName = '';
-    this.contact.firstName = '';
     // this.contactForm.value.lastName;
     // this.contactForm.value.email;
     // this.contactForm.value.phone;
-
   }
 
   editTask() {
