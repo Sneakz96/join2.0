@@ -1,7 +1,6 @@
 import { Injectable, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { DialogAddUserComponent } from '../components/dialogs/dialog-add-user/dialog-add-user.component';
 
 @Injectable({
@@ -39,7 +38,6 @@ export class DataService implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-    private router: Router,
     public dialog: MatDialog,
   ) {
     console.log('dataservice called');

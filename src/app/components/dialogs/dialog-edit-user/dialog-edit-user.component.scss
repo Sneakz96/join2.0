@@ -65,7 +65,7 @@
     margin: 0 40px 120px 40px;
 }
 
-.center {
+.initials {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,31 +108,11 @@
 .btn-container {
     width: 87%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: var(--m10p);
 }
 
-.cancel-btn {
-    display: flex;
-    align-items: center;
-    padding: var(--m10) var(--m20);
-    background-color: white;
-    color: var(--dark-navy);
-    border: 1px solid var(--dark-navy);
-    border-radius: var(--m10);
-
-    img {
-        height: 12px;
-        margin-left: var(--m5);
-    }
-
-    &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
-}
-
-.add-btn {
+.save-btn {
     display: flex;
     align-items: center;
     padding: var(--m10) var(--m20);
