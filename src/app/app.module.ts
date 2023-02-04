@@ -9,24 +9,24 @@ import { AppRoutingModule } from './app-routing.module';
 
 //COMPONENTS_
 import { AppComponent } from './app.component';
-import { AddTaskComponent } from './components/add-task/add-task.component';
-import { BoardComponent } from './components/board/board.component';
-import { ContactsComponent } from './components/contacts/contacts.component';
-import { DataProtectionComponent } from './components/data-protection/data-protection.component';
-import { HelpSectionComponent } from './components/help-section/help-section.component';
-import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
-import { LoggedWrapperComponent } from './components/logged-wrapper/logged-wrapper.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { SummaryComponent } from './components/summary/summary.component';
-import { DialogAddUserComponent } from './components/dialogs/dialog-add-user/dialog-add-user.component';
-import { ContactWrapperComponent } from './components/contact-wrapper/contact-wrapper.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ContactListComponent } from './components/contact-list/contact-list.component';
-import { LoginComponent } from './components/login/login.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
-import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
-import { EditContactComponent } from './components/edit-contact/edit-contact.component';
+import { AddTaskComponent } from './components/main/add-task/add-task.component';
+import { BoardComponent } from './components/main/board/board.component';
+import { ContactsComponent } from './components/main/contacts/contacts/contacts.component';
+import { DataProtectionComponent } from './components/main/data-protection/data-protection.component';
+import { HelpSectionComponent } from './components/main/help-section/help-section.component';
+import { LegalNoticeComponent } from './components/main/legal-notice/legal-notice.component';
+import { LoggedWrapperComponent } from './components/main/logged-wrapper/logged-wrapper.component';
+import { SidenavComponent } from './components/main/sidenav/sidenav.component';
+import { SummaryComponent } from './components/main/summary/summary.component';
+import { DialogAddUserComponent } from './components/main/dialogs/dialog-add-user/dialog-add-user.component';
+import { ContactWrapperComponent } from './components/main/contacts/contact-wrapper/contact-wrapper.component';
+import { SignUpComponent } from './components/log/sign-up/sign-up.component';
+import { ContactListComponent } from './components/main/contacts/contact-list/contact-list.component';
+import { LoginComponent } from './components/log/login/login.component';
+import { WelcomeComponent } from './components/log/welcome/welcome.component';
+import { DialogAddTaskComponent } from './components/main/dialogs/dialog-add-task/dialog-add-task.component';
+import { ContentWrapperComponent } from './components/main/content-wrapper/content-wrapper.component';
+import { EditContactComponent } from './components/main/contacts/edit-contact/edit-contact.component';
 
 //ANGULAR_MATERIAL_
 import { MatInputModule } from '@angular/material/input';
@@ -42,12 +42,13 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { FirestoreModule, provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { TaskDialogComponent } from './components/dialogs/task-dialog/task-dialog.component';
+import { TaskDialogComponent } from './components/main/dialogs/task-dialog/task-dialog.component';
 import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
-import { DialogEditUserComponent } from './components/dialogs/dialog-edit-user/dialog-edit-user.component';
+import { DialogEditUserComponent } from './components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
+import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-task/dialog-edit-task.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { DialogEditUserComponent } from './components/dialogs/dialog-edit-user/d
     ContentWrapperComponent,
     EditContactComponent,
     DialogEditUserComponent,
+    DialogEditTaskComponent,
   ],
   imports: [
     HttpClientModule,

@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
-import { AddTaskComponent } from 'src/app/components/add-task/add-task.component';
+import { AddTaskComponent } from 'src/app/components/main/add-task/add-task.component';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 

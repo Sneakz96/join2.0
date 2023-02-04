@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddTaskComponent } from './components/add-task/add-task.component';
-import { BoardComponent } from './components/board/board.component';
-import { ContactWrapperComponent } from './components/contact-wrapper/contact-wrapper.component';
-import { DataProtectionComponent } from './components/data-protection/data-protection.component';
-import { HelpSectionComponent } from './components/help-section/help-section.component';
-import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { SummaryComponent } from './components/summary/summary.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
-import { DialogAddUserComponent } from './components/dialogs/dialog-add-user/dialog-add-user.component';
-import { ContactsComponent } from './components/contacts/contacts.component';
-import { EditContactComponent } from './components/edit-contact/edit-contact.component';
+import { AddTaskComponent } from './components/main/add-task/add-task.component';
+import { BoardComponent } from './components/main/board/board.component';
+import { ContactWrapperComponent } from './components/main/contacts/contact-wrapper/contact-wrapper.component';
+import { DataProtectionComponent } from './components/main/data-protection/data-protection.component';
+import { HelpSectionComponent } from './components/main/help-section/help-section.component';
+import { LegalNoticeComponent } from './components/main/legal-notice/legal-notice.component';
+import { LoginComponent } from './components/log/login/login.component';
+import { SignUpComponent } from './components/log/sign-up/sign-up.component';
+import { SummaryComponent } from './components/main/summary/summary.component';
+import { WelcomeComponent } from './components/log/welcome/welcome.component';
+import { ContentWrapperComponent } from './components/main/content-wrapper/content-wrapper.component';
+import { DialogAddUserComponent } from './components/main/dialogs/dialog-add-user/dialog-add-user.component';
+import { ContactsComponent } from './components/main/contacts/contacts/contacts.component';
+import { EditContactComponent } from './components/main/contacts/edit-contact/edit-contact.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },

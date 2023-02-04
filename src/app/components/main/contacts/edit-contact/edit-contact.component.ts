@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
-import { DialogEditUserComponent } from '../dialogs/dialog-edit-user/dialog-edit-user.component';
+import { DialogEditUserComponent } from '../../dialogs/dialog-edit-user/dialog-edit-user.component';
 
 @Component({
   selector: 'app-edit-contact',
