@@ -9,7 +9,7 @@
 
 
         <div class="mid">
-            <div class="circle">
+            <div class="circle" [ngStyle]="{'background-color': user.color}">
                 <div class="initials">
                     {{ user.firstName.charAt(0) }}
                     {{ user.lastName.charAt(0) }}

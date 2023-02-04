@@ -10,7 +10,6 @@
 
 .content {
     background-color: white;
-
 }
 
 .contact {
@@ -20,7 +19,6 @@
     align-items: center;
     justify-content: center;
 }
-
 
 .left {
     background-color: var(--dark-navy);
@@ -60,8 +58,7 @@
     height: 120px;
     width: 120px;
     border-radius: 50%;
-    background-color: rgb(209, 209, 209);
-    border: 3px solid rgb(255, 255, 255);
+    border: 1px solid var(--white);
     margin: 0 40px 120px 40px;
 }
 
@@ -71,6 +68,9 @@
     align-items: center;
     height: 120px;
     width: 120px;
+    font-weight: 500;
+    font-size: var(--fs-l);
+    color: var(--dark-navy);
 }
 
 .right {
