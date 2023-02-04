@@ -67,7 +67,6 @@ export class DataService implements OnInit {
   getDayTime() {
     let today = new Date();
     let curHr = today.getHours();
-
     if (curHr < 12) {
       this.dayTime = 'Good morning';
     } else if (curHr < 18) {
@@ -79,8 +78,6 @@ export class DataService implements OnInit {
 
   // GET LOGGED USER
   getLoggedUser() {
-    console.log(this.loggedUser);
-
     if (this.loggedUser) {
       this.userName = this.loggedUser;
       console.log(this.userName);
@@ -133,12 +130,14 @@ export class DataService implements OnInit {
     })
   }
 
+  // GET LOWEST DUEDATE OF ALL TASKS
   getLowestDueDate(task: any, index: any) {
     if (index >= 0) {
       this.deadline = this.changeDateAppearance(new Date(task.dueDate));
     }
   }
 
+  // 
   changeDateAppearance(date: any) {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let day = date.getDate();
@@ -148,7 +147,7 @@ export class DataService implements OnInit {
     return month + ' ' + day + ', ' + year;
   }
 
-  //LOAD CONTACTS FROM FIRESTORE
+  //LOAD ALL CONTACTS FROM FIRESTORE
   loadContacts() {
     this.firestore
       .collection('allContacts')
@@ -201,5 +200,6 @@ export class DataService implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  
 
 }

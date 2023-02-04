@@ -47,10 +47,7 @@
 .list-header {
     width: 90%;
     margin-top: var(--m10p);
-
-
 }
-
 
 .letter {
     margin-left: var(--m5p);
@@ -78,6 +75,10 @@
     width: 90%;
     height: 50px;
     padding: 8px;
+
+    &:last-child {
+        margin-bottom: var(--m10p);
+    }
 
     &:hover {
         transform: scale(1.05);
@@ -140,9 +141,10 @@
 }
 
 @media(max-width: 760px) {
-    .contact-list{
+    .contact-list {
         top: 140px;
     }
+
     .new-contact {
         width: 25%;
         display: flex;
