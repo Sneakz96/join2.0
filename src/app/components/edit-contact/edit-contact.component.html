@@ -4,39 +4,31 @@
         <div class="contact-head">
             <div class="circle" [ngStyle]="{'background-color': user.color}">
                 <div class="initials">
-                    <!-- <span>{{ user.firstName.charAt(0) }}</span>
-                    <span>{{ user.lastName.charAt(0) }}</span> -->
+                    <span>{{ user.firstName.charAt(0) }}</span>
+                    <span>{{ user.lastName.charAt(0) }}</span>
                 </div>
             </div>
             <div class="name">
                 {{ user.firstName}}
-                <!-- <input type="text" contenteditable="true" value="{{ user.firstName}}"> -->
                 {{ user.lastName}}
-                <!-- <input type="text" contenteditable="true" value="{{ user.lastName}}"> -->
-                <span> <img src="./assets/img/icons/addblue.png">Add Task</span>
+                <span routerLink="/kanbanboard/add-task"><img src="./assets/img/icons/addblue.png"> Add Task</span>
             </div>
         </div>
-
         <div class="contact-information">
             <h2>Contact-Information</h2>
             <div class="edit-btn" (click)="editUser()">
                 <img src="./assets/img/icons/edit1.png">
                 <span>Edit User</span>
             </div>
-
             <div class="mail">
                 <span>Email</span>
                 <p>{{ user.email }}</p>
-                <!-- <input type="text" contenteditable="true" value="{{ user.email }}"> -->
             </div>
             <div class="phone">
                 <span>Phone</span>
                 <p>{{ user.phone }}</p>
-                <!-- <input type="text" contenteditable="edit" value="{{ user.phone }}">  -->
             </div>
         </div>
-
-
         <button class="new-contact-btn" (click)="data.addNewContact()">
             New contact
             <img src="/assets/img/icons/new-contact.png">

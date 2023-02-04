@@ -11,10 +11,4 @@ export class ContentWrapperComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  //   loadedFeature = 'summary';
-
-  // onNavigate(feature: string) {
-  //   this.loadedFeature = feature;
-  // }
 }

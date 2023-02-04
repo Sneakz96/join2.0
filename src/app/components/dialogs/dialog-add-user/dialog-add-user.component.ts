@@ -45,13 +45,11 @@ export class DialogAddUserComponent implements OnInit {
       'email': new FormControl(this.contact.email, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
       'phone': new FormControl(this.contact.phone, [Validators.required, Validators.pattern('[- +()0-9]+')]),
     });
-    console.log(this.contact.firstName);
   }
 
   // GIVE NEW USER RANDOM ID
   setUserID() {
     this.contact.id = 20000 * Math.random();
-    console.log(this.contact.id);
   }
 
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME

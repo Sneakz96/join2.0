@@ -25,7 +25,7 @@ export class DataService implements OnInit {
 
   currentUser: any;
 
-  
+
   allContacts = [];
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
@@ -51,7 +51,7 @@ export class DataService implements OnInit {
 
   ngOnInit(): void {
     this.sortContacts();
-console.log('datas init called');
+    console.log('datas init called');
   }
 
   checkNewTask() {
@@ -196,10 +196,10 @@ console.log('datas init called');
   //   this.router.navigate(['/kanbanboard/contacts/add-user']);
   // }
   addNewContact() {
-   const dialogRef = this.dialog.open(DialogAddUserComponent);
+    const dialogRef = this.dialog.open(DialogAddUserComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
+
 }

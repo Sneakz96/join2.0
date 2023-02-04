@@ -21,7 +21,7 @@
 
 
         <div class="right">
-            <img src="./assets/img/icons/x.png" class="close">
+            <img src="./assets/img/icons/x.png" class="close" (click)="closeDialog()">
 
             <div class="name" [formGroup]="">
                 <input type="text" [placeholder]="'First name'">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="btn-container">
-                <button class="save-btn">
+                <button class="save-btn" (click)="save()">
                     Save
                 </button>
             </div>
