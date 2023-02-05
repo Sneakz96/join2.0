@@ -4,12 +4,13 @@
     right: 0;
     bottom: 0;
     width: 70%;
+    overflow-y: scroll;
 }
 
 @media(max-width: 1080px) {
     .contact-content{
-        left: 0 !important;
-        width: 100% !important;
+        right: 0 !important;
+        width: 70% !important;
     }
 }
 

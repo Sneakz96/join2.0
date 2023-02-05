@@ -21,6 +21,10 @@
     justify-content: flex-end;
     background-color: white;
 
+    &:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    }
 }
 
 .new-contact-btn {
@@ -136,7 +140,7 @@
 
 @media(max-width: 1080px) {
     .contact-list {
-        width: 25%;
+        width: 30%;
     }
 }
 
@@ -146,7 +150,7 @@
     }
 
     .new-contact {
-        width: 25%;
+        width: 30%;
         display: flex;
     }
 

@@ -35,6 +35,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 //ANGULAR_FIRE_
 import { environment } from "src/environments/environment";
@@ -91,6 +92,7 @@ import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-t
     FirestoreModule,
     MatSelectModule,
     MatIconModule,
+    MatMenuModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
