@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,8 @@ import { DialogEditTaskComponent } from '../dialog-edit-task/dialog-edit-task.co
   templateUrl: './task-dialog.component.html',
   styleUrls: ['./task-dialog.component.scss']
 })
-export class TaskDialogComponent implements OnInit {
+
+export class TaskDialogComponent {
 
   taskId = '';
   task: Task;
@@ -23,47 +24,19 @@ export class TaskDialogComponent implements OnInit {
     private route: ActivatedRoute,
     public data: DataService,
     public dialog: MatDialog,
-  ) {
+  ) { }
 
-  }
-
-
-  ngOnInit(): void {
-    console.log('task:', this.task);
-    // this.getParams();
-  }
-
-  // // 
-  // getParams() {
-  //   this.route.paramMap.subscribe(paramMap => {
-  //     this.taskId = paramMap.get('id');
-  //     console.log(this.route);
-  //     this.getCurrentTask();
-  //   });
-  // }
-
-  // // LOAD CURRENT TASK FROM DB
-  // getCurrentTask() {
-  //   this.firestore
-  //     .collection('allTasks')
-  //     .doc(this.taskId)
-  //     .valueChanges()
-  //     .subscribe((task: any) => {
-  //       this.task = new Task(task);
-  //     });
-  //   console.log(this.task);
-  // }
-
+  // CLOSE DIALOGAND AND NAVIGATE TO BOARD
   closeDialog() {
     this.dialogRef.close();
     this.router.navigate(['/kanbanboard/board']);
   }
 
+  // EDIT OPENED TASK
   editTask() {
-    const dialogRef = this.dialog.open(DialogEditTaskComponent);
-    dialogRef.componentInstance.task = new Task(this.task);
-    dialogRef.componentInstance.taskId = this.taskId;
-    console.log(this.task);
-    console.log(this.taskId);
+    this.dialogRef.close();
+    const dialog = this.dialog.open(DialogEditTaskComponent);
+    dialog.componentInstance.task = new Task(this.task);
+    dialog.componentInstance.taskId = this.taskId;
   }
 }

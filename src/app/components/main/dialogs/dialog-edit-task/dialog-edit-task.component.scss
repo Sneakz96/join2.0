@@ -2,28 +2,45 @@
     border-radius: 10px !important;
 }
 
+::ng-deep .cdk-overlay-pane {
+    width: 50% !important;
+}
+
 .task {
     height: fit-content;
-    width: 500px;
 }
 
 .task-category {
     padding: 8px;
     background-color: var(--dark-navy);
     color: var(--white);
+    outline: none;
     border-radius: 10px;
-    width: fit-content;
+    border: none;
+    text-align: center;
+}
+
+.task-content{
+    width: 100%;
 }
 
 .title {
+    width: 80%;
     margin-top: var(--m5p);
     margin-bottom: var(--m5p);
     font-weight: 400;
     font-size: var(--fs-hl);
+    outline: none;
+    border: none;
+
 }
 
 .description {
+    width: 100%;
     margin-bottom: var(--m5p);
+    outline: none;
+    border: none;
+
 }
 
 .due-date {
@@ -31,10 +48,15 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    width: 50%;
+    width: 70%;
 
     p {
         font-weight: bold;
+    }
+
+    input {
+        outline: none;
+        border: none;
     }
 }
 
@@ -88,20 +110,20 @@
 
 
 
-.close-btn{
+.close-btn {
     position: relative;
     left: 97%;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 }
 
-.edit-btn{
+.edit-btn {
     position: relative;
     left: 90%;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
         transform: scale(1.05);
     }

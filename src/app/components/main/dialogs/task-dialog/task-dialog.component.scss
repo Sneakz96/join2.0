@@ -2,9 +2,12 @@
     border-radius: 10px !important;
 }
 
+::ng-deep .cdk-overlay-pane {
+    width: 50% !important;
+}
+
 .task {
     height: fit-content;
-    width: 500px;
 }
 
 .task-category {

@@ -5,7 +5,7 @@
     </div>
     <div class="task-content">
         <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
-        <input type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
+        <input class="description" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
     </div>
     <div class="due-date">
         <p>Due Date:</p>
@@ -26,6 +26,5 @@
         {{ contact.firstName }}
         {{ contact.lastName }}
     </div>
-
     <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="save()">
 </div>
