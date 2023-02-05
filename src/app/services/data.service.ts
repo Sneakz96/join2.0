@@ -45,8 +45,6 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.getDayTime();
-    console.log(this.allTasks);
-    // this.checkNewTask();
   }
 
   ngOnInit(): void {
@@ -54,7 +52,7 @@ export class DataService implements OnInit {
     console.log('datas init called');
   }
 
-  checkNewTask() {
+  checkIfNewContactIsCreated() {
     if (!this.contactCreated) {
       setTimeout(() => {
         console.log('cc');

@@ -14,7 +14,7 @@ import { DialogEditUserComponent } from '../../dialogs/dialog-edit-user/dialog-e
 
 export class EditContactComponent implements OnInit {
 
-  userId = "";
+  userId = '';
   user: any = {};
 
   constructor(
@@ -27,22 +27,27 @@ export class EditContactComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getParams();
+  }
+
+  // GET PARAM ID OF CONTACT FROM ACTIVE ROUTE
+  getParams() {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
       console.log(this.userId);
-      this.getUser();
+      this.getCurrentUser();
     });
   }
 
   // LOAD CURRENT USER FROM DB
-  getUser() {
+  getCurrentUser() {
     this.firestore
       .collection('allContacts')
       .doc(this.userId)
       .valueChanges()
       .subscribe((user: any) => {
         this.user = new Contact(user);
-      })
+      });
   }
 
   // ROUTER NAVIGATE TO ADD USER COMPONENT
@@ -55,12 +60,5 @@ export class EditContactComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogEditUserComponent);
     dialogRef.componentInstance.user = new Contact(this.user.toJSON());
     dialogRef.componentInstance.userId = this.userId;
-  }
-
-
-  save() {
-    console.log('save user called');
-
-
   }
 }

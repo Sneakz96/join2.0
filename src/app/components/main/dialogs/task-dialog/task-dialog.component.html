@@ -1,32 +1,25 @@
-<div class="task" draggable="true">
+<div class="task">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="closeDialog()">
     <div class="category">
-        <p class="task-category">{{ taskOnDialog.category }}</p>
-        <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
-        <!-- <span class="task-category">{{ taskToDo.category }}</span> -->
+        <p class="task-category">{{ task.category }}</p>
     </div>
     <div class="task-content">
-        <p class="title">{{ taskOnDialog.title }}</p>
-        <p class="description">{{ taskOnDialog.description }}</p>
-        <!--EDIT TITLE TO VARIABLES FROM JSON-->
-        <!-- <span class="title">{{ taskToDo.title }}</span>
-            <p></p> -->
+        <p class="title">{{ task.title }}</p>
+        <p class="description">{{ task.description }}</p>
     </div>
-    {{ taskOnDialog.status }}
-
     <div class="due-date">
         <p>Due Date:</p>
-        <span>{{ taskOnDialog.dueDate }}</span>
+        <span>{{ task.dueDate }}</span>
     </div>
     <div class="priority">
         <p>Priority:</p>
         <div class="urgency-btn">
-            <img src="./assets/img/icons/{{ taskOnDialog.priority }}.png">
+            <img src="./assets/img/icons/{{ task.priority }}.png">
         </div>
     </div>
     <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
     <span class="assigned-to">Assigned To:</span>
-    <div class="assigned-contact" *ngFor="let contact of taskOnDialog.assignedTo">
+    <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName.charAt(0)}}
             {{ contact.lastName.charAt(0)}}
@@ -35,5 +28,5 @@
         {{ contact.lastName }}
     </div>
 
-    <img class="edit-btn" src="./assets/img/icons/edit.png">
+    <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="editTask()">
 </div>

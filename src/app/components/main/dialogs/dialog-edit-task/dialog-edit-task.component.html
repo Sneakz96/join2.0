@@ -1,1 +1,31 @@
-<p>dialog-edit-task works!</p>
+<div class="task">
+    <img src="./assets/img/icons/x.png" class="close-btn" (click)="close()">
+    <div class="category">
+        <input class="task-category" type="text" matInput [(ngModel)]="task.category" [placeholder]="'Category'">
+    </div>
+    <div class="task-content">
+        <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
+        <input type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
+    </div>
+    <div class="due-date">
+        <p>Due Date:</p>
+        <input type="text" matInput [(ngModel)]="task.dueDate" [placeholder]="'Due Date'">
+    </div>
+    <div class="priority">
+        <p>Priority:</p>
+        <div class="urgency-btn">
+            <img src="./assets/img/icons/{{ task.priority }}.png">
+        </div>
+    </div>
+    <span class="assigned-to">Assigned To:</span>
+    <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
+        <div class="circle" [ngStyle]="{'background-color': contact.color}">
+            {{ contact.firstName.charAt(0)}}
+            {{ contact.lastName.charAt(0)}}
+        </div>
+        {{ contact.firstName }}
+        {{ contact.lastName }}
+    </div>
+
+    <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="save()">
+</div>

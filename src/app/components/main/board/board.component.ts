@@ -36,10 +36,15 @@ export class BoardComponent implements OnInit {
 
   // 
   openTask(taskToOpen: any) {
-    const dialogRef = this.dialog.open(TaskDialogComponent);
-    dialogRef.componentInstance.taskOnDialog = taskToOpen;
-    dialogRef.afterClosed().subscribe(() => {
+    const dialogRef = this.dialog.open(TaskDialogComponent,{
+      width: '100%',
+      data: {
+        taskToOpen
+      }
     });
+    dialogRef.componentInstance.task = taskToOpen;
+    dialogRef.componentInstance.taskId = taskToOpen.customIdName;
+    console.log(taskToOpen);
   }
 
   // OPEN ADD TASK DIALOG

@@ -34,6 +34,6 @@ export class ContactListComponent implements OnInit {
   
   // 
   addNewContact() {
-    this.router.navigate(['/kanbanboard/contacts/add-user'])
+    this.router.navigate(['/kanbanboard/contacts/add-user']);
   }
 }

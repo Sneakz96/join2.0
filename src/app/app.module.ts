@@ -99,6 +99,7 @@ import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-t
     provideFirestore(() => getFirestore()),
   ],
   providers: [
+    TaskDialogComponent,
     MatDatepickerModule,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }

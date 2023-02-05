@@ -14,6 +14,7 @@ import { ContentWrapperComponent } from './components/main/content-wrapper/conte
 import { DialogAddUserComponent } from './components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { ContactsComponent } from './components/main/contacts/contacts/contacts.component';
 import { EditContactComponent } from './components/main/contacts/edit-contact/edit-contact.component';
+import { TaskDialogComponent } from './components/main/dialogs/task-dialog/task-dialog.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -23,7 +24,11 @@ const routes: Routes = [
   {
     path: 'kanbanboard', component: ContentWrapperComponent, children: [
       { path: 'summary', component: SummaryComponent },
-      { path: 'board', component: BoardComponent },
+      {
+        path: 'board', component: BoardComponent, children: [
+          { path: ':id', component: TaskDialogComponent },
+        ]
+      },
       { path: 'add-task', component: AddTaskComponent },
       { path: 'help', component: HelpSectionComponent },
       { path: 'data-protection', component: DataProtectionComponent },

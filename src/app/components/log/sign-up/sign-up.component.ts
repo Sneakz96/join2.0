@@ -43,7 +43,7 @@ export class SignUpComponent {
         if (res.credential == null) {
           res.user.updateProfile({ displayName: this.signForm.value.displayName });
           console.log('You are Successfully signed up!', res);
-          this.router.navigate(['/kanbanboard/summary'])
+          this.router.navigate(['/kanbanboard/summary']);
         }
       })
       .catch(error => {

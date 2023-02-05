@@ -6,8 +6,6 @@
             <span class="title">Edit contact</span>
             <div class="stroke"></div>
         </div>
-
-
         <div class="mid">
             <div class="circle" [ngStyle]="{'background-color': user.color}">
                 <div class="initials">
@@ -16,12 +14,9 @@
                 </div>
             </div>
         </div>
-
-
         <div class="right">
             <img src="./assets/img/icons/x.png" class="close" (click)="closeDialog()">
-
-            <div class="name" >
+            <div class="name">
                 <div class="input-container">
                     <input type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'">
                     <mat-icon class="mat-icon">person_outline</mat-icon>

@@ -12,6 +12,7 @@ export class DialogEditUserComponent implements OnInit {
 
   user: Contact;
   userId: string;
+  
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
     private firestore: AngularFirestore,
