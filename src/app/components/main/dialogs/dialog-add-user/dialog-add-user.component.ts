@@ -1,11 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
-
 
 
 @Component({
@@ -14,7 +13,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-add-user.component.scss']
 })
 
-export class DialogAddUserComponent implements OnInit {
+export class DialogAddUserComponent implements OnInit{
 
   contact = new Contact();
   contactForm!: FormGroup;
@@ -29,6 +28,7 @@ export class DialogAddUserComponent implements OnInit {
     public data: DataService,
     public dialogRef: MatDialogRef<DialogAddUserComponent>
   ) {
+   
   }
 
 
@@ -83,8 +83,8 @@ export class DialogAddUserComponent implements OnInit {
     }
   }
 
-  // 
-  addUser() {
+  // ADD CREATED USER TO CONTACT-LIST
+   addUser() {
     this.setUser();
     this.saveUserToFirestore();
     console.log(this.data.contactCreated);//f
@@ -98,7 +98,7 @@ export class DialogAddUserComponent implements OnInit {
 
   }
 
-  // 
+  // SET USEER FORM
   setUser() {
     this.contact.firstName = this.contactForm.value.firstName;
     this.contact.lastName = this.contactForm.value.lastName;
@@ -120,17 +120,13 @@ export class DialogAddUserComponent implements OnInit {
 
   // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {
-    console.log('clear values called');
-    console.log(this.contactForm.value.firstName);
-    this.contactForm.value.firstName = '';
-    // this.contactForm.value.lastName;
-    // this.contactForm.value.email;
-    // this.contactForm.value.phone;
+    const firstName = document.getElementById("firstName") as HTMLInputElement;
+    const lastName = document.getElementById("lastName") as HTMLInputElement;
+    const mail = document.getElementById("mail") as HTMLInputElement;
+    const phone = document.getElementById("phone") as HTMLInputElement;
+    firstName.value = '';
+    lastName.value = '';
+    mail.value = '';
+    phone.value = '';
   }
-
-  editTask() {
-    console.log('edit');
-  }
-
-
 }
