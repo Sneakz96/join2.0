@@ -89,7 +89,7 @@
     .sidenav {
         position: fixed;
         flex-direction: row;
-        top: 90%;
+        top: unset;
         bottom: 0;
         left: 0;
         right: 0;
@@ -165,7 +165,4 @@
 }
 
 @media(max-width: 300px) {
-    .sidenav {
-        top: 90%;
-    }
 }

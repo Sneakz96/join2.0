@@ -95,13 +95,13 @@
         display: none;
     }
 
-    .new-contact-btn {
+    .add-new-contact-btn {
         bottom: var(--m20p);
     }
 }
 
 @media(max-width: 760px) {
-    .new-contact-btn {
+    .add-new-contact-btn {
         display: none;
     }
 
