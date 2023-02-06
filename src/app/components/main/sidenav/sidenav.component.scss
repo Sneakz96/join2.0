@@ -88,7 +88,6 @@
 
 .active {
     background-color: var(--menu-active);
-
 }
 
 
@@ -135,9 +134,7 @@
     }
 
     .sub-menu {
-        @media(max-width: 1080px) {
-            display: none;
-        }
+        display: none;
     }
 
     .active {
@@ -156,10 +153,16 @@
             padding-right: 0 !important;
         }
     }
+
     .menu-ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         li {
             font-size: var(--fs-sm);
-            img{
+
+            img {
                 padding-left: 0 !important;
                 padding-right: 0 !important;
             }
@@ -167,4 +170,13 @@
     }
 }
 
-@media(max-width: 300px) {}
+@media(max-width: 300px) {
+    // .active {
+    //     padding-left: 0 !important;
+    //     padding-right: 0 !important;
+    // }
+
+    .sidenav {
+        top: 85%;
+    }
+}

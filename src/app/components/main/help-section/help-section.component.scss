@@ -5,6 +5,7 @@
   bottom: 0;
   width: 90%;
   background-color: var(--white);
+  overflow-y: scroll;
 }
 
 .description-container {
@@ -24,6 +25,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:last-child {
+    margin-bottom: var(--m50p);
+  }
 }
 
 .number {
@@ -36,6 +41,7 @@
 
 .text {
   width: 100%;
+
   p {
     margin-left: var(--m10);
   }
@@ -49,13 +55,14 @@
   .description-container {
     overflow-y: scroll;
   }
+
+  .last {
+    margin-bottom: var(--m20p);
+  }
 }
 
-@media (max-width: 760px) {
-}
+@media (max-width: 760px) {}
 
-@media (max-width: 420px) {
-}
+@media (max-width: 420px) {}
 
-@media (max-width: 300px) {
-}
+@media (max-width: 300px) {}

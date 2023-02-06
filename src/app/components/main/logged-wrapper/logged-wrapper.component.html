@@ -3,6 +3,24 @@
     <p>Kanban Project Managemet Tool</p>
     <div class="img-content">
         <a href="#" routerLink="/kanbanboard/help"><img class="faq" src="/assets/img/icons/question.png"></a>
-        <div class="profile-logged"></div>
+
+
+
+        <button class="mb-menu-btn" id="mb_menu" #mb_menu [matMenuTriggerFor]="menu">
+            <div class="profile-logged">
+                <img src="/assets/img/user.png">
+            </div>
+        </button>
+
+        <mat-menu class=" mb-menu" #menu="matMenu">
+            <button mat-menu-item routerLink="/kanbanboard/data-protection">
+                <mat-icon>info</mat-icon>
+                <span>Privacy</span>
+            </button>
+            <button mat-menu-item routerLink="/kanbanboard/legal-notice">
+                <mat-icon>info</mat-icon>
+                <span>Legal notice</span>
+            </button>
+        </mat-menu>
     </div>
 </div>

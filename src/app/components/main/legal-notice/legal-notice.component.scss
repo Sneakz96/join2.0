@@ -32,6 +32,10 @@ ul {
 }
 
 @media(max-width: 1080px) {
+    .last {
+        margin-bottom: var(--m20p);
+    }
+
     .content {
         width: 100%;
     }

@@ -37,15 +37,32 @@
 }
 
 .profile-logged {
-    min-height: 40px;
-    min-width: 40px;
-    margin-left: var(--m20);
+    height: 48px;
+    width: 48px;
     border-radius: 50%;
-    background: url('/assets/img/user.png');
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: cover;
+    object-fit: cover;
+
+    img {
+        margin-right: 3px;
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+    }
+}
+
+.mb-menu-btn {
+    height: 48px;
+    width: 48px;
+    margin-left: var(--m20);
+    background-color: var(--white);
+    border: none;   
     border: 2px solid var(--dark-navy);
+    border-radius: 50%;
+}
+
+
+.mat-icon {
+    color: var(--dark-navy);
 }
 
 @media(max-width: 1080px) {
@@ -57,7 +74,8 @@
             display: none;
         }
     }
-    .logo{
+
+    .logo {
         display: flex;
         margin-left: var(--m5p);
     }

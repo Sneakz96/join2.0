@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
-import { AddTaskComponent } from 'src/app/components/main/add-task/add-task.component';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
@@ -63,10 +62,8 @@ export class DialogAddTaskComponent implements OnInit {
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
 
-
   constructor(
     private firestore: Firestore,
-    private fb: FormBuilder,
     titleElement: ElementRef,
     descriptionElement: ElementRef,
     categoryElement: ElementRef,
@@ -76,8 +73,9 @@ export class DialogAddTaskComponent implements OnInit {
     assignedContactsElement: ElementRef,
     dropdown: ElementRef,
     public dataService: DataService,
-    public dialogRef: MatDialogRef<any>
-  ) {
+    public dialogRef: MatDialogRef<any>,
+    public dialog: MatDialogRef<DialogAddTaskComponent>,
+    ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
     this.categoryElement = categoryElement;
@@ -94,7 +92,11 @@ export class DialogAddTaskComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-  ngOnChanges() { }
+
+  // EXIT ADD TASK DIALOG
+  close() {
+    this.dialog.close();
+  }
 
   //ADD TASK TO LOCAL STORAGE
   addTask() {

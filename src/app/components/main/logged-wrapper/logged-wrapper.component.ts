@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 
 
 @Component({
@@ -8,8 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedWrapperComponent implements OnInit {
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkDisplayWidth();
+    console.log('top called');
+  }
 
+  // CHECK WIDTH OF DISPLAY
+  checkDisplayWidth() {
+    const button = document.getElementById("mb_menu") as HTMLButtonElement;
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 600) {
+        console.log('on');
+        button.disabled = true;
+      } else {
+        console.log('off');
+        button.disabled = false;
+      }
+    });
+  }
 }

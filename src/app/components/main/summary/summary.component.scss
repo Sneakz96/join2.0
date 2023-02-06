@@ -257,18 +257,8 @@
 
 @media(max-width: 420px) {
     .container {
-        width: 50%;
-        margin-right: 0 !important;
-        margin-bottom: var(--m10p);
-    }
-
-    .container-last {
-        margin-right: 0 !important;
-        margin-bottom: var(--m10);
-    }
-
-    .row {
-        flex-direction: column;
+        width: 40%;
+        margin: 10px;
     }
 
     .urgency-date {
@@ -278,7 +268,8 @@
 
 @media(max-width: 300px) {
     .container {
-        width: 70%;
+        width: 30% !important;
+        margin: 5px;
     }
 
     .line {
@@ -289,7 +280,7 @@
     .urgency-date {
         height: 180px;
         flex-direction: column;
-        width: 120%;
+        width: 110% !important;
         justify-content: center !important;
     }
 
@@ -303,5 +294,17 @@
 
     .side-container {
         margin-bottom: var(--m20p);
+    }
+
+    .container-last {
+        margin: 8px;
+        width: 110px;
+    }
+
+    .info {
+        margin-left: 3px;
+    }
+    .label{
+        font-size: var(--fs-sm);
     }
 }
