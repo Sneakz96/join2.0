@@ -33,12 +33,12 @@ export class DialogAddUserComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.setForm();
+    this.setUserForm();
     this.setUserID();
   }
 
   // SET FORM OF NEW CONTACT
-  setForm() {
+  setUserForm() {
     this.contactForm = new FormGroup({
       'firstName': new FormControl(this.contact.firstName, [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
       'lastName': new FormControl(this.contact.lastName, Validators.required),

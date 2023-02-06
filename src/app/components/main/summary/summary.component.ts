@@ -12,7 +12,5 @@ export class SummaryComponent {
 
   constructor(
     public data: DataService,
-  ) {
-
-  }
+  ) {}
 }

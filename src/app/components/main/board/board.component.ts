@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -13,14 +13,11 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board.component.scss']
 })
 
-export class BoardComponent implements OnInit {
+export class BoardComponent {
 
-  @Input() task: any;
-
-  open = false;
   dueDate: any;
-
   searchField: string;
+  @Input() task: any;
 
 
   constructor(
@@ -29,14 +26,9 @@ export class BoardComponent implements OnInit {
     public data: DataService,
   ) { }
 
-
-  ngOnInit(): void {
-    console.log();
-  }
-
   // 
   openTask(taskToOpen: any) {
-    const dialogRef = this.dialog.open(TaskDialogComponent,{
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
       data: {
         taskToOpen
@@ -44,20 +36,15 @@ export class BoardComponent implements OnInit {
     });
     dialogRef.componentInstance.task = taskToOpen;
     dialogRef.componentInstance.taskId = taskToOpen.customIdName;
-    console.log(taskToOpen);
   }
 
   // OPEN ADD TASK DIALOG
   addTask() {
     const dialogRef = this.dialog.open(DialogAddTaskComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   // DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
-
     let index = event.currentIndex;
     let indexBefore = event.previousIndex;
     if (event.previousContainer === event.container) {
@@ -115,31 +102,9 @@ export class BoardComponent implements OnInit {
 
 
 
-
+  // 
   searchTasks() {
 
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  // editTask(task: any) {
-  //   const dialogRef = this.dialog.open(AddTaskComponent, {
-  //     width: '100%',
-  //     data: {
-  //       task
-  //     },
-  //   });
-  //   dialogRef.componentInstance.openedAsDialogEditTask = true;
-  //   this.closeOverlay();
-  // 
 }

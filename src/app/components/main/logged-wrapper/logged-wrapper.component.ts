@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-logged-wrapper',
@@ -8,25 +8,12 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 })
 export class LoggedWrapperComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private UIService: UIService,
+  ) {
+  }
+  
   ngOnInit(): void {
-    this.checkDisplayWidth();
-    console.log('top called');
-  }
-
-  // CHECK WIDTH OF DISPLAY
-  checkDisplayWidth() {
-    const button = document.getElementById("mb_menu") as HTMLButtonElement;
-    button.disabled = true;
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 1080) {
-        console.log('off');
-        button.disabled = true;
-      } else {
-        console.log('on');
-        button.disabled = false;
-      }
-    });
-  }
+    this.UIService.checkDisplayWidth();
+  } 
 }
