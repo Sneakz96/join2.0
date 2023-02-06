@@ -334,6 +334,17 @@ form {
     .create {
         width: 90%;
     }
+    .btn-container {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 110px;
+    }
+    .create-task-btn{
+        margin-top: var(--m10);
+        margin-left: 0;
+    }
 }
 
 @media(max-width: 300px) {

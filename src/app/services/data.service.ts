@@ -1,4 +1,4 @@
-import { Injectable, OnChanges, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
@@ -13,8 +13,6 @@ export class DataService implements OnInit {
   id: string;
   allTasks = [];
 
-  contactCreated = false;
-
   todos!: number;
   inProgress!: number;
   feedback!: number;
@@ -22,19 +20,13 @@ export class DataService implements OnInit {
   urgent!: number;
   deadline!: string;
   dayTime!: string;
-
-  currentUser: any;
-
-
+  
+  contactCreated = false;
   allContacts = [];
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
-
-
   loggedUser: string = '';
-
   userName: string;
-
 
   constructor(
     private firestore: AngularFirestore,
