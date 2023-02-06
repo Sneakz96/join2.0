@@ -14,6 +14,8 @@
         TASK DIALOG
         CONTACTS
     -CLEAN CODE
+    -ADD LOGOUT MB
+    -ADD LOGOUT 
     -PENETRATION | UNIT TEST <-> FINISH 
 
 ### DONE ###

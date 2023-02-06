@@ -26,16 +26,18 @@
         </div>
         <div class="sub-menu">
                 <ul class="sub-menu-ul">
-                        <a href="#" routerLink="/kanbanboard/data-protection">
-                                <li routerLinkActive="active">
-                                        <img src="/assets/img/icons/info.png">Privacy
-                                </li>
-                        </a>
-                        <a href="#" routerLink="/kanbanboard/legal-notice">
-                                <li routerLinkActive="active">
-                                        <img src="/assets/img/icons/info.png">Legal notice
-                                </li>
-                        </a>
+                        <button mat-menu-item routerLink="/kanbanboard/data-protection" routerLinkActive="active">
+                                <mat-icon>info_outline</mat-icon>
+                                <span>Logout</span>
+                        </button>
+                        <button mat-menu-item routerLink="/kanbanboard/legal-notice" routerLinkActive="active">
+                                <mat-icon>info_outline</mat-icon>
+                                <span>Legal notice</span>
+                        </button>
+                        <button mat-menu-item routerLink="/login">
+                                <mat-icon>logout</mat-icon>
+                                <span>Logout</span>
+                        </button>
                 </ul>
         </div>
 </div>
