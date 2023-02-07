@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
@@ -13,7 +13,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-add-user.component.scss']
 })
 
-export class DialogAddUserComponent implements OnInit{
+export class DialogAddUserComponent implements OnInit {
 
   contact = new Contact();
   contactForm!: FormGroup;
@@ -27,29 +27,68 @@ export class DialogAddUserComponent implements OnInit{
     private firestore: Firestore,
     public data: DataService,
     public dialogRef: MatDialogRef<DialogAddUserComponent>
-  ) {
-   
-  }
+  ) { }
 
 
   ngOnInit(): void {
     this.setUserForm();
-    this.setUserID();
   }
 
   // SET FORM OF NEW CONTACT
   setUserForm() {
     this.contactForm = new FormGroup({
-      'firstName': new FormControl(this.contact.firstName, [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      'lastName': new FormControl(this.contact.lastName, Validators.required),
-      'email': new FormControl(this.contact.email, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
-      'phone': new FormControl(this.contact.phone, [Validators.required, Validators.pattern('[- +()0-9]+')]),
+      'firstName': new FormControl(this.contact.firstName),
+      'lastName': new FormControl(this.contact.lastName),
+      'email': new FormControl(this.contact.email),
+      'phone': new FormControl(this.contact.phone),
     });
+
   }
 
   // GIVE NEW USER RANDOM ID
   setUserID() {
     this.contact.id = 20000 * Math.random();
+  }
+
+  // SET USER FORM
+  checkForm() {
+    var firstName = this.contactForm.value.firstName.replace(/\s/g, '');
+    var lastName = this.contactForm.value.lastName.replace(/\s/g, '');
+    var mail = this.contactForm.value.email.replace(/\s/g, '');
+    var phone = this.contactForm.value.phone.replace(/\s/g, '');
+    const checkInputs = (value: string): boolean => {
+      const allowedCharacters = /^[A-Za-z0-9+-]+$/;
+      return allowedCharacters.test(value);
+    };
+    const checkMail = (value: string): boolean => {
+      const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return allowedNumbers.test(value);
+    };
+    const checkNumber = (value: string): boolean => {
+      const allowedNumbers = /^[0-9+/+]+$/;
+      return allowedNumbers.test(value);
+    };
+    let first = checkInputs(firstName);
+    let last = checkInputs(lastName);
+    let email = checkMail(mail);
+    let number = checkNumber(phone);
+
+    console.log(first, last, email, number); // Output: false
+
+    if (!first || !last || !email || !number) {
+      console.log('error'); // Output: false
+      console.log(first, last, email, number); // Output: false
+    } else {
+      console.log('it works'); // Output: false
+      console.log(first, last, email, number); // Output: false
+      this.contact.firstName = firstName;
+      this.contact.lastName = lastName;
+      this.contact.email = mail;
+      this.contact.phone = phone;
+      this.setUserID();
+      this.setColor();
+      this.addUser();
+    }
   }
 
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
@@ -83,30 +122,6 @@ export class DialogAddUserComponent implements OnInit{
     }
   }
 
-  // ADD CREATED USER TO CONTACT-LIST
-   addUser() {
-    this.setUser();
-    this.saveUserToFirestore();
-    console.log(this.data.contactCreated);//f
-    this.closeDialog()
-    setTimeout(() => {
-      this.data.contactCreated = true;//t
-      console.log(this.data.contactCreated);
-    }, 500);
-
-    console.log(this.data.contactCreated);//f
-
-  }
-
-  // SET USEER FORM
-  setUser() {
-    this.contact.firstName = this.contactForm.value.firstName;
-    this.contact.lastName = this.contactForm.value.lastName;
-    this.setColor();
-    this.contact.email = this.contactForm.value.email;
-    this.contact.phone = this.contactForm.value.phone;
-  }
-
   // SAVE NEW USER TO DB
   saveUserToFirestore() {
     const coll = collection(this.firestore, 'allContacts');
@@ -116,6 +131,18 @@ export class DialogAddUserComponent implements OnInit{
   // CLOSE DIALOG TO CREATE NEW USER
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
+  addUser() {
+    console.log('user added called', this.contact);
+    this.data.contactCreated = true;
+    // this.saveUserToFirestore();
+    this.closeDialog();
+    this.router.navigate(['/kanbanboard/contacts']);
+    setTimeout(() => {
+      this.data.contactCreated = false;
+    }, 3000);
   }
 
   // SHOULD CLEAR VALUES OF DIALOG

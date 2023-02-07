@@ -32,8 +32,6 @@ export class DataService implements OnInit {
     private firestore: AngularFirestore,
     public dialog: MatDialog,
   ) {
-    console.log('dataservice called');
-    this.getLoggedUser();
     this.loadTasks();
     this.loadContacts();
     this.getDayTime();
@@ -41,17 +39,17 @@ export class DataService implements OnInit {
 
   ngOnInit(): void {
     this.sortContacts();
-    console.log('datas init called');
   }
 
-  checkIfNewContactIsCreated() {
-    if (!this.contactCreated) {
-      setTimeout(() => {
-        console.log('cc');
-      }, 2000);
-      this.contactCreated = false;
-    }
-  }
+  // // 
+  // checkIfNewContactIsCreated() {
+  //   if (!this.contactCreated) {
+  //     setTimeout(() => {
+  //       console.log('cc');
+  //     }, 2000);
+  //     this.contactCreated = false;
+  //   }
+  // }
 
   // GET CURRENT DAY TIME
   getDayTime() {
@@ -63,16 +61,6 @@ export class DataService implements OnInit {
       this.dayTime = 'Good afternoon'
     } else {
       this.dayTime = 'Good evening'
-    }
-  }
-
-  // GET LOGGED USER
-  getLoggedUser() {
-    if (this.loggedUser) {
-      this.userName = this.loggedUser;
-      console.log(this.userName);
-    } else {
-      this.userName = 'Guest';
     }
   }
 
@@ -187,7 +175,7 @@ export class DataService implements OnInit {
   addNewContact() {
     const dialogRef = this.dialog.open(DialogAddUserComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
   
