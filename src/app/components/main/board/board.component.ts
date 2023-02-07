@@ -24,7 +24,11 @@ export class BoardComponent {
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-  ) { }
+  ) {
+
+  }
+
+
 
   // 
   openTask(taskToOpen: any) {
@@ -104,6 +108,17 @@ export class BoardComponent {
 
   // 
   searchTasks() {
+    console.log('input', this.searchField);
+    console.log('summary', this.data.allTasks);
+
+    for (let i = 0; i < this.data.allTasks.length; i++) {
+      var allTasks = this.data.allTasks[i];
+      console.log(i);
+      if (allTasks['title'].includes(this.searchField)) {
+        // currentPokemons.push(allPokemons[i]);
+        console.log('includes');
+      }
+    }
 
 
   }
