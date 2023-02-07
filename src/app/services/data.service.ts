@@ -20,13 +20,13 @@ export class DataService implements OnInit {
   urgent!: number;
   deadline!: string;
   dayTime!: string;
-  
+
   contactCreated = false;
   allContacts = [];
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
-  loggedUser: string = '';
-  userName: string;
+  
+  userName: string = 'Guest';
 
   constructor(
     private firestore: AngularFirestore,
@@ -40,16 +40,6 @@ export class DataService implements OnInit {
   ngOnInit(): void {
     this.sortContacts();
   }
-
-  // // 
-  // checkIfNewContactIsCreated() {
-  //   if (!this.contactCreated) {
-  //     setTimeout(() => {
-  //       console.log('cc');
-  //     }, 2000);
-  //     this.contactCreated = false;
-  //   }
-  // }
 
   // GET CURRENT DAY TIME
   getDayTime() {
@@ -115,7 +105,7 @@ export class DataService implements OnInit {
     }
   }
 
-  // 
+  // CHANGE DATE APPEARANCE
   changeDateAppearance(date: any) {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let day = date.getDate();
@@ -150,6 +140,7 @@ export class DataService implements OnInit {
     });
 
   }
+
   // GET ALL FIRST NAMES OF CONTACT LIST
   getFirstNames() {
     let names = [];
@@ -169,15 +160,8 @@ export class DataService implements OnInit {
     });
   }
 
-  // addNewContact() {
-  //   this.router.navigate(['/kanbanboard/contacts/add-user']);
-  // }
+  // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
-    const dialogRef = this.dialog.open(DialogAddUserComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(DialogAddUserComponent);
   }
-  
-
 }
