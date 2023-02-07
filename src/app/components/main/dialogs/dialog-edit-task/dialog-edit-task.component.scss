@@ -10,6 +10,19 @@
     height: fit-content;
 }
 
+.category {
+    p {
+        padding: 8px;
+        background-color: var(--dark-navy);
+        color: var(--white);
+        outline: none;
+        border-radius: 10px;
+        border: none;
+        text-align: center;
+        width: fit-content;
+    }
+}
+
 .task-category {
     padding: 8px;
     background-color: var(--dark-navy);
@@ -21,7 +34,7 @@
     width: fit-content;
 }
 
-.task-content{
+.task-content {
     width: 100%;
 }
 
@@ -121,12 +134,24 @@
 }
 
 .edit-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     position: relative;
-    left: 90%;
+    left: 87%;
+    padding: 8px;
+    width: fit-content;
+    color: var(--white);
+    background-color: var(--dark-navy);
+    border: none;
+    border-radius: 10px;
+
+    img {
+        margin-left: var(--m5);
+    }
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.05);
     }
 }
 

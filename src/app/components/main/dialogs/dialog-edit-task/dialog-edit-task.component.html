@@ -1,7 +1,8 @@
 <div class="task">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="close()">
     <div class="category">
-        <input class="task-category" type="text" matInput [(ngModel)]="task.category" [placeholder]="'Category'">
+        <p>{{ task.category }}</p>
+        <!-- <input class="task-category" type="text" matInput [(ngModel)]="task.category" [placeholder]="'Category'"> -->
     </div>
     <div class="task-content">
         <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
@@ -26,5 +27,8 @@
         {{ contact.firstName }}
         {{ contact.lastName }}
     </div>
-    <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="save()">
+    <button class="edit-btn" (click)="save()">
+        Ok
+        <img src="./assets/img/icons/create.png">
+    </button>
 </div>
