@@ -101,25 +101,24 @@ export class BoardComponent {
 
 
 
-
-
-
-
-
   // 
   searchTasks() {
     console.log('input', this.searchField);
     console.log('summary', this.data.allTasks);
-
+    let currentTasks = [];
+    
     for (let i = 0; i < this.data.allTasks.length; i++) {
       var allTasks = this.data.allTasks[i];
-      console.log(i);
+      // console.log(i);
       if (allTasks['title'].includes(this.searchField)) {
-        // currentPokemons.push(allPokemons[i]);
-        console.log('includes');
+        currentTasks.push(allTasks);
+        console.log('includes', allTasks);
       }
+      // if (allTasks['description'].includes(this.searchField)) {
+      //   currentTasks.push(allTasks);
+      //   console.log('includes', allTasks);
+      // }
     }
-
-
+    // this.renderTasks();
   }
 }

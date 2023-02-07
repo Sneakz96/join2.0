@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
@@ -56,24 +56,26 @@ export class DialogAddUserComponent implements OnInit {
     var lastName = this.contactForm.value.lastName.replace(/\s/g, '');
     var mail = this.contactForm.value.email.replace(/\s/g, '');
     var phone = this.contactForm.value.phone.replace(/\s/g, '');
+
     const checkInputs = (value: string): boolean => {
       const allowedCharacters = /^[A-Za-z0-9+-]+$/;
       return allowedCharacters.test(value);
     };
+
     const checkMail = (value: string): boolean => {
       const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return allowedNumbers.test(value);
     };
+
     const checkNumber = (value: string): boolean => {
       const allowedNumbers = /^[0-9+/+]+$/;
       return allowedNumbers.test(value);
     };
+
     let first = checkInputs(firstName);
     let last = checkInputs(lastName);
     let email = checkMail(mail);
     let number = checkNumber(phone);
-
-    console.log(first, last, email, number); // Output: false
 
     if (!first || !last || !email || !number) {
       console.log('error'); // Output: false

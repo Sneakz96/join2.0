@@ -11,7 +11,6 @@ export class UIService {
 
   // CHECK WIDTH OF DISPLAY
   checkDisplayWidth() {
-    console.log('hi');
     const button = document.getElementById("mb_menu") as HTMLButtonElement;
     button.disabled = true;
     window.addEventListener("resize", () => {
