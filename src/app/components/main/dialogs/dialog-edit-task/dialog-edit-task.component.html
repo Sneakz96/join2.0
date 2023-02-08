@@ -1,17 +1,31 @@
 <div class="task">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="close()">
     <div class="task-content">
+        <p class="label">Title</p>
         <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
+        <p class="label">Description</p>
         <input class="description" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
     </div>
     <div class="due-date">
-        <p>Due Date:</p>
+        <p class="label">Due Date:</p>
         <input type="text" matInput [(ngModel)]="task.dueDate" [placeholder]="'Due Date'">
     </div>
     <div class="priority">
-        <p>Priority:</p>
-        <div class="urgency-btn">
-            <img src="./assets/img/icons/{{ task.priority }}.png">
+        <p class="label">Priority:</p>
+        <div class="btn-container">
+
+            <div class="urgency-btn">
+                <p class="btn-label">Low</p>
+                <img src="./assets/img/icons/Low.png">
+            </div>
+            <div class="urgency-btn">
+                <p class="btn-label">Medium</p>
+                <img src="./assets/img/icons/Medium.png">
+            </div>
+            <div class="urgency-btn">
+                <p class="btn-label">High</p>
+                <img src="./assets/img/icons/Urgent.png">
+            </div>
         </div>
     </div>
     <span class="assigned-to">Assigned To:</span>
