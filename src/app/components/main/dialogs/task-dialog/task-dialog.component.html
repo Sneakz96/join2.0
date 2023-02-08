@@ -24,9 +24,12 @@
             {{ contact.firstName.charAt(0)}}
             {{ contact.lastName.charAt(0)}}
         </div>
-        {{ contact.firstName }}
-        {{ contact.lastName }}
+        <div class="name">
+            {{ contact.firstName }}
+            {{ contact.lastName }}
+        </div>
     </div>
-
-    <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="editTask()">
+    <div class="btn-container">
+        <img class="edit-btn" src="./assets/img/icons/edit.png" (click)="editTask()">
+    </div>
 </div>

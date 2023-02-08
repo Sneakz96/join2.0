@@ -43,6 +43,10 @@ ul {
 
 @media(max-width: 760px) {}
 
-@media(max-width: 420px) {}
+@media(max-width: 420px) {
+    .last {
+        margin-bottom: var(--m50p);
+    }
+}
 
 @media(max-width: 300px) {}

@@ -1,9 +1,5 @@
 <div class="task">
     <img src="./assets/img/icons/x.png" class="close-btn" (click)="close()">
-    <div class="category">
-        <p>{{ task.category }}</p>
-        <!-- <input class="task-category" type="text" matInput [(ngModel)]="task.category" [placeholder]="'Category'"> -->
-    </div>
     <div class="task-content">
         <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
         <input class="description" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
@@ -24,8 +20,10 @@
             {{ contact.firstName.charAt(0)}}
             {{ contact.lastName.charAt(0)}}
         </div>
-        {{ contact.firstName }}
-        {{ contact.lastName }}
+        <div class="name">
+            {{ contact.firstName }}
+            {{ contact.lastName }}
+        </div>
     </div>
     <button class="edit-btn" (click)="save()">
         Ok

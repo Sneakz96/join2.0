@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-welcome',
@@ -11,8 +10,7 @@ import { UIService } from 'src/app/services/ui.service';
 export class WelcomeComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private ui: UIService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
