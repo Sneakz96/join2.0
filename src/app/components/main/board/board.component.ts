@@ -24,9 +24,7 @@ export class BoardComponent {
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-  ) {
-
-  }
+  ) { }
 
 
 
@@ -105,20 +103,28 @@ export class BoardComponent {
   searchTasks() {
     console.log('input', this.searchField);
     console.log('summary', this.data.allTasks);
-    let currentTasks = [];
     
+    let currentTasks = [];
     for (let i = 0; i < this.data.allTasks.length; i++) {
-      var allTasks = this.data.allTasks[i];
-      // console.log(i);
-      if (allTasks['title'].includes(this.searchField)) {
+      let allTasks = this.data.allTasks[i];
+      if (allTasks['title'].includes(this.searchField) ||
+        allTasks['description'].includes(this.searchField) ||
+        allTasks['category'].includes(this.searchField)
+      ) {
+        // debugger;
         currentTasks.push(allTasks);
-        console.log('includes', allTasks);
+        console.log('includes', currentTasks);
+        this.renderTasks(currentTasks);
       }
-      // if (allTasks['description'].includes(this.searchField)) {
-      //   currentTasks.push(allTasks);
-      //   console.log('includes', allTasks);
-      // }
     }
-    // this.renderTasks();
+  }
+
+  renderTasks(tasks: any) {
+    console.log();
+    console.log(tasks);
+    for (let i = 0; i < tasks.length; i++) {
+      let searchedTask = tasks[i];
+      console.log(searchedTask); // WORKS TILL HERE
+    }
   }
 }
