@@ -216,6 +216,9 @@ form {
 //BTN
 
 .btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     bottom: 0px;
 }
@@ -295,7 +298,34 @@ form {
     border: 1px solid red;
 }
 
+.mb-container {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.mb-alert {
+    color: var(--white);
+    background-color: var(--dark-navy);
+    padding: 14px 16px;
+    width: fit-content;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+
+    img {
+        margin-left: var(--m5);
+    }
+}
+
 @media(max-width: 1080px) {
+    .mb-container {
+        position: absolute;
+        top: var(--m5p);
+    }
+
     .content {
         width: 100%;
     }
@@ -310,6 +340,19 @@ form {
 }
 
 @media(max-width: 760px) {
+    .subtasks{
+        width: 90%;
+    }
+    .btn-container {
+        width: 50%;
+    }
+
+    .mb-container {
+        position: relative;
+        top: unset;
+        bottom: 120px;
+    }
+
     .create {
         flex-direction: column;
         align-items: center;
