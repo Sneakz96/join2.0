@@ -27,7 +27,6 @@ export class BoardComponent {
   ) { }
 
 
-
   // 
   openTask(taskToOpen: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -94,8 +93,10 @@ export class BoardComponent {
         let days = diff / (1000 * 60 * 60 * 24);
         return days < 3;
       });
-    }, 1000 * 60 * 60 * 24 * 3);
+    }, 1000 * 60 * 60 * 24 * 3); 
+    //  MS  *  S * M  * H  * T
   }
+
 
 
 
@@ -119,6 +120,7 @@ export class BoardComponent {
     }
   }
 
+  // 
   renderTasks(tasks: any) {
     console.log();
     console.log(tasks);

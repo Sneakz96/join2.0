@@ -16,13 +16,7 @@ export class ContactsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public data: DataService,
-  ) {
+  ) { }
 
-  }
-
-
-  ngOnInit(): void {
- 
-  }
-
+  ngOnInit(): void { }
 }

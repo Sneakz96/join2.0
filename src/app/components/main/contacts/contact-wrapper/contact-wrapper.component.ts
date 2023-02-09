@@ -6,18 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-wrapper.component.scss']
 })
 
-export class ContactWrapperComponent implements OnInit {
+export class ContactWrapperComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-
-  sideSelect = 'contacts';
-
-  onSelect(feature: string) {
-    this.sideSelect = feature;
-  }
 }

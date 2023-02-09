@@ -8,31 +8,19 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./contact-list.component.scss']
 })
 
-export class ContactListComponent implements OnInit {
+export class ContactListComponent {
 
   constructor(
     public dataService: DataService,
     private router: Router,
-  ) {
+  ) { }
 
-  }
-
-  ngOnInit(): void {
-
-  }
-
-
+  // GET CHAR.AT(0) ON FIRST NAME OF CONTACT
   getFirstLetterFromContact(contact: any) {
     return contact.firstName.charAt(0);
   }
 
-
-  editContact() {
-
-    console.log('open contact edit');
-  }
-  
-  // 
+  // OPEN ADD NEW USER OVERLAY
   addNewContact() {
     this.router.navigate(['/kanbanboard/contacts/add-user']);
   }
