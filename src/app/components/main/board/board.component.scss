@@ -279,10 +279,17 @@
     }
 
     .box {
-        display: none;
+        position: unset;
+        margin-top: var(--m10);
+    }
+
+    .searchbox {
+        margin-left: var(--m10p);
+        width: 40%;
     }
 
     .overview {
+        margin-top: var(--m20);
         flex-direction: column;
         overflow-y: scroll;
     }
@@ -292,7 +299,12 @@
     }
 }
 
-@media(max-width: 760px) {}
+@media(max-width: 760px) {
+    .searchbox {
+        margin-left: var(--m10p);
+        width: 70%;
+    }
+}
 
 @media(max-width: 420px) {}
 
