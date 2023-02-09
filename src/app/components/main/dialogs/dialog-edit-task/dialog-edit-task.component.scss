@@ -17,7 +17,7 @@
 }
 
 .title {
-    width: 100%;
+    width: 75%;
     background: white;
     box-sizing: border-box;
     border: 1px solid #D1D1D1;
@@ -28,7 +28,7 @@
 }
 
 .description {
-    width: 100%;
+    width: 75%;
     background: white;
     box-sizing: border-box;
     border: 1px solid #D1D1D1;
@@ -44,10 +44,9 @@
     justify-content: space-between;
     flex-direction: column;
     margin-bottom: 8px;
-    width: 70%;
+    width: 75%;
 
     input {
-        width: 100%;
         background: white;
         box-sizing: border-box;
         border: 1px solid #D1D1D1;
@@ -59,7 +58,7 @@
 }
 
 .priority {
-    width: 100%;
+    width: 75%;
 }
 
 .btn-container {
@@ -140,13 +139,34 @@
     }
 
     &:hover {
+        transform: scale(1.05);
         cursor: pointer;
+
+        img {
+            margin-bottom: 2px;
+        }
     }
 }
 
 @media(max-width: 1080px) {}
 
 @media(max-width: 760px) {
+    .title {
+        width: 100%;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .due-date {
+        width: 100%;
+    }
+
+    .priority {
+        width: 100%;
+    }
+
     ::ng-deep .mat-dialog-container {
         border-radius: 0px !important;
     }
@@ -160,10 +180,6 @@
 }
 
 @media(max-width: 420px) {
-    // .description {
-    //     margin-bottom: var(--m10p);
-    // }
-
     .due-date {
         width: 100% !important;
     }
