@@ -93,7 +93,6 @@ export class AddTaskComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-  ngOnChanges() { }
 
   //ADD TASK TO LOCAL STORAGE
   addTask() {
@@ -101,7 +100,7 @@ export class AddTaskComponent implements OnInit {
     if (this.taskCreated === true) {
       this.setId();
       this.setDate();
-      this.saveTaskToFirestore();
+      // this.saveTaskToFirestore();
       this.clearAllValues();
       console.log('task is created', this.taskCreated);
     } else {

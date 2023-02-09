@@ -1,16 +1,9 @@
 <div class="content">
     <h1>Add task</h1>
-    <div [ngClass]="{'d-none': taskCreated === true}" id="alert" role="alert">
+    <button [ngClass]="{'d-none': taskCreated === true}" id="alert" role="alert">
         All Input fields are requested!
-    </div>
-
-
-
+    </button>
     <div class="create-new-task">
-        <!--#ALERTS-->
-        <div ngClass="" class="alert alert-success d-none" id="successAlert" role="alert">
-            The Task is created!
-        </div>
         <!--#CREATE TASK SECTION-->
         <div class="create">
             <div class="row row-left">
@@ -77,16 +70,10 @@
                             src="/assets/img/icons/x.png"></button>
                     <button class="create-task-btn" (click)="addTask()">Create Task<img
                             src="/assets/img/icons/create.png"></button>
+                    <button class="mb-alert"><span>Task added to Backlog</span>
+                        <img src="./assets/img/icons/task_added_mb.png"></button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="mb-container">
-
-        <div class="mb-alert">
-            <span>Task added to Backlog</span>
-            <img src="./assets/img/icons/task_added_mb.png">
-        </div>
-    </div>
-
 </div>

@@ -1,3 +1,66 @@
+::ng-deep .drop {
+    width: 100% !important;
+}
+
+::ng-deep .dropdown-btn {
+    width: 90% !important;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 10px;
+    border: none !important;
+}
+
+::ng-deep .selected-item {
+    background-color: var(--dark-navy) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 10px !important;
+}
+
+::ng-deep .dropdown-list {
+    border-radius: 10px !important;
+}
+
+::ng-deep .multiselect-item-checkbox {
+    ::before {
+        border: 2px solid var(--dark-navy) !important;
+    }
+}
+
+::ng-deep .mat-form-field-infix {
+    border-top: none;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-select-placeholder {
+    color: var(--light-grey) !important;
+}
+
+::ng-deep .mat-option-text {
+    color: var(--dark-navy);
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
+    background-color: var(--dark-navy);
+}
+
+::ng-deep .mat-select-panel {
+    max-width: 90% !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    border-radius: 10px !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white !important;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px !important;
+}
+
+
 .content {
     position: fixed;
     right: 0;
@@ -6,6 +69,19 @@
     width: 90%;
     background-color: var(--white);
     overflow-y: scroll;
+
+}
+
+#alert {
+    margin-top: var(--m20);
+    margin-bottom: var(--m20);
+    margin-left: var(--m5p);
+    color: red;
+    height: fit-content;
+    padding: 8px;
+    width: fit-content;
+    border-radius: 10px;
+    border: 1px solid red;
 }
 
 .create-new-task {
@@ -79,94 +155,23 @@
     border-radius: 10px;
 }
 
-
-
-form {
-    box-sizing: border-box;
-    background: white;
-    width: 90%;
-    border: 1px solid var(--light-grey);
-    border-radius: 10px;
-}
-
-::ng-deep .drop {
-    width: 100% !important;
-}
-
-::ng-deep .dropdown-btn {
-    width: 90% !important;
-    box-sizing: border-box;
-    background: white;
-    border-radius: 10px;
-    border: none !important;
-}
-
-::ng-deep .selected-item {
-    background-color: var(--dark-navy) !important;
-    color: rgb(255, 255, 255) !important;
-    border-radius: 10px !important;
-}
-
-::ng-deep .dropdown-list {
-    border-radius: 10px !important;
-}
-
-::ng-deep .multiselect-item-checkbox {
-    ::before {
-        border: 2px solid var(--dark-navy) !important;
-    }
-}
-
 .multiselect-dropdown {
     width: 90% !important;
 }
 
-::ng-deep .mat-form-field-wrapper {
-
-    border-radius: 10px !important;
-}
-
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: white !important;
-    border: 1px solid var(--light-grey);
-    border-radius: 10px !important;
-}
-
-::ng-deep .assigned {
+.assigned {
     width: 90%;
-
 }
-
-::ng-deep .mat-form-field-infix {
-    border-top: none;
-}
-
-::ng-deep .mat-form-field-underline {
-    display: none;
-}
-
-::ng-deep .mat-select-placeholder {
-    color: var(--light-grey) !important;
-}
-
-::ng-deep .mat-option-text {
-    color: var(--dark-navy);
-}
-
-::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
-    background-color: var(--dark-navy);
-}
-
-::ng-deep .mat-select-panel {
-    max-width: 90% !important;
-}
-
 
 .priority {
     margin-bottom: var(--m20);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
 
     button {
-        padding: var(--m10) var(--m20);
+        padding: 8px;
         margin: 3px;
         background-color: var(--white);
         border: none;
@@ -204,6 +209,26 @@ form {
     }
 }
 
+.subtasks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 120px;
+    overflow-y: scroll;
+    margin-bottom: var(--m10p);
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        input {
+            width: 20px;
+            margin-top: 10px;
+        }
+    }
+}
+
 .checkbox-container {
     display: flex;
 
@@ -212,8 +237,6 @@ form {
         margin-top: 5px;
     }
 }
-
-//BTN
 
 .btn-container {
     display: flex;
@@ -266,51 +289,15 @@ form {
     }
 }
 
-.subtasks {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 120px;
-    overflow-y: scroll;
-    margin-bottom: var(--m10p);
-
-    div {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-
-        input {
-            width: 20px;
-            margin-top: 10px;
-        }
-    }
-}
-
-#alert {
-    margin-top: var(--m20);
-    margin-bottom: var(--m20);
-    margin-left: var(--m5p);
-    color: red;
-    height: fit-content;
-    padding: 8px;
-    width: fit-content;
-    border-radius: 10px;
-    border: 1px solid red;
-}
-
-.mb-container {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-}
-
 .mb-alert {
+    position: relative;
+    bottom: 565px;
     color: var(--white);
     background-color: var(--dark-navy);
     padding: 14px 16px;
     width: fit-content;
     border-radius: 10px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 99;
@@ -321,38 +308,26 @@ form {
 }
 
 @media(max-width: 1080px) {
-    .mb-container {
-        position: absolute;
-        top: var(--m5p);
-    }
-
     .content {
         width: 100%;
     }
 
     .create-new-task {
         margin-top: var(--m5p);
+        margin-bottom: var(--m10p);
     }
 
     .row {
         width: 100%;
     }
+
+    .priority {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
 
 @media(max-width: 760px) {
-    .subtasks{
-        width: 90%;
-    }
-    .btn-container {
-        width: 50%;
-    }
-
-    .mb-container {
-        position: relative;
-        top: unset;
-        bottom: 120px;
-    }
-
     .create {
         flex-direction: column;
         align-items: center;
@@ -363,11 +338,31 @@ form {
     }
 
     .subtasks {
+        width: 100%;
         margin-bottom: var(--m50p);
     }
 
     .btn-container {
+        width: 60%;
         margin-bottom: var(--m25p);
+    }
+
+    .row {
+        input {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+        }
+    }
+
+    .textaria {
+        width: 100%;
+    }
+
+    .assigned {
+        width: 100%;
     }
 }
 
@@ -378,8 +373,6 @@ form {
 
     .btn-container {
         width: 90%;
-        display: flex;
-        align-items: center;
         flex-direction: column;
         margin-bottom: 110px;
     }
@@ -388,11 +381,19 @@ form {
         margin-top: var(--m10);
         margin-left: 0;
     }
+
+    .mb-alert {
+        bottom: 142px;
+    }
 }
 
 @media(max-width: 300px) {
+    .priority {
+        flex-direction: column;
+    }
+
     .btn-container {
-        width: 90%;
+        width: 100%;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -402,5 +403,9 @@ form {
     .create-task-btn {
         margin-top: var(--m5p);
         margin-left: 0;
+    }
+
+    .mb-alert {
+        bottom: 158px;
     }
 }
