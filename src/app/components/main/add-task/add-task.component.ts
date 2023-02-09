@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { Firestore, collectionData, collection, docData } from '@angular/fire/firestore';
 import { doc, setDoc } from "firebase/firestore";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -15,30 +16,21 @@ import { doc, setDoc } from "firebase/firestore";
 
 export class AddTaskComponent implements OnInit {
 
-  @Input() task: Task | any;
-
   contactForm = new FormControl('');
-
-  public allTasks: any[] = [];
-
-  //SUBTASKS
-  subTaskCreationStatus = 'no subtask created';
-  addSubInput: string = '';
-  addedSubTasks: string[] = [];
 
   //CONTACTS
   contact = new FormControl();
   selectedContacts: string[] = [];
-
+  allContacts$: Observable<any>;
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
-
   assignedCollegues: string[] = [];
 
+  // TASKS
   taskCreated = true;
-
-  titel: string = 'alert';
-  //INPUT FIELDS
+  alert = false;
+  
+  newTask = new Task();
   id!: number;
   title: string = '';
   description: string = '';
@@ -50,9 +42,11 @@ export class AddTaskComponent implements OnInit {
   subtasks: string[] = [];
   subInput: string = '';
 
-  newTask = new Task();
+  //SUBTASKS
+  subTaskCreationStatus = 'no subtask created';
+  addSubInput: string = '';
+  addedSubTasks: string[] = [];
 
-  allContacts$: Observable<any>;
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -66,7 +60,6 @@ export class AddTaskComponent implements OnInit {
 
   constructor(
     private firestore: Firestore,
-    private fb: FormBuilder,
     titleElement: ElementRef,
     descriptionElement: ElementRef,
     categoryElement: ElementRef,
@@ -76,6 +69,7 @@ export class AddTaskComponent implements OnInit {
     assignedContactsElement: ElementRef,
     dropdown: ElementRef,
     public dataService: DataService,
+    public router: Router,
   ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
@@ -87,12 +81,10 @@ export class AddTaskComponent implements OnInit {
     this.dropdown = dropdown;
     const coll = collection(firestore, 'allContacts');
     this.allContacts$ = collectionData(coll);
-    this.allContacts$.subscribe(() => {
-      // console.log(this.allContacts$);
-    });
   }
 
   ngOnInit(): void { }
+
 
   //ADD TASK TO LOCAL STORAGE
   addTask() {
@@ -100,11 +92,12 @@ export class AddTaskComponent implements OnInit {
     if (this.taskCreated === true) {
       this.setId();
       this.setDate();
-      // this.saveTaskToFirestore();
       this.clearAllValues();
-      console.log('task is created', this.taskCreated);
-    } else {
-      console.log('something wrong');
+      this.alert = true;
+      // this.saveTaskToFirestore();
+      setTimeout(() => {
+        this.router.navigate(['/kanbanboard/board']);
+      }, 2500);
     }
   }
 
@@ -126,7 +119,7 @@ export class AddTaskComponent implements OnInit {
     console.log(prio);
   }
 
-  //CREATE SUBTASK
+  // CREATE SUBTASK
   addSubTask() {
     this.subTaskCreationStatus = 'sub created';
     console.log(this.subTaskCreationStatus, this.addSubInput);
@@ -134,34 +127,41 @@ export class AddTaskComponent implements OnInit {
     this.addSubInput = '';
   }
 
-  //GET TASK INPUTS
+  // GET TASK INPUTS
   getAllInputs() {
     this.newTask.title = this.titleElement.nativeElement.value;
     this.newTask.description = this.descriptionElement.nativeElement.value;
     this.newTask.category = this.categoryElement.nativeElement.value;
     this.newTask.dueDate = this.dueDateElement.nativeElement.value;
-    this.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
+    this.newTask.assignedTo = this.assignedCollegues;
     this.newTask.subtasks = this.addedSubTasks;
-
     this.checkIfInputIsEmpty()
   }
 
-  checkIfInputIsEmpty(){
-    if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '' || this.descriptionElement.nativeElement.value === '' || this.dueDateElement.nativeElement.value === '' || this.newTask.priority === '') {
+  // CHECK EMPTY INPUTS
+  checkIfInputIsEmpty() {
+    if (this.titleElement.nativeElement.value === '' ||
+      this.categoryElement.nativeElement.value === '' ||
+      this.descriptionElement.nativeElement.value === '' ||
+      this.dueDateElement.nativeElement.value === '' ||
+      this.newTask.priority === ''
+    ) {
       this.taskCreated = false;
       this.clearAllValues();
-      console.log('Please enter infos', this.titleElement.nativeElement.value);
-    } else if (this.titleElement.nativeElement.value.length >= 1 && this.categoryElement.nativeElement.value.length == 1 && this.newTask.assignedTo.length > 0) {
+    } else if (this.titleElement.nativeElement.value.length >= 1 &&
+      this.categoryElement.nativeElement.value.length == 1 &&
+      this.newTask.assignedTo.length > 0
+    ) {
       this.taskCreated = true;
     }
   }
 
-  //DISPLAYS ALL CREATED SUBTASKS
+  // DISPLAYS ALL CREATED SUBTASKS
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
 
-  //CLEAR ALL INPUT.VALUES
+  // CLEAR ALL INPUT.VALUES
   clearAllValues() {
     this.titleElement.nativeElement.value = '';
     this.descriptionElement.nativeElement.value = '';
@@ -174,10 +174,10 @@ export class AddTaskComponent implements OnInit {
     this.subtasks = [];
   }
 
+  // SAVE TASKS TO DB
   saveTaskToFirestore() {
     const coll = collection(this.firestore, 'allTasks');
     setDoc(doc(coll), this.newTask.toJSON());
-    // s = UNIQUE ID
   }
 
 }

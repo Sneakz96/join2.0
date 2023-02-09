@@ -243,7 +243,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    bottom: 0px;
+    bottom: 20px;
 }
 
 .clear-btn {
@@ -290,17 +290,18 @@
 }
 
 .mb-alert {
-    position: relative;
-    bottom: 565px;
-    color: var(--white);
-    background-color: var(--dark-navy);
-    padding: 14px 16px;
-    width: fit-content;
-    border-radius: 10px;
     display: none;
     align-items: center;
     justify-content: center;
+    width: fit-content;
+    padding: 14px 16px;
+    color: var(--white);
+    background-color: var(--dark-navy);
+    border-radius: 10px;
+    border: none;
     z-index: 99;
+    margin-bottom: 50px;
+    margin-left: var(--m5p);
 
     img {
         margin-left: var(--m5);
@@ -324,6 +325,10 @@
     .priority {
         width: 100%;
         justify-content: space-between;
+    }
+
+    .mb-alert {
+        display: none;
     }
 }
 
@@ -364,6 +369,12 @@
     .assigned {
         width: 100%;
     }
+
+    .mb-alert {
+        display: flex;
+        margin-left: 55px;
+        animation: move-up 1.2s forwards;
+    }
 }
 
 @media(max-width: 420px) {
@@ -383,7 +394,7 @@
     }
 
     .mb-alert {
-        bottom: 142px;
+        margin-left: 58px;
     }
 }
 
@@ -393,7 +404,7 @@
     }
 
     .btn-container {
-        width: 100%;
+        width: 95%;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -406,6 +417,19 @@
     }
 
     .mb-alert {
-        bottom: 158px;
+        margin-bottom: 75px;
+        margin-left: 14px;
+    }
+}
+
+//ANIMATION
+
+@keyframes move-up {
+    from {
+        transform: translateY(200px);
+    }
+
+    to {
+        transform: translateY(0);
     }
 }
