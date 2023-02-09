@@ -225,9 +225,14 @@ form {
     border: 1px solid red;
 }
 
+::ng-deep .mat-dialog-container {
+    border-radius: 10px;
+    bottom: 0px;
+    overflow-y: scroll !important;
+}
 
 ::ng-deep .cdk-overlay-pane {
-    overflow-y: scroll;
+    max-width: 60vw !important;
     border-radius: 20px;
 }
 
@@ -324,11 +329,15 @@ form {
         position: relative;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
-        margin-bottom: var(--m20p);
         right: 0;
         bottom: 0;
+    }
+
+    .create-task-btn {
+        margin-top: 21px !important;
+        margin-left: 0 !important;
     }
 }
 
@@ -339,18 +348,14 @@ form {
 
     .btn-container {
         width: 100%;
+        height: 100px;
         position: relative;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
-        margin-bottom: var(--m20p);
         right: 0;
-    }
-
-    .create-task-btn {
-        margin-top: var(--m5p);
-        margin-left: 0 !important;
+        margin-bottom: var(--m20p);
     }
 
     .create {
@@ -358,11 +363,17 @@ form {
         align-items: center;
     }
 
+    ::ng-deep .mat-dialog-container {
+        border-radius: 0px !important;
+        bottom: 0px;
+    }
+
     ::ng-deep .cdk-overlay-pane {
         margin-top: 158px !important;
         height: 100vh !important;
         border-radius: 0px !important;
         max-width: 100vw !important;
+        width: 100%;
     }
 }
 
@@ -404,25 +415,17 @@ form {
         width: 90%;
     }
 
-    ::ng-deep .mat-dialog-container {
-        border-radius: 0px !important;
-        bottom: 0px;
-    }
-
-
 }
 
 @media(max-width: 300px) {
+    .btn-container{
+        margin-bottom: var(--m5p);
+    }
 
     .create-task-btn {
         margin-top: var(--m5p);
         margin-left: 0;
         width: 100%;
-    }
-
-    ::ng-deep .mat-dialog-container {
-        border-radius: 0px !important;
-        bottom: 0px;
     }
 
     ::ng-deep .cdk-overlay-pane {

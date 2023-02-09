@@ -1,10 +1,7 @@
 ::ng-deep .mat-dialog-container {
+    width: 100vw !important;
     border-radius: 10px !important;
 }
-
-// ::ng-deep .cdk-overlay-pane {
-//     width: 50% !important;
-// }
 
 .task {
     height: fit-content;
@@ -14,26 +11,31 @@
     width: 100%;
 }
 
-.label{
+.label {
     font-size: var(--fs-l);
+    margin-bottom: 3px;
 }
 
 .title {
-    width: 80%;
-    margin-top: var(--m5p);
-    margin-bottom: var(--m5p);
-    font-weight: 400;
-    font-size: var(--fs-hl);
-    // outline: none;
-    // border: none;
-
+    width: 100%;
+    background: white;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
 }
 
 .description {
     width: 100%;
-    margin-bottom: var(--m5p);
-    // outline: none;
-    // border: none;
+    background: white;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
 }
 
 .due-date {
@@ -41,26 +43,49 @@
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
-    margin-bottom: var(--m5p);
+    margin-bottom: 8px;
     width: 70%;
+
+    input {
+        width: 100%;
+        background: white;
+        box-sizing: border-box;
+        border: 1px solid #D1D1D1;
+        border-radius: 10px;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
 }
 
 .priority {
+    width: 100%;
+}
+
+.btn-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--m5p);
-    width: 50%;
+    margin-bottom: 8px;
 }
 
 .urgency-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     border: 1px solid black;
     border-radius: 10px;
     padding: 6px;
+
+    img {
+        margin-left: 6px;
+        width: 14px;
+        height: 12px;
+    }
 }
 
-.assigned-to {
-    font-weight: bold;
+.btn-label {
+    font-size: var(--fs-sm);
 }
 
 .assignedTo {
@@ -87,8 +112,6 @@
     border-radius: 50%;
     padding: 8px;
 }
-
-
 
 .close-btn {
     position: relative;
@@ -137,15 +160,12 @@
 }
 
 @media(max-width: 420px) {
-    .description {
-        margin-bottom: var(--m10p);
-    }
+    // .description {
+    //     margin-bottom: var(--m10p);
+    // }
 
     .due-date {
         width: 100% !important;
-        input{
-            width: 42%;
-        }
     }
 
     .priority {
@@ -156,7 +176,7 @@
         width: 100%;
     }
 
-    .edit-btn{
+    .edit-btn {
         position: absolute;
         bottom: 10px;
         right: 10px;

@@ -28,7 +28,9 @@
             </div>
         </div>
     </div>
-    <span class="assigned-to">Assigned To:</span>
+    <span class="label">Assigned To:</span>
+
+    
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName.charAt(0)}}
