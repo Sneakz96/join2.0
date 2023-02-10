@@ -1,9 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { DialogAddTaskComponent } from '../components/main/dialogs/dialog-add-task/dialog-add-task.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { Task } from '../models/task.class';
 
@@ -36,12 +35,12 @@ export class DataService implements OnInit {
   // USERNAME
   userName: string = 'Guest';
 
+
   // 
   constructor(
     private fire: Firestore,
     private firestore: AngularFirestore,
     public dialog: MatDialog,
-    public dialogAdd: MatDialogRef<DialogAddTaskComponent>,
   ) {
     this.getDayTime();
     this.loadTasks();
@@ -206,10 +205,5 @@ export class DataService implements OnInit {
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
-  }
-
-  // EXIT ADD TASK DIALOG
-  close() {
-    this.dialogAdd.close();
   }
 }

@@ -130,4 +130,9 @@ export class DialogAddTaskComponent implements OnInit {
     this.addedSubTasks = [];
     this.subtasks = [];
   }
+
+  // EXIT ADD TASK DIALOG
+  close() {
+    this.dialogRef.close();
+  }
 }
