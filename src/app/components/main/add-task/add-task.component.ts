@@ -77,7 +77,7 @@ export class AddTaskComponent implements OnInit {
       this.data.setDate();
       this.clearAllValues();
       this.data.alert = true;
-      // this.data.saveTaskToFirestore();
+      this.data.saveTaskToFirestore();
       setTimeout(() => {
         this.router.navigate(['/kanbanboard/board']);
       }, 2500);

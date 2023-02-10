@@ -69,7 +69,7 @@ export class DialogAddTaskComponent implements OnInit {
     public dataService: DataService,
     public dialogRef: MatDialogRef<any>,
     public data: DataService
-    ) {
+  ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
     this.categoryElement = categoryElement;
@@ -78,7 +78,7 @@ export class DialogAddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
-   
+
   }
 
   // 
@@ -90,10 +90,12 @@ export class DialogAddTaskComponent implements OnInit {
     if (this.taskCreated === true) {
       this.data.setId();
       this.data.setDate();
-      // this.data.saveTaskToFirestore();
       this.clearAllValues();
-      this.dialogRef.close();
-      console.log('add called');
+      this.data.alert = true;
+      this.data.saveTaskToFirestore();
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 2500);
     }
   }
 
