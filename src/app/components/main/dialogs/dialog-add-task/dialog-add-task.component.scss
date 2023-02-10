@@ -170,6 +170,8 @@ form {
 
 .priority {
     margin-bottom: var(--m20);
+    display: flex;
+    justify-content: space-around;
 
     button {
         padding: var(--m10) var(--m20);
@@ -218,8 +220,6 @@ form {
         margin-top: 5px;
     }
 }
-
-//BTN
 
 .btn-container {
     position: absolute;
@@ -334,7 +334,6 @@ form {
 
     .priority {
         width: 100%;
-        justify-content: space-between;
     }
 
     .btn-container {
@@ -359,6 +358,25 @@ form {
 }
 
 @media(max-width: 760px) {
+    .row {
+        input {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+        }
+    }
+
+    .textaria {
+        width: 100%;
+    }
+
+    .assigned {
+        width: 100%;
+
+    }
+
     .headline {
         margin-left: 0;
     }
@@ -401,24 +419,7 @@ form {
 }
 
 @media(max-width: 420px) {
-    .row {
-        input {
-            width: 110%;
-        }
 
-        select {
-            width: 110%;
-        }
-    }
-
-    .textaria {
-        width: 110%;
-    }
-
-    .assigned {
-        width: 110%;
-
-    }
 
     .btn-container {
         width: 110%;

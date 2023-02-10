@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -36,7 +35,6 @@ export class DialogAddTaskComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
   assignedCollegues: string[] = [];
-  taskCreated = true;
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -49,7 +47,6 @@ export class DialogAddTaskComponent implements OnInit {
 
   // 
   constructor(
-    private firestore: Firestore,
     titleElement: ElementRef,
     descriptionElement: ElementRef,
     categoryElement: ElementRef,
@@ -78,7 +75,7 @@ export class DialogAddTaskComponent implements OnInit {
   // ADD TASK TO LOCAL STORAGE
   addTask() {
     this.getAllInputs();
-    if (this.taskCreated === true) {
+    if (this.data.taskCreated === true) {
       this.data.setId();
       this.data.setDate();
       this.clearAllValues();
@@ -110,9 +107,9 @@ export class DialogAddTaskComponent implements OnInit {
       this.titleElement.nativeElement.value === '' ||
       this.categoryElement.nativeElement.value === ''
     ) {
-      this.taskCreated = false;
+      this.data.taskCreated = false;
     } else if (this.titleElement.nativeElement.value.length >= 1) {
-      this.taskCreated = true;
+      this.data.taskCreated = true;
     }
   }
 

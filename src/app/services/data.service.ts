@@ -210,6 +210,6 @@ export class DataService implements OnInit {
 
   // EXIT ADD TASK DIALOG
   close() {
-    this.dialogAdd.close(DialogAddTaskComponent);
+    this.dialogAdd.close();
   }
 }

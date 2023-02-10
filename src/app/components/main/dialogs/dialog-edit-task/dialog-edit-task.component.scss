@@ -6,6 +6,7 @@
 ::ng-deep .mat-form-field-flex {
     padding: 0 !important;
     background-color: var(--white) !important;
+    border: none !important;
 }
 
 ::ng-deep .mat-form-field-infix {
@@ -15,6 +16,14 @@
 
 ::ng-deep .mat-select-arrow-wrapper {
     height: unset !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    width: 100%;
+}
+
+::ng-deep .mat-form-field-underline{
+    display: none;
 }
 
 .task {
@@ -68,7 +77,6 @@
         gap: 10px;
         padding: 12px 14px;
     }
-
 }
 
 .priority {
@@ -94,6 +102,20 @@
         margin-left: 6px;
         width: 14px;
         height: 12px;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(1.05);
+        border: 1px solid blueviolet;
+    }
+
+    &:visited {
+        border: 5px solid blueviolet;
     }
 }
 
@@ -188,6 +210,10 @@
 
     .priority {
         width: 100%;
+    }
+
+    ::ng-deep .mat-form-field-flex {
+        width: 132% !important;
     }
 
     ::ng-deep .mat-dialog-container {
