@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  
+
   loginForm!: FormGroup;
 
+  // 
   constructor(public dialog: MatDialog, private router: Router, private afAuth: AngularFireAuth) {
     this.loginForm = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
@@ -22,13 +23,15 @@ export class LoginComponent {
     });
   }
 
-  openDialog(): void {
-  }
+  // 
+  openDialog(): void { }
 
+  // 
   onSubmit() {
     return false;
   }
 
+  // 
   loginUser() {
     this.afAuth
       .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)

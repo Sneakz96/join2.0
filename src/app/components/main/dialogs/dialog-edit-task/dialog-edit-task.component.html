@@ -13,7 +13,6 @@
     <div class="priority">
         <p class="label">Priority:</p>
         <div class="btn-container">
-
             <div class="urgency-btn">
                 <p class="btn-label">Low</p>
                 <img src="./assets/img/icons/Low.png">
@@ -29,16 +28,13 @@
         </div>
     </div>
     <span class="label">Assigned To:</span>
-
     <mat-form-field class="assigned" appearance="fill">
         <mat-select class="assigned-field" 
             [placeholder]="'Select contacts'" multiple #assignedContacts><!--[(value)]="assignedCollegues" [formControl]="contactForm"-->
-            <!-- <mat-option *ngFor="let contact of allContacts$ |async" [value]="contact">
-                {{contact.firstName}} {{contact.lastName}}</mat-option> -->
+            <mat-option *ngFor="let contact of data.allContacts$ |async" [value]="contact">
+                {{contact.firstName}} {{contact.lastName}}</mat-option>
         </mat-select>
     </mat-form-field>
-
-    
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName.charAt(0)}}

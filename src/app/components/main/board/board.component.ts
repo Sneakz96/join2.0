@@ -6,7 +6,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -17,7 +16,7 @@ export class BoardComponent {
 
   dueDate: any;
   searchField: string;
-  @Input() task: any;
+  task: any;
 
   // 
   constructor(
@@ -30,9 +29,7 @@ export class BoardComponent {
   openTask(taskToOpen: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
-      data: {
-        taskToOpen
-      }
+      data: { taskToOpen }
     });
     dialogRef.componentInstance.task = taskToOpen;
     dialogRef.componentInstance.taskId = taskToOpen.customIdName;
@@ -40,7 +37,7 @@ export class BoardComponent {
 
   // OPEN ADD TASK DIALOG
   addTask() {
-    const dialogRef = this.dialog.open(DialogAddTaskComponent);
+    this.dialog.open(DialogAddTaskComponent);
   }
 
   // DRAG AND DROP FUNCTION
@@ -96,10 +93,7 @@ export class BoardComponent {
     //  MS  *  S * M  * H  * T
   }
 
-
-
-
-  // 
+  // SEARCH TASK ON BOARD
   searchTasks() {
     console.log('input', this.searchField);
     console.log('summary', this.data.allTasks);
@@ -107,7 +101,8 @@ export class BoardComponent {
     let currentTasks = [];
     for (let i = 0; i < this.data.allTasks.length; i++) {
       let allTasks = this.data.allTasks[i];
-      if (allTasks['title'].includes(this.searchField) ||
+      if (
+        allTasks['title'].includes(this.searchField) ||
         allTasks['description'].includes(this.searchField) ||
         allTasks['category'].includes(this.searchField)
       ) {

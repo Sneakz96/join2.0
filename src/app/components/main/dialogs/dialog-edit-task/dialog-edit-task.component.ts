@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dialog-edit-task',
@@ -15,18 +16,19 @@ export class DialogEditTaskComponent implements OnInit {
   task: Task;
   taskId: string;
 
+  // 
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<DialogEditTaskComponent>,
     private firestore: AngularFirestore,
+    public data: DataService,
   ) { }
 
-
+  // 
   ngOnInit(): void {
     console.log(this.task);
     console.log(this.taskId);
   }
-
 
   // SAVE EDITED TASK TO DB
   save() {

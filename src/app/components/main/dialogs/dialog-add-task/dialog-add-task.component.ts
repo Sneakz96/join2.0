@@ -1,10 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -12,28 +10,12 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './dialog-add-task.component.html',
   styleUrls: ['./dialog-add-task.component.scss']
 })
+
 export class DialogAddTaskComponent implements OnInit {
 
-  @Input() task: Task | any;
 
-  contactForm = new FormControl('');
-
-  public allTasks: any[] = [];
-
-  //SUBTASKS
-  subTaskCreationStatus = 'no subtask created';
-  addSubInput: string = '';
-  addedSubTasks: string[] = [];
-
-  //CONTACTS
-  contact = new FormControl();
-  selectedContacts: string[] = [];
-  dropdownSettings: IDropdownSettings = {};
-  dropDownForm!: FormGroup;
-  assignedCollegues: string[] = [];
-  taskCreated = true;
-
-  titel: string = 'alert';
+  // TASK
+  allTasks: any[] = [];
   id!: number;
   title: string = '';
   description: string = '';
@@ -44,8 +26,17 @@ export class DialogAddTaskComponent implements OnInit {
   createdAt!: number;
   subtasks: string[] = [];
   subInput: string = '';
-
-
+  // SUBTASKS
+  subTaskCreationStatus = 'no subtask created';
+  addSubInput: string = '';
+  addedSubTasks: string[] = [];
+  // CONTACTS
+  contactForm = new FormControl();
+  selectedContacts: string[] = [];
+  dropdownSettings: IDropdownSettings = {};
+  dropDownForm!: FormGroup;
+  assignedCollegues: string[] = [];
+  taskCreated = true;
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -56,6 +47,7 @@ export class DialogAddTaskComponent implements OnInit {
   @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
   @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
 
+  // 
   constructor(
     private firestore: Firestore,
     titleElement: ElementRef,
@@ -78,7 +70,6 @@ export class DialogAddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
-
   }
 
   // 
@@ -113,9 +104,12 @@ export class DialogAddTaskComponent implements OnInit {
     this.data.newTask.description = this.descriptionElement.nativeElement.value;
     this.data.newTask.category = this.categoryElement.nativeElement.value;
     this.data.newTask.dueDate = this.dueDateElement.nativeElement.value;
-    this.data.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
+    this.data.newTask.assignedTo = this.assignedCollegues;
     this.data.newTask.subtasks = this.addedSubTasks;
-    if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '') {
+    if (
+      this.titleElement.nativeElement.value === '' ||
+      this.categoryElement.nativeElement.value === ''
+    ) {
       this.taskCreated = false;
     } else if (this.titleElement.nativeElement.value.length >= 1) {
       this.taskCreated = true;

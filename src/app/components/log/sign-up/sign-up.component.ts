@@ -16,13 +16,19 @@ export class SignUpComponent {
   @ViewChild('passwordField') messageField!: ElementRef;
   signForm!: FormGroup;
 
-  constructor(public dialog: MatDialog, private router: Router, private afAuth: AngularFireAuth) { }
+  // 
+  constructor(
+    public dialog: MatDialog, 
+    private router: Router, 
+    private afAuth: AngularFireAuth
+    ) { }
 
+  // 
   ngOnInit() {
     this.setFormGroup();
   }
 
-
+  // SET SIGN UP FORM
   setFormGroup() {
     this.signForm = new FormGroup({
       'displayName': new FormControl('', Validators.required),
@@ -31,7 +37,7 @@ export class SignUpComponent {
     });
   }
 
-  /* Sign up */
+  // SIGN UP TO DB
   signUp() {
     console.log('signUp called');
     if (this.signForm.invalid) {
