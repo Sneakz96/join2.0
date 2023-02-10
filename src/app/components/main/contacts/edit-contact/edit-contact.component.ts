@@ -17,6 +17,7 @@ export class EditContactComponent implements OnInit {
   userId = '';
   user: any = {};
 
+  // 
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
@@ -25,7 +26,7 @@ export class EditContactComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-
+  // 
   ngOnInit(): void {
     this.getParams();
   }
@@ -57,6 +58,7 @@ export class EditContactComponent implements OnInit {
 
   // OPEN DIALOG
   editUser() {
+    debugger;
     const dialogRef = this.dialog.open(DialogEditUserComponent);
     dialogRef.componentInstance.user = new Contact(this.user.toJSON());
     dialogRef.componentInstance.userId = this.userId;
