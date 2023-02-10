@@ -35,7 +35,6 @@ export class EditContactComponent implements OnInit {
   getParams() {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
-      console.log(this.userId);
       this.getCurrentUser();
     });
   }
@@ -58,7 +57,7 @@ export class EditContactComponent implements OnInit {
 
   // OPEN DIALOG
   editUser() {
-    debugger;
+    
     const dialogRef = this.dialog.open(DialogEditUserComponent);
     dialogRef.componentInstance.user = new Contact(this.user.toJSON());
     dialogRef.componentInstance.userId = this.userId;

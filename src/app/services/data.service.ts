@@ -1,18 +1,26 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialog } from '@angular/material/dialog';
+import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { DialogAddTaskComponent } from '../components/main/dialogs/dialog-add-task/dialog-add-task.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
+import { Task } from '../models/task.class';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService implements OnInit {
-
+  // ALERTS
+  alert = false;
+  taskCreated = true;
+  contactCreated = false;
+  // TASKS
+  newTask = new Task();
   taskId: any;
   id: string;
   allTasks = [];
-
   todos!: number;
   inProgress!: number;
   feedback!: number;
@@ -20,26 +28,29 @@ export class DataService implements OnInit {
   urgent!: number;
   deadline!: string;
   dayTime!: string;
-
-  contactCreated = false;
+  // CONTACTS
   allContacts = [];
+  allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
-  
+  // USERNAME
   userName: string = 'Guest';
 
+  // 
   constructor(
+    private fire: Firestore,
     private firestore: AngularFirestore,
     public dialog: MatDialog,
+    public dialogAdd: MatDialogRef<DialogAddTaskComponent>,
   ) {
+    this.getDayTime();
     this.loadTasks();
     this.loadContacts();
-    this.getDayTime();
+    this.loadContactListInAddTask();
   }
 
-  ngOnInit(): void {
-    this.sortContacts();
-  }
+  // 
+  ngOnInit(): void { }
 
   // GET CURRENT DAY TIME
   getDayTime() {
@@ -65,6 +76,30 @@ export class DataService implements OnInit {
         this.clear();
         this.count(this.allTasks);
       });
+  }
+
+  // SET TASK ID
+  setId() {
+    var id = new Date().getTime();
+    this.newTask.id = id / 1000000000;
+  }
+
+  // SET CREATION TIME
+  setDate() {
+    var date = new Date().getTime();
+    this.newTask.createdAt = date;
+  }
+
+  // LOG PRIORITY
+  setPrio(prio: string) {
+    this.newTask.priority = prio;
+    console.log(this.newTask.priority)
+  }
+
+  // SAVE TASKS TO DB
+  saveTaskToFirestore() {
+    const coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.newTask.toJSON());
   }
 
   // RESET ALL NUMBERS BEFORE COUNT ALL TASKS
@@ -115,7 +150,7 @@ export class DataService implements OnInit {
     return month + ' ' + day + ', ' + year;
   }
 
-  //LOAD ALL CONTACTS FROM FIRESTORE
+  // LOAD ALL CONTACTS FROM FIRESTORE
   loadContacts() {
     this.firestore
       .collection('allContacts')
@@ -127,7 +162,7 @@ export class DataService implements OnInit {
       });
   }
 
-  //SORT CONTACTS ON ALPHABET
+  // SORT CONTACTS ON ALPHABET
   sortContacts() {
     this.allContacts.sort((a, b) => {
       if (a.firstName < b.firstName) {
@@ -138,7 +173,15 @@ export class DataService implements OnInit {
       }
       return 0;
     });
+  }
 
+  // LOAD CONTACTS IN OBSERVABLE FOR ADD TASK (ASSIGNED)
+  loadContactListInAddTask() {
+    const coll = collection(this.fire, 'allContacts');
+    this.allContacts$ = collectionData(coll);
+    this.allContacts$.subscribe(() => {
+      console.log(this.allContacts$);
+    });
   }
 
   // GET ALL FIRST NAMES OF CONTACT LIST
@@ -150,7 +193,7 @@ export class DataService implements OnInit {
     this.checkFirstLetters(names);
   }
 
-  //CHECK FIRST LETTERS OF FIRST NAMES
+  // CHECK FIRST LETTERS OF FIRST NAMES
   checkFirstLetters(names: any) {
     names.forEach((firstLetter: any[]) => {
       let initial = firstLetter[0];
@@ -163,5 +206,10 @@ export class DataService implements OnInit {
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  // EXIT ADD TASK DIALOG
+  close() {
+    this.dialogAdd.close();
   }
 }

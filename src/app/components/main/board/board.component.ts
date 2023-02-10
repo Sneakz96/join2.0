@@ -19,13 +19,12 @@ export class BoardComponent {
   searchField: string;
   @Input() task: any;
 
-
+  // 
   constructor(
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
   ) { }
-
 
   // 
   openTask(taskToOpen: any) {
@@ -93,7 +92,7 @@ export class BoardComponent {
         let days = diff / (1000 * 60 * 60 * 24);
         return days < 3;
       });
-    }, 1000 * 60 * 60 * 24 * 3); 
+    }, 1000 * 60 * 60 * 24 * 3);
     //  MS  *  S * M  * H  * T
   }
 
@@ -104,7 +103,7 @@ export class BoardComponent {
   searchTasks() {
     console.log('input', this.searchField);
     console.log('summary', this.data.allTasks);
-    
+
     let currentTasks = [];
     for (let i = 0; i < this.data.allTasks.length; i++) {
       let allTasks = this.data.allTasks[i];

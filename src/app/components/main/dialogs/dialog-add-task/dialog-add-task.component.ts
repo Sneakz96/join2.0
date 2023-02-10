@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
@@ -28,16 +28,12 @@ export class DialogAddTaskComponent implements OnInit {
   //CONTACTS
   contact = new FormControl();
   selectedContacts: string[] = [];
-
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
-
   assignedCollegues: string[] = [];
-
   taskCreated = true;
 
   titel: string = 'alert';
-  //INPUT FIELDS
   id!: number;
   title: string = '';
   description: string = '';
@@ -49,9 +45,7 @@ export class DialogAddTaskComponent implements OnInit {
   subtasks: string[] = [];
   subInput: string = '';
 
-  newTask = new Task();
 
-  allContacts$: Observable<any>;
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -74,7 +68,7 @@ export class DialogAddTaskComponent implements OnInit {
     dropdown: ElementRef,
     public dataService: DataService,
     public dialogRef: MatDialogRef<any>,
-    public dialog: MatDialogRef<DialogAddTaskComponent>,
+    public data: DataService
     ) {
     this.titleElement = titleElement;
     this.descriptionElement = descriptionElement;
@@ -84,54 +78,26 @@ export class DialogAddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
-    const coll = collection(firestore, 'allContacts');
-    this.allContacts$ = collectionData(coll);
-    this.allContacts$.subscribe(() => {
-      console.log(this.allContacts$);
-    });
+   
   }
 
+  // 
   ngOnInit(): void { }
 
-  // EXIT ADD TASK DIALOG
-  close() {
-    this.dialog.close();
-  }
-
-  //ADD TASK TO LOCAL STORAGE
+  // ADD TASK TO LOCAL STORAGE
   addTask() {
     this.getAllInputs();
     if (this.taskCreated === true) {
-      this.setId();
-      this.setDate();
-      this.saveTaskToFirestore();
+      this.data.setId();
+      this.data.setDate();
+      // this.data.saveTaskToFirestore();
       this.clearAllValues();
-      console.log('task is created', this.taskCreated);
       this.dialogRef.close();
-    } else {
-      console.log('something wrong');
+      console.log('add called');
     }
   }
 
-  //SET TASK ID
-  setId() {
-    var id = new Date().getTime();
-    this.newTask.id = id / 1000000000;
-  }
-
-  //SET CREATION TIME
-  setDate() {
-    var date = new Date().getTime();
-    this.newTask.createdAt = date;
-  }
-
-  //LOG PRIORITY
-  setPrio(prio: string) {
-    this.newTask.priority = prio;
-    console.log(this.newTask.priority)
-  }
-
-  //CREATE SUBTASK
+  // CREATE SUBTASK
   addSubTask() {
     this.subTaskCreationStatus = 'sub created';
     console.log(this.subTaskCreationStatus, this.addSubInput);
@@ -139,30 +105,27 @@ export class DialogAddTaskComponent implements OnInit {
     this.addSubInput = '';
   }
 
-  //GET TASK INPUTS
+  // GET TASK INPUTS
   getAllInputs() {
-    this.newTask.title = this.titleElement.nativeElement.value;
-    this.newTask.description = this.descriptionElement.nativeElement.value;
-    this.newTask.category = this.categoryElement.nativeElement.value;
-    this.newTask.dueDate = this.dueDateElement.nativeElement.value;
-    this.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
-    this.newTask.subtasks = this.addedSubTasks;
-
-    console.log(this.categoryElement.nativeElement.value);
+    this.data.newTask.title = this.titleElement.nativeElement.value;
+    this.data.newTask.description = this.descriptionElement.nativeElement.value;
+    this.data.newTask.category = this.categoryElement.nativeElement.value;
+    this.data.newTask.dueDate = this.dueDateElement.nativeElement.value;
+    this.data.newTask.assignedTo = this.assignedCollegues;//this.assignedContacts.nativeElement.value 
+    this.data.newTask.subtasks = this.addedSubTasks;
     if (this.titleElement.nativeElement.value === '' || this.categoryElement.nativeElement.value === '') {
       this.taskCreated = false;
-      console.log('Please enter infos', this.titleElement.nativeElement.value);
     } else if (this.titleElement.nativeElement.value.length >= 1) {
       this.taskCreated = true;
     }
   }
 
-  //DISPLAYS ALL CREATED SUBTASKS
+  // DISPLAYS ALL CREATED SUBTASKS
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
 
-  //CLEAR ALL INPUT.VALUES
+  // CLEAR ALL INPUT.VALUES
   clearAllValues() {
     this.titleElement.nativeElement.value = '';
     this.descriptionElement.nativeElement.value = '';
@@ -173,11 +136,5 @@ export class DialogAddTaskComponent implements OnInit {
     this.subInputElement.nativeElement.value = '';
     this.addedSubTasks = [];
     this.subtasks = [];
-  }
-
-  saveTaskToFirestore() {
-    const coll = collection(this.firestore, 'allTasks');
-    setDoc(doc(coll), this.newTask.toJSON());
-    // s = UNIQUE ID
   }
 }

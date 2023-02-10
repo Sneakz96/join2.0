@@ -1,15 +1,12 @@
 <!--#CREATE TASK SECTION-->
 <span class="headline">Add Task</span>
 <div class="create">
-    <img class="close-btn" src="./assets/img/icons/x.png" (click)="close()">
+    <img class="close-btn" src="./assets/img/icons/x.png" (click)="data.close()">
     <div class="row row-left">
         <h5>Title</h5>
         <input type="text" class="input-field" placeholder="Enter a title" #title>
-
         <h5>Description</h5>
-        <textarea class="textaria" rows="10" placeholder="Enter a Description" #description>
-    </textarea>
-
+        <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
         <h5>Category</h5>
         <select #category>
             <option value="" disabled selected hidden>Select task category</option>
@@ -23,36 +20,29 @@
             <option value="Production">Production</option>
             <option value="Team">Team</option>
         </select>
-
         <h5>Assigned to</h5>
         <mat-form-field class="assigned" appearance="fill">
             <mat-select class="assigned-field" [(value)]="assignedCollegues" [formControl]="contactForm"
                 [placeholder]="'Select contacts'" multiple #assignedContacts>
-                <mat-option *ngFor="let contact of allContacts$ |async" [value]="contact">
+                <mat-option *ngFor="let contact of data.allContacts$ |async" [value]="contact">
                     {{contact.firstName}} {{contact.lastName}}</mat-option>
             </mat-select>
         </mat-form-field>
-
-
     </div>
     <div class="vector">
-
     </div>
     <div class="row row-right">
         <h5>Due date</h5>
         <input type="date" id="dueDate" #dueDate>
-
         <h5>Prio</h5>
         <div class="priority">
-            <button (click)="setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
-            <button (click)="setPrio('Medium')">Medium<img src="/assets/img/icons/Medium.png"></button>
-            <button (click)="setPrio('Low')">Low<img src="/assets/img/icons/Low.png"></button>
+            <button (click)="data.setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
+            <button (click)="data.setPrio('Medium')">Medium<img src="/assets/img/icons/Medium.png"></button>
+            <button (click)="data.setPrio('Low')">Low<img src="/assets/img/icons/Low.png"></button>
         </div>
-
         <h5>Subtasks</h5>
         <div class="subtask">
             <input type="text" (input)="updateSubTask($event)" placeholder="Add new subtask" #subInput>
-            <!-- [(ngModel)]="addSubInput"> -->
             <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
         </div>
         <div class="subtasks" #subtasks>
@@ -61,12 +51,13 @@
                 <label for="checkbox">{{ subtasks }}</label>
             </div>
         </div>
-
-
         <div class="btn-container">
-            <button class="clear-btn" (click)="clearAllValues()">Clear<img src="/assets/img/icons/x.png"></button>
+            <button class="clear-btn" (click)="clearAllValues()">Clear
+                <img src="/assets/img/icons/x.png"></button>
             <button class="create-task-btn" (click)="addTask()">Create Task<img
                     src="/assets/img/icons/create.png"></button>
+            <button class="mb-alert" *ngIf="data.alert === true">Task added to Board
+                <img src="./assets/img/icons/task_added_mb.png"></button>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dialog-edit-user',
@@ -16,11 +17,13 @@ export class DialogEditUserComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
     private firestore: AngularFirestore,
+    private dataService: DataService
   ) { }
 
 
   ngOnInit(): void {
     console.log(this.user);
+    console.log(this.dataService.allContacts);
   }
 
   // CLOSE DIALOG
