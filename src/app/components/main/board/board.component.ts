@@ -94,33 +94,11 @@ export class BoardComponent {
   }
 
   // SEARCH TASK ON BOARD
-  searchTasks() {
-    console.log('input', this.searchField);
-    console.log('summary', this.data.allTasks);
-
-    let currentTasks = [];
-    for (let i = 0; i < this.data.allTasks.length; i++) {
-      let allTasks = this.data.allTasks[i];
-      if (
-        allTasks['title'].includes(this.searchField) ||
-        allTasks['description'].includes(this.searchField) ||
-        allTasks['category'].includes(this.searchField)
-      ) {
-        // debugger;
-        currentTasks.push(allTasks);
-        console.log('includes', currentTasks);
-        this.renderTasks(currentTasks);
-      }
-    }
-  }
-
-  // 
-  renderTasks(tasks: any) {
-    console.log();
-    console.log(tasks);
-    for (let i = 0; i < tasks.length; i++) {
-      let searchedTask = tasks[i];
-      console.log(searchedTask); // WORKS TILL HERE
-    }
+  search() {
+    this.data.allTasks.forEach((task) => {
+      task.visible = task.title.includes(this.searchField);
+      console.log(task.visible, task);
+      console.log(task.visible, task);
+    });
   }
 }

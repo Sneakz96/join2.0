@@ -3,12 +3,13 @@ export class Task {
     title: string;
     description: string;
     category: string;
-    assignedTo: any[]=[];
+    assignedTo: any[] = [];
     dueDate: string;
     priority: string;
     subtasks: string[] = [];
     createdAt: number;
     status: string;
+    visible: boolean;
 
     constructor(task?: any) {
         this.id = task ? task.id : '';
@@ -21,10 +22,11 @@ export class Task {
         this.subtasks = task ? task.subtasks : [];
         this.createdAt = task ? task.createdAt : '';
         this.status = 'toDo';
+        this.visible = true;
     }
 
-    public toJSON(){
-        return{
+    public toJSON() {
+        return {
             id: this.id,
             title: this.title,
             description: this.description,
@@ -34,7 +36,8 @@ export class Task {
             priority: this.priority,
             subtasks: this.subtasks,
             createdAt: this.createdAt,
-            status: this.status
+            status: this.status,
+            visible: this.visible
         }
     }
 }

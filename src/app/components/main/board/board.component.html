@@ -2,8 +2,8 @@
   <h1>Board</h1>
   <div class="box">
     <!--SEARCHBOX HERE-->
-    <input class="searchbox" (keyup)="searchTasks()" type="text" placeholder="Find task" [(ngModel)]="searchField">
-    <img class="toggle" (click)="searchTasks()" src="/assets/img/icons/search.png">
+    <input class="searchbox" (keyup)="search()" type="text" placeholder="Find task" [(ngModel)]="searchField">
+    <img class="toggle" (click)="search()" src="/assets/img/icons/search.png">
     <button class="btn" (click)="addTask()">
       <p>Add task</p>
       <img src="/assets/img/icons/add-task.png">
@@ -19,7 +19,7 @@
       <div class="content-container" id="dropList_0" #toDo cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let taskToDo of data.allTasks" cdkDrag [cdkDragData]="taskToDo">
-          <div class="task" *ngIf="taskToDo.status === 'toDo'"
+          <div class="task" [ngClass]="{'task-shadow': !taskToDo.visible}" *ngIf="taskToDo.status === 'toDo'"
             (click)="openTask(taskToDo)" [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
             <div class="category">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
