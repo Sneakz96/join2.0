@@ -18,8 +18,8 @@
       </div>
       <div class="content-container" id="dropList_0" #toDo cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let taskToDo of data.allTasks" cdkDrag [cdkDragData]="taskToDo">
-
+        <div *ngFor="let taskToDo of data.allTasks" cdkDrag [cdkDragData]="taskToDo"
+          [cdkDragDisabled]="taskToDo.visible">
           <div class="task" [ngClass]="taskToDo.visible ? 'task-shadow':'task'" *ngIf="taskToDo.status === 'toDo'"
             (click)="openTask(taskToDo)" [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
             <div class="category">
@@ -58,8 +58,9 @@
       </div>
       <div class="content-container" id="dropList_1" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress">
-          <div class="task" [ngClass]="taskInProgress.visible ? 'task-shadow':'task'" *ngIf="taskInProgress.status === 'inProgress'" (click)="openTask(taskInProgress)"
+        <div *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress" [cdkDragDisabled]="taskInProgress.visible">
+          <div class="task" [ngClass]="taskInProgress.visible ? 'task-shadow':'task'"
+            *ngIf="taskInProgress.status === 'inProgress'" (click)="openTask(taskInProgress)"
             [routerLink]="['/kanbanboard/board/' + taskInProgress.customIdName]">
             <div class="category">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
@@ -98,8 +99,8 @@
       <div class="content-container" id="dropList_2" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback">
-          <div class="task" [ngClass]="taskAwaitingFeedback.visible ? 'task-shadow':'task'" *ngIf="taskAwaitingFeedback.status === 'awaitingFeedback'"
-            (click)="openTask(taskAwaitingFeedback)"
+          <div class="task" [ngClass]="taskAwaitingFeedback.visible ? 'task-shadow':'task'"
+            *ngIf="taskAwaitingFeedback.status === 'awaitingFeedback'" (click)="openTask(taskAwaitingFeedback)"
             [routerLink]="['/kanbanboard/board/' + taskAwaitingFeedback.customIdName]">
             <div class="category">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
@@ -138,8 +139,8 @@
       <div class="content-container" id="dropList_3" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone">
-          <div class="task" [ngClass]="taskDone.visible ? 'task-shadow':'task'" *ngIf="taskDone.status === 'done'" (click)="openTask(taskDone)"
-            [routerLink]="['/kanbanboard/board/' + taskDone.customIdName]">
+          <div class="task" [ngClass]="taskDone.visible ? 'task-shadow':'task'" *ngIf="taskDone.status === 'done'"
+            (click)="openTask(taskDone)" [routerLink]="['/kanbanboard/board/' + taskDone.customIdName]">
             <div class="category">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskDone.category }}</span>

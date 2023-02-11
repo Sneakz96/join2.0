@@ -53,6 +53,7 @@ export class BoardComponent {
         indexBefore,
         index
       );
+      this.searchField = '';
       this.changeStatusByDrop(event.item.data, event.container.id);
     }
   }

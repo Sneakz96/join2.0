@@ -143,6 +143,7 @@
 
 .task-shadow{
     background-color: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
     &:hover {
         cursor: auto;
         transform: scale(1);
