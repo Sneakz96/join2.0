@@ -11,8 +11,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class DialogAddTaskComponent implements OnInit {
-
-
   // TASK
   allTasks: any[] = [];
   id!: number;
