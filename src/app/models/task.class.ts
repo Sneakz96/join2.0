@@ -22,7 +22,7 @@ export class Task {
         this.subtasks = task ? task.subtasks : [];
         this.createdAt = task ? task.createdAt : '';
         this.status = 'toDo';
-        this.visible = true;
+        this.visible = false;
     }
 
     public toJSON() {
