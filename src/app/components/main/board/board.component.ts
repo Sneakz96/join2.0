@@ -96,9 +96,7 @@ export class BoardComponent {
   // SEARCH TASK ON BOARD
   search() {
     this.data.allTasks.forEach((task) => {
-      task.visible = task.title.includes(this.searchField);
-      console.log(task.visible, task);
-      console.log(task.visible, task);
+      task.visible = !task.title.includes(this.searchField);
     });
   }
 }
