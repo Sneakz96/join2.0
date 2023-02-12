@@ -17,6 +17,11 @@ export class DialogEditTaskComponent implements OnInit {
   taskId: string;
 
   // 
+  low = false;
+  medium = false;
+  high = false;
+
+  // 
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<DialogEditTaskComponent>,
@@ -26,16 +31,24 @@ export class DialogEditTaskComponent implements OnInit {
 
   // 
   ngOnInit(): void {
-    console.log(this.task);
-    console.log(this.taskId);
     this.getPriority();
   }
 
   // 
   getPriority() {
-    console.log(this.task.priority);
-    console.log(low);
+    if (this.task.priority == 'Low') {
+      this.low = true;
+      console.log(this.low);
+    } else if (this.task.priority == 'Medium') {
+      this.medium = true;
+      console.log(this.medium);
+    } else if (this.task.priority == 'Urgent') {
+      this.high = true;
+      console.log(this.high);
+    }
   }
+
+
 
   // SAVE EDITED TASK TO DB
   save() {

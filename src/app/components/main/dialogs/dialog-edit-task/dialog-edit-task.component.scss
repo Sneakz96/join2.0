@@ -107,35 +107,35 @@
     margin-bottom: 8px;
 }
 
-.urgency-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 6px;
 
-    img {
-        margin-left: 6px;
-        width: 14px;
-        height: 12px;
-    }
 
-    &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
 
-    &:active {
-        transform: scale(1.05);
-        border: 1px solid blueviolet;
-    }
 
-    &:visited {
-        border: 5px solid blueviolet;
-    }
+.low{
+    color: white;
+    background-color: rgb(122, 226, 41);
 }
+
+.medium{
+    color: white;
+    background-color: rgb(254, 167, 3);
+}
+
+.high{
+    color: white;
+    background-color: rgb(255, 61, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .btn-label {
     font-size: var(--fs-sm);
