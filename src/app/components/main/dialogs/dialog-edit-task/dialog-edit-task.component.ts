@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog-edit-task',
@@ -11,11 +12,13 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-edit-task.component.scss']
 })
 
-export class DialogEditTaskComponent implements OnInit {
+export class DialogEditTaskComponent implements OnInit{
 
   task: Task;
   taskId: string;
-
+  // 
+  contactForm = new FormControl();
+  assignedCollegues: string[] = [];
   // 
   low = false;
   medium = false;
@@ -31,24 +34,33 @@ export class DialogEditTaskComponent implements OnInit {
 
   // 
   ngOnInit(): void {
+    console.log('init called')
     this.getPriority();
   }
 
-  // 
+  // GET PRIORITY OF CURRENT TASK
   getPriority() {
     if (this.task.priority == 'Low') {
       this.low = true;
-      console.log(this.low);
+      this.medium = false;
+      this.high = false;
     } else if (this.task.priority == 'Medium') {
+      this.low = false;
       this.medium = true;
-      console.log(this.medium);
+      this.high = false;
     } else if (this.task.priority == 'Urgent') {
+      this.low = false;
+      this.medium = false;
       this.high = true;
-      console.log(this.high);
     }
   }
 
-
+  // CHANGE PRIORITY OF CURRENT TASK
+  setPrio(prio: string) {
+    this.task.priority = prio;
+    console.log(this.task.priority)
+    this.getPriority();
+  }
 
   // SAVE EDITED TASK TO DB
   save() {
@@ -60,7 +72,7 @@ export class DialogEditTaskComponent implements OnInit {
       .update(this.task.toJSON());
   }
 
-  // CLOSE DIALOG
+  // CLOSE EDIT DIALOG
   close() {
     this.dialogRef.close();
     this.router.navigate(['/kanbanboard/board']);

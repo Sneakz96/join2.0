@@ -89,16 +89,10 @@
         padding: 8px;
         border: none;
         border-radius: 10px;
-
-        img {
-            margin-left: 6px;
-        }
-
-        &:hover {
-            transform: scale(1.1);
+        &:hover{
+            cursor: pointer;
         }
     }
-
 }
 
 .btn-container {
@@ -118,6 +112,9 @@
         width: 20px;
         height: 15px;
         background-image: url('/assets/img/icons/Low.png');
+    }
+    &:hover{
+        cursor: pointer;
     }
 }
 
@@ -199,6 +196,7 @@
     border-radius: 10px;
     gap: 10px;
     padding: 12px 14px;
+    margin-top: 3px;
 }
 
 .assigned-contact {
