@@ -107,35 +107,80 @@
     margin-bottom: 8px;
 }
 
+#low {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    div {
+        margin-left: 6px;
+        background-repeat: none;
+        width: 20px;
+        height: 15px;
+        background-image: url('/assets/img/icons/Low.png');
+    }
+}
 
-
-
-.low{
+.low {
     color: white;
     background-color: rgb(122, 226, 41);
+
+    div {
+        background-image: url('/assets/img/icons/low_white.png') !important;
+        width: 20px !important;
+        height: 15px !important;
+    }
 }
 
-.medium{
+#medium {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        margin-left: 6px;
+        background-repeat: none;
+        width: 17px;
+        height: 9px;
+        background-image: url('/assets/img/icons/Medium.png');
+    }
+}
+
+.medium {
     color: white;
     background-color: rgb(254, 167, 3);
+
+    div {
+        background-image: url('/assets/img/icons/medium_white.png') !important;
+        width: 17px !important;
+        height: 9px !important;
+    }
 }
 
-.high{
+#high {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        margin-left: 6px;
+        background-repeat: none;
+        width: 20px;
+        height: 14px;
+        background-image: url('/assets/img/icons/Urgent.png');
+    }
+}
+
+.high {
     color: white;
     background-color: rgb(255, 61, 0);
+
+    div {
+        background-image: url('/assets/img/icons/urgent_white.png') !important;
+        width: 17px !important;
+        height: 13px !important;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .btn-label {
     font-size: var(--fs-sm);

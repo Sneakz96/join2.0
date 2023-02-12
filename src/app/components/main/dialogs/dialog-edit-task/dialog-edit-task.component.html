@@ -12,24 +12,25 @@
     </div>
     <div class="priority">
         <p class="label">Priority:</p>
-
-
         <div class="priority-btn">
             <button id="low" [ngClass]="{'low': low}" (click)="data.setPrio('Low')">Low
-                <img src="/assets/img/icons/Low.png"></button>
-            <button id="medium" [ngClass]="{'medium': medium == true}" (click)="data.setPrio('Medium')">Medium
-                <img src="/assets/img/icons/Medium.png"></button>
-            <button id="high" [ngClass]="{'high': high == true}" (click)="data.setPrio('Urgent')">Urgent
-                <img src="/assets/img/icons/Urgent.png"></button>
+                <div [ngClass]="{'low': low}"></div>
+            </button>
+
+            <button id="medium" [ngClass]="{'medium': medium}" (click)="data.setPrio('Medium')">Medium
+                <div [ngClass]="{'medium': medium}"></div>
+            </button>
+
+            <button id="high" [ngClass]="{'high': high}" (click)="data.setPrio('Urgent')">Urgent
+                <div [ngClass]="{'high': high}"></div>
+            </button>
         </div>
-
-
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
         <mat-select class="assigned-field" [placeholder]="'Select contacts'" multiple
             #assignedContacts><!--[(value)]="assignedCollegues" [formControl]="contactForm"-->
-            <mat-option *ngFor="let contact of data.allContacts$ |async" [value]="contact">
+            <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                 {{contact.firstName}} {{contact.lastName}}</mat-option>
         </mat-select>
     </mat-form-field>
