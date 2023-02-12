@@ -12,24 +12,10 @@
     </div>
     <div class="priority">
         <p class="label">Priority:</p>
-        <div class="priority">
-            <button (click)="data.setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
+        <div class="priority-btn">
+            <button id="low" (click)="data.setPrio('Low')">Low<img src="/assets/img/icons/Low.png"></button>
             <button (click)="data.setPrio('Medium')">Medium<img src="/assets/img/icons/Medium.png"></button>
-            <button (click)="data.setPrio('Low')">Low<img src="/assets/img/icons/Low.png"></button>
-        </div>
-        <div class="btn-container">
-            <div class="urgency-btn">
-                <p class="btn-label">Low</p>
-                <img src="./assets/img/icons/Low.png">
-            </div>
-            <div class="urgency-btn">
-                <p class="btn-label">Medium</p>
-                <img src="./assets/img/icons/Medium.png">
-            </div>
-            <div class="urgency-btn">
-                <p class="btn-label">High</p>
-                <img src="./assets/img/icons/Urgent.png">
-            </div>
+            <button (click)="data.setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
         </div>
     </div>
     <span class="label">Assigned To:</span>

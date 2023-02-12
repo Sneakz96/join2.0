@@ -28,6 +28,13 @@ export class DialogEditTaskComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.task);
     console.log(this.taskId);
+    this.getPriority();
+  }
+
+  // 
+  getPriority() {
+    console.log(this.task.priority);
+    console.log(low);
   }
 
   // SAVE EDITED TASK TO DB

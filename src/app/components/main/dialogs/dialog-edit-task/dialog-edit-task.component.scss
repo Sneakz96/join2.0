@@ -22,7 +22,7 @@
     width: 100%;
 }
 
-::ng-deep .mat-form-field-underline{
+::ng-deep .mat-form-field-underline {
     display: none;
 }
 
@@ -79,8 +79,26 @@
     }
 }
 
-.priority {
+.priority-btn {
     width: 75%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8px;
+
+    button {
+        padding: 8px;
+        border: none;
+        border-radius: 10px;
+
+        img {
+            margin-left: 6px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
 }
 
 .btn-container {
@@ -196,6 +214,10 @@
 @media(max-width: 1080px) {}
 
 @media(max-width: 760px) {
+    .priority-btn {
+        width: 100%;
+    }
+
     .title {
         width: 100%;
     }
