@@ -13,21 +13,21 @@
     <div class="priority">
         <p class="label">Priority:</p>
         <div class="priority-btn">
-            <button [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
+            <button id="low" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
                 <div [ngClass]="{'low': low}"></div>
             </button>
 
-            <button [ngClass]="{'medium': medium}" (click)="setPrio('Medium')">Medium
+            <button id="medium" [ngClass]="{'medium': medium}" (click)="setPrio('Medium')">Medium
                 <div [ngClass]="{'medium': medium}"></div>
             </button>
 
-            <button [ngClass]="{'high': high}" (click)="setPrio('Urgent')">Urgent
+            <button id="high" [ngClass]="{'high': high}" (click)="setPrio('Urgent')">Urgent
                 <div [ngClass]="{'high': high}"></div>
             </button>
         </div>
     </div>
     <span class="label">Assigned To:</span>
-    
+
     <mat-form-field class="assigned" appearance="fill">
         <mat-select id="collegueMenu" class="assigned-field" multiple #assignedContacts [(value)]="assignedCollegues"
             [placeholder]="'Select contact to assign'" [formControl]="contactForm">
