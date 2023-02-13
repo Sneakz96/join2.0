@@ -23,7 +23,6 @@ export class DialogEditTaskComponent implements OnInit {
   low = false;
   medium = false;
   high = false;
-
   // 
   constructor(
     private router: Router,
@@ -79,30 +78,29 @@ export class DialogEditTaskComponent implements OnInit {
     this.router.navigate(['/kanbanboard/board']);
   }
 
-
-
-
-
-  toppings = new FormControl('');
-
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-
-
+  // 
   checkAssignedContacts() {
-    console.log(this.task.assignedTo[0].selected);
-    console.log();
-    console.log();
-
-
-    let selectedContactsIds = [1, 3];
-
-    let updatedContacts = this.data.allContacts.map(contact => {
-      if (selectedContactsIds.includes(contact.id)) {
-        return { ...contact, selected: true };
-      }
-      return contact;
-    });
+    // console.log(this.task.assignedTo[0].selected);
+    console.log(this.assignedCollegues);
+    for (let i = 0; i < this.task.assignedTo.length; i++) {
+      let element = this.task.assignedTo[i];
+      console.log(element);
+      element.selected = true;
+      this.assignedCollegues.push(element);
+    }
+    console.log(this.assignedCollegues);
   }
 
+  // CHECKBOX EVENT
+  onChange(event: any) {
+    console.log(event)
+    if (event.selected == true) {
+      event.selected = false;
+      console.log(event.selected)
+    } else {
+      event.selected = true;
+      console.log(event.selected)
+    }
+  }
 
 }

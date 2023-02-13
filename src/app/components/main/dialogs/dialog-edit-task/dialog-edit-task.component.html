@@ -27,27 +27,24 @@
         </div>
     </div>
     <span class="label">Assigned To:</span>
+    
     <mat-form-field class="assigned" appearance="fill">
         <mat-select id="collegueMenu" class="assigned-field" multiple #assignedContacts [(value)]="assignedCollegues"
             [placeholder]="'Select contact to assign'" [formControl]="contactForm">
-            <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
-                {{contact.firstName}} {{contact.lastName}}</mat-option>
+            <mat-option *ngFor="let contact of data.allContacts$ | async; let i = index" [value]="contact">
+                <mat-checkbox [checked]="contact.selected" (change)="onChange(contact)">{{contact.firstName}} {{contact.lastName}}</mat-checkbox>
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
 
-    <!-- <mat-form-field appearance="fill">
-        <mat-label>Toppings</mat-label>
-        <mat-select [formControl]="toppings" multiple>
-            <mat-select-trigger>
-                {{toppings.value?.[0] || ''}}
-                <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-                    (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-                </span>
-            </mat-select-trigger>
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+    <mat-form-field>
+        <mat-select placeholder="Toppings">
+            <mat-option *ngFor="let topping of data.allContacts$ | async; let i = index" [value]="assignedCollegues">
+                <mat-checkbox [checked]="topping.selected" (change)="onChange(topping)">{{topping.firstName}} {{topping.lastName}}</mat-checkbox>
+            </mat-option>
         </mat-select>
-    </mat-form-field> -->
+    </mat-form-field>
 
 
 
