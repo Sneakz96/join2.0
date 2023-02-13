@@ -23,6 +23,8 @@ export class DialogEditTaskComponent implements OnInit {
   low = false;
   medium = false;
   high = false;
+
+  test = false;
   // 
   constructor(
     private router: Router,
@@ -100,7 +102,7 @@ export class DialogEditTaskComponent implements OnInit {
     } else {
       event.selected = true;
       console.log(event.selected)
+      console.log(this.test)
     }
   }
-
 }
