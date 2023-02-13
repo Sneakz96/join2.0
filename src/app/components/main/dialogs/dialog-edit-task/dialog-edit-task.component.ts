@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./dialog-edit-task.component.scss']
 })
 
-export class DialogEditTaskComponent implements OnInit{
+export class DialogEditTaskComponent implements OnInit {
 
   task: Task;
   taskId: string;
@@ -36,6 +36,7 @@ export class DialogEditTaskComponent implements OnInit{
   ngOnInit(): void {
     console.log('init called')
     this.getPriority();
+    this.checkAssignedContacts();
   }
 
   // GET PRIORITY OF CURRENT TASK
@@ -77,4 +78,31 @@ export class DialogEditTaskComponent implements OnInit{
     this.dialogRef.close();
     this.router.navigate(['/kanbanboard/board']);
   }
+
+
+
+
+
+  toppings = new FormControl('');
+
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+
+  checkAssignedContacts() {
+    console.log(this.task.assignedTo[0].selected);
+    console.log();
+    console.log();
+
+
+    let selectedContactsIds = [1, 3];
+
+    let updatedContacts = this.data.allContacts.map(contact => {
+      if (selectedContactsIds.includes(contact.id)) {
+        return { ...contact, selected: true };
+      }
+      return contact;
+    });
+  }
+
+
 }

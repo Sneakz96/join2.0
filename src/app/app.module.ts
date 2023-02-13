@@ -44,7 +44,7 @@ import { FirestoreModule, provideFirestore, getFirestore } from "@angular/fire/f
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskDialogComponent } from './components/main/dialogs/task-dialog/task-dialog.component';
-import { initializeApp, getApp, provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';

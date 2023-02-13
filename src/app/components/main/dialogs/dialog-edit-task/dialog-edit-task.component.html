@@ -28,15 +28,32 @@
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" multiple
-            #assignedContacts [(value)]="assignedCollegues" [placeholder]="'Select contact to assign'" [formControl]="contactForm">
+        <mat-select id="collegueMenu" class="assigned-field" multiple #assignedContacts [(value)]="assignedCollegues"
+            [placeholder]="'Select contact to assign'" [formControl]="contactForm">
             <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                 {{contact.firstName}} {{contact.lastName}}</mat-option>
         </mat-select>
     </mat-form-field>
+
+
+    <!-- <mat-form-field appearance="fill">
+        <mat-label>Toppings</mat-label>
+        <mat-select [formControl]="toppings" multiple>
+            <mat-select-trigger>
+                {{toppings.value?.[0] || ''}}
+                <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+                    (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+
+
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
 
-        
+
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName.charAt(0)}}
             {{ contact.lastName.charAt(0)}}

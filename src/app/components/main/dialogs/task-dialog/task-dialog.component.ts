@@ -37,5 +37,6 @@ export class TaskDialogComponent {
     dialog.componentInstance.task = new Task(this.task);
     dialog.componentInstance.taskId = this.taskId;
     console.log(this.task);
+    console.log(this.task.assignedTo[0].selected);
   }
 }

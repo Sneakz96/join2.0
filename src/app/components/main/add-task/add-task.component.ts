@@ -18,7 +18,7 @@ export class AddTaskComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;
   assignedCollegues: string[] = [];
-// TASK
+  // TASK
   id!: number;
   title: string = '';
   description: string = '';
@@ -73,6 +73,7 @@ export class AddTaskComponent implements OnInit {
   addTask() {
     this.getAllInputs();
     if (this.data.taskCreated === true) {
+      this.changeContactStatus();
       this.data.setId();
       this.data.setDate();
       this.clearAllValues();
@@ -101,6 +102,7 @@ export class AddTaskComponent implements OnInit {
     this.data.newTask.assignedTo = this.assignedCollegues;
     this.data.newTask.subtasks = this.addedSubTasks;
     this.checkIfInputIsEmpty();
+    this.changeContactStatus();
   }
 
   // CHECK EMPTY INPUTS
@@ -137,5 +139,14 @@ export class AddTaskComponent implements OnInit {
     this.subInputElement.nativeElement.value = '';
     this.addedSubTasks = [];
     this.subtasks = [];
+  }
+
+
+  changeContactStatus() {
+    for (let i = 0; i < this.data.newTask.assignedTo.length; i++) {
+      let element = this.data.newTask.assignedTo[i];
+      element.selected = true;
+      console.log(element.selected);
+    }
   }
 }

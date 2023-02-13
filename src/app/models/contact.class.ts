@@ -5,6 +5,7 @@ export class Contact {
     email!: string;
     phone!: string;
     color!: string;
+    selected:boolean;
 
     constructor(obj?: any) {
         this.id = obj ? obj.id : '';
@@ -12,7 +13,8 @@ export class Contact {
         this.lastName = obj ? obj.lastName : '';
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
-        this.color= obj ? obj.color : 'blue';
+        this.color = obj ? obj.color : 'blue';
+        this.selected = false;
     }
 
     public toJSON() {
@@ -22,7 +24,8 @@ export class Contact {
             lastName: this.lastName,
             email: this.email,
             phone: this.phone,
-            color: this.color
+            color: this.color,
+            selected: this.selected
         }
     }
 }

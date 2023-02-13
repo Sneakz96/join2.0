@@ -42,7 +42,6 @@ export class DialogAddUserComponent implements OnInit {
       'email': new FormControl(this.contact.email),
       'phone': new FormControl(this.contact.phone),
     });
-
   }
 
   // GIVE NEW USER RANDOM ID
@@ -52,10 +51,10 @@ export class DialogAddUserComponent implements OnInit {
 
   // SET USER FORM
   checkForm() {
-    var firstName = this.contactForm.value.firstName.replace(/\s/g, '');
-    var lastName = this.contactForm.value.lastName.replace(/\s/g, '');
-    var mail = this.contactForm.value.email.replace(/\s/g, '');
-    var phone = this.contactForm.value.phone.replace(/\s/g, '');
+    let firstName = this.contactForm.value.firstName.replace(/\s/g, '');
+    let lastName = this.contactForm.value.lastName.replace(/\s/g, '');
+    let mail = this.contactForm.value.email.replace(/\s/g, '');
+    let phone = this.contactForm.value.phone.replace(/\s/g, '');
 
     const checkInputs = (value: string): boolean => {
       const allowedCharacters = /^[A-Za-z0-9+-]+$/;
@@ -81,7 +80,7 @@ export class DialogAddUserComponent implements OnInit {
       console.log('error'); // Output: false
       console.log(first, last, email, number); // Output: false
     } else {
-      console.log('it works'); // Output: false
+      console.log('it works' , this.contact.selected); // Output: false
       console.log(first, last, email, number); // Output: false
       this.contact.firstName = firstName;
       this.contact.lastName = lastName;
@@ -139,7 +138,7 @@ export class DialogAddUserComponent implements OnInit {
   addUser() {
     console.log('user added called', this.contact);
     this.data.contactCreated = true;
-    // this.saveUserToFirestore();
+    this.saveUserToFirestore();
     this.closeDialog();
     this.router.navigate(['/kanbanboard/contacts']);
     setTimeout(() => {
