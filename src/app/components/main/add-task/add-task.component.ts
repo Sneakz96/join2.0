@@ -72,6 +72,7 @@ export class AddTaskComponent implements OnInit {
   // ADD TASK TO LOCAL STORAGE
   addTask() {
     this.getAllInputs();
+
     if (this.data.taskCreated === true) {
       this.changeContactStatus();
       this.data.setId();
@@ -83,6 +84,7 @@ export class AddTaskComponent implements OnInit {
         this.router.navigate(['/kanbanboard/board']);
       }, 2500);
       console.log(this.data.newTask);
+      console.log(this.data.newTask.assignedTo);
     }
   }
 

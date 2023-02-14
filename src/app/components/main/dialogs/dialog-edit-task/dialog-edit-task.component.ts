@@ -33,7 +33,7 @@ export class DialogEditTaskComponent implements OnInit {
     public data: DataService,
     assignedContactsElement: ElementRef,
   ) {
-    // this.assignedContacts = assignedContactsElement;
+    this.assignedContacts = assignedContactsElement;
   }
 
   // 
@@ -69,6 +69,7 @@ export class DialogEditTaskComponent implements OnInit {
 
   // SAVE EDITED TASK TO DB
   save() {
+    this.updateAssignedContacts();
     console.log('save called');
     this.close();
     this.firestore
@@ -132,7 +133,7 @@ export class DialogEditTaskComponent implements OnInit {
 
   @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
 
-  // assignedTo: [] = [];
+  assignedTo: [] = [];
   // assignedCollegues: string[] = [];    double
 
 
@@ -143,10 +144,12 @@ export class DialogEditTaskComponent implements OnInit {
 
   updateAssignedContacts() {
     let input = document.getElementById("collegueMenu").innerText;
-    this.task.assignedTo;
-    this.assignedCollegues;
-    console.log('test:', input);
-    console.log('test:', this.task.assignedTo);
-    console.log('test:', this.assignedCollegues);
+    this.task.assignedTo = this.assignedCollegues;//DAS IST ASSIGNED -> MUSS ÜBERSCHRIEBEN WERDEN
+    // this.assignedCollegues;
+    this.data.newTask.assignedTo;
+    console.log('test:', input);//TEXT UNUSEFUL
+    console.log('assignedCollegues:', this.assignedCollegues);//TRUE/FALSE
+    console.log('test:', this.assignedContacts.nativeElement);
+    // console.log('dataTask:', this.data.newTask.assignedTo);
   }
 }

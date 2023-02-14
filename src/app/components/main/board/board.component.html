@@ -37,8 +37,8 @@
               <div class="assignedTo">
                 <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo">
                   <div [ngStyle]="{ 'background-color': contact.color }">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
+                    {{ contact.firstName?.charAt(0) }}
+                    {{ contact.lastName?.charAt(0) }}
                   </div>
                 </div>
               </div>
@@ -77,8 +77,8 @@
               <div class="assignedTo">
                 <div class="assigned-to" *ngFor="let contact of taskInProgress.assignedTo">
                   <div [ngStyle]="{ 'background-color': contact.color }">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
+                    {{ contact.firstName?.charAt(0) }}
+                    {{ contact.lastName?.charAt(0) }}
                   </div>
                 </div>
               </div>
@@ -117,8 +117,8 @@
               <div class="assignedTo">
                 <div class="assigned-to" *ngFor="let contact of taskAwaitingFeedback.assignedTo">
                   <div [ngStyle]="{ 'background-color': contact.color }">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
+                    {{ contact.firstName?.charAt(0) }}
+                    {{ contact.lastName?.charAt(0) }}
                   </div>
                 </div>
               </div>
@@ -156,8 +156,8 @@
               <div class="assignedTo">
                 <div class="assigned-to" *ngFor="let contact of taskDone.assignedTo">
                   <div [ngStyle]="{ 'background-color': contact.color }">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
+                    {{ contact.firstName?.charAt(0) }}
+                    {{ contact.lastName?.charAt(0) }}
                   </div>
                 </div>
               </div>
