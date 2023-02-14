@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, InjectionToken, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormControl } from '@angular/forms';
+import { MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dialog-edit-task',
@@ -80,29 +81,55 @@ export class DialogEditTaskComponent implements OnInit {
     this.router.navigate(['/kanbanboard/board']);
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   // 
   checkAssignedContacts() {
     // console.log(this.task.assignedTo[0].selected);
-    console.log(this.assignedCollegues);
+    // console.log(this.assignedCollegues);
     for (let i = 0; i < this.task.assignedTo.length; i++) {
       let element = this.task.assignedTo[i];
-      console.log(element);
+      console.log('Assigned to:',element);
       element.selected = true;
-      this.assignedCollegues.push(element);
+      console.log('Service:',this.data.allContacts[i]);
+      this.assignedCollegues.push(element.id);
     }
     console.log(this.assignedCollegues);
   }
+
+
+
 
   // CHECKBOX EVENT
   onChange(event: any) {
     console.log(event)
     if (event.selected == true) {
+      this.checked = false;
       event.selected = false;
       console.log(event.selected)
     } else {
       event.selected = true;
+        this.checked = true;
       console.log(event.selected)
       console.log(this.test)
     }
   }
+
+
+  MAT_CHECKBOX_DEFAULT_OPTIONS: InjectionToken<MatCheckboxDefaultOptions>;
+
+  checked = false;
+  disabled = false;
+  updateAllComplete(){}
 }

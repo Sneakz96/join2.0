@@ -36,6 +36,7 @@ export class TaskDialogComponent {
     const dialog = this.dialog.open(DialogEditTaskComponent);
     dialog.componentInstance.task = new Task(this.task);
     dialog.componentInstance.taskId = this.taskId;
+    console.log(this.data.allContacts);
     console.log(this.task);
     console.log(this.task.assignedTo[0].selected);
   }

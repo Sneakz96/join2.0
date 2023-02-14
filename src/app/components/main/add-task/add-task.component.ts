@@ -82,6 +82,7 @@ export class AddTaskComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/kanbanboard/board']);
       }, 2500);
+      console.log(this.data.newTask);
     }
   }
 
