@@ -16,28 +16,28 @@
             <button id="low" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
                 <div [ngClass]="{'low': low}"></div>
             </button>
-
             <button id="medium" [ngClass]="{'medium': medium}" (click)="setPrio('Medium')">Medium
                 <div [ngClass]="{'medium': medium}"></div>
             </button>
-
             <button id="high" [ngClass]="{'high': high}" (click)="setPrio('Urgent')">Urgent
                 <div [ngClass]="{'high': high}"></div>
             </button>
         </div>
     </div>
     <span class="label">Assigned To:</span>
+
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="assignedCollegues"
+        <mat-select id="collegueMenu" class="assigned-field"  #assignedContacts [(value)]="assignedCollegues"
             [placeholder]="'Select contact to assign'">
             <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
-                <mat-checkbox class="example-margin" [(ngModel)]="contact.id == assignedCollegues">
+                <mat-checkbox class="example-margin" [(ngModel)]="contact.id == assignedCollegues" (ngModelChange)="updateAssignedContacts()">
                     {{contact.firstName}}
                     {{contact.lastName}}
                 </mat-checkbox>
             </mat-option>
         </mat-select>
     </mat-form-field>
+
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName.charAt(0)}}

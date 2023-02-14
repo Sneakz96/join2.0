@@ -1,4 +1,4 @@
-import { Component, InjectionToken, OnInit } from '@angular/core';
+import { Component, ElementRef, InjectionToken, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -24,15 +24,17 @@ export class DialogEditTaskComponent implements OnInit {
   low = false;
   medium = false;
   high = false;
-
-  test = false;
+  checked = false;
   // 
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<DialogEditTaskComponent>,
     private firestore: AngularFirestore,
     public data: DataService,
-  ) { }
+    assignedContactsElement: ElementRef,
+  ) {
+    // this.assignedContacts = assignedContactsElement;
+  }
 
   // 
   ngOnInit(): void {
@@ -100,9 +102,9 @@ export class DialogEditTaskComponent implements OnInit {
     // console.log(this.assignedCollegues);
     for (let i = 0; i < this.task.assignedTo.length; i++) {
       let element = this.task.assignedTo[i];
-      console.log('Assigned to:',element);
+      console.log('Assigned to:', element);
       element.selected = true;
-      console.log('Service:',this.data.allContacts[i]);
+      // console.log('Service:',this.data.allContacts[i]); 
       this.assignedCollegues.push(element.id);
     }
     console.log(this.assignedCollegues);
@@ -120,16 +122,31 @@ export class DialogEditTaskComponent implements OnInit {
       console.log(event.selected)
     } else {
       event.selected = true;
-        this.checked = true;
+      this.checked = true;
       console.log(event.selected)
-      console.log(this.test)
     }
   }
 
 
-  MAT_CHECKBOX_DEFAULT_OPTIONS: InjectionToken<MatCheckboxDefaultOptions>;
 
-  checked = false;
-  disabled = false;
-  updateAllComplete(){}
+
+  @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
+
+  // assignedTo: [] = [];
+  // assignedCollegues: string[] = [];    double
+
+
+
+
+
+
+
+  updateAssignedContacts() {
+    let input = document.getElementById("collegueMenu").innerText;
+    this.task.assignedTo;
+    this.assignedCollegues;
+    console.log('test:', input);
+    console.log('test:', this.task.assignedTo);
+    console.log('test:', this.assignedCollegues);
+  }
 }
