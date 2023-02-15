@@ -63,10 +63,10 @@
 
 .content {
     position: fixed;
-    right: 0;
     top: 80px;
+    right: 0;
     bottom: 0;
-    width: 90%;
+    left: 175px;
     background-color: var(--white);
     overflow-y: scroll;
 
@@ -310,6 +310,7 @@
 
 @media(max-width: 1080px) {
     .content {
+        left: 0;
         width: 100%;
     }
 

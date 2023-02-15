@@ -7,7 +7,8 @@
     flex-direction: column;
     top: 80px;
     bottom: 0;
-    width: 20%;
+    left: 175px;
+    width: 300px;
     border-top: 1px solid var(--white);
     overflow-y: scroll;
 }
@@ -140,7 +141,8 @@
 
 @media(max-width: 1080px) {
     .contact-list {
-        width: 30%;
+        left: 0;
+        // width: 30%;
     }
 }
 
@@ -150,7 +152,7 @@
     }
 
     .new-contact {
-        width: 30%;
+        width: 300px;
         display: flex;
     }
 
