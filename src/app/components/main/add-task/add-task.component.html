@@ -13,7 +13,7 @@
                 <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
                 <h5>Category</h5>
                 <select #category>
-                    <option value="" disabled selected hidden>Select task category</option>
+                    <option class="placeholder" disabled selected hidden>Select task category</option>
                     <option value="Management">Management</option>
                     <option value="Marketing">Marketing</option>
                     <option value="Costumer Service">Costumer Service</option>
@@ -26,7 +26,7 @@
                 </select>
                 <h5>Assigned to</h5>
                 <mat-form-field class="assigned" appearance="fill">
-                    <mat-select class="assigned-field" [(value)]="assignedCollegues" [formControl]="contactForm"
+                    <mat-select [(value)]="assignedCollegues" [formControl]="contactForm"
                         [placeholder]="'Select contacts'" multiple #assignedContacts>
                         <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                             {{contact.firstName}} {{contact.lastName}}</mat-option>
@@ -37,7 +37,15 @@
             </div>
             <div class="row row-right">
                 <h5>Due date</h5>
-                <input type="date" id="dueDate" #dueDate>
+                <div class="test">
+                    <input matInput #dueDate class="date-container" [matDatepicker]="datePicker" disabled [min]="today" [placeholder]="'DD/MM/YYYY'">
+                    <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
+                </div>
+                    
+
+
+
                 <h5>Prio</h5>
                 <div class="priority">
                     <button (click)="data.setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>
@@ -62,7 +70,7 @@
                     <button class="create-task-btn" (click)="addTask()">Create Task<img
                             src="/assets/img/icons/create.png"></button>
                 </div>
-                <button class="mb-alert" *ngIf="data.alert === true">Task added to Board
+                <button class="mb-alert" *ngIf="data.alert">Task added to Board
                     <img src="./assets/img/icons/task_added_mb.png"></button>
             </div>
         </div>

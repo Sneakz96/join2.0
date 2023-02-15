@@ -24,6 +24,7 @@ export class AddTaskComponent implements OnInit {
   description: string = '';
   category: string = '';
   assignedTo: [] = [];
+  today: Date;
   dueDate: string = '';
   priority: string = '';
   createdAt!: number;
@@ -64,10 +65,18 @@ export class AddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
+    this.getToday();
   }
 
   // 
   ngOnInit(): void { }
+
+  // 
+  getToday() {
+    let day = new Date();
+    day.getDate();
+    this.today = day;
+  }
 
   // ADD TASK TO LOCAL STORAGE
   addTask() {

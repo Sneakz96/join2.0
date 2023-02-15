@@ -26,8 +26,12 @@
     }
 }
 
+
+
+
 ::ng-deep .mat-form-field-infix {
     border-top: none;
+    height: 30px;
 }
 
 ::ng-deep .mat-form-field-underline {
@@ -52,12 +56,15 @@
 
 ::ng-deep .mat-form-field-wrapper {
     border-radius: 10px !important;
+    position: absolute;
 }
 
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: white !important;
     border: 1px solid var(--light-grey);
     border-radius: 10px !important;
+    height: 50px;
+    align-items: center;
 }
 
 
@@ -69,7 +76,6 @@
     left: 175px;
     background-color: var(--white);
     overflow-y: scroll;
-
 }
 
 #alert {
@@ -135,13 +141,27 @@
         background: white;
         border: 1px solid var(--light-grey);
         border-radius: 10px;
+        color: var(--light-grey);
     }
 }
 
-#dueDate {
-    &:hover {
-        cursor: pointer;
-    }
+.placeholder {
+    color: var(--light-grey) !important;
+}
+
+.test {
+    display: flex;
+    position: relative;
+}
+
+.date-container {
+    width: 100%;
+}
+
+.calendar {
+    position: absolute;
+    left: 78%;
+    top: 2px;
 }
 
 .textaria {
@@ -153,6 +173,10 @@
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.25);
+    }
 }
 
 .multiselect-dropdown {
@@ -233,6 +257,7 @@
     display: flex;
 
     input {
+        height: 5px;
         width: 20px;
         margin-top: 5px;
     }
@@ -323,6 +348,10 @@
         width: 100%;
     }
 
+    .calendar {
+        left: 72%;
+    }
+
     .priority {
         width: 100%;
         justify-content: space-between;
@@ -369,6 +398,14 @@
 
     .assigned {
         width: 100%;
+    }
+
+    .calendar {
+        left: 85%;
+    }
+
+    .plus {
+        left: 88%;
     }
 
     .mb-alert {
