@@ -3,7 +3,7 @@
     right: 0;
     top: 80px;
     bottom: 0;
-    width: 90%;
+    left: 175px;
     background-color: var(--white);
     overflow-y: scroll;
 
@@ -36,8 +36,8 @@ ul {
 
 
 @media(max-width: 1080px) {
-    .content{
-        width: 100%;
+    .content {
+        left: 0;
     }
 }
 
