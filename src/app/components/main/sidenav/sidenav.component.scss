@@ -4,12 +4,13 @@
     left: 0;
     background-color: var(--dark-navy);
     height: 100vh;
-    width: 10%;
+    min-width: 100px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     font-size: var(--fs-m);
+    z-index: 99;
 }
 
 .logo {
