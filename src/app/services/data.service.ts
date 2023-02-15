@@ -27,6 +27,7 @@ export class DataService implements OnInit {
   urgent!: number;
   deadline!: string;
   dayTime!: string;
+  today: Date;
   // CONTACTS
   allContacts = [];
   allContacts$: Observable<any>;
@@ -53,8 +54,10 @@ export class DataService implements OnInit {
 
   // GET CURRENT DAY TIME
   getDayTime() {
-    let today = new Date();
-    let curHr = today.getHours();
+    let day = new Date();
+    day.getDate();
+    this.today = day;
+    let curHr = day.getHours();
     if (curHr < 12) {
       this.dayTime = 'Good morning';
     } else if (curHr < 18) {
@@ -93,6 +96,15 @@ export class DataService implements OnInit {
   setPrio(prio: string) {
     this.newTask.priority = prio;
     console.log(this.newTask.priority)
+  }
+
+  // CHANGE STATUS OF ASSIGNED CONTACTS
+  changeContactStatus() {
+    for (let i = 0; i < this.newTask.assignedTo.length; i++) {
+      let element = this.newTask.assignedTo[i];
+      element.selected = true;
+      console.log(element.selected);
+    }
   }
 
   // SAVE TASKS TO DB

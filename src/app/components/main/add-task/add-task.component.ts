@@ -24,7 +24,7 @@ export class AddTaskComponent implements OnInit {
   description: string = '';
   category: string = '';
   assignedTo: [] = [];
-  today: Date;
+
   dueDate: string = '';
   priority: string = '';
   createdAt!: number;
@@ -34,6 +34,7 @@ export class AddTaskComponent implements OnInit {
   subTaskCreationStatus = 'no subtask created';
   addSubInput: string = '';
   addedSubTasks: string[] = [];
+
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
@@ -65,25 +66,20 @@ export class AddTaskComponent implements OnInit {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
-    this.getToday();
+    
   }
 
   // 
   ngOnInit(): void { }
 
-  // 
-  getToday() {
-    let day = new Date();
-    day.getDate();
-    this.today = day;
-  }
+  
 
   // ADD TASK TO LOCAL STORAGE
   addTask() {
     this.getAllInputs();
 
     if (this.data.taskCreated === true) {
-      this.changeContactStatus();
+      this.data.changeContactStatus();
       this.data.setId();
       this.data.setDate();
       this.clearAllValues();
@@ -114,7 +110,7 @@ export class AddTaskComponent implements OnInit {
     this.data.newTask.assignedTo = this.assignedCollegues;
     this.data.newTask.subtasks = this.addedSubTasks;
     this.checkIfInputIsEmpty();
-    this.changeContactStatus();
+    this.data.changeContactStatus();
   }
 
   // CHECK EMPTY INPUTS
@@ -154,11 +150,5 @@ export class AddTaskComponent implements OnInit {
   }
 
 
-  changeContactStatus() {
-    for (let i = 0; i < this.data.newTask.assignedTo.length; i++) {
-      let element = this.data.newTask.assignedTo[i];
-      element.selected = true;
-      console.log(element.selected);
-    }
-  }
+
 }

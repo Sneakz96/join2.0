@@ -26,9 +26,6 @@
     }
 }
 
-
-
-
 ::ng-deep .mat-form-field-infix {
     border-top: none;
     height: 30px;
@@ -66,7 +63,6 @@
     height: 50px;
     align-items: center;
 }
-
 
 .content {
     position: fixed;
@@ -145,16 +141,12 @@
     }
 }
 
-.placeholder {
-    color: var(--light-grey) !important;
-}
-
-.test {
+.date-container {
     display: flex;
     position: relative;
 }
 
-.date-container {
+.date {
     width: 100%;
 }
 

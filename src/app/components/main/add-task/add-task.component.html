@@ -37,15 +37,11 @@
             </div>
             <div class="row row-right">
                 <h5>Due date</h5>
-                <div class="test">
-                    <input matInput #dueDate class="date-container" [matDatepicker]="datePicker" disabled [min]="today" [placeholder]="'DD/MM/YYYY'">
+                <div class="date">
+                    <input matInput #dueDate class="" [matDatepicker]="datePicker" disabled [min]="data.today" [placeholder]="'DD/MM/YYYY'">
                     <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
                 </div>
-                    
-
-
-
                 <h5>Prio</h5>
                 <div class="priority">
                     <button (click)="data.setPrio('Urgent')">Urgent<img src="/assets/img/icons/Urgent.png"></button>

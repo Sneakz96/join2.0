@@ -1,17 +1,13 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UIService implements OnInit {
+export class UIService {
 
   // 
   constructor() {
-  }
-
-  ngOnInit(): void {
-    this.checkDisplayWidth();
   }
 
   // CHECK WIDTH OF DISPLAY
@@ -39,5 +35,5 @@ export class UIService implements OnInit {
   }
 
 
-  
+
 }

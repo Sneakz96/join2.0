@@ -74,6 +74,7 @@ export class DialogAddTaskComponent implements OnInit {
   addTask() {
     this.getAllInputs();
     if (this.data.taskCreated === true) {
+      this.data.changeContactStatus();
       this.data.setId();
       this.data.setDate();
       this.clearAllValues();
@@ -101,12 +102,24 @@ export class DialogAddTaskComponent implements OnInit {
     this.data.newTask.dueDate = this.dueDateElement.nativeElement.value;
     this.data.newTask.assignedTo = this.assignedCollegues;
     this.data.newTask.subtasks = this.addedSubTasks;
-    if (
-      this.titleElement.nativeElement.value === '' ||
-      this.categoryElement.nativeElement.value === ''
+    this.checkIfInputIsEmpty();
+    this.data.changeContactStatus();
+  }
+
+    // CHECK EMPTY INPUTS
+  checkIfInputIsEmpty() {
+    if (this.titleElement.nativeElement.value === '' ||
+      this.categoryElement.nativeElement.value === '' ||
+      this.descriptionElement.nativeElement.value === '' ||
+      this.dueDateElement.nativeElement.value === '' ||
+      this.data.newTask.priority === ''
     ) {
       this.data.taskCreated = false;
-    } else if (this.titleElement.nativeElement.value.length >= 1) {
+      this.clearAllValues();
+    } else if (this.titleElement.nativeElement.value.length >= 1 &&
+      this.categoryElement.nativeElement.value.length == 1 &&
+      this.data.newTask.assignedTo.length > 0
+    ) {
       this.data.taskCreated = true;
     }
   }

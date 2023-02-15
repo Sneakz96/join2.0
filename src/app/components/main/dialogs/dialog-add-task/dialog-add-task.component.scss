@@ -139,10 +139,19 @@
     border: 1px solid var(--light-grey);
 }
 
-#dueDate {
-    &:hover {
-        cursor: pointer;
-    }
+.date-container {
+    display: flex;
+    position: relative;
+}
+
+.date {
+    width: 100%;
+}
+
+.calendar {
+    position: absolute;
+    left: 78%;
+    top: 2px;
 }
 
 .textaria {
