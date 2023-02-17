@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-add-task.component.scss']
 })
 
-export class DialogAddTaskComponent implements OnInit {
+export class DialogAddTaskComponent {
   // TASK
   allTasks: any[] = [];
   id!: number;
@@ -66,9 +66,6 @@ export class DialogAddTaskComponent implements OnInit {
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
   }
-
-  // 
-  ngOnInit(): void { }
 
   // ADD TASK TO LOCAL STORAGE
   addTask() {

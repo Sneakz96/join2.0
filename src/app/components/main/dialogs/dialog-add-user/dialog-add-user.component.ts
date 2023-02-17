@@ -22,6 +22,7 @@ export class DialogAddUserComponent implements OnInit {
 
   @Output() sideSelect = new EventEmitter<string>();
 
+  // 
   constructor(
     private router: Router,
     private firestore: Firestore,
@@ -29,7 +30,7 @@ export class DialogAddUserComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogAddUserComponent>
   ) { }
 
-
+  // 
   ngOnInit(): void {
     this.setUserForm();
   }
@@ -80,7 +81,7 @@ export class DialogAddUserComponent implements OnInit {
       console.log('error'); // Output: false
       console.log(first, last, email, number); // Output: false
     } else {
-      console.log('it works' , this.contact.selected); // Output: false
+      console.log('it works', this.contact.selected); // Output: false
       console.log(first, last, email, number); // Output: false
       this.contact.firstName = firstName;
       this.contact.lastName = lastName;
@@ -159,7 +160,7 @@ export class DialogAddUserComponent implements OnInit {
   }
 
   // CLOSE DIALOG
-  close(){
+  close() {
 
   }
 }

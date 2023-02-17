@@ -8,12 +8,12 @@ import { UIService } from 'src/app/services/ui.service';
 })
 
 export class ContentWrapperComponent implements OnInit {
-
+  // 
   constructor(
     private UiService: UIService,
-  ) {
-  }
-  
+  ) { }
+
+  // 
   ngOnInit(): void {
     this.UiService.checkDisplayWidth();
   }

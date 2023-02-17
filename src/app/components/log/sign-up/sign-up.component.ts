@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
+
 export class SignUpComponent {
 
   @ViewChild('nameField') nameField!: ElementRef;

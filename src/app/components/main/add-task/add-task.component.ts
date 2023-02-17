@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { DataService } from 'src/app/services/data.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-task.component.scss']
 })
 
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent {
   //CONTACTS
   contact = new FormControl();
   contactForm = new FormControl('');
@@ -68,11 +68,6 @@ export class AddTaskComponent implements OnInit {
     this.dropdown = dropdown;
     
   }
-
-  // 
-  ngOnInit(): void { }
-
-  
 
   // ADD TASK TO LOCAL STORAGE
   addTask() {
@@ -148,7 +143,4 @@ export class AddTaskComponent implements OnInit {
     this.addedSubTasks = [];
     this.subtasks = [];
   }
-
-
-
 }

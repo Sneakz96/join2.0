@@ -9,8 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class SummaryComponent {
-
+  // 
   constructor(
     public data: DataService,
-  ) {}
+  ) { }
 }

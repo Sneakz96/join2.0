@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
@@ -9,14 +9,13 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./contacts.component.scss']
 })
 
-export class ContactsComponent implements OnInit {
+export class ContactsComponent {
 
   contact = new Contact();
 
+  // 
   constructor(
     public dialog: MatDialog,
     public data: DataService,
   ) { }
-
-  ngOnInit(): void { }
 }

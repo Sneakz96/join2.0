@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './help-section.component.html',
   styleUrls: ['./help-section.component.scss']
 })
-export class HelpSectionComponent {
 
+export class HelpSectionComponent {
+  // 
   constructor() { }
 }

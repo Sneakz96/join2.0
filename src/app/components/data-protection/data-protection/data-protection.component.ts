@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './data-protection.component.html',
   styleUrls: ['./data-protection.component.scss']
 })
-export class DataProtectionComponent{
 
+export class DataProtectionComponent {
+  // 
   constructor() { }
 }

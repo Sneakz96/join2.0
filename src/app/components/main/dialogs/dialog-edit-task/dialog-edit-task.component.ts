@@ -17,14 +17,13 @@ export class DialogEditTaskComponent implements OnInit {
 
   task: Task;
   taskId: string;
-  // 
   contactForm = new FormControl();
   assignedCollegues: string[] = [];
-  // 
   low = false;
   medium = false;
   high = false;
   checked = false;
+
   // 
   constructor(
     private router: Router,
@@ -38,7 +37,6 @@ export class DialogEditTaskComponent implements OnInit {
 
   // 
   ngOnInit(): void {
-    console.log('init called')
     this.getPriority();
     this.checkAssignedContacts();
   }
@@ -63,7 +61,6 @@ export class DialogEditTaskComponent implements OnInit {
   // CHANGE PRIORITY OF CURRENT TASK
   setPrio(prio: string) {
     this.task.priority = prio;
-    console.log(this.task.priority)
     this.getPriority();
   }
 
@@ -83,36 +80,6 @@ export class DialogEditTaskComponent implements OnInit {
     this.dialogRef.close();
     this.router.navigate(['/kanbanboard/board']);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // 
-  checkAssignedContacts() {
-    // console.log(this.task.assignedTo[0].selected);
-    // console.log(this.assignedCollegues);
-    for (let i = 0; i < this.task.assignedTo.length; i++) {
-      let element = this.task.assignedTo[i];
-      console.log('Assigned to:', element);
-      element.selected = true;
-      // console.log('Service:',this.data.allContacts[i]); 
-      this.assignedCollegues.push(element.id);
-    }
-    console.log(this.assignedCollegues);
-  }
-
-
-
 
   // CHECKBOX EVENT
   onChange(event: any) {
@@ -134,14 +101,24 @@ export class DialogEditTaskComponent implements OnInit {
   @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
 
   assignedTo: [] = [];
-  // assignedCollegues: string[] = [];    double
 
 
 
+  // CHECK ASSIGNED CONTACTS
+  checkAssignedContacts() {
+    // console.log(this.task.assignedTo[0].selected);
+    // console.log(this.assignedCollegues);
+    for (let i = 0; i < this.task.assignedTo.length; i++) {
+      let element = this.task.assignedTo[i];
+      console.log('Assigned to:', element);
+      element.selected = true;
+      // console.log('Service:',this.data.allContacts[i]); 
+      this.assignedCollegues.push(element.id);
+    }
+    console.log(this.assignedCollegues);
+  }
 
-
-
-
+  // 
   updateAssignedContacts() {
     let input = document.getElementById("collegueMenu").innerText;
     this.task.assignedTo = this.assignedCollegues;//DAS IST ASSIGNED -> MUSS ÜBERSCHRIEBEN WERDEN

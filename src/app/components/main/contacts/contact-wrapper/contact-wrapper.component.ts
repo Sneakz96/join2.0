@@ -9,11 +9,11 @@ import { UIService } from 'src/app/services/ui.service';
 })
 
 export class ContactWrapperComponent {
-
+  // 
   constructor(
     public data: DataService,
     private Ui: UIService,
-  ) { 
+  ) {
     Ui.checkMbDevice();
   }
 }

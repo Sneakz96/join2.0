@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dialog-edit-user',
   templateUrl: './dialog-edit-user.component.html',
   styleUrls: ['./dialog-edit-user.component.scss']
 })
-export class DialogEditUserComponent implements OnInit {
+
+export class DialogEditUserComponent {
 
   user: Contact;
   userId: string;
@@ -18,14 +18,7 @@ export class DialogEditUserComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
     private firestore: AngularFirestore,
-    private dataService: DataService
   ) { }
-
-  // 
-  ngOnInit(): void {
-    console.log(this.user);
-    console.log(this.dataService.allContacts);
-  }
 
   // CLOSE DIALOG
   closeDialog() {
@@ -35,7 +28,6 @@ export class DialogEditUserComponent implements OnInit {
   // SAVE EDITED TASK TO DB
   save() {
     this.setColor();
-    console.log('save called');
     this.closeDialog();
     this.firestore
       .collection('allContacts')

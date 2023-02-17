@@ -57,7 +57,7 @@ export class EditContactComponent implements OnInit {
 
   // OPEN DIALOG
   editUser() {
-    const dialogRef = this.dialog.open(DialogEditUserComponent);
+    let dialogRef = this.dialog.open(DialogEditUserComponent);
     dialogRef.componentInstance.user = new Contact(this.user.toJSON());
     dialogRef.componentInstance.userId = this.userId;
   }

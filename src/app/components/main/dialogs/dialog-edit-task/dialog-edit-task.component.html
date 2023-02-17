@@ -25,7 +25,6 @@
         </div>
     </div>
     <span class="label">Assigned To:</span>
-
     <mat-form-field class="assigned" appearance="fill">
         <mat-select id="collegueMenu" class="assigned-field" multiple #assignedContacts [(value)]="assignedCollegues"
             [placeholder]="'Select contact to assign'">
@@ -37,7 +36,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName?.charAt(0)}}
