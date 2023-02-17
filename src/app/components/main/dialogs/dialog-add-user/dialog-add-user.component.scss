@@ -10,6 +10,7 @@
 
 .contact {
     height: 100%;
+    min-width: 750px;
     width: 900px;
     display: flex;
     align-items: center;
@@ -103,6 +104,7 @@
     position: absolute;
     top: 21px;
     left: 82%;
+    color: var(--icon);
 }
 
 .btn-container {
@@ -156,9 +158,20 @@
 
 
 
+.close {
+    position: relative;
+    height: 14px;
+    width: 14px;
+    right: 25%;
+    top: 40%;
+    background-image: url('/assets/img/icons/close.png');
+    background-repeat: none;
+    background-size: cover;
 
-
-
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 @media(max-width: 1080px) {}
 
@@ -236,6 +249,38 @@
 
     .right {
         width: 100%;
+        margin-top: var(--m5p);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .name {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .input-container {
+        width: 70%;
+
+        input {
+            border: 1px solid var(--border);
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cancel-btn {
+        display: none;
     }
 
     ::ng-deep .mat-dialog-container {

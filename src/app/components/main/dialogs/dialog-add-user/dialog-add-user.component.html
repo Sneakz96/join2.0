@@ -1,5 +1,5 @@
 <div class="content">
-    <div class="close"></div>
+    <div class="close" (click)="closeDialog()"></div>
     <div class="contact">
         <div class="left">
             <img src="./assets/img/Capa 2.png" class="logo">
@@ -40,7 +40,7 @@
             <div class="btn-container">
                 <button class="cancel-btn" (click)="clearValues()">
                     Cancel
-                    <img src="./assets/img/icons/x.png">
+                    <img src="./assets/img/icons/close.png">
                 </button>
                 <button class="add-btn" (click)="checkForm()">
                     Add Contact

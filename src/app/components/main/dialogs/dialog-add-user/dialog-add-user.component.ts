@@ -157,4 +157,9 @@ export class DialogAddUserComponent implements OnInit {
     mail.value = '';
     phone.value = '';
   }
+
+  // CLOSE DIALOG
+  close(){
+
+  }
 }

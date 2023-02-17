@@ -147,12 +147,13 @@
 }
 
 .date {
+    position: relative;
     width: 100%;
 }
 
 .calendar {
     position: absolute;
-    left: 78%;
+    left: 76%;
     top: 2px;
 }
 
