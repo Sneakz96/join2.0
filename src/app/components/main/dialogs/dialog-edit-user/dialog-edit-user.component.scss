@@ -286,7 +286,7 @@
     }
 
     .mid {
-        height: 100px;
+        height: unset;
         width: 100%;
         display: flex;
         align-items: flex-start;
@@ -352,6 +352,10 @@
     }
 }
 
-@media(max-width: 420px) {}
+@media(max-width: 420px) {
+        .right {
+        margin-top: var(--m20p);
+    }
+}
 
 @media(max-width: 300px) {}

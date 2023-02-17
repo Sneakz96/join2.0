@@ -188,14 +188,16 @@
     .left {
         width: 240px;
     }
+
     .mid {
         width: 140px;
     }
+
     .input-container {
         width: 70%;
         display: flex;
         position: relative;
-    
+
         input {
             margin-top: var(--m10);
             width: 90%;
@@ -205,7 +207,7 @@
             padding: 12px;
         }
     }
-    
+
     .right {
         width: 275px;
         height: 100%;
