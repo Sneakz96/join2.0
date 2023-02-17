@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './legal-notice.component.html',
   styleUrls: ['./legal-notice.component.scss']
 })
+
 export class LegalNoticeComponent{
 
   constructor() { }
