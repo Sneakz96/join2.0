@@ -186,6 +186,15 @@
         }
     }
 
+    .contact {
+        width: 100%;
+        height: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
     .left {
         height: 250px;
         width: 100%;
@@ -216,11 +225,8 @@
     }
 
     .circle {
-    }
-    
-    .center {
         position: absolute;
-        top: -50%;
+        top: -80px;
         height: 120px;
         width: 120px;
         border-radius: 50%;
@@ -228,23 +234,8 @@
         border: 3px solid rgb(255, 255, 255);
     }
 
-
-
-
-
-
-
     .right {
         width: 100%;
-    }
-
-    .contact {
-        width: 100%;
-        height: unset;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
     }
 
     ::ng-deep .mat-dialog-container {
