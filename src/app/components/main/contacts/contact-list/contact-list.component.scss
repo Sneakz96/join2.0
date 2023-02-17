@@ -21,10 +21,6 @@
     align-items: center;
     justify-content: flex-end;
     background-color: white;
-    &:hover{
-        transform: scale(1.05);
-        cursor: pointer;
-    }
 }
 
 .new-contact-btn {
@@ -36,6 +32,7 @@
     color: var(--white);
     border: none;
     border-radius: var(--m10);
+    font-weight: 500;
 
     img {
         height: 20px;
@@ -146,17 +143,25 @@
 }
 
 @media(max-width: 760px) {
+
     .contact-list {
         top: 140px;
+        right: 0px;
+        width: 100%;
     }
 
     .new-contact {
-        width: 300px;
+        width: 100%;
+        min-width: 300px;
         display: flex;
     }
 
     .new-contact-btn {
         font-size: var(--fs-sm);
+
+        &:hover {
+            transform: none;
+        }
     }
 }
 

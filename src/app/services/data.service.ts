@@ -37,6 +37,10 @@ export class DataService implements OnInit {
   userName: string = 'Guest';
 
 
+  mbDevice = null;
+
+
+
   // 
   constructor(
     private fire: Firestore,
@@ -47,10 +51,12 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
+    console.log(this.mbDevice);
   }
 
   // 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   // GET CURRENT DAY TIME
   getDayTime() {

@@ -1,17 +1,17 @@
-.content-wrapper {
-    position: fixed;
-    top: 80px;
-    right: 0;
-    bottom: 0;
-    width: 95%;
-    left: 100px;
-    overflow-y: scroll;
-}
+// .content-wrapper {
+//     position: fixed;
+//     top: 80px;
+//     right: 0;
+//     bottom: 0;
+
+//     left: 100px;
+//     overflow-y: scroll;
+// }
 
 @media(max-width: 1080px) {
-    .content-wrapper{
-        width: 100%;
-    }
+    // .content-wrapper{
+    //     width: 100%;
+    // }
 }
 
 @media(max-width: 760px) {}

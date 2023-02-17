@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-contact-wrapper',
@@ -8,5 +10,10 @@ import { Component } from '@angular/core';
 
 export class ContactWrapperComponent {
 
-  constructor() { }
+  constructor(
+    public data: DataService,
+    private Ui: UIService,
+  ) { 
+    Ui.checkMbDevice();
+  }
 }

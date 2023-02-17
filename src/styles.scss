@@ -13,6 +13,18 @@
     display: none;
 }
 
+.width100 {
+    width: 100% !important;
+}
+
+.pos100 {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    bottom: 0;
+    left: 0 !important;
+}
+
 //HEADERS
 h1 {
     color: var(--dark-navy) !important;

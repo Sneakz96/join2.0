@@ -3,7 +3,7 @@
     right: 0;
     top: 80px;
     bottom: 0;
-    width: 70%;
+    left: 475px;
     background-color: var(--white);
 }
 
@@ -165,7 +165,15 @@
 }
 
 
-@media(max-width: 1080px) {}
+@media(max-width: 1080px) {
+    .content{
+        left:300px;
+    }
+    
+    .new-contact-btn {
+        bottom: var(--m20p); 
+    }
+}
 
 @media(max-width: 760px) {}
 

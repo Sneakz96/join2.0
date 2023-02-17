@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { DialogAddUserComponent } from '../../dialogs/dialog-add-user/dialog-add-user.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -12,6 +14,7 @@ export class ContactListComponent {
 
   constructor(
     public dataService: DataService,
+    public dialog: MatDialog,
     private router: Router,
   ) { }
 
@@ -22,6 +25,9 @@ export class ContactListComponent {
 
   // OPEN ADD NEW USER OVERLAY
   addNewContact() {
-    this.router.navigate(['/kanbanboard/contacts/add-user']);
+    // this.router.navigate(['/kanbanboard/contacts/add-user']);
+
+    // OPEN DIALOG
+    this.dialog.open(DialogAddUserComponent);
   }
 }
