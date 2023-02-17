@@ -67,8 +67,6 @@
     border-radius: 8px;
 }
 
-//CONTACT
-
 .contact {
     display: flex;
     align-items: center;
@@ -76,10 +74,6 @@
     width: 90%;
     height: 50px;
     padding: 8px;
-
-    &:last-child {
-        margin-bottom: var(--m10p);
-    }
 
     &:hover {
         transform: scale(1.05);
@@ -138,7 +132,12 @@
 @media(max-width: 1080px) {
     .contact-list {
         left: 0;
-        // width: 30%;
+        bottom: 100px;
+    }
+
+    .horizontal-line {
+        margin-top: var(--m5p);
+        margin-bottom: var(--m5p);
     }
 }
 
@@ -148,11 +147,12 @@
         top: 140px;
         right: 0px;
         width: 100%;
+        bottom: 140px !important;
+        overflow-y: scroll;
     }
 
     .new-contact {
         width: 100%;
-        min-width: 300px;
         display: flex;
     }
 
@@ -163,6 +163,7 @@
             transform: none;
         }
     }
+
 }
 
 @media(max-width: 420px) {}

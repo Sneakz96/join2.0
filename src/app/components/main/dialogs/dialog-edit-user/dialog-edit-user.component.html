@@ -1,4 +1,5 @@
 <div class="content">
+    <div class="mb-close" (click)="closeDialog()"></div>
     <div class="contact">
         <div class="left">
             <img src="./assets/img/Capa 2.png" class="logo">
@@ -14,7 +15,7 @@
             </div>
         </div>
         <div class="right">
-            <img src="./assets/img/icons/x.png" class="close" (click)="closeDialog()">
+            <div class="close" (click)="closeDialog()"></div>
             <div class="name">
                 <div class="input-container">
                     <input type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'">
