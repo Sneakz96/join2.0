@@ -39,14 +39,18 @@ ul {
     .content {
         left: 0;
     }
+
+    .last {
+        margin-bottom: var(--m20p);
+    }
 }
 
-@media(max-width: 760px) {}
-
-@media(max-width: 420px) {
+@media(max-width: 760px) {
     .last {
         margin-bottom: var(--m50p);
     }
 }
+
+@media(max-width: 420px) {}
 
 @media(max-width: 300px) {}
