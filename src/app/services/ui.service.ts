@@ -21,19 +21,15 @@ export class UIService {
     window.addEventListener("load", () => {
       if (window.innerWidth >= 1080) {
         button.disabled = true;
-        // console.log(button.disabled);
       } else {
         button.disabled = false;
-        // console.log(button.disabled);
       }
     });
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1080) {
         button.disabled = true;
-        // console.log(button.disabled);
       } else {
         button.disabled = false;
-        // console.log(button.disabled);
       }
     });
   }
@@ -43,19 +39,15 @@ export class UIService {
     window.addEventListener("load", () => {
       if (window.innerWidth >= 760) {
         this.data.mbDevice = null;
-        console.log(this.data.mbDevice);
       } else {
         this.data.mbDevice = false;
-        console.log(this.data.mbDevice);
       }
     });
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 760) {
         this.data.mbDevice = null;
-        console.log(this.data.mbDevice);
       } else {
         this.data.mbDevice = false;
-        console.log(this.data.mbDevice);
       }
     });
   }
