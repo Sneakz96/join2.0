@@ -11,7 +11,7 @@
         <div *ngFor="let contact of dataService.allContacts; index as i">
             <div class="contact" *ngIf="getFirstLetterFromContact(contact) === initial"
                 [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]"
-                routerLinkActive="active-user">
+                routerLinkActive="active-user" (click)="open(contact)">
                 <div class="bg-pic" [ngStyle]="{'background-color': contact.color}">
                     <span>{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}</span>
                 </div>

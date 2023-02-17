@@ -105,6 +105,7 @@ import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-t
   providers: [
     TaskDialogComponent,
     MatDatepickerModule,
+    EditContactComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],

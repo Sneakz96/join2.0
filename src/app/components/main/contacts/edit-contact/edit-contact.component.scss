@@ -34,7 +34,7 @@
     height: 120px;
     width: 120px;
     color: var(--dark-navy);
-    
+
     span {
         font-size: var(--fs-xl);
     }
@@ -56,7 +56,7 @@
     }
 }
 
-.contact-information{
+.contact-information {
     position: relative;
 }
 
@@ -166,12 +166,13 @@
 
 
 @media(max-width: 1080px) {
-    .content{
-        left:300px;
+    .content {
+        left: 300px;
+        overflow-y: scroll !important;
     }
-    
+
     .new-contact-btn {
-        bottom: var(--m20p); 
+        bottom: var(--m20p);
     }
 }
 
