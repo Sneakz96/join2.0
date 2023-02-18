@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { DialogEditUserComponent } from '../components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
@@ -40,11 +42,13 @@ export class DataService {
 
   // 
   constructor(
+    private router: Router,
     private fire: Firestore,
     private firestore: AngularFirestore,
     public dialog: MatDialog,
     private editUser: DialogEditUserComponent,
     private addUser: DialogAddUserComponent,
+    public dialogRef: MatDialogRef<DialogAddUserComponent>,
   ) {
     this.getDayTime();
     this.loadTasks();
@@ -214,6 +218,51 @@ export class DataService {
     });
   }
 
+  // SET FORM OF NEW CONTACT
+  setUserForm() {
+    this.addUser.contactForm = new FormGroup({
+      'firstName': new FormControl(this.addUser.contact.firstName),
+      'lastName': new FormControl(this.addUser.contact.lastName),
+      'email': new FormControl(this.addUser.contact.email),
+      'phone': new FormControl(this.addUser.contact.phone),
+    });
+  }
+
+  // SET USER FORM
+  checkUserForm() {
+    let firstName = this.addUser.contactForm.value.firstName.replace(/\s/g, '');
+    let lastName = this.addUser.contactForm.value.lastName.replace(/\s/g, '');
+    let mail = this.addUser.contactForm.value.email.replace(/\s/g, '');
+    let phone = this.addUser.contactForm.value.phone.replace(/\s/g, '');
+    let checkInputs = (value: string): boolean => {
+      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
+      return allowedCharacters.test(value);
+    };
+    let checkMail = (value: string): boolean => {
+      let allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return allowedNumbers.test(value);
+    };
+    let checkNumber = (value: string): boolean => {
+      let allowedNumbers = /^[0-9+/+]+$/;
+      return allowedNumbers.test(value);
+    };
+    let first = checkInputs(firstName);
+    let last = checkInputs(lastName);
+    let email = checkMail(mail);
+    let number = checkNumber(phone);
+
+    if (!first || !last || !email || !number) {
+    } else {
+      this.addUser.contact.firstName = firstName;
+      this.addUser.contact.lastName = lastName;
+      this.addUser.contact.email = mail;
+      this.addUser.contact.phone = phone;
+      this.setUserID();
+      this.setContactColor();
+      this.addNewUser();
+    }
+  }
+
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
   setUserColor() {
     switch (this.editUser.user.lastName.charCodeAt(0) % 6) {
@@ -280,10 +329,26 @@ export class DataService {
     this.addUser.contact.id = 20000 * Math.random();
   }
 
-
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
+  addNewUser() {
+    this.contactCreated = true;
+    this.saveUserToFirestore();
+    this.closeDialog();
+    this.router.navigate(['/kanbanboard/contacts']);
+    setTimeout(() => {
+      this.contactCreated = false;
+    }, 3000);
+  }
+
+  // SAVE NEW USER TO DB
+  saveUserToFirestore() {
+    const coll = collection(this.fire, 'allContacts');
+    setDoc(doc(coll), this.addUser.contact.toJSON());
   }
 
   // SAVE EDITED USER TO DB
@@ -294,5 +359,22 @@ export class DataService {
       .collection('allContacts')
       .doc(this.editUser.userId)
       .update(this.editUser.user.toJSON());
+  }
+
+  // CLOSE DIALOG TO CREATE NEW USER
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  // SHOULD CLEAR VALUES OF DIALOG
+  clearValues() {
+    let firstName = document.getElementById("firstName") as HTMLInputElement;
+    let lastName = document.getElementById("lastName") as HTMLInputElement;
+    let mail = document.getElementById("mail") as HTMLInputElement;
+    let phone = document.getElementById("phone") as HTMLInputElement;
+    firstName.value = '';
+    lastName.value = '';
+    mail.value = '';
+    phone.value = '';
   }
 }
