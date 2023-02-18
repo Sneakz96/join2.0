@@ -1,25 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { DialogAddTaskComponent } from '../components/main/dialogs/dialog-add-task/dialog-add-task.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
-import { DialogEditUserComponent } from '../components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
 import { Task } from '../models/task.class';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DataService {
+export class DataService implements OnInit {
   // ALERTS
   alert = false;
   taskCreated = true;
   contactCreated = false;
-  mbDevice = null;
   // TASKS
   newTask = new Task();
   taskId: any;
@@ -41,21 +36,26 @@ export class DataService {
   // USERNAME
   userName: string = 'Guest';
 
+
+  mbDevice = null;
+
+
+
   // 
   constructor(
-    private router: Router,
     private fire: Firestore,
     private firestore: AngularFirestore,
     public dialog: MatDialog,
-    private editUser: DialogEditUserComponent,
-    private addedTask: DialogAddTaskComponent,
-    private addUser: DialogAddUserComponent,
-    public dialogRef: MatDialogRef<any>,
   ) {
     this.getDayTime();
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
+    console.log(this.mbDevice);
+  }
+
+  // 
+  ngOnInit(): void {
   }
 
   // GET CURRENT DAY TIME
@@ -113,22 +113,6 @@ export class DataService {
     }
   }
 
-  // ADD TASK TO LOCAL STORAGE
-  addTask() {
-    this.addedTask.getAllInputs();
-    if (this.taskCreated === true) {
-      this.changeContactStatus();
-      this.setId();
-      this.setDate();
-      this.addedTask.clearAllValues();
-      this.alert = true;
-      this.saveTaskToFirestore();
-      setTimeout(() => {
-        this.dialogRef.close();
-      }, 2500);
-    }
-  }
-
   // SAVE TASKS TO DB
   saveTaskToFirestore() {
     const coll = collection(this.fire, 'allTasks');
@@ -165,13 +149,6 @@ export class DataService {
       }
     })
   }
-
-
-
-
-
-
-
 
   // GET LOWEST DUEDATE OF ALL TASKS
   getLowestDueDate(task: any, index: any) {
@@ -243,118 +220,8 @@ export class DataService {
     });
   }
 
-
-
-
-  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
-  setUserColor() {
-    switch (this.editUser.user.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.editUser.user.color = 'lightgreen'
-        break;
-      case 1:
-        this.editUser.user.color = 'lightgrey'
-        break;
-      case 2:
-        this.editUser.user.color = 'lightblue'
-        break;
-      case 3:
-        this.editUser.user.color = 'red'
-        break;
-      case 4:
-        this.editUser.user.color = 'yellow'
-        break;
-      case 5:
-        this.editUser.user.color = 'orange'
-        break;
-      case 6:
-        this.editUser.user.color = 'purple'
-        break;
-      case 7:
-        this.editUser.user.color = 'pink'
-        break;
-      default:
-    }
-  }
-
-  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
-  setContactColor() {
-    switch (this.addUser.contact.lastName.charCodeAt(0) % 6) {
-      case 0:
-        break;
-      case 1:
-        this.addUser.contact.color = 'lightgrey'
-        break;
-      case 2:
-        this.addUser.contact.color = 'lightblue'
-        break;
-      case 3:
-        this.addUser.contact.color = 'red'
-        break;
-      case 4:
-        this.addUser.contact.color = 'yellow'
-        break;
-      case 5:
-        this.addUser.contact.color = 'orange'
-        break;
-      case 6:
-        this.addUser.contact.color = 'purple'
-        break;
-      case 7:
-        this.addUser.contact.color = 'pink'
-        break;
-      default:
-    }
-  }
-
-  // GIVE NEW USER RANDOM ID
-  setUserID() {
-    this.addUser.contact.id = 20000 * Math.random();
-  }
-
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
-  }
-
-  // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
-  addNewUser() {
-    this.contactCreated = true;
-    this.saveUserToFirestore();
-    this.addUser.closeDialog();
-    this.router.navigate(['/kanbanboard/contacts']);
-    setTimeout(() => {
-      this.contactCreated = false;
-    }, 3000);
-  }
-
-  // SAVE NEW USER TO DB
-  saveUserToFirestore() {
-    const coll = collection(this.fire, 'allContacts');
-    setDoc(doc(coll), this.addUser.contact.toJSON());
-  }
-
-  // SAVE EDITED USER TO DB
-  save() {
-    this.setUserColor();
-    this.editUser.closeDialog();
-    this.firestore
-      .collection('allContacts')
-      .doc(this.editUser.userId)
-      .update(this.editUser.user.toJSON());
-  }
-
-
-
-  // SHOULD CLEAR VALUES OF DIALOG
-  clearValues() {
-    let firstName = document.getElementById("firstName") as HTMLInputElement;
-    let lastName = document.getElementById("lastName") as HTMLInputElement;
-    let mail = document.getElementById("mail") as HTMLInputElement;
-    let phone = document.getElementById("phone") as HTMLInputElement;
-    firstName.value = '';
-    lastName.value = '';
-    mail.value = '';
-    phone.value = '';
   }
 }

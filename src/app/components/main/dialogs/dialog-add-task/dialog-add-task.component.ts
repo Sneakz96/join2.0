@@ -67,7 +67,21 @@ export class DialogAddTaskComponent {
     this.dropdown = dropdown;
   }
 
-
+  // ADD TASK TO LOCAL STORAGE
+  addTask() {
+    this.getAllInputs();
+    if (this.data.taskCreated === true) {
+      this.data.changeContactStatus();
+      this.data.setId();
+      this.data.setDate();
+      this.clearAllValues();
+      this.data.alert = true;
+      this.data.saveTaskToFirestore();
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 2500);
+    }
+  }
 
   // CREATE SUBTASK
   addSubTask() {
