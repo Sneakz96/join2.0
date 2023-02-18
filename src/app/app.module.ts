@@ -111,6 +111,7 @@ import { HttpClientModule } from '@angular/common/http';
     EditContactComponent,
     DialogEditUserComponent,
     DialogAddUserComponent,
+    DialogAddTaskComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],
