@@ -109,6 +109,8 @@ import { HttpClientModule } from '@angular/common/http';
     TaskDialogComponent,
     MatDatepickerModule,
     EditContactComponent,
+    DialogEditUserComponent,
+    DialogAddUserComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],

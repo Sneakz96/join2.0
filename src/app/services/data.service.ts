@@ -1,20 +1,22 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
+import { DialogEditUserComponent } from '../components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
 import { Task } from '../models/task.class';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DataService implements OnInit {
+export class DataService {
   // ALERTS
   alert = false;
   taskCreated = true;
   contactCreated = false;
+  mbDevice = null;
   // TASKS
   newTask = new Task();
   taskId: any;
@@ -36,26 +38,18 @@ export class DataService implements OnInit {
   // USERNAME
   userName: string = 'Guest';
 
-
-  mbDevice = null;
-
-
-
   // 
   constructor(
     private fire: Firestore,
     private firestore: AngularFirestore,
     public dialog: MatDialog,
+    private editUser: DialogEditUserComponent,
+    private addUser: DialogAddUserComponent,
   ) {
     this.getDayTime();
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
-    console.log(this.mbDevice);
-  }
-
-  // 
-  ngOnInit(): void {
   }
 
   // GET CURRENT DAY TIME
@@ -220,8 +214,85 @@ export class DataService implements OnInit {
     });
   }
 
+  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
+  setUserColor() {
+    switch (this.editUser.user.lastName.charCodeAt(0) % 6) {
+      case 0:
+        this.editUser.user.color = 'lightgreen'
+        break;
+      case 1:
+        this.editUser.user.color = 'lightgrey'
+        break;
+      case 2:
+        this.editUser.user.color = 'lightblue'
+        break;
+      case 3:
+        this.editUser.user.color = 'red'
+        break;
+      case 4:
+        this.editUser.user.color = 'yellow'
+        break;
+      case 5:
+        this.editUser.user.color = 'orange'
+        break;
+      case 6:
+        this.editUser.user.color = 'purple'
+        break;
+      case 7:
+        this.editUser.user.color = 'pink'
+        break;
+      default:
+    }
+  }
+
+  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
+  setContactColor() {
+    switch (this.addUser.contact.lastName.charCodeAt(0) % 6) {
+      case 0:
+        break;
+      case 1:
+        this.addUser.contact.color = 'lightgrey'
+        break;
+      case 2:
+        this.addUser.contact.color = 'lightblue'
+        break;
+      case 3:
+        this.addUser.contact.color = 'red'
+        break;
+      case 4:
+        this.addUser.contact.color = 'yellow'
+        break;
+      case 5:
+        this.addUser.contact.color = 'orange'
+        break;
+      case 6:
+        this.addUser.contact.color = 'purple'
+        break;
+      case 7:
+        this.addUser.contact.color = 'pink'
+        break;
+      default:
+    }
+  }
+
+  // GIVE NEW USER RANDOM ID
+  setUserID() {
+    this.addUser.contact.id = 20000 * Math.random();
+  }
+
+
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  // SAVE EDITED USER TO DB
+  save() {
+    this.setUserColor();
+    this.editUser.closeDialog();
+    this.firestore
+      .collection('allContacts')
+      .doc(this.editUser.userId)
+      .update(this.editUser.user.toJSON());
   }
 }

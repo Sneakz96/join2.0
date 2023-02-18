@@ -17,7 +17,6 @@ export class DialogAddUserComponent implements OnInit {
 
   contact = new Contact();
   contactForm!: FormGroup;
-
   userOnDialog: any;
 
   @Output() sideSelect = new EventEmitter<string>();
@@ -45,10 +44,7 @@ export class DialogAddUserComponent implements OnInit {
     });
   }
 
-  // GIVE NEW USER RANDOM ID
-  setUserID() {
-    this.contact.id = 20000 * Math.random();
-  }
+
 
   // SET USER FORM
   checkForm() {
@@ -87,42 +83,13 @@ export class DialogAddUserComponent implements OnInit {
       this.contact.lastName = lastName;
       this.contact.email = mail;
       this.contact.phone = phone;
-      this.setUserID();
-      this.setColor();
+      this.data.setUserID();
+      this.data.setContactColor();
       this.addUser();
     }
   }
 
-  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
-  setColor() {
-    switch (this.contact.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.contact.color = 'lightgreen'
-        break;
-      case 1:
-        this.contact.color = 'lightgrey'
-        break;
-      case 2:
-        this.contact.color = 'lightblue'
-        break;
-      case 3:
-        this.contact.color = 'red'
-        break;
-      case 4:
-        this.contact.color = 'yellow'
-        break;
-      case 5:
-        this.contact.color = 'orange'
-        break;
-      case 6:
-        this.contact.color = 'purple'
-        break;
-      case 7:
-        this.contact.color = 'pink'
-        break;
-      default:
-    }
-  }
+ 
 
   // SAVE NEW USER TO DB
   saveUserToFirestore() {
@@ -137,7 +104,6 @@ export class DialogAddUserComponent implements OnInit {
 
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
-    console.log('user added called', this.contact);
     this.data.contactCreated = true;
     this.saveUserToFirestore();
     this.closeDialog();
