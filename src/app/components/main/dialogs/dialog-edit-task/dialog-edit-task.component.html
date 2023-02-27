@@ -25,17 +25,35 @@
         </div>
     </div>
     <span class="label">Assigned To:</span>
+
+
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" multiple #assignedContacts [(value)]="assignedCollegues"
+        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="assignedCollegues"
             [placeholder]="'Select contact to assign'">
-            <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
-                <mat-checkbox class="example-margin" [(ngModel)]="contact.id == assignedCollegues" (ngModelChange)="updateAssignedContacts()"> <!--SAY NG MODEL CONTAIN-->
-                    {{contact.firstName}}
-                    {{contact.lastName}}
-                </mat-checkbox>
+            <mat-option *ngFor="let contact of data.allContacts$ | async; let i = index" [value]="contact">
+                <input id="contact{{i}}" class="example-margin" type="checkbox" (click)="handleChecked(i, $event)" [(ngModel)]="assignedCollegues[i]">
+                {{contact.firstName}}
+                {{contact.lastName}}
             </mat-option>
         </mat-select>
     </mat-form-field>
+
+
+    <!-- <div class="assigned">
+        <div *ngFor="let assignee of assignedCollegues">
+            <div class="task-assignees">
+                <input type="checkbox">
+                <p>{{ assignee.name }}</p>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+
+
+
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
         <div class="circle" [ngStyle]="{'background-color': contact.color}">
             {{ contact.firstName?.charAt(0)}}
