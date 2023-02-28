@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,7 +22,8 @@ export class SignUpComponent {
   constructor(
     public dialog: MatDialog, 
     private router: Router, 
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    public authService: AuthService,
     ) { }
 
   // 

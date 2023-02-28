@@ -7,11 +7,11 @@
     <div class="form-container">
         <p>Log in</p>
         <div class="blue-line"></div>
-        <form [formGroup]="loginForm" class="reg-form outline" ngNativeValidate>
+        <form [formGroup]="authService.loginForm" class="reg-form outline" ngNativeValidate>
             <mat-form-field class="pos-r" appearance="outline">
                 <mat-label>Email</mat-label>
                 <mat-icon class="mail-icon">mail_outline</mat-icon>
-                <input formControlName="email" matInput type="email">
+                <input formControlName="email" matInput type="email" pla>
             </mat-form-field>
             <mat-form-field class="pos-r" appearance="outline">
                 <mat-label>Password</mat-label>
@@ -22,7 +22,7 @@
                 <a href="#">Forgot my password</a>
             </div>
             <div class="btn-container">
-                <button mat-raised-button class="login-btn" (click)="loginUser()">Login</button>
+                <button mat-raised-button class="login-btn" (click)="authService.loginUser()">Login</button>
                 <button mat-raised-button class="guest-login-btn" routerLink="/kanbanboard">Guest Log in</button>
             </div>
         </form>
