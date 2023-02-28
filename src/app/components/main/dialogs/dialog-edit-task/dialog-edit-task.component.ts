@@ -90,10 +90,7 @@ export class DialogEditTaskComponent implements OnInit {
       console.log(event.selected)
     }
   }
-
-
-
-
+  
   // CHECK ASSIGNED CONTACTS
   checkAssignedContacts() {
     // debugger;
