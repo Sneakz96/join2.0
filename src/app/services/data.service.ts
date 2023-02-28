@@ -3,9 +3,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { AddTaskComponent } from '../components/main/add-task/add-task.component';
+import { BoardComponent } from '../components/main/board/board.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { Task } from '../models/task.class';
-
+import { DialogEditUserComponent } from 'src/app/components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
+import { EditContactComponent } from 'src/app/components/main/contacts/edit-contact/edit-contact.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,17 +38,20 @@ export class DataService implements OnInit {
   initialsFirstNames: string[] = [];
   // USERNAME
   userName: string = 'Guest';
-
+  // BOARD
+  task: any;
 
   mbDevice = null;
 
 
-
   // 
   constructor(
+    private edit: EditContactComponent,
     private fire: Firestore,
     private firestore: AngularFirestore,
+    private board: BoardComponent,
     public dialog: MatDialog,
+    private addTask: AddTaskComponent,
   ) {
     this.getDayTime();
     this.loadTasks();
@@ -223,5 +229,52 @@ export class DataService implements OnInit {
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  //--BOARD--//
+
+  // SEARCH TASK ON BOARD
+  search() {
+    this.allTasks.forEach((task) => {
+      task.visible = !task.title.includes(this.board.searchField);
+    });
+  }
+
+  // DELETE TASK AFTER 3 DAYS IF IT'S DONE
+  deleteDoneTasks(task: any) {
+    setTimeout(() => {
+      this.task = this.allTasks.filter(item => {
+        let now = new Date();
+        let diff = now.getTime() - task.createdAt.getTime();
+        let days = diff / (1000 * 60 * 60 * 24);
+        return days < 3;
+      });
+    }, 1000 * 60 * 60 * 24 * 3);
+    //  MS  *  S * M  * H  * T
+  }
+
+  // UPDATE TASK STATUS IN DB
+  updateTask(task: any, status: any) {
+    this.firestore
+      .collection("allTasks")
+      .doc(task.customIdName)
+      .update({ status: status });
+  }
+
+  //--CONTACTS--//
+
+
+  // GET CHAR.AT(0) ON FIRST NAME OF CONTACT
+  getFirstLetterFromContact(contact: any) {
+    return contact.firstName.charAt(0);
+  }
+  // CHECK MB DEVICE - WHAT TO OPEN
+  open(userToOpen: any) {
+    if (this.mbDevice == null) {
+    } else {
+      let dialogRef = this.dialog.open(DialogEditUserComponent);
+      dialogRef.componentInstance.user = userToOpen;
+      dialogRef.componentInstance.userId = this.edit.userId;
+    }
   }
 }

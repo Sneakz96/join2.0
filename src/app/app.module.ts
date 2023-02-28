@@ -23,8 +23,8 @@ import { EditContactComponent } from './components/main/contacts/edit-contact/ed
 import { ContentWrapperComponent } from './components/main/content-wrapper/content-wrapper.component';
 import { TaskDialogComponent } from './components/main/dialogs/task-dialog/task-dialog.component';
 // LEGAL_NOTICES
-import { LegalNoticeComponent } from 'src/app/components/data-protection/legal-notice/legal-notice.component';
-import { DataProtectionComponent } from 'src/app/components/data-protection/data-protection/data-protection.component';
+import { LegalNoticeComponent } from 'src/app/components/statics/legal-notice/legal-notice.component';
+import { DataProtectionComponent } from 'src/app/components/statics/data-protection/data-protection.component';
 // DIALOGS
 import { DialogAddUserComponent } from './components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { DialogAddTaskComponent } from './components/main/dialogs/dialog-add-task/dialog-add-task.component';
@@ -55,6 +55,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     EditContactComponent,
     LoginComponent,
+    BoardComponent,
+    AddTaskComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],

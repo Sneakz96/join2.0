@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -16,7 +16,6 @@ export class BoardComponent {
 
   dueDate: any;
   searchField: string;
-  task: any;
 
   // 
   constructor(
@@ -27,7 +26,7 @@ export class BoardComponent {
 
   // 
   openTask(taskToOpen: any) {
-    const dialogRef = this.dialog.open(TaskDialogComponent, {
+    let dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
       data: { taskToOpen }
     });
@@ -68,36 +67,8 @@ export class BoardComponent {
       task.status = 'awaitingFeedback';
     } else if (status === 'dropList_3') {
       task.status = 'done';
-      this.deleteDoneTasks(task);
+      this.data.deleteDoneTasks(task);
     }
-    this.updateTask(task, task.status);
-  }
-
-  // UPDATE TASK STATUS IN DB
-  updateTask(task: any, status: any) {
-    this.firestore
-      .collection("allTasks")
-      .doc(task.customIdName)
-      .update({ status: status });
-  }
-
-  // DELETE TASK AFTER 3 DAYS IF IT'S DONE
-  deleteDoneTasks(task: any) {
-    setTimeout(() => {
-      this.task = this.data.allTasks.filter(item => {
-        let now = new Date();
-        let diff = now.getTime() - task.createdAt.getTime();
-        let days = diff / (1000 * 60 * 60 * 24);
-        return days < 3;
-      });
-    }, 1000 * 60 * 60 * 24 * 3);
-    //  MS  *  S * M  * H  * T
-  }
-
-  // SEARCH TASK ON BOARD
-  search() {
-    this.data.allTasks.forEach((task) => {
-      task.visible = !task.title.includes(this.searchField);
-    });
+    this.data.updateTask(task, task.status);
   }
 }

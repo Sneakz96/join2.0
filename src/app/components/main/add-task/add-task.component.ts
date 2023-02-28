@@ -96,6 +96,10 @@ export class AddTaskComponent {
     this.addSubInput = '';
   }
 
+  // DISPLAYS ALL CREATED SUBTASKS
+  updateSubTask(event: any) {
+    this.addSubInput = event.target.value;
+  }
   // GET TASK INPUTS
   getAllInputs() {
     this.data.newTask.title = this.titleElement.nativeElement.value;
@@ -124,11 +128,6 @@ export class AddTaskComponent {
     ) {
       this.data.taskCreated = true;
     }
-  }
-
-  // DISPLAYS ALL CREATED SUBTASKS
-  updateSubTask(event: any) {
-    this.addSubInput = event.target.value;
   }
 
   // CLEAR ALL INPUT.VALUES
