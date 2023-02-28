@@ -3,7 +3,7 @@
     <div class="form-container pos-r">
         <p>Sign up</p>
         <mat-icon class="arrow-back" routerLink="/login">arrow_back</mat-icon>
-        <form [formGroup]="signForm" class="reg-form" ngNativeValidate>
+        <form [formGroup]="authService.signForm" class="reg-form" ngNativeValidate>
             <div class="blue-line"></div>
             <mat-form-field class="pos-r" appearance="outline">
                 <mat-label>Name</mat-label>
@@ -21,7 +21,7 @@
                 <mat-icon class="icon">lock</mat-icon>
             </mat-form-field>
             <div class="button-container">
-                <button mat-raised-button type="submit" class="sign-up-btn" (click)="signUp()">Sign up</button>
+                <button mat-raised-button type="submit" class="sign-up-btn" (click)="authService.signUp()">Sign up</button>
             </div>
         </form>
     </div>
