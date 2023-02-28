@@ -231,12 +231,7 @@ export class DataService implements OnInit {
 
   //--BOARD--//
 
-  // SEARCH TASK ON BOARD
-  search() {
-    this.allTasks.forEach((task) => {
-      task.visible = !task.title.includes(this.board.searchField);
-    });
-  }
+
 
   // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {

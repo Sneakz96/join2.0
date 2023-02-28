@@ -24,6 +24,14 @@ export class BoardComponent {
     public data: DataService,
   ) { }
 
+  // SEARCH TASK ON BOARD
+  search() {
+    this.data.allTasks.forEach((task) => {
+      task.visible = !task.title.includes(this.searchField);
+    });
+  }
+
+
   // 
   openTask(taskToOpen: any) {
     let dialogRef = this.dialog.open(TaskDialogComponent, {

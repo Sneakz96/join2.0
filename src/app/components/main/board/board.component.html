@@ -2,8 +2,8 @@
   <h1>Board</h1>
   <div class="box">
     <!--SEARCHBOX HERE-->
-    <input class="searchbox" (keyup)="data.search()" type="text" placeholder="Find task" [(ngModel)]="searchField">
-    <img class="toggle" (click)="data.search()" src="/assets/img/icons/search.png">
+    <input class="searchbox" (keyup)="search()" type="text" placeholder="Find task" [(ngModel)]="searchField">
+    <img class="toggle" (click)="search()" src="/assets/img/icons/search.png">
     <button class="btn" (click)="addTask()">
       <p>Add task</p>
       <img src="/assets/img/icons/add-task.png">
