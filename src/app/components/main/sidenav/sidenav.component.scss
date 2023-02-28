@@ -42,10 +42,9 @@
         display: flex;
         align-items: center;
 
-
         img {
-            padding-left: 16px;
-            padding-right: 8px;
+            padding-left: 32px;
+            padding-right: 12px;
             height: 22px;
             width: 22px;
         }
@@ -61,10 +60,11 @@
     margin-bottom: var(--m50);
     position: relative;
     bottom: 50px;
-
 }
 
 .sub-menu-ul {
+    justify-content: flex-start;
+
     button {
         color: var(--light-grey);
         text-decoration: none;
@@ -74,6 +74,8 @@
 
         .mat-icon {
             color: var(--light-grey);
+            height: 22px;
+            width: 22px;
         }
     }
 
@@ -82,10 +84,14 @@
     }
 }
 
+.mat-menu-item {
+    margin-left: 8px;
+    margin-right: 12px;
+}
+
 .active {
     background-color: var(--menu-active);
 }
-
 
 @media(max-width: 1080px) {
     .sidenav {
