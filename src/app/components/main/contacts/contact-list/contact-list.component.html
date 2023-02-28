@@ -1,17 +1,17 @@
 <div class="contact-list">
     <div class="new-contact">
-        <button class="new-contact-btn" (click)="data.addNewContact()">
+        <button class="new-contact-btn" (click)="addNewContact()">
             New contact
             <img src="/assets/img/icons/new-contact.png">
         </button>
     </div>
-    <div class="list-header" *ngFor=" let initial of data.initialsFirstNames">
+    <div class="list-header" *ngFor=" let initial of dataService.initialsFirstNames">
         <span class="letter">{{ initial }}</span>
         <div class="horizontal-line"></div>
-        <div *ngFor="let contact of data.allContacts; index as i">
-            <div class="contact" *ngIf="data.getFirstLetterFromContact(contact) === initial"
+        <div *ngFor="let contact of dataService.allContacts; index as i">
+            <div class="contact" *ngIf="getFirstLetterFromContact(contact) === initial"
                 [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]"
-                routerLinkActive="active-user" (click)="data.open(contact)">
+                routerLinkActive="active-user" (click)="open(contact)">
                 <div class="bg-pic" [ngStyle]="{'background-color': contact.color}">
                     <span>{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}</span>
                 </div>

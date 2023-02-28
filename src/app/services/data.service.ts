@@ -7,8 +7,7 @@ import { AddTaskComponent } from '../components/main/add-task/add-task.component
 import { BoardComponent } from '../components/main/board/board.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { Task } from '../models/task.class';
-import { DialogEditUserComponent } from 'src/app/components/main/dialogs/dialog-edit-user/dialog-edit-user.component';
-import { EditContactComponent } from 'src/app/components/main/contacts/edit-contact/edit-contact.component';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,7 +45,6 @@ export class DataService implements OnInit {
 
   // 
   constructor(
-    private edit: EditContactComponent,
     private fire: Firestore,
     private firestore: AngularFirestore,
     private board: BoardComponent,
@@ -259,22 +257,5 @@ export class DataService implements OnInit {
       .collection("allTasks")
       .doc(task.customIdName)
       .update({ status: status });
-  }
-
-  //--CONTACTS--//
-
-
-  // GET CHAR.AT(0) ON FIRST NAME OF CONTACT
-  getFirstLetterFromContact(contact: any) {
-    return contact.firstName.charAt(0);
-  }
-  // CHECK MB DEVICE - WHAT TO OPEN
-  open(userToOpen: any) {
-    if (this.mbDevice == null) {
-    } else {
-      let dialogRef = this.dialog.open(DialogEditUserComponent);
-      dialogRef.componentInstance.user = userToOpen;
-      dialogRef.componentInstance.userId = this.edit.userId;
-    }
   }
 }

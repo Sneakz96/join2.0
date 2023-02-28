@@ -16,7 +16,7 @@ import { ContactsComponent } from './components/main/contacts/contacts/contacts.
 import { SummaryComponent } from './components/main/summary/summary.component';
 import { LoggedWrapperComponent } from './components/main/logged-wrapper/logged-wrapper.component';
 import { SidenavComponent } from './components/main/sidenav/sidenav.component';
-import { HelpSectionComponent } from './components/main/help-section/help-section.component';
+import { HelpSectionComponent } from './components/statics/help-section/help-section.component';
 import { ContactWrapperComponent } from './components/main/contacts/contact-wrapper/contact-wrapper.component';
 import { ContactListComponent } from './components/main/contacts/contact-list/contact-list.component';
 import { EditContactComponent } from './components/main/contacts/edit-contact/edit-contact.component';

@@ -4,7 +4,7 @@ import { AddTaskComponent } from './components/main/add-task/add-task.component'
 import { BoardComponent } from './components/main/board/board.component';
 import { ContactWrapperComponent } from './components/main/contacts/contact-wrapper/contact-wrapper.component';
 import { DataProtectionComponent } from 'src/app/components/statics/data-protection/data-protection.component';
-import { HelpSectionComponent } from './components/main/help-section/help-section.component';
+import { HelpSectionComponent } from './components/statics/help-section/help-section.component';
 import { LegalNoticeComponent } from 'src/app/components/statics/legal-notice/legal-notice.component';
 import { LoginComponent } from './components/log/login/login.component';
 import { SignUpComponent } from './components/log/sign-up/sign-up.component';

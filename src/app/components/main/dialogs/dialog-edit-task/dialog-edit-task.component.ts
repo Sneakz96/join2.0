@@ -1,11 +1,10 @@
-import { Component, ElementRef, InjectionToken, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormControl } from '@angular/forms';
-import { MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dialog-edit-task',
