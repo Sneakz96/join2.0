@@ -231,8 +231,6 @@ export class DataService implements OnInit {
 
   //--BOARD--//
 
-
-
   // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {
     setTimeout(() => {

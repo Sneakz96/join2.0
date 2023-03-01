@@ -28,30 +28,15 @@
 
 
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="assignedCollegues"
+        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="checkedContacts"
             [placeholder]="'Select contact to assign'">
             <mat-option *ngFor="let contact of data.allContacts$ | async; let i = index" [value]="contact">
-                <input id="contact{{i}}" class="example-margin" type="checkbox" (click)="handleChecked(i, $event)" [(ngModel)]="assignedCollegues[i]">
+                <input id="contact{{i}}" class="example-margin" type="checkbox" (click)="handleChecked(i, $event)" [(ngModel)]="checkedContacts[i]">
                 {{contact.firstName}}
                 {{contact.lastName}}
             </mat-option>
         </mat-select>
     </mat-form-field>
-
-
-    <!-- <div class="assigned">
-        <div *ngFor="let assignee of assignedCollegues">
-            <div class="task-assignees">
-                <input type="checkbox">
-                <p>{{ assignee.name }}</p>
-            </div>
-        </div>
-    </div> -->
-
-
-
-
-
 
 
     <div class="assigned-contact" *ngFor="let contact of task.assignedTo">

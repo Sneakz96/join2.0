@@ -17,12 +17,15 @@ export class DialogEditTaskComponent implements OnInit {
   task: Task;
   taskId: string;
   contactForm = new FormControl();
-  assignedCollegues: any[] = [];
+  checkedContacts: any[] = [];
+
   low = false;
   medium = false;
   high = false;
   checked = false;
 
+
+  selected = false;
   // 
   constructor(
     private router: Router,
@@ -63,7 +66,7 @@ export class DialogEditTaskComponent implements OnInit {
   // SAVE EDITED TASK TO DB
   save() {
     // this.updateAssignedContacts();
-    console.log('save called', this.assignedCollegues);
+    console.log('save called', this.checkedContacts);
     this.close();
     // this.firestore
     //   .collection('allTasks')
@@ -90,20 +93,42 @@ export class DialogEditTaskComponent implements OnInit {
       console.log(event.selected)
     }
   }
-  
+
+
+
+
+
   // CHECK ASSIGNED CONTACTS
   checkAssignedContacts() {
-    // debugger;
-    // console.log(this.task.assignedTo[0].selected); //BOOLEAN
-    console.log(this.assignedCollegues);
-    // console.log(this.assignedTo);
+    console.log(this.checkedContacts);
     for (let i = 0; i < this.task.assignedTo.length; i++) {
       let element = this.task.assignedTo[i];
-      console.log('Assigned to:', element); // LOG ASSIGNED CONTACTS
-      // element.selected = true;
-      this.assignedCollegues.push(element);
+      element.selected = true;
+      
+      this.checkedContacts.push(element);
+      let checkArray = this.checkedContacts[i];
+      console.log(checkArray);
     }
-    console.log('All assigned contacts:', this.assignedCollegues);
+    this.log();
+  }
+
+  log() {
+    for (let i = 0; i < this.data.allContacts.length; i++) {
+      let element = this.data.allContacts[i];
+      console.log('log', element.firstName, this.data.allContacts[i].id,);
+
+    }
+    for (let i = 0; i < this.task.assignedTo.length; i++) {
+      console.log(i, 'assignedTo:', this.checkedContacts[i].firstName, this.checkedContacts[i].id);
+
+      if (this.checkedContacts[i].firstName == this.data.allContacts[i].firstName) {
+        console.log('true');
+      }
+
+    }
+    // for (let i = 0; i < this.data.allContacts.length; i++) {
+    //   console.log('log', this.data.allContacts[i].selected);
+    // } 
   }
 
   handleChecked(i: number, event: Event) {
