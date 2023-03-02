@@ -37,7 +37,7 @@ export class DialogEditTaskComponent implements OnInit {
   // 
   ngOnInit(): void {
     this.getPriority();
-    this.checkAssignedContacts();
+    this.checkAllAssignedContacts();
   }
 
   // GET PRIORITY OF CURRENT TASK
@@ -94,41 +94,25 @@ export class DialogEditTaskComponent implements OnInit {
     }
   }
 
+  checkAllAssignedContacts() {
+    this.checkedContacts = [];
+    for (let i = 0; i < this.data.allContacts.length; i++) {
 
+      this.checkedContacts.push(this.checkAssignedContacts(i));
+
+      console.log(this.checkedContacts);
+    }
+  }
 
 
 
   // CHECK ASSIGNED CONTACTS
-  checkAssignedContacts() {
-    console.log(this.checkedContacts);
-    for (let i = 0; i < this.task.assignedTo.length; i++) {
-      let element = this.task.assignedTo[i];
-      element.selected = true;
-      
-      this.checkedContacts.push(element);
-      let checkArray = this.checkedContacts[i];
-      console.log(checkArray);
+  checkAssignedContacts(i: number) {
+    if (this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id) == -1) {
+      return false;
+    } else {
+      return true;
     }
-    this.log();
-  }
-
-  log() {
-    for (let i = 0; i < this.data.allContacts.length; i++) {
-      let element = this.data.allContacts[i];
-      console.log('log', element.firstName, this.data.allContacts[i].id,);
-
-    }
-    for (let i = 0; i < this.task.assignedTo.length; i++) {
-      console.log(i, 'assignedTo:', this.checkedContacts[i].firstName, this.checkedContacts[i].id);
-
-      if (this.checkedContacts[i].firstName == this.data.allContacts[i].firstName) {
-        console.log('true');
-      }
-
-    }
-    // for (let i = 0; i < this.data.allContacts.length; i++) {
-    //   console.log('log', this.data.allContacts[i].selected);
-    // } 
   }
 
   handleChecked(i: number, event: Event) {

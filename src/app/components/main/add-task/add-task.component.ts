@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class AddTaskComponent {
   //CONTACTS
   contact = new FormControl();
-  contactForm = new FormControl('');
+  // contactForm = new FormControl('');
   selectedContacts: string[] = [];
   dropdownSettings: IDropdownSettings = {};
   dropDownForm!: FormGroup;

@@ -26,7 +26,7 @@
                 </select>
                 <h5>Assigned to</h5>
                 <mat-form-field class="assigned" appearance="fill">
-                    <mat-select [(value)]="assignedCollegues" [formControl]="contactForm"
+                    <mat-select [(value)]="assignedCollegues" [formControl]="contact"
                         [placeholder]="'Select contacts'" multiple #assignedContacts>
                         <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                             {{contact.firstName}} {{contact.lastName}}</mat-option>
