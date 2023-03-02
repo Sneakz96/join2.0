@@ -28,7 +28,7 @@
 
 
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="checkedContacts"
+        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo"
             [placeholder]="'Select contact to assign'">
             <mat-option *ngFor="let contact of data.allContacts$ | async; let i = index" [value]="contact">
                 <input id="contact{{i}}" class="example-margin" type="checkbox" (click)="handleChecked(i, $event)" [(ngModel)]="checkedContacts[i]">

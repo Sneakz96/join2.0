@@ -55,7 +55,6 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
-    console.log(this.mbDevice);
   }
 
   // 
@@ -79,7 +78,7 @@ export class DataService implements OnInit {
 
   // LOAD ALL TASKS FROM FIRESTORE
   loadTasks() {
-    console.log('loading tasks called');
+    // console.log('loading tasks called');
     this.firestore
       .collection('allTasks')
       .valueChanges({ idField: 'customIdName' })
@@ -201,7 +200,7 @@ export class DataService implements OnInit {
     const coll = collection(this.fire, 'allContacts');
     this.allContacts$ = collectionData(coll);
     this.allContacts$.subscribe(() => {
-      console.log(this.allContacts$);
+      // console.log(this.allContacts$);
     });
   }
 

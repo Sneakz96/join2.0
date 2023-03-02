@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +15,7 @@ export class UIService {
 
   // CHECK WIDTH OF DISPLAY FOR MB_MENU ON PROFILE
   checkDisplayWidth() {
-    console.log('Check Display Width');
-    const button = document.getElementById("mb_menu") as HTMLButtonElement;
+    let button = document.getElementById("mb_menu") as HTMLButtonElement;
     window.addEventListener("load", () => {
       if (window.innerWidth >= 1080) {
         button.disabled = true;
@@ -51,7 +49,4 @@ export class UIService {
       }
     });
   }
-
-
-
 }
