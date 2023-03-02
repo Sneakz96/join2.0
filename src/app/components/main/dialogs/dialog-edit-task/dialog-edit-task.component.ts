@@ -115,28 +115,12 @@ export class DialogEditTaskComponent implements OnInit {
   }
 
   handleChecked(i: number, event: Event) {
-    // debugger;
-    // console.log(this.data.allContacts[i]); 
     event.stopPropagation();
-    this.checkedContacts[i] = !this.checkedContacts[i];
-    console.log(this.checkedContacts[i]);
-    console.log('clicked number of contact in array:',i);
-
     if (this.checkedContacts[i] == true) {
-      // debugger;
-      // PUSH CONTACT TO ARRAY
-      // this.data.allContacts[i].selected = true;
-      console.log('choosen contact',this.data.allContacts[i + 1]);
-      // this.task.assignedTo.push(this.data.allContacts[i]);
-      console.log('assigned is:',this.checkedContacts[i]);
-      console.log('Task assigned to',this.task.assignedTo);
+      this.task.assignedTo.push(this.data.allContacts[i]);
     } else {
-      // SPLICE CONTACT FROM ARRAY
-      // this.data.allContacts[i + 1].selected = false;
-      // this.task.assignedTo.splice(i, 1);
-      console.log(this.task.assignedTo);
-      // console.log(this.data.allContacts[i + 1]);
-      console.log('', this.checkedContacts);
+      this.task.assignedTo.splice(this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id), 1);
     }
+    this.checkAllAssignedContacts()
   }
 }
