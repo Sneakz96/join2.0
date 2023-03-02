@@ -99,7 +99,6 @@ export class DialogEditTaskComponent implements OnInit {
   checkAllAssignedContacts() {
     this.checkedContacts = [];
     for (let i = 0; i < this.data.allContacts.length; i++) {
-      // this.task.assignedTo[i].selected = true; HAPPENS IN ADD TASK
       this.checkedContacts.push(this.checkAssignedContacts(i));
     }
     console.log(this.checkedContacts);
