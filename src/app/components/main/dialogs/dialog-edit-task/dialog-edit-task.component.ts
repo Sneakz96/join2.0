@@ -81,30 +81,30 @@ export class DialogEditTaskComponent implements OnInit {
   }
 
   // CHECKBOX EVENT
-  onChange(event: any) {
-    console.log(event)
-    if (event.selected == true) {
-      this.checked = false;
-      event.selected = false;
-      console.log(event.selected)
-    } else {
-      event.selected = true;
-      this.checked = true;
-      console.log(event.selected)
-    }
-  }
+  // onChange(event: any) {
+  //   console.log(event)
+  //   if (event.selected == true) {
+  //     this.checked = false;
+  //     event.selected = false;
+  //     console.log(event.selected)
+  //   } else {
+  //     event.selected = true;
+  //     this.checked = true;
+  //     console.log(event.selected)
+  //   }
+  // }
+
+
 
   checkAllAssignedContacts() {
     this.checkedContacts = [];
     for (let i = 0; i < this.data.allContacts.length; i++) {
-
+      // this.task.assignedTo[i].selected = true; HAPPENS IN ADD TASK
       this.checkedContacts.push(this.checkAssignedContacts(i));
 
       console.log(this.checkedContacts);
     }
   }
-
-
 
   // CHECK ASSIGNED CONTACTS
   checkAssignedContacts(i: number) {
@@ -116,12 +116,11 @@ export class DialogEditTaskComponent implements OnInit {
   }
 
   handleChecked(i: number, event: Event) {
-    // debugger;
-    console.log(i);
-    console.log(event);
-    console.log(this.task.assignedTo);
+    debugger;
+    console.log(this.data.allContacts[i]);
     event.stopPropagation();
-    this.task.assignedTo[i].selected = !this.task.assignedTo[i].selected;
-    console.log(this.task.assignedTo[i]);
+    this.checkedContacts[i] = !this.checkedContacts[i];
+    console.log(this.checkedContacts);
+    // this.task.assignedTo[i].selected = !this.task.assignedTo[i].selected;
   }
 }
