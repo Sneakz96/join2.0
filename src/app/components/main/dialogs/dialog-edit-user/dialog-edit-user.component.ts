@@ -13,7 +13,7 @@ export class DialogEditUserComponent {
 
   user: Contact;
   userId: string;
-
+  userEdited = false;
   // 
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
@@ -25,14 +25,65 @@ export class DialogEditUserComponent {
     this.dialogRef.close();
   }
 
-  // SAVE EDITED TASK TO DB
+  // SAVE EDITED USER TO DB
   save() {
-    this.setColor();
-    this.closeDialog();
-    this.firestore
-      .collection('allContacts')
-      .doc(this.userId)
-      .update(this.user.toJSON());
+    this.checkEditedForm();
+    if (this.userEdited) {
+      this.setColor();
+      this.closeDialog();
+      this.firestore
+        .collection('allContacts')
+        .doc(this.userId)
+        .update(this.user.toJSON());
+    } else{
+      // console.error('error');
+    }
+  }
+
+  // 
+  checkEditedForm(){
+    
+    console.log('check user form',);
+    console.log(this.user.firstName);
+    console.log(this.user.lastName);
+    console.log(this.user.email);
+    console.log(this.user.phone);
+  
+    let firstName = this.user.firstName.replace(/\s/g, '');
+    let lastName = this.user.lastName.replace(/\s/g, '');
+    let mail = this.user.email.replace(/\s/g, '');
+    let phone = this.user.phone.replace(/\s/g, '');
+
+    let checkInputs = (value: string): boolean => {
+      const allowedCharacters = /^[A-Za-z0-9+-]+$/;
+      return allowedCharacters.test(value);
+    };
+    let checkMail = (value: string): boolean => {
+      const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return allowedNumbers.test(value);
+    };
+
+    let checkNumber = (value: string): boolean => {
+      const allowedNumbers = /^[0-9+/+]+$/;
+      return allowedNumbers.test(value);
+    };
+
+    let first = checkInputs(firstName);
+    let last = checkInputs(lastName);
+    let email = checkMail(mail);
+    let number = checkNumber(phone);
+
+    console.log(first);
+    console.log(last);
+    console.log(email);
+    console.log(number);
+
+    if (!first || !last || !email || !number) {
+      console.log('error'); // Output: false
+      console.log(first, last, mail, phone); // Output: false
+    } else {
+      this.userEdited = true;
+    }
   }
 
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME

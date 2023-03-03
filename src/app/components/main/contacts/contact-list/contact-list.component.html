@@ -13,7 +13,7 @@
                 [routerLink]="['/kanbanboard/contacts/edit-user/' + contact.customIdName]"
                 routerLinkActive="active-user" (click)="open(contact)">
                 <div class="bg-pic" [ngStyle]="{'background-color': contact.color}">
-                    <span>{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}</span>
+                    <span>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</span>
                 </div>
                 <div class="contact-info">
                     <span>{{ contact.firstName }} {{ contact.lastName }}</span>

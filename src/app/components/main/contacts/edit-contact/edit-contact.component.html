@@ -4,8 +4,8 @@
         <div class="contact-head">
             <div class="circle" [ngStyle]="{'background-color': user.color}">
                 <div class="initials">
-                    <span>{{ user.firstName?.charAt(0) }}</span>
-                    <span>{{ user.lastName?.charAt(0) }}</span>
+                    <span>{{ user.firstName?.charAt(0).toUpperCase() }}</span>
+                    <span>{{ user.lastName?.charAt(0).toUpperCase() }}</span>
                 </div>
             </div>
             <div class="name">

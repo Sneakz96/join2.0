@@ -56,17 +56,17 @@ export class DialogAddUserComponent implements OnInit {
     let mail = this.contactForm.value.email.replace(/\s/g, '');
     let phone = this.contactForm.value.phone.replace(/\s/g, '');
 
-    const checkInputs = (value: string): boolean => {
+    let checkInputs = (value: string): boolean => {
       const allowedCharacters = /^[A-Za-z0-9+-]+$/;
       return allowedCharacters.test(value);
     };
 
-    const checkMail = (value: string): boolean => {
+    let checkMail = (value: string): boolean => {
       const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return allowedNumbers.test(value);
     };
 
-    const checkNumber = (value: string): boolean => {
+    let checkNumber = (value: string): boolean => {
       const allowedNumbers = /^[0-9+/+]+$/;
       return allowedNumbers.test(value);
     };
@@ -125,7 +125,7 @@ export class DialogAddUserComponent implements OnInit {
 
   // SAVE NEW USER TO DB
   saveUserToFirestore() {
-    const coll = collection(this.firestore, 'allContacts');
+    let coll = collection(this.firestore, 'allContacts');
     setDoc(doc(coll), this.contact.toJSON());
   }
 
@@ -148,18 +148,13 @@ export class DialogAddUserComponent implements OnInit {
 
   // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {
-    const firstName = document.getElementById("firstName") as HTMLInputElement;
-    const lastName = document.getElementById("lastName") as HTMLInputElement;
-    const mail = document.getElementById("mail") as HTMLInputElement;
-    const phone = document.getElementById("phone") as HTMLInputElement;
+    let firstName = document.getElementById("firstName") as HTMLInputElement;
+    let lastName = document.getElementById("lastName") as HTMLInputElement;
+    let mail = document.getElementById("mail") as HTMLInputElement;
+    let phone = document.getElementById("phone") as HTMLInputElement;
     firstName.value = '';
     lastName.value = '';
     mail.value = '';
     phone.value = '';
-  }
-
-  // CLOSE DIALOG
-  close() {
-
   }
 }
