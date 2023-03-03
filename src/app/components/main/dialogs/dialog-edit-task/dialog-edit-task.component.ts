@@ -65,8 +65,8 @@ export class DialogEditTaskComponent implements OnInit {
 
   // SAVE EDITED TASK TO DB
   save() {
-    // this.updateAssignedContacts();
     console.log('save called', this.checkedContacts);
+    this.checkAllAssignedContacts();
     this.close();
     // this.firestore
     //   .collection('allTasks')
@@ -80,22 +80,7 @@ export class DialogEditTaskComponent implements OnInit {
     this.router.navigate(['/kanbanboard/board']);
   }
 
-  // CHECKBOX EVENT
-  // onChange(event: any) {
-  //   console.log(event)
-  //   if (event.selected == true) {
-  //     this.checked = false;
-  //     event.selected = false;
-  //     console.log(event.selected)
-  //   } else {
-  //     event.selected = true;
-  //     this.checked = true;
-  //     console.log(event.selected)
-  //   }
-  // }
-
-
-
+  // 
   checkAllAssignedContacts() {
     this.checkedContacts = [];
     for (let i = 0; i < this.data.allContacts.length; i++) {
@@ -113,6 +98,7 @@ export class DialogEditTaskComponent implements OnInit {
     }
   }
 
+  // 
   handleChecked(i: number, event: Event) {
     event.stopPropagation();
     if (this.checkedContacts[i] == true) {
@@ -120,6 +106,6 @@ export class DialogEditTaskComponent implements OnInit {
     } else {
       this.task.assignedTo.splice(this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id), 1);
     }
-    this.checkAllAssignedContacts()
+    this.checkAllAssignedContacts();
   }
 }
