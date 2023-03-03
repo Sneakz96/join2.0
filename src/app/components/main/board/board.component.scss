@@ -118,16 +118,17 @@
     height: 500px;
     border-radius: 15px;
     overflow-y: scroll;
-    background-color: lightgreen;
+    background-color: var(--white);
 }
 
 ::ng-deep .cdk-drag {
-    margin-top: 3px;
+    margin-top: 5px;
     border-radius: 20px !important;
     background-color: var(--white) !important;
     display: flex;
-    justify-content: center !important;
-    align-items: center !important;
+    justify-content: center;
+    align-items: center;
+    // max-height: 200px;
     background-color: red !important;
 }
 
