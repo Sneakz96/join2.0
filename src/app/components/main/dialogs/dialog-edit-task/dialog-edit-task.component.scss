@@ -7,6 +7,8 @@
     padding: 0 !important;
     // background-color: var(--white) !important;
     // border-radius: 10px !important;
+    border: unset !important;
+    height: 0px !important;
 }
 
 ::ng-deep .mat-form-field-infix {
@@ -191,6 +193,7 @@
     width: 75%;
     display: flex;
     flex-direction: column;
+    margin-top: 18px;
 }
 
 .assigned-field {

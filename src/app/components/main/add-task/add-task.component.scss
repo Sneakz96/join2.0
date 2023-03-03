@@ -1,72 +1,72 @@
-::ng-deep .drop {
-    width: 100% !important;
-}
+// ::ng-deep .drop {
+//     width: 100% !important;
+// }
 
-::ng-deep .dropdown-btn {
-    width: 90% !important;
-    box-sizing: border-box;
-    background: white;
-    border-radius: 10px;
-    border: none !important;
-}
+// ::ng-deep .dropdown-btn {
+//     width: 90% !important;
+//     box-sizing: border-box;
+//     background: white;
+//     border-radius: 10px;
+//     border: none !important;
+// }
 
-::ng-deep .selected-item {
-    background-color: var(--dark-navy) !important;
-    color: rgb(255, 255, 255) !important;
-    border-radius: 10px !important;
-}
+// ::ng-deep .selected-item {
+//     background-color: var(--dark-navy) !important;
+//     color: rgb(255, 255, 255) !important;
+//     border-radius: 10px !important;
+// }
 
-::ng-deep .dropdown-list {
-    border-radius: 10px !important;
-}
+// ::ng-deep .dropdown-list {
+//     border-radius: 10px !important;
+// }
 
-::ng-deep .mat-form-field-wrapper {
-    width: 100% !important;
-}
+// ::ng-deep .mat-form-field-wrapper {
+//     width: 100% !important;
+// }
 
-::ng-deep .multiselect-item-checkbox {
-    ::before {
-        border: 2px solid var(--dark-navy) !important;
-    }
-}
+// ::ng-deep .multiselect-item-checkbox {
+//     ::before {
+//         border: 2px solid var(--dark-navy) !important;
+//     }
+// }
 
-::ng-deep .mat-form-field-infix {
-    border-top: none;
-    height: 30px;
-}
+// ::ng-deep .mat-form-field-infix {
+//     border-top: none;
+//     height: 30px;
+// }
 
-::ng-deep .mat-form-field-underline {
-    display: none;
-}
+// ::ng-deep .mat-form-field-underline {
+//     display: none;
+// }
 
-::ng-deep .mat-select-placeholder {
-    color: var(--light-grey) !important;
-}
+// ::ng-deep .mat-select-placeholder {
+//     color: var(--light-grey) !important;
+// }
 
-::ng-deep .mat-option-text {
-    color: var(--dark-navy);
-}
+// ::ng-deep .mat-option-text {
+//     color: var(--dark-navy);
+// }
 
-::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
-    background-color: var(--dark-navy);
-}
+// ::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
+//     background-color: var(--dark-navy);
+// }
 
-::ng-deep .mat-select-panel {
-    max-width: 90% !important;
-}
+// ::ng-deep .mat-select-panel {
+//     max-width: 90% !important;
+// }
 
-::ng-deep .mat-form-field-wrapper {
-    border-radius: 10px !important;
-    position: absolute;
-}
+// ::ng-deep .mat-form-field-wrapper {
+//     border-radius: 10px !important;
+//     position: absolute;
+// }
 
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: white !important;
-    border: 1px solid var(--light-grey);
-    border-radius: 10px !important;
-    height: 50px;
-    align-items: center;
-}
+// ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+//     background-color: white !important;
+//     border: 1px solid var(--light-grey) !important;
+//     border-radius: 10px !important;
+//     height: 50px;
+//     align-items: center;
+// }
 
 .content {
     position: fixed;
@@ -181,7 +181,12 @@
 }
 
 .assigned {
-    width: 90%;
+    background: white;
+    margin-bottom: var(--m20);
+    width: 80%;
+    padding: 13px 21px;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
 }
 
 .priority {

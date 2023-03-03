@@ -1,7 +1,7 @@
 // ::ng-deep .mat-dialog-container {
-//     border-radius: 10px;
-//     bottom: 0px;
-
+    // border-radius: 20px;
+    // bottom: 0px;
+    // min-height: 675px !important;
 // }
 
 // ::ng-deep .cdk-overlay-pane {
@@ -11,8 +11,7 @@
 .task {
     overflow-y: scroll !important;
     padding: 20px;
-    height: fit-content;
-    border-radius: 10px !important;
+    // border-radius: 20px !important;
     background-color: beige !important;
 }
 
@@ -111,8 +110,8 @@
     justify-content: flex-end;
 }
 
-.edit-btn{
-    &:hover{
+.edit-btn {
+    &:hover {
         transform: scale(1.05);
         cursor: pointer;
     }
