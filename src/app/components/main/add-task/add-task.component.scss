@@ -20,6 +20,10 @@
     border-radius: 10px !important;
 }
 
+::ng-deep .mat-form-field-wrapper {
+    width: 100% !important;
+}
+
 ::ng-deep .multiselect-item-checkbox {
     ::before {
         border: 2px solid var(--dark-navy) !important;

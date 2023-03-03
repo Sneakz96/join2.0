@@ -1,6 +1,7 @@
 ::ng-deep .mat-dialog-container {
     border-radius: 30px;
-    height: 400px;
+    min-height: 400px;
+    min-width: 80%;
     padding: 0px;
 }
 
