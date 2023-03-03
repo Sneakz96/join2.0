@@ -3,8 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { AddTaskComponent } from '../components/main/add-task/add-task.component';
-import { BoardComponent } from '../components/main/board/board.component';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
 import { Task } from '../models/task.class';
 
@@ -47,9 +45,7 @@ export class DataService implements OnInit {
   constructor(
     private fire: Firestore,
     private firestore: AngularFirestore,
-    private board: BoardComponent,
     public dialog: MatDialog,
-    private addTask: AddTaskComponent,
   ) {
     this.getDayTime();
     this.loadTasks();
@@ -104,7 +100,6 @@ export class DataService implements OnInit {
   // LOG PRIORITY
   setPrio(prio: string) {
     this.newTask.priority = prio;
-    console.log(this.newTask.priority)
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
@@ -112,7 +107,6 @@ export class DataService implements OnInit {
     for (let i = 0; i < this.newTask.assignedTo.length; i++) {
       let element = this.newTask.assignedTo[i];
       element.selected = true;
-      console.log(element.selected);
     }
   }
 
@@ -197,7 +191,7 @@ export class DataService implements OnInit {
 
   // LOAD CONTACTS IN OBSERVABLE FOR ADD TASK (ASSIGNED)
   loadContactListInAddTask() {
-    const coll = collection(this.fire, 'allContacts');
+    let coll = collection(this.fire, 'allContacts');
     this.allContacts$ = collectionData(coll);
     this.allContacts$.subscribe(() => {
       // console.log(this.allContacts$);

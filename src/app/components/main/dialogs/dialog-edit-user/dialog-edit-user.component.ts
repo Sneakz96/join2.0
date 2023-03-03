@@ -84,10 +84,10 @@ export class DialogEditUserComponent {
         this.user.color = 'lightblue'
         break;
       case 3:
-        this.user.color = 'red'
+        this.user.color = 'rgb(203, 87, 87)'
         break;
       case 4:
-        this.user.color = 'yellow'
+        this.user.color = '#d0d046'//YELLOW
         break;
       case 5:
         this.user.color = 'orange'
