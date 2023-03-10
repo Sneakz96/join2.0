@@ -33,7 +33,7 @@ export class TaskDialogComponent {
   // EDIT OPENED TASK
   editTask() {
     this.dialogRef.close();
-    const dialog = this.dialog.open(DialogEditTaskComponent);
+    let dialog = this.dialog.open(DialogEditTaskComponent);
     dialog.componentInstance.task = new Task(this.task);
     dialog.componentInstance.taskId = this.taskId;
   }

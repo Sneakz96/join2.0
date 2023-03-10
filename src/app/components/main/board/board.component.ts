@@ -31,7 +31,6 @@ export class BoardComponent {
     });
   }
 
-
   // 
   openTask(taskToOpen: any) {
     let dialogRef = this.dialog.open(TaskDialogComponent, {
