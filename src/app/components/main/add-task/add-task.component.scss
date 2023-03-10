@@ -50,18 +50,18 @@
     align-items: flex-start;
     flex-direction: column;
 
-    input {
-        // box-sizing: border-box;
-        // margin-bottom: var(--m20);
-        // width: 90%;
-        // padding: 13px 21px;
-        // background-color: white;
-        // border: 1px solid var(--light-grey);
-        // border-radius: 10px;
-        // display: flex;
-        // flex-direction: row;
-        // align-items: center;
-    }
+    // input {
+    // box-sizing: border-box;
+    // margin-bottom: var(--m20);
+    // width: 90%;
+    // padding: 13px 21px;
+    // background-color: white;
+    // border: 1px solid var(--light-grey);
+    // border-radius: 10px;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // }
 }
 
 // TITLE
@@ -207,14 +207,10 @@
     }
 }
 
+// SUBTASKS
 .subtask {
     position: relative;
     display: flex;
-
-    input {
-        margin-bottom: none !important;
-        width: 90%;
-    }
 }
 
 .plus {
@@ -227,6 +223,7 @@
     }
 }
 
+// ADDED SUBTASKS
 .subtasks {
     display: flex;
     flex-direction: column;
@@ -244,16 +241,6 @@
             width: 20px;
             margin-top: 10px;
         }
-    }
-}
-
-.checkbox-container {
-    display: flex;
-
-    input {
-        height: 5px;
-        width: 20px;
-        margin-top: 5px;
     }
 }
 
