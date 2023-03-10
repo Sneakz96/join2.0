@@ -49,42 +49,50 @@ export class DialogAddUserComponent implements OnInit {
     this.contact.id = 20000 * Math.random();
   }
 
-  // SET USER FORM
+  // CHECK SENDED USER FORM (ADD USER)
   checkForm() {
-    let firstName = this.contactForm.value.firstName.replace(/\s/g, '');
-    let lastName = this.contactForm.value.lastName.replace(/\s/g, '');
-    let mail = this.contactForm.value.email.replace(/\s/g, '');
-    let phone = this.contactForm.value.phone.replace(/\s/g, '');
-
-    let checkInputs = (value: string): boolean => {
-      const allowedCharacters = /^[A-Za-z0-9+-]+$/;
+    let firstName = this.contactForm.value.firstName.trim();
+    let lastName = this.contactForm.value.lastName.trim();
+    let email = this.contactForm.value.email.trim();
+    let phone = this.contactForm.value.phone.trim();
+  
+    // Ersten Buchstaben von Vor- und Nachnamen groß schreiben
+    let capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+  
+    let formattedFirstName = capitalizeFirstLetter(firstName);
+    let formattedLastName = capitalizeFirstLetter(lastName);
+  
+    let isValidInput = (value) => {
+      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
       return allowedCharacters.test(value);
     };
-
-    let checkMail = (value: string): boolean => {
-      const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+    let isValidEmail = (value) => {
+      let allowedEmailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return allowedEmailFormat.test(value);
+    };
+  
+    let isValidNumber = (value) => {
+      let allowedNumbers = /^[0-9+/+]+$/;
       return allowedNumbers.test(value);
     };
-
-    let checkNumber = (value: string): boolean => {
-      const allowedNumbers = /^[0-9+/+]+$/;
-      return allowedNumbers.test(value);
-    };
-
-    let first = checkInputs(firstName);
-    let last = checkInputs(lastName);
-    let email = checkMail(mail);
-    let number = checkNumber(phone);
-
-    if (!first || !last || !email || !number) {
+  
+    let isFirstNameValid = isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
+    let isLastNameValid = isValidInput(formattedLastName) && formattedLastName.length >= 3;
+    let isEmailValid = isValidEmail(email);
+    let isNumberValid = isValidNumber(phone);
+  
+    if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
       console.log('error'); // Output: false
-      console.log(first, last, email, number); // Output: false
+      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isNumberValid); // Output: false
     } else {
       console.log('it works', this.contact.selected); // Output: false
-      console.log(first, last, email, number); // Output: false
-      this.contact.firstName = firstName;
-      this.contact.lastName = lastName;
-      this.contact.email = mail;
+      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isNumberValid); // Output: false
+      this.contact.firstName = formattedFirstName;
+      this.contact.lastName = formattedLastName;
+      this.contact.email = email;
       this.contact.phone = phone;
       this.setUserID();
       this.setColor();

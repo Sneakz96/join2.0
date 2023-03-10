@@ -12,9 +12,11 @@
                 <h5>Description</h5>
                 <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
                 <h5>Category</h5>
-                <select #category>
-                    <option class="placeholder" disabled selected hidden>Select task category</option>
-                    <option value="Management">Management</option>
+
+
+                <select class="category" [value]="12" #category>
+                    <!-- <option class="placeholder" disabled selected hidden>Select task category</option> -->
+                    <option class="black" value="Management">Management</option>
                     <option value="Marketing">Marketing</option>
                     <option value="Costumer Service">Costumer Service</option>
                     <option value="Team">Team</option>
@@ -26,10 +28,21 @@
                 </select>
 
 
+                <h4>mat-select</h4>
+                <mat-form-field  class="assigned" appearance="fill">
+                    <mat-select [(ngModel)]="selectedValue" name="food">
+                        <mat-option *ngFor="let food of categorys" [value]="food">
+                            {{food}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+
                 <h5>Assigned to</h5>
                 <div class="assigned" appearance="fill">
-                    <mat-select [(value)]="assignedCollegues" [formControl]="contact"
-                        [placeholder]="'Select contacts'" multiple #assignedContacts>
+                    <mat-select [(value)]="assignedCollegues" [formControl]="contact" [placeholder]="'Select contacts'"
+                        multiple #assignedContacts>
                         <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                             {{contact.firstName}} {{contact.lastName}}</mat-option>
                     </mat-select>
@@ -40,7 +53,8 @@
             <div class="row row-right">
                 <h5>Due date</h5>
                 <div class="date">
-                    <input matInput #dueDate class="" [matDatepicker]="datePicker" disabled [min]="data.today" [placeholder]="'DD/MM/YYYY'">
+                    <input matInput #dueDate class="" [matDatepicker]="datePicker" disabled [min]="data.today"
+                        [placeholder]="'DD/MM/YYYY'">
                     <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
                 </div>

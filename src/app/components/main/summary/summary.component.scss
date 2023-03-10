@@ -14,16 +14,16 @@
     justify-content: flex-start;
 
     p {
-        margin-left: 5px;
+        margin-left: 30px;
         margin-top: 6%;
-        font-size: 18px;
-        font-weight: 100;
+        font-size: 27px;
+        font-weight: 400;
     }
 }
 
 .stroke {
     margin-left: 5px;
-    margin-top: 75px;
+    margin-top: 6%;
     color: var(--secondary);
     font-size: 50px;
 }
@@ -153,9 +153,15 @@
 }
 
 .side-container {
-    color: var(--dark-navy);
+    position: absolute;
+    right: 53px;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    background-color: yellow;
 
     p {
         font-size: var(--fs-hl);
@@ -163,12 +169,19 @@
 }
 
 .daytime {
-    font-size: var(--fs-xl);
-    margin-bottom: var(--m5p);
+    font-weight: 500;
+    font-size: 47px;
 }
 
 .logged-name {
-    font-size: var(--fs-xl);
+    color: var(--secondary);
+    font-size: 64px;
+}
+
+@media(max-width: 1550px) {
+    .side-container {
+        display: none;
+    }
 }
 
 @media(max-width: 1080px) {
@@ -220,15 +233,6 @@
     .label {
         font-size: var(--fs-l);
     }
-
-    .side-container {
-        margin-top: var(--m10);
-        flex-direction: row;
-    }
-
-    .logged-name {
-        margin-left: var(--m10);
-    }
 }
 
 @media(max-width: 760px) {
@@ -244,10 +248,6 @@
 
     .urgency-date {
         width: 320px;
-    }
-
-    .side-container {
-        flex-direction: column;
     }
 
     .label {
@@ -291,10 +291,6 @@
 
     .deadline {
         margin-bottom: 15px;
-    }
-
-    .side-container {
-        margin-bottom: var(--m20p);
     }
 
     .container-last {

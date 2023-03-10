@@ -34,7 +34,8 @@ export class AddTaskComponent {
   subTaskCreationStatus = 'no subtask created';
   addSubInput: string = '';
   addedSubTasks: string[] = [];
-
+  selectedValue: string;
+  categorys= ['Management','Marketing','','','','',''];
 
   @ViewChild('title', { static: true }) titleElement: ElementRef;
   @ViewChild('description', { static: true }) descriptionElement: ElementRef;
