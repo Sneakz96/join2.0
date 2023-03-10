@@ -24,6 +24,39 @@
     left: 0 !important;
 }
 
+.low {
+    color: white;
+    background-color: rgb(122, 226, 41) !important;
+
+    div {
+        background-image: url('/assets/img/icons/low_white.png') !important;
+        width: 20px !important;
+        height: 15px !important;
+    }
+}
+
+.medium {
+    color: white;
+    background-color: rgb(254, 167, 3) !important;
+
+    div {
+        background-image: url('/assets/img/icons/medium_white.png') !important;
+        width: 17px !important;
+        height: 9px !important;
+    }
+}
+
+.high {
+    color: white;
+    background-color: rgb(255, 61, 0) !important;
+
+    div {
+        background-image: url('/assets/img/icons/urgent_white.png') !important;
+        width: 17px !important;
+        height: 13px !important;
+    }
+}
+
 //HEADERS
 h1 {
     color: black !important;
@@ -90,7 +123,7 @@ h6 {
     --light-grey: rgb(205, 205, 205);
     --white: rgb(246, 247, 248);
     --secondary: rgb(41, 171, 226);
-
+    --light-blue: rgb(41, 171, 226);
     --border: rgba(0, 0, 0, 0.25);
     --icon: rgba(0, 0, 0, 0.75);
 

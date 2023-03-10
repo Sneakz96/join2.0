@@ -18,19 +18,18 @@ export class DialogEditTaskComponent implements OnInit {
   taskId: string;
   contactForm = new FormControl();
   checkedContacts: any[] = [];
-
+  // BOOLEANS
   low = false;
   medium = false;
   high = false;
   checked = false;
-
-
   selected = false;
+
   // 
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<DialogEditTaskComponent>,
-    private firestore: AngularFirestore,
+    // private firestore: AngularFirestore,
     public data: DataService
   ) { }
 

@@ -67,7 +67,6 @@ export class AddTaskComponent {
     this.subtasksElement = substasksElement;
     this.assignedContacts = assignedContactsElement;
     this.dropdown = dropdown;
-    
   }
 
   // ADD TASK TO LOCAL STORAGE
@@ -101,6 +100,7 @@ export class AddTaskComponent {
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
+
   // GET TASK INPUTS
   getAllInputs() {
     this.data.newTask.title = this.titleElement.nativeElement.value;

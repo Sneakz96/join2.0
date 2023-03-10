@@ -39,7 +39,9 @@ export class DataService implements OnInit {
   task: any;
 
   mbDevice = null;
-
+  low = false;
+  medium = false;
+  high = false;
 
   // 
   constructor(
@@ -74,7 +76,6 @@ export class DataService implements OnInit {
 
   // LOAD ALL TASKS FROM FIRESTORE
   loadTasks() {
-    // console.log('loading tasks called');
     this.firestore
       .collection('allTasks')
       .valueChanges({ idField: 'customIdName' })
@@ -87,19 +88,37 @@ export class DataService implements OnInit {
 
   // SET TASK ID
   setId() {
-    var id = new Date().getTime();
+    let id = new Date().getTime();
     this.newTask.id = id / 1000000000;
   }
 
   // SET CREATION TIME
   setDate() {
-    var date = new Date().getTime();
+    let date = new Date().getTime();
     this.newTask.createdAt = date;
   }
 
   // LOG PRIORITY
   setPrio(prio: string) {
     this.newTask.priority = prio;
+    this.getPriority();
+  }
+
+  // GET PRIORITY OF CURRENT TASK
+  getPriority() {
+    if (this.newTask.priority == 'Low') {
+      this.low = true;
+      this.medium = false;
+      this.high = false;
+    } else if (this.newTask.priority == 'Medium') {
+      this.low = false;
+      this.medium = true;
+      this.high = false;
+    } else if (this.newTask.priority == 'Urgent') {
+      this.low = false;
+      this.medium = false;
+      this.high = true;
+    }
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
