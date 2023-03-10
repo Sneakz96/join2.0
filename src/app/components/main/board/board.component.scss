@@ -137,16 +137,16 @@
 //CREATED TASKS
 .task {
     border-radius: 20px;
-    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
     padding: 20px;
     width: 75%;
     height: fit-content;
     background-color: white;
-    margin-bottom: var(--m5p);
+    margin-top: 5px;
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.025);
+        transform: scale(1.005);
     }
 }
 
