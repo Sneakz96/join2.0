@@ -7,10 +7,8 @@
         <!--#CREATE TASK SECTION-->
         <div class="create">
             <div class="row row-left">
-
                 <h5>Title</h5>
-                <input type="text" class="input-field" placeholder="Enter a title" #title>
-
+                <input class="input-field" type="text" placeholder="Enter a title" #title>
                 <h5>Description</h5>
                 <textarea class="textaria" rows="10" placeholder="Enter a Description" #description></textarea>
 
@@ -56,7 +54,7 @@
 
             <div class="row row-right">
                 <h5>Due date</h5>
-                <div class="date">
+                <div class="date input-field">
                     <input matInput #dueDate class="" [matDatepicker]="datePicker" disabled [min]="data.today"
                         [placeholder]="'DD/MM/YYYY'">
                     <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>

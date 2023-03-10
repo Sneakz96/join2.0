@@ -39,7 +39,7 @@
     height: 95%;
     left: 50%;
     top: 5%;
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--light-blue);
 }
 
 .row {
@@ -51,45 +51,38 @@
     flex-direction: column;
 
     input {
-        box-sizing: border-box;
-        margin-bottom: var(--m20);
-        width: 90%;
-        padding: 13px 21px;
-        background: white;
-        border: 1px solid var(--light-grey);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        // box-sizing: border-box;
+        // margin-bottom: var(--m20);
+        // width: 90%;
+        // padding: 13px 21px;
+        // background-color: white;
+        // border: 1px solid var(--light-grey);
+        // border-radius: 10px;
+        // display: flex;
+        // flex-direction: row;
+        // align-items: center;
     }
 }
 
-.category {
+// TITLE
+.input-field {
     box-sizing: border-box;
     margin-bottom: var(--m20);
     width: 90%;
     padding: 13px 21px;
-    background: white;
+    background-color: white;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
-}
-
-.date-container {
     display: flex;
-    position: relative;
+    flex-direction: row;
+    align-items: center;
+
+    &::placeholder {
+        color: red;
+    }
 }
 
-.date {
-    position: relative;
-    width: 100%;
-}
-
-.calendar {
-    position: absolute;
-    left: 76%;
-    top: 2px;
-}
-
+// DESCRIPTION
 .textaria {
     box-sizing: border-box;
     background: white;
@@ -101,14 +94,22 @@
     border-radius: 10px;
 
     &::placeholder {
-        color: rgba(0, 0, 0, 0.25);
+        color: red;
     }
 }
 
-.multiselect-dropdown {
-    width: 90% !important;
+// CATEGORY
+.category {
+    box-sizing: border-box;
+    margin-bottom: var(--m20);
+    width: 90%;
+    padding: 13px 21px;
+    background: white;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
 }
 
+// ASSIGNED TO 
 .assigned {
     background: white;
     margin-bottom: var(--m20);
@@ -118,6 +119,23 @@
     border-radius: 10px;
 }
 
+// DUE DATE
+.date-container {
+    display: flex;
+    position: relative;
+}
+
+.date {
+    position: relative;
+}
+
+.calendar {
+    position: absolute;
+    left: 85%;
+    top: 2px;
+}
+
+// PRIO
 .priority {
     margin-bottom: var(--m20);
     display: flex;
