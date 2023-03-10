@@ -132,6 +132,13 @@
         li {
             flex-direction: column;
             justify-content: center;
+
+            img {
+                padding-left: 0;
+                padding-right: 0;
+                height: 22px;
+                width: 22px;
+            }
         }
     }
 

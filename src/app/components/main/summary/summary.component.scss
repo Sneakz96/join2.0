@@ -161,7 +161,6 @@
     flex: none;
     order: 1;
     flex-grow: 0;
-    background-color: yellow;
 
     p {
         font-size: var(--fs-hl);
@@ -196,6 +195,7 @@
         height: 100px !important;
         align-items: flex-start;
         margin-left: var(--m5p);
+        margin-bottom: 150px;
 
         h1 {
             margin-left: 0 !important;
@@ -204,6 +204,7 @@
         p {
             margin-top: 5px;
             color: var(--secondary);
+
         }
     }
 
@@ -244,6 +245,7 @@
     .container-last {
         width: 150px;
         height: 110px;
+        margin-bottom: 15%;
     }
 
     .urgency-date {
@@ -257,6 +259,9 @@
 }
 
 @media(max-width: 420px) {
+    h1{
+        font-size: 47px !important;
+    }
     .container {
         width: 40%;
         margin: 10px;
