@@ -74,6 +74,7 @@
     }
 }
 
+// MAIN CONTENT
 .overview {
     margin-top: var(--m50);
     margin-left: var(--m5p);
@@ -83,14 +84,14 @@
 }
 
 .column {
-    width: 280px;
+    width: 20%;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
 .header-container {
-    width: 280px;
+    width: 100%;
     margin-bottom: var(--m10);
     display: flex;
     justify-content: space-between;
@@ -115,14 +116,18 @@
     align-items: center;
     flex-direction: column;
     overflow-y: scroll;
-    width: 280px;
+    width: 100%;
     height: 60vh;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .drag-task {
-    width: 180px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.075);
+    border-radius: 20px;
 }
 
 //CREATED TASKS
@@ -131,9 +136,9 @@
     border-radius: 20px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
     padding: 20px;
-    width: 180px;
     height: fit-content;
     background-color: white;
+    width: 100%;
 
     &:hover {
         cursor: pointer;
@@ -261,31 +266,9 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media(max-width: 1440px) {
-    .column {
-        width: 220px;
-    }
-
-    .task {
-        width: 140px;
-    }
-}
-
-@media(max-width: 1180px) {
-    .overview {
-        margin-top: var(--m20);
-        flex-direction: column;
-        overflow-y: scroll;
-    }
-}
-
 @media(max-width: 1080px) {
-    // .task {
-    //     width: 500px;
-    // }
-
     .content-container {
-        height: 30vh;
+        height: 40vh;
     }
 
     .content {
@@ -309,7 +292,7 @@
     }
 
     .column {
-        width: 100%;
+        width: 22%;
 
         &:last-child {
             margin-bottom: 50px;
@@ -318,20 +301,24 @@
 }
 
 @media(max-width: 760px) {
-    // .task {
-    //     width: 350px;
-    // }
-
     .searchbox {
         margin-left: var(--m10p);
         width: 70%;
     }
+
+    .overview {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .content-container {
+        height: 30vh;
+    }
 }
 
-@media(max-width: 420px) {
-    // .task {
-    //     width: 80%;
-    // }
-}
+@media(max-width: 420px) {}
 
 @media(max-width: 300px) {}

@@ -63,7 +63,7 @@
       </div>
       <div class="content-container" id="dropList_1" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress" [cdkDragDisabled]="taskInProgress.visible">
+        <div class="drag-task" *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress" [cdkDragDisabled]="taskInProgress.visible">
           <div class="task" [ngClass]="taskInProgress.visible ? 'task-shadow':'task'"
             *ngIf="taskInProgress.status == 'inProgress'" (click)="openTask(taskInProgress)"
             [routerLink]="['/kanbanboard/board/' + taskInProgress.customIdName]">
@@ -103,7 +103,7 @@
       </div>
       <div class="content-container" id="dropList_2" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback" [cdkDragDisabled]="taskAwaitingFeedback.visible">
+        <div class="drag-task" *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback" [cdkDragDisabled]="taskAwaitingFeedback.visible">
           <div class="task" [ngClass]="taskAwaitingFeedback.visible ? 'task-shadow':'task'"
             *ngIf="taskAwaitingFeedback.status == 'awaitingFeedback'" (click)="openTask(taskAwaitingFeedback)"
             [routerLink]="['/kanbanboard/board/' + taskAwaitingFeedback.customIdName]">
@@ -143,7 +143,7 @@
       </div>
       <div class="content-container" id="dropList_3" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone" [cdkDragDisabled]="taskDone.visible">
+        <div class="drag-task" *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone" [cdkDragDisabled]="taskDone.visible">
           <div class="task" [ngClass]="taskDone.visible ? 'task-shadow':'task'" *ngIf="taskDone.status == 'done'"
             (click)="openTask(taskDone)" [routerLink]="['/kanbanboard/board/' + taskDone.customIdName]">
             <div class="category">
