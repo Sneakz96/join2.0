@@ -86,8 +86,9 @@
 // ASSIGNED TO 
 .assigned {
     background: white;
+    box-sizing: border-box;
     margin-bottom: var(--m20);
-    width: 80%;
+    width: 90%;
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
@@ -99,6 +100,11 @@
 
 ::ng-deep .mat-select-placeholder {
     color: red !important;
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+    position: absolute;
+    right: -50px;
 }
 
 // DUE DATE
@@ -132,9 +138,10 @@
     }
 }
 
-::ng-deep .mat-calendar-body-cell-content  {
+::ng-deep .mat-calendar-body-cell-content {
     background-color: rgba(0, 0, 0, 0.1) !important;
-    &:hover{
+
+    &:hover {
         background-color: rgba(41, 171, 226, 0.25) !important;
     }
 }
@@ -219,6 +226,7 @@
 .subtask {
     position: relative;
     display: flex;
+    width: 100%;
 }
 
 .plus {

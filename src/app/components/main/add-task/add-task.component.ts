@@ -18,12 +18,12 @@ export class AddTaskComponent {
   // 
   task = new Task();
   taskForm!: FormGroup;
+  choosenCategory: any;
   // 
-  subTaskCreationStatus = 'no subtask created';
   addSubInput: string = '';
   addedSubTasks: string[] = [];
-  selectedValue: string;
-  categorys = ['Management', 'Marketing', '', '', '', '', ''];
+  // 
+  subError = false;
 
   // 
   constructor(
@@ -40,7 +40,7 @@ export class AddTaskComponent {
   // 
   setForm() {
     this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title, [Validators.required, Validators.minLength(3)]),
+      'title': new FormControl(this.task.title),
       'description': new FormControl(this.task.description),
       'category': new FormControl(this.task.category),
       'assignedTo': new FormControl(this.task.assignedTo),
@@ -50,14 +50,6 @@ export class AddTaskComponent {
     });
   }
 
-  // CREATE SUBTASK
-  addSubTask() {
-    this.subTaskCreationStatus = 'sub created';
-    console.log(this.subTaskCreationStatus, this.addSubInput);
-    this.addedSubTasks.push(this.addSubInput);
-    this.addSubInput = '';
-  }
-
   // LOG PRIO
   setPrio(prio: string) {
     console.log(prio);
@@ -65,7 +57,7 @@ export class AddTaskComponent {
     this.getPrio(prio);
   }
 
-  // 
+  // GET PRIO STATUS -> SET BOOLEAN
   getPrio(prio) {
     if (prio == 'Low') {
       this.data.low = true;
@@ -81,21 +73,39 @@ export class AddTaskComponent {
       this.data.high = true;
     }
   }
+
   // DISPLAYS ALL CREATED SUBTASKS
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
 
+  // CREATE SUBTASK
+  addSubTask() {
+    if (this.addSubInput == '' || this.addSubInput.length < 4) {
+      this.handleSubError();
+      console.log('alert error', this.subError);
+      // ADD ALERT 
+    } else {
+      this.addedSubTasks.push(this.addSubInput);
+    }
+  }
+
+  handleSubError() {
+    this.subError = true;
+    setTimeout(() => {
+      this.subError = false;
+    }, 3000);
+  }
+
   // 
   checkForm() {
-
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let category = this.taskForm.value.category;
     let assignedTo = this.taskForm.value.assignedTo;
     let dueDate = this.taskForm.value.dueDate;
     let prio = this.task.priority;
-    let subtasks = this.taskForm.value.subtasks;
+    let subtasks = this.addedSubTasks;
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -110,7 +120,8 @@ export class AddTaskComponent {
       return allowedCharacters.test(value);
     }
     let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
-    console.log(validTitle);
+    let validDescription = isValid(description) && description.length >= 3;
+    console.log(validTitle, validDescription);
   }
 
   // 

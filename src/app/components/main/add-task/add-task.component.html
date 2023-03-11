@@ -1,6 +1,8 @@
 <div class="content">
     <h1>Add task</h1>
+    <!-- ALERTS -->
 
+    <!-- ALERTS -->
     <div class="create-new-task">
         <!--#CREATE TASK SECTION-->
         <div class="create">
@@ -15,7 +17,7 @@
                         required></textarea>
 
                     <h5>Category</h5>
-                    <select class="category" formControlName="category" required>
+                    <select class="category" >
                         <option value="" class="placeholder" selected hidden>Select task category</option>
                         <option value="Management">Management</option>
                         <option value="Marketing">Marketing</option>
@@ -28,6 +30,19 @@
                         <option value="Sales">Sales</option>
                     </select>
 
+                    <h5>Category</h5>
+                    <mat-select class="category" [(value)]="choosenCategory" formControlName="category" required placeholder="Select category">
+                        <mat-option value="Management">Management</mat-option>
+                        <mat-option value="Costumer Service">Costumer Service</mat-option>
+                        <mat-option value="Marketing">Marketing</mat-option>
+                        <mat-option value="Team">Team</mat-option>
+                        <mat-option value="Design">Design</mat-option>
+                        <mat-option value="IT">It</mat-option>
+                        <mat-option value="Media">Media</mat-option>
+                        <mat-option value="Backoffice">Backoffice</mat-option>
+                        <mat-option value="Sales">Sales</mat-option>
+                    </mat-select>
+                    
                     <h5>Assigned to</h5>
                     <div class="assigned" appearance="fill">
                         <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
@@ -63,35 +78,38 @@
                             <div [ngClass]="{'high': data.high}"></div>
                         </button>
                     </div>
+                    <form>
 
-                    <h5>Subtasks</h5>
-                    <div class="subtask">
-                        <!-- <input class="input-field" type="text" (input)="updateSubTask($event)"
-                            placeholder="Add new subtask" #subInput [(ngModel)]="addSubInput"> -->
-                        <img class="plus" src="/assets/img/icons/plus.png">
-                        <!-- (click)="addSubTask()" -->
-                    </div>
-
-                    <div class="subtasks" #subtasks>
-                        <div class="_2" *ngFor="let subtasks of addedSubTasks">
-                            <input type="checkbox">
-                            <label for="checkbox">{{ subtasks }}</label>
+                        <h5>Subtasks</h5>
+                        <div class="subtask">
+                            <input class="input-field" type="text" (input)="updateSubTask($event)"
+                                placeholder="Add new subtask">
+                            <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
                         </div>
-                    </div>
+                        <div class="sub-alert" *ngIf="subError">
+                            <span>Form is invalid</span>
+                        </div>
+                        <div class="subtasks" #subtasks>
+                            <div class="_2" *ngFor="let subtasks of addedSubTasks">
+                                <input type="checkbox" checked>
+                                <label for="checkbox">{{ subtasks }}</label>
+                            </div>
+                        </div>
+                    </form>
 
                     <div class="btn-container">
-                        <!-- (click)="clearAllValues()" -->
-                        <button class="clear-btn" (click)="resetForm()">Clear<img
-                                src="/assets/img/icons/close.png"></button>
-                        <!-- (click)="addTask()" -->
-                        <button class="create-task-btn" (click)="checkForm()">Create Task<img
-                                src="/assets/img/icons/create.png"></button>
+                        <button class="clear-btn" (click)="resetForm()">Clear
+                            <img src="/assets/img/icons/close.png">
+                        </button>
+                        <button class="create-task-btn" (click)="checkForm()">Create Task
+                            <img src="/assets/img/icons/create.png">
+                        </button>
                     </div>
 
                     <button class="mb-alert" *ngIf="data.alert">Task added to Board
                         <img src="./assets/img/icons/task_added_mb.png">
                     </button>
-                
+
                 </div>
             </form>
 
