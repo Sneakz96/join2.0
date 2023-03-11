@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
@@ -34,68 +34,37 @@ export class AddTaskComponent {
   // subtasks: string[] = [];
   // subInput: string = '';
   // // SUBTASKS
-  // subTaskCreationStatus = 'no subtask created';
+  subTaskCreationStatus = 'no subtask created';
   addSubInput: string = '';
   addedSubTasks: string[] = [];
   selectedValue: string;
   categorys = ['Management', 'Marketing', '', '', '', '', ''];
 
-  // @ViewChild('title', { static: true }) titleElement: ElementRef;
-  // @ViewChild('description', { static: true }) descriptionElement: ElementRef;
-  // @ViewChild('category', { static: true }) categoryElement: ElementRef;
-  // @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
-  // @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
-  // @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
-  // @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
-  // @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
-
   // 
   constructor(
-    // titleElement: ElementRef,
-    // descriptionElement: ElementRef,
-    // categoryElement: ElementRef,
-    // dueDateElement: ElementRef,
-    // subInputElement: ElementRef,
-    // substasksElement: ElementRef,
-    // assignedContactsElement: ElementRef,
-    // dropdown: ElementRef,
     public data: DataService,
     public router: Router,
   ) {
-    // this.titleElement = titleElement;
-    // this.descriptionElement = descriptionElement;
-    // this.categoryElement = categoryElement;
-    // this.dueDateElement = dueDateElement;
-    // this.subInputElement = subInputElement;
-    // this.subtasksElement = substasksElement;
-    // this.assignedContacts = assignedContactsElement;
-    // this.dropdown = dropdown;
   }
 
   ngOnInit(): void {
+    // debugger;
     this.setForm();
   }
 
-  setForm() {
-    console.log('title:',)
-    let newTask = new FormGroup({
-      'title': new FormControl(this.task.title),
-      // 'description': new FormControl(this.task.description),
-      // 'category': new FormControl(this.task.category),
-      // 'assignedTo': new FormControl(this.task.assignedTo),
-
-
-      // 'firstName': new FormControl(this.contact.firstName),
-      // 'lastName': new FormControl(this.contact.lastName),
-      // 'email': new FormControl(this.contact.email),
-      // 'phone': new FormControl(this.contact.phone),
-    });
-    console.log(newTask.value);
-  }
   // 
-  sendForm(task){
-    console.log(task);
+  setForm() {
+    this.taskForm = new FormGroup({
+      'title': new FormControl(this.task.title, [Validators.required, Validators.minLength(3)]),
+      'description': new FormControl(this.task.description),
+      'category': new FormControl(this.task.category),
+      'assignedTo': new FormControl(this.task.assignedTo),
+      'dueDate': new FormControl(this.task.dueDate),
+      'prio': new FormControl(this.task.priority),
+      'subTasks': new FormControl(this.task.subtasks)
+    });
   }
+
 
 
   // ADD TASK TO LOCAL STORAGE
@@ -118,18 +87,58 @@ export class AddTaskComponent {
   // }
 
   // CREATE SUBTASK
-  // addSubTask() {
-  //   this.subTaskCreationStatus = 'sub created';
-  //   console.log(this.subTaskCreationStatus, this.addSubInput);
-  //   this.addedSubTasks.push(this.addSubInput);
-  //   this.addSubInput = '';
-  // }
-
+  addSubTask() {
+    this.subTaskCreationStatus = 'sub created';
+    console.log(this.subTaskCreationStatus, this.addSubInput);
+    this.addedSubTasks.push(this.addSubInput);
+    this.addSubInput = '';
+  }
+  // LOG PRIORITY
+  setPrio(prio: string) {
+    console.log(prio);
+    this.task.priority = prio;
+    this.data.getPriority();
+  }
   // DISPLAYS ALL CREATED SUBTASKS
   updateSubTask(event: any) {
     this.addSubInput = event.target.value;
   }
 
+  // 
+  checkForm() {
+
+    let title = this.taskForm.value.title.trim();
+    let description = this.taskForm.value.description.trim();
+    let category = this.taskForm.value.category;
+    let assignedTo = this.taskForm.value.assignedTo;
+    let dueDate = this.taskForm.value.dueDate;
+    let prio = this.taskForm.value.prio;
+    let subtasks = this.taskForm.value.subtasks;
+
+    let capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+    let formattedTitle = capitalizeFirstLetter(title);
+    console.log(formattedTitle);
+    console.log(title, description, category, assignedTo, dueDate, prio, subtasks);
+
+
+    let isValid = (value) => {
+      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
+      return allowedCharacters.test(value);
+    }
+    let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
+    console.log(validTitle);
+  }
+
+
+
+
+
+
+  resetForm() {
+    console.log('form should be reset');
+  }
   // GET TASK INPUTS
   // getAllInputs() {
   //   this.data.newTask.title = this.titleElement.nativeElement.value;

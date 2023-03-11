@@ -98,11 +98,7 @@ export class DataService implements OnInit {
     this.newTask.createdAt = date;
   }
 
-  // LOG PRIORITY
-  setPrio(prio: string) {
-    this.newTask.priority = prio;
-    this.getPriority();
-  }
+
 
   // GET PRIORITY OF CURRENT TASK
   getPriority() {

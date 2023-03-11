@@ -8,17 +8,17 @@
     overflow-y: scroll;
 }
 
-#alert {
-    margin-top: var(--m20);
-    margin-bottom: var(--m20);
-    margin-left: var(--m5p);
-    color: red;
-    height: fit-content;
-    padding: 8px;
-    width: fit-content;
-    border-radius: 10px;
-    border: 1px solid red;
-}
+// #alert {
+//     margin-top: var(--m20);
+//     margin-bottom: var(--m20);
+//     margin-left: var(--m5p);
+//     color: red;
+//     height: fit-content;
+//     padding: 8px;
+//     width: fit-content;
+//     border-radius: 10px;
+//     border: 1px solid red;
+// }
 
 .create-new-task {
     height: fit-content;
@@ -49,19 +49,6 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-
-    // input {
-    // box-sizing: border-box;
-    // margin-bottom: var(--m20);
-    // width: 90%;
-    // padding: 13px 21px;
-    // background-color: white;
-    // border: 1px solid var(--light-grey);
-    // border-radius: 10px;
-    // display: flex;
-    // flex-direction: row;
-    // align-items: center;
-    // }
 }
 
 // TITLE
@@ -104,11 +91,56 @@
     margin-bottom: var(--m20);
     width: 90%;
     padding: 13px 21px;
-    background: white;
+    // background: yellow;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+
+    &:first-child {
+        color: green;
+    }
 }
 
+.placeholder {
+    color: red !important;
+    background-color: black;
+}
+
+.category option:first-child {
+    color: red !important;
+    font-style: italic;
+    /* Make the placeholder text italic */
+}
+
+.category option.placeholder {
+    color: red !important;
+    /* Set the placeholder text color */
+    font-style: italic;
+    /* Make the placeholder text italic */
+}
+select.category option[disabled][selected] {
+    color: #999;
+    font-style: italic;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 // ASSIGNED TO 
 .assigned {
     background: white;
@@ -117,6 +149,14 @@
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+}
+
+.assigned-to {
+    width: 80%;
+}
+
+::ng-deep .mat-select-placeholder {
+    color: red !important;
 }
 
 // DUE DATE
