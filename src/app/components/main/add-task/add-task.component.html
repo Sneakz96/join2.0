@@ -11,12 +11,12 @@
                         placeholder="Enter a title" required>
 
                     <h5>Description</h5>
-                    <textarea class="textaria" rows="10" placeholder="Enter a Description"
-                        formControlName="description" required></textarea>
+                    <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
+                        required></textarea>
 
                     <h5>Category</h5>
                     <select class="category" formControlName="category" required>
-                        <option value="" class="placeholder"  selected hidden>Select task category</option>
+                        <option value="" class="placeholder" selected hidden>Select task category</option>
                         <option value="Management">Management</option>
                         <option value="Marketing">Marketing</option>
                         <option value="Costumer Service">Costumer Service</option>
@@ -29,7 +29,7 @@
                     </select>
 
                     <h5>Assigned to</h5>
-                    <div class="assigned" appearance="fill" >
+                    <div class="assigned" appearance="fill">
                         <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
                             placeholder="Select contacts" multiple #assignedContacts required>
                             <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
@@ -38,26 +38,25 @@
                     </div>
 
                 </div>
-
                 <div class="vector d-none"></div>
 
                 <div class="row row-right">
                     <h5>Due date</h5>
                     <div class="date input-field">
-                        <input matInput #dueDate class="" [matDatepicker]="datePicker" disabled [min]="data.today"
-                            [placeholder]="'DD/MM/YYYY'">
+                        <input matInput class="date-input" [matDatepicker]="datePicker" disabled [min]="data.today"
+                            placeholder="DD/MM/YYYY">
                         <mat-datepicker-toggle class="calendar" matIconSuffix
                             [for]="datePicker"></mat-datepicker-toggle>
                         <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
                     </div>
+
 
                     <h5>Prio</h5>
                     <div class="priority">
                         <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
                             <div [ngClass]="{'low': data.low}"></div>
                         </button>
-                        <button id="addMedium" [ngClass]="{'medium': data.medium}"
-                            (click)="setPrio('Medium')">Medium
+                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="setPrio('Medium')">Medium
                             <div [ngClass]="{'medium': data.medium}"></div>
                         </button>
                         <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
@@ -72,6 +71,7 @@
                         <img class="plus" src="/assets/img/icons/plus.png">
                         <!-- (click)="addSubTask()" -->
                     </div>
+
                     <div class="subtasks" #subtasks>
                         <div class="_2" *ngFor="let subtasks of addedSubTasks">
                             <input type="checkbox">
@@ -81,16 +81,20 @@
 
                     <div class="btn-container">
                         <!-- (click)="clearAllValues()" -->
-                        <button class="clear-btn" (click)="resetForm()">Clear<img src="/assets/img/icons/close.png"></button>
+                        <button class="clear-btn" (click)="resetForm()">Clear<img
+                                src="/assets/img/icons/close.png"></button>
                         <!-- (click)="addTask()" -->
                         <button class="create-task-btn" (click)="checkForm()">Create Task<img
                                 src="/assets/img/icons/create.png"></button>
                     </div>
-                    <button class="mb-alert" *ngIf="data.alert">Task added to Board
-                        <img src="./assets/img/icons/task_added_mb.png"></button>
-                </div>
 
+                    <button class="mb-alert" *ngIf="data.alert">Task added to Board
+                        <img src="./assets/img/icons/task_added_mb.png">
+                    </button>
+                
+                </div>
             </form>
+
 
 
         </div>

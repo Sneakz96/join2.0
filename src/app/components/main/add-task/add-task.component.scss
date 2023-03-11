@@ -8,18 +8,6 @@
     overflow-y: scroll;
 }
 
-// #alert {
-//     margin-top: var(--m20);
-//     margin-bottom: var(--m20);
-//     margin-left: var(--m5p);
-//     color: red;
-//     height: fit-content;
-//     padding: 8px;
-//     width: fit-content;
-//     border-radius: 10px;
-//     border: 1px solid red;
-// }
-
 .create-new-task {
     height: fit-content;
     display: flex;
@@ -91,56 +79,10 @@
     margin-bottom: var(--m20);
     width: 90%;
     padding: 13px 21px;
-    // background: yellow;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
-
-    &:first-child {
-        color: green;
-    }
 }
 
-.placeholder {
-    color: red !important;
-    background-color: black;
-}
-
-.category option:first-child {
-    color: red !important;
-    font-style: italic;
-    /* Make the placeholder text italic */
-}
-
-.category option.placeholder {
-    color: red !important;
-    /* Set the placeholder text color */
-    font-style: italic;
-    /* Make the placeholder text italic */
-}
-select.category option[disabled][selected] {
-    color: #999;
-    font-style: italic;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 // ASSIGNED TO 
 .assigned {
     background: white;
@@ -169,10 +111,36 @@ select.category option[disabled][selected] {
     position: relative;
 }
 
+.date-input {
+    background-color: white;
+    border: none;
+    color: black;
+
+    &::placeholder {
+        color: red;
+    }
+}
+
 .calendar {
     position: absolute;
     left: 85%;
     top: 2px;
+
+    // color: red;
+    &:active {
+        color: var(--light-blue);
+    }
+}
+
+::ng-deep .mat-calendar-body-cell-content  {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    &:hover{
+        background-color: rgba(41, 171, 226, 0.25) !important;
+    }
+}
+
+::ng-deep .mat-calendar-body-selected {
+    background-color: var(--light-blue) !important;
 }
 
 // PRIO
@@ -355,142 +323,142 @@ select.category option[disabled][selected] {
 }
 
 @media(max-width: 1080px) {
-    .content {
-        left: 0;
-        width: 100%;
-    }
+    // .content {
+    //     left: 0;
+    //     width: 100%;
+    // }
 
-    .create-new-task {
-        margin-top: var(--m5p);
-        margin-bottom: var(--m10p);
-    }
+    // .create-new-task {
+    //     margin-top: var(--m5p);
+    //     margin-bottom: var(--m10p);
+    // }
 
-    .assigned {
-        width: 72.5%;
-    }
+    // .assigned {
+    //     width: 72.5%;
+    // }
 
-    .row {
-        width: 100%;
-    }
+    // .row {
+    //     width: 100%;
+    // }
 
-    .calendar {
-        left: 72%;
-    }
+    // .calendar {
+    //     left: 72%;
+    // }
 
-    .priority {
-        width: 100%;
-        justify-content: space-between;
-    }
+    // .priority {
+    //     width: 100%;
+    //     justify-content: space-between;
+    // }
 
-    .mb-alert {
-        display: none;
-    }
+    // .mb-alert {
+    //     display: none;
+    // }
 }
 
 @media(max-width: 760px) {
-    .create {
-        flex-direction: column;
-        align-items: center;
-    }
+    // .create {
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
 
-    .vector {
-        display: none;
-    }
+    // .vector {
+    //     display: none;
+    // }
 
-    .subtasks {
-        width: 100%;
-        margin-bottom: var(--m50p);
-    }
+    // .subtasks {
+    //     width: 100%;
+    //     margin-bottom: var(--m50p);
+    // }
 
-    .btn-container {
-        width: 60%;
-        margin-bottom: var(--m25p);
-    }
+    // .btn-container {
+    //     width: 60%;
+    //     margin-bottom: var(--m25p);
+    // }
 
-    .row {
-        input {
-            width: 100%;
-        }
+    // .row {
+    //     input {
+    //         width: 100%;
+    //     }
 
-        select {
-            width: 100%;
-        }
-    }
+    //     select {
+    //         width: 100%;
+    //     }
+    // }
 
-    .textaria {
-        width: 100%;
-    }
+    // .textaria {
+    //     width: 100%;
+    // }
 
-    .assigned {
-        width: 87.5%;
-    }
+    // .assigned {
+    //     width: 87.5%;
+    // }
 
-    .calendar {
-        left: 85%;
-    }
+    // .calendar {
+    //     left: 85%;
+    // }
 
-    .plus {
-        left: 88%;
-    }
+    // .plus {
+    //     left: 88%;
+    // }
 
-    .mb-alert {
-        display: flex;
-        margin-left: 55px;
-        animation: move-up 1.2s forwards;
-    }
+    // .mb-alert {
+    //     display: flex;
+    //     margin-left: 55px;
+    //     animation: move-up 1.2s forwards;
+    // }
 }
 
 @media(max-width: 420px) {
-    .assigned {
-        width: 85.5%;
-    }
+    // .assigned {
+    //     width: 85.5%;
+    // }
 
-    .create {
-        width: 90%;
-    }
+    // .create {
+    //     width: 90%;
+    // }
 
-    .btn-container {
-        width: 90%;
-        flex-direction: column;
-        margin-bottom: 110px;
-    }
+    // .btn-container {
+    //     width: 90%;
+    //     flex-direction: column;
+    //     margin-bottom: 110px;
+    // }
 
-    .create-task-btn {
-        margin-top: var(--m10);
-        margin-left: 0;
-    }
+    // .create-task-btn {
+    //     margin-top: var(--m10);
+    //     margin-left: 0;
+    // }
 
-    .mb-alert {
-        margin-left: 58px;
-    }
+    // .mb-alert {
+    //     margin-left: 58px;
+    // }
 }
 
 @media(max-width: 300px) {
-    .assigned {
-        width: 82.5%;
-    }
+    // .assigned {
+    //     width: 82.5%;
+    // }
 
-    .priority {
-        flex-direction: column;
-    }
+    // .priority {
+    //     flex-direction: column;
+    // }
 
-    .btn-container {
-        width: 95%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin-bottom: var(--m50p);
-    }
+    // .btn-container {
+    //     width: 95%;
+    //     display: flex;
+    //     align-items: center;
+    //     flex-direction: column;
+    //     margin-bottom: var(--m50p);
+    // }
 
-    .create-task-btn {
-        margin-top: var(--m5p);
-        margin-left: 0;
-    }
+    // .create-task-btn {
+    //     margin-top: var(--m5p);
+    //     margin-left: 0;
+    // }
 
-    .mb-alert {
-        margin-bottom: 75px;
-        margin-left: 14px;
-    }
+    // .mb-alert {
+    //     margin-bottom: 75px;
+    //     margin-left: 14px;
+    // }
 }
 
 //ANIMATION

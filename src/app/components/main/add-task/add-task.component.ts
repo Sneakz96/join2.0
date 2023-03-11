@@ -12,28 +12,13 @@ import { Task } from 'src/app/models/task.class';
 })
 
 export class AddTaskComponent {
-  //CONTACTS
+  //
   contact = new FormControl();
-  // contactForm = new FormControl('');
-  // selectedContacts: string[] = [];
-  // dropdownSettings: IDropdownSettings = {};
-  // dropDownForm!: FormGroup;
   assignedCollegues: string[] = [];
-  // TASK
+  // 
   task = new Task();
   taskForm!: FormGroup;
-  // id!: number;
-  // title: string = '';
-  // description: string = '';
-  // category: string = '';
-  // assignedTo: [] = [];
-
-  // dueDate: string = '';
-  // priority: string = '';
-  // createdAt!: number;
-  // subtasks: string[] = [];
-  // subInput: string = '';
-  // // SUBTASKS
+  // 
   subTaskCreationStatus = 'no subtask created';
   addSubInput: string = '';
   addedSubTasks: string[] = [];
@@ -61,9 +46,78 @@ export class AddTaskComponent {
       'assignedTo': new FormControl(this.task.assignedTo),
       'dueDate': new FormControl(this.task.dueDate),
       'prio': new FormControl(this.task.priority),
-      'subTasks': new FormControl(this.task.subtasks)
+      'subTasks': new FormControl(this.task.subtasks),
     });
   }
+
+  // CREATE SUBTASK
+  addSubTask() {
+    this.subTaskCreationStatus = 'sub created';
+    console.log(this.subTaskCreationStatus, this.addSubInput);
+    this.addedSubTasks.push(this.addSubInput);
+    this.addSubInput = '';
+  }
+
+  // LOG PRIO
+  setPrio(prio: string) {
+    console.log(prio);
+    this.task.priority = prio;
+    this.getPrio(prio);
+  }
+
+  // 
+  getPrio(prio) {
+    if (prio == 'Low') {
+      this.data.low = true;
+      this.data.medium = false;
+      this.data.high = false;
+    } else if (prio == 'Medium') {
+      this.data.low = false;
+      this.data.medium = true;
+      this.data.high = false;
+    } else if (prio == 'Urgent') {
+      this.data.low = false;
+      this.data.medium = false;
+      this.data.high = true;
+    }
+  }
+  // DISPLAYS ALL CREATED SUBTASKS
+  updateSubTask(event: any) {
+    this.addSubInput = event.target.value;
+  }
+
+  // 
+  checkForm() {
+
+    let title = this.taskForm.value.title.trim();
+    let description = this.taskForm.value.description.trim();
+    let category = this.taskForm.value.category;
+    let assignedTo = this.taskForm.value.assignedTo;
+    let dueDate = this.taskForm.value.dueDate;
+    let prio = this.task.priority;
+    let subtasks = this.taskForm.value.subtasks;
+
+    let capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+    let formattedTitle = capitalizeFirstLetter(title);
+    console.log(formattedTitle);
+    console.log(title, description, category, assignedTo, dueDate, prio, subtasks);
+
+
+    let isValid = (value) => {
+      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
+      return allowedCharacters.test(value);
+    }
+    let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
+    console.log(validTitle);
+  }
+
+  // 
+  resetForm() {
+    console.log('form should be reset');
+  }
+
 
 
 
@@ -86,59 +140,7 @@ export class AddTaskComponent {
   //   }
   // }
 
-  // CREATE SUBTASK
-  addSubTask() {
-    this.subTaskCreationStatus = 'sub created';
-    console.log(this.subTaskCreationStatus, this.addSubInput);
-    this.addedSubTasks.push(this.addSubInput);
-    this.addSubInput = '';
-  }
-  // LOG PRIORITY
-  setPrio(prio: string) {
-    console.log(prio);
-    this.task.priority = prio;
-    this.data.getPriority();
-  }
-  // DISPLAYS ALL CREATED SUBTASKS
-  updateSubTask(event: any) {
-    this.addSubInput = event.target.value;
-  }
 
-  // 
-  checkForm() {
-
-    let title = this.taskForm.value.title.trim();
-    let description = this.taskForm.value.description.trim();
-    let category = this.taskForm.value.category;
-    let assignedTo = this.taskForm.value.assignedTo;
-    let dueDate = this.taskForm.value.dueDate;
-    let prio = this.taskForm.value.prio;
-    let subtasks = this.taskForm.value.subtasks;
-
-    let capitalizeFirstLetter = (string) => {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-    let formattedTitle = capitalizeFirstLetter(title);
-    console.log(formattedTitle);
-    console.log(title, description, category, assignedTo, dueDate, prio, subtasks);
-
-
-    let isValid = (value) => {
-      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
-      return allowedCharacters.test(value);
-    }
-    let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
-    console.log(validTitle);
-  }
-
-
-
-
-
-
-  resetForm() {
-    console.log('form should be reset');
-  }
   // GET TASK INPUTS
   // getAllInputs() {
   //   this.data.newTask.title = this.titleElement.nativeElement.value;
