@@ -24,7 +24,7 @@ export class AddTaskComponent {
   addedSubTasks: string[] = [];
   // 
   subError = false;
-
+  taskCreated = false;
   // 
   constructor(
     public data: DataService,
@@ -33,7 +33,6 @@ export class AddTaskComponent {
   }
 
   ngOnInit(): void {
-    // debugger;
     this.setForm();
   }
 
@@ -52,7 +51,6 @@ export class AddTaskComponent {
 
   // LOG PRIO
   setPrio(prio: string) {
-    console.log(prio);
     this.task.priority = prio;
     this.getPrio(prio);
   }
@@ -129,6 +127,21 @@ export class AddTaskComponent {
     console.log('form should be reset');
   }
 
+  addTaskToDb() {
+    this.checkForm();
+    // if (this.taskCreated) {
+    this.data.changeContactStatus();
+    this.data.setId();
+    this.data.setDate();
+    // this.data.alert = true;
+    // this.data.saveTaskToFirestore();
+    // setTimeout(() => {
+    //   this.router.navigate(['/kanbanboard/board']);
+    // }, 2500);
+    console.log(this.task)
+    // }
+
+  }
 
 
 

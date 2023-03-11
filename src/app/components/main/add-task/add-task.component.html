@@ -6,32 +6,20 @@
     <div class="create-new-task">
         <!--#CREATE TASK SECTION-->
         <div class="create">
-            <form [formGroup]="taskForm" ngNativeValidate>
+            <form class="create" [formGroup]="taskForm" ngNativeValidate>
                 <div class="row row-left">
+                    <!-- TITLE -->
                     <h5>Title</h5>
                     <input class="input-field" type="text" id="title" formControlName="title"
                         placeholder="Enter a title" required>
-
+                    <!-- DESCRIPTION -->
                     <h5>Description</h5>
                     <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
                         required></textarea>
-
+                    <!-- CATEGORY -->
                     <h5>Category</h5>
-                    <select class="category" >
-                        <option value="" class="placeholder" selected hidden>Select task category</option>
-                        <option value="Management">Management</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Costumer Service">Costumer Service</option>
-                        <option value="Team">Team</option>
-                        <option value="Design">Design</option>
-                        <option value="IT">IT</option>
-                        <option value="Media">Media</option>
-                        <option value="Backoffice">Backoffice</option>
-                        <option value="Sales">Sales</option>
-                    </select>
-
-                    <h5>Category</h5>
-                    <mat-select class="category" [(value)]="choosenCategory" formControlName="category" required placeholder="Select category">
+                    <mat-select class="category" [(value)]="choosenCategory" formControlName="category" required
+                        placeholder="Select category">
                         <mat-option value="Management">Management</mat-option>
                         <mat-option value="Costumer Service">Costumer Service</mat-option>
                         <mat-option value="Marketing">Marketing</mat-option>
@@ -42,7 +30,7 @@
                         <mat-option value="Backoffice">Backoffice</mat-option>
                         <mat-option value="Sales">Sales</mat-option>
                     </mat-select>
-                    
+                    <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
                     <div class="assigned" appearance="fill">
                         <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
@@ -51,70 +39,62 @@
                                 {{contact.firstName}} {{contact.lastName}}</mat-option>
                         </mat-select>
                     </div>
-
                 </div>
-                <div class="vector d-none"></div>
-
+                <div class="vector"></div>
                 <div class="row row-right">
+                    <!-- DUE_DATE -->
                     <h5>Due date</h5>
                     <div class="date input-field">
                         <input matInput class="date-input" [matDatepicker]="datePicker" disabled [min]="data.today"
-                            placeholder="DD/MM/YYYY">
+                            placeholder="dd/mm/yyyy">
                         <mat-datepicker-toggle class="calendar" matIconSuffix
                             [for]="datePicker"></mat-datepicker-toggle>
                         <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
                     </div>
-
-
+                    <!-- PRIORITY -->
                     <h5>Prio</h5>
                     <div class="priority">
-                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
-                            <div [ngClass]="{'low': data.low}"></div>
+                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
+                            <div [ngClass]="{'high': data.high}"></div>
                         </button>
                         <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="setPrio('Medium')">Medium
                             <div [ngClass]="{'medium': data.medium}"></div>
                         </button>
-                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
-                            <div [ngClass]="{'high': data.high}"></div>
+                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
+                            <div [ngClass]="{'low': data.low}"></div>
                         </button>
                     </div>
-                    <form>
-
-                        <h5>Subtasks</h5>
-                        <div class="subtask">
-                            <input class="input-field" type="text" (input)="updateSubTask($event)"
-                                placeholder="Add new subtask">
-                            <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
+                    <!-- SUBTASKS -->
+                    <h5>Subtasks</h5>
+                    <div class="subtask">
+                        <input class="input-field" type="text" (input)="updateSubTask($event)"
+                            placeholder="Add new subtask">
+                        <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
+                    </div>
+                    <!-- SUBALERT -->
+                    <div class="sub-alert" *ngIf="subError">
+                        <span>Input darf nicht leer sein!</span>
+                    </div>
+                    <div class="subtasks" #subtasks>
+                        <div class="_2" *ngFor="let subtasks of addedSubTasks">
+                            <input type="checkbox" checked>
+                            <label for="checkbox">{{ subtasks }}</label>
                         </div>
-                        <div class="sub-alert" *ngIf="subError">
-                            <span>Form is invalid</span>
-                        </div>
-                        <div class="subtasks" #subtasks>
-                            <div class="_2" *ngFor="let subtasks of addedSubTasks">
-                                <input type="checkbox" checked>
-                                <label for="checkbox">{{ subtasks }}</label>
-                            </div>
-                        </div>
-                    </form>
-
+                    </div>
+                    <!-- BTN -->
                     <div class="btn-container">
                         <button class="clear-btn" (click)="resetForm()">Clear
                             <img src="/assets/img/icons/close.png">
                         </button>
-                        <button class="create-task-btn" (click)="checkForm()">Create Task
+                        <button class="create-task-btn" (click)="addTaskToDb()">Create Task
                             <img src="/assets/img/icons/create.png">
                         </button>
                     </div>
-
                     <button class="mb-alert" *ngIf="data.alert">Task added to Board
                         <img src="./assets/img/icons/task_added_mb.png">
                     </button>
-
                 </div>
             </form>
-
-
-
         </div>
     </div>
 </div>

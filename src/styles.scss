@@ -1,4 +1,4 @@
-/*GLOBALS*/
+/*GLOBAL*/
 * {
     margin: 0;
     padding: 0;
@@ -83,7 +83,7 @@ h4 {
 
 h5 {
     color: black !important;
-    font-size: var(--fs-m) !important;
+    font-size: 21px !important;
     margin-bottom: 3px !important;
 }
 
@@ -92,8 +92,9 @@ h6 {
     font-size: var(--fs-l) !important;
 }
 
-//FONT ROOT
+
 :root {
+    //FONT ROOT
     --fs-s: 10px;
     --fs-sm: 13px;
     --fs-m: 18px;
@@ -101,8 +102,7 @@ h6 {
     --fs-xl: 30px;
     --fs-hl: 42px;
 
-//MARGIN ROOT
-
+    //MARGIN ROOT
     --m5: 5px;
     --m5p: 5%;
     --m10: 10px;
@@ -114,8 +114,7 @@ h6 {
     --m50: 50px;
     --m50p: 50%;
 
-//COLOR ROOT
-
+    //COLOR ROOT
     --dark-navy: rgb(42, 54, 71);
     --menu-active: rgb(9, 25, 49);
     --light-grey: rgb(205, 205, 205);
@@ -124,6 +123,7 @@ h6 {
     --light-blue: rgb(41, 171, 226);
     --border: rgba(0, 0, 0, 0.25);
     --icon: rgba(0, 0, 0, 0.75);
+    --placeholder: rgba(0, 0, 0, 0.35);
 
     //CONTACTCOLORSERVICE
     --yellow: rgb(212, 255, 0);
