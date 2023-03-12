@@ -32,25 +32,22 @@
                     </mat-select>
                     <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
-                    <div class="assigned" appearance="fill">
-                        <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
-                            placeholder="Select contacts" multiple #assignedContacts required>
-                            <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
-                                {{contact.firstName}} {{contact.lastName}}</mat-option>
-                        </mat-select>
-                    </div>
+                    <!-- <div class="assigned" appearance="fill"> -->
+                    <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
+                        placeholder="Select contacts" multiple #assignedContacts required>
+                        <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
+                            {{contact.firstName}} {{contact.lastName}}</mat-option>
+                    </mat-select>
+                    <!-- </div> -->
                 </div>
                 <div class="vector"></div>
                 <div class="row row-right">
                     <!-- DUE_DATE -->
                     <h5>Due date</h5>
-                    <div class="date input-field">
-                        <input matInput class="date-input" [matDatepicker]="datePicker" [min]="data.today"
-                            placeholder="dd/mm/yyyy" formControlName="dueDate" required>
-                        <mat-datepicker-toggle class="calendar" matIconSuffix
-                            [for]="datePicker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
-                    </div>
+                    <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
+                        placeholder="dd/mm/yyyy" formControlName="dueDate" required>
+                    <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
                     <!-- PRIORITY -->
                     <h5>Prio</h5>
                     <div class="priority">

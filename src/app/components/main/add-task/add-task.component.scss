@@ -82,10 +82,13 @@
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+
+    &:focus {
+        border: 2px solid var(--active);
+    }
 }
 
-// ASSIGNED TO 
-.assigned {
+.assigned-to {
     background-color: white;
     box-sizing: border-box;
     margin-bottom: var(--m20);
@@ -93,6 +96,10 @@
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
+
+    &:focus {
+        border: 2px solid var(--active) !important;
+    }
 }
 
 ::ng-deep .mat-select-placeholder {
@@ -109,19 +116,20 @@
 }
 
 // DUE DATE
-.date-container {
-    display: flex;
-    position: relative;
-}
+// .date-container {
+//     display: flex;
+//     position: relative;
+// }
 
-.date {
-    position: relative;
-}
+// .date {
+//     position: relative;
+// }
 
 .date-input {
     background-color: white;
     border: none;
     color: black;
+    position: relative;
 
     &::placeholder {
         color: var(--placeholder);
@@ -130,8 +138,8 @@
 
 .calendar {
     position: absolute;
-    left: 85%;
-    top: 2px;
+    left: 78%;
+    top: 30px;
 
     &:active {
         color: var(--light-blue);
