@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -21,25 +20,26 @@ export class AddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // 
-  addSubInput: string = '';
+  
+  //
+  @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: string[] = [];
   // 
   subError = false;
   taskCreated = false;
+
   // 
   constructor(
     public data: DataService,
     public router: Router,
     private fire: Firestore,
-    
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.setForm();
   }
 
-  // 
+  // SET TASK FORM
   setForm() {
     this.taskForm = new FormGroup({
       'title': new FormControl(this.task.title),
@@ -59,7 +59,7 @@ export class AddTaskComponent {
   }
 
   // GET PRIO STATUS -> SET BOOLEAN
-  getPrio(prio) {
+  getPrio(prio: string) {
     if (prio == 'Low') {
       this.data.low = true;
       this.data.medium = false;
@@ -75,22 +75,17 @@ export class AddTaskComponent {
     }
   }
 
-  // DISPLAYS ALL CREATED SUBTASKS
-  updateSubTask(event: any) {
-    this.addSubInput = event.target.value;
-  }
-
   // CREATE SUBTASK
   addSubTask() {
-    if (this.addSubInput == '' || this.addSubInput.length < 4) {
+    if (this.subInput.nativeElement.value == '') {
       this.handleSubError();
-      console.log('alert error', this.subError);
-      // ADD ALERT 
     } else {
-      this.addedSubTasks.push(this.addSubInput);
+      this.addedSubTasks.push(this.subInput.nativeElement.value);
+      this.subInput.nativeElement.value = '';
     }
   }
 
+  // GIVE SUBTASK ERROR
   handleSubError() {
     this.subError = true;
     setTimeout(() => {
@@ -102,18 +97,12 @@ export class AddTaskComponent {
   checkForm() {
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
-    let category = this.taskForm.value.category;
-    let assignedTo = this.assignedCollegues;
     let dueDate = this.taskForm.value.dueDate;
-    let prio = this.task.priority;
-    let subtasks = this.addedSubTasks;
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
     };
     let formattedTitle = capitalizeFirstLetter(title);
-
-
     let isValid = (value) => {
       let allowedCharacters = /^[A-Za-z0-9+-]+$/;
       return allowedCharacters.test(value);
@@ -123,21 +112,18 @@ export class AddTaskComponent {
       return expectedFormat.test(value);
     };
 
-    let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
-    let validDescription = isValid(description) && description.length >= 3;
-    let validDueDate = isValidDate(dueDate);
-    console.log('date is valid:', validDueDate);
-    console.log(assignedTo);
+    isValid(formattedTitle) && formattedTitle.length >= 3;
+    isValid(description) && description.length >= 3;
+    isValidDate(dueDate);
 
     this.task.title = formattedTitle;
     this.task.description = description;
-    this.task.category = category;
+    this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.dueDate = dueDate;
-    this.task.priority = prio;
-    this.task.subtasks = subtasks;
+    this.task.priority = this.task.priority;
+    this.task.subtasks = this.addedSubTasks;
 
-    console.log(this.task);
     this.changeContactStatus();
     this.setId();
     this.setDate();
@@ -174,18 +160,20 @@ export class AddTaskComponent {
 
   // 
   resetForm() {
-    console.log('form should be reset');
+    this.taskForm.reset();
+    this.subInput.nativeElement.value = '';
+    this.addedSubTasks = [];
+    this.task.priority = '';
+    // REMOVE ACTIVE CLASS
+    this.data.high = false;
+    this.data.medium = false;
+    this.data.low = false;
   }
 
   // 
   addTaskToDb() {
-    // this.checkForm();
-    // this.checkAlerts()
-
-    console.log(this.task);
-    // this.data.alert = true;
-    // this.data.saveTaskToFirestore();
-    this.saveTaskToFirestore();
+    this.data.alert = true;
+    // this.saveTaskToFirestore();
     setTimeout(() => {
       this.router.navigate(['/kanbanboard/board']);
     }, 2500);
@@ -193,9 +181,10 @@ export class AddTaskComponent {
   }
   // SAVE TASKS TO DB
   saveTaskToFirestore() {
-    const coll = collection(this.fire, 'allTasks');
+    let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
+  
   // 
   checkAlerts() {
     console.log('alert');

@@ -67,8 +67,7 @@
                     <!-- SUBTASKS -->
                     <h5>Subtasks</h5>
                     <div class="subtask">
-                        <input class="input-field" type="text" (input)="updateSubTask($event)"
-                            placeholder="Add new subtask">
+                        <input class="input-field" type="text" placeholder="Add new subtask" id="sub-input" #subInput>
                         <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
                     </div>
                     <!-- SUBALERT -->
