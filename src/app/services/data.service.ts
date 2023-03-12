@@ -264,14 +264,5 @@ export class DataService implements OnInit {
       .update({ status: status });
   }
 
-  // DELETE TASK ON OVERLAY
-  deleteTask(task: any, taskId: any) {
-    this.firestore.collection("allTasks").doc(taskId).delete()
-      .then(() => {
-        console.log("Aufgabe wurde erfolgreich gelöscht.");
-      })
-      .catch((error) => {
-        console.error("Fehler beim Löschen der Aufgabe:", error);
-      });
-  }
+
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -22,7 +23,8 @@ export class TaskDialogComponent {
     public dialogRef: MatDialogRef<TaskDialogComponent>,
     private router: Router,
     public data: DataService,
-    ) { }
+    private firestore: AngularFirestore,
+  ) { }
 
   // CLOSE DIALOG AND AND NAVIGATE TO BOARD
   closeDialog() {
@@ -37,5 +39,17 @@ export class TaskDialogComponent {
     dialog.componentInstance.task = new Task(this.task);
     dialog.componentInstance.taskId = this.taskId;
     this.closeDialog();
+  }
+
+  // DELETE TASK ON OVERLAY
+  deleteTask(task: any, taskId: any) {
+    this.firestore.collection("allTasks").doc(taskId).delete()
+      .then(() => {
+        console.log("Aufgabe wurde erfolgreich gelöscht.");
+        this.closeDialog();
+      })
+      .catch((error) => {
+        console.error("Fehler beim Löschen der Aufgabe:", error);
+      });
   }
 }

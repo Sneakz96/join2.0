@@ -31,6 +31,7 @@ export class AddTaskComponent {
     public data: DataService,
     public router: Router,
     private fire: Firestore,
+    
   ) {
   }
 
@@ -103,8 +104,6 @@ export class AddTaskComponent {
     let description = this.taskForm.value.description.trim();
     let category = this.taskForm.value.category;
     let assignedTo = this.assignedCollegues;
-    console.log('this.assignedCollegues:', this.assignedCollegues);
-    console.log('assignedTo:', assignedTo);
     let dueDate = this.taskForm.value.dueDate;
     let prio = this.task.priority;
     let subtasks = this.addedSubTasks;
@@ -123,6 +122,7 @@ export class AddTaskComponent {
       let expectedFormat = /^\w{3} \w{3} \d{1,2} \d{4} \d{2}:\d{2}:\d{2} GMT[+-]\d{4} \(.+\)$/;
       return expectedFormat.test(value);
     };
+
     let validTitle = isValid(formattedTitle) && formattedTitle.length >= 3;
     let validDescription = isValid(description) && description.length >= 3;
     let validDueDate = isValidDate(dueDate);
@@ -133,7 +133,7 @@ export class AddTaskComponent {
     this.task.description = description;
     this.task.category = category;
     this.task.assignedTo = this.assignedCollegues;
-    this.task.dueDate = dueDate.getDate();
+    this.task.dueDate = dueDate;
     this.task.priority = prio;
     this.task.subtasks = subtasks;
 
@@ -212,4 +212,7 @@ export class AddTaskComponent {
       this.taskCreated = false;
     }
   }
+
+
+
 }
