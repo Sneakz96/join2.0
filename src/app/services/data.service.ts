@@ -86,17 +86,9 @@ export class DataService implements OnInit {
       });
   }
 
-  // SET TASK ID
-  setId() {
-    let id = new Date().getTime();
-    this.newTask.id = id / 1000000000;
-  }
 
-  // SET CREATION TIME
-  setDate() {
-    let date = new Date().getTime();
-    this.newTask.createdAt = date;
-  }
+
+
 
 
 
@@ -123,6 +115,18 @@ export class DataService implements OnInit {
       let element = this.newTask.assignedTo[i];
       element.selected = true;
     }
+  }
+  
+  // SET TASK ID
+  setId() {
+    let id = new Date().getTime();
+    this.newTask.id = id / 1000000000;
+  }
+
+  // SET CREATION TIME
+  setDate() {
+    let date = new Date().getTime();
+    this.newTask.createdAt = date;
   }
 
   // SAVE TASKS TO DB

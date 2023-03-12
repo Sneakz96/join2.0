@@ -45,8 +45,8 @@
                     <!-- DUE_DATE -->
                     <h5>Due date</h5>
                     <div class="date input-field">
-                        <input matInput class="date-input" [matDatepicker]="datePicker" disabled [min]="data.today"
-                            placeholder="dd/mm/yyyy">
+                        <input matInput class="date-input" [matDatepicker]="datePicker" [min]="data.today"
+                            placeholder="dd/mm/yyyy" formControlName="dueDate" required>
                         <mat-datepicker-toggle class="calendar" matIconSuffix
                             [for]="datePicker"></mat-datepicker-toggle>
                         <mat-datepicker touchUi="" #datePicker disabled="false"></mat-datepicker>
@@ -86,11 +86,11 @@
                         <button class="clear-btn" (click)="resetForm()">Clear
                             <img src="/assets/img/icons/close.png">
                         </button>
-                        <button class="create-task-btn" (click)="addTaskToDb()">Create Task
+                        <button class="create-task-btn" (click)="checkForm()">Create Task
                             <img src="/assets/img/icons/create.png">
                         </button>
                     </div>
-                    <button class="mb-alert" *ngIf="data.alert">Task added to Board
+                    <button class="mb-alert" *ngIf="taskCreated">Task added to Board
                         <img src="./assets/img/icons/task_added_mb.png">
                     </button>
                 </div>
