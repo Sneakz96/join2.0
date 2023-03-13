@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -22,7 +22,7 @@ export class AddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // 
-
+  contactForm!: FormGroup;
   //
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: string[] = [];
@@ -33,8 +33,6 @@ export class AddTaskComponent {
 
 
   // ALERTS
-  title = false;
-  description = false;
   category = false;
   assigned = false;
   dueDate = false;
@@ -45,34 +43,27 @@ export class AddTaskComponent {
     public data: DataService,
     public router: Router,
     private fire: Firestore,
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.setForm();
   }
 
+  ngOnInit(): void {
 
+  }
 
+  // 
   handleAlerts() {
-    this.alert_title();
-    this.alert_description();
     this.alert_category();
     this.alert_assigned();
-    this.alert_due_date();
     this.alert_prio();
     this.timeout();
   }
 
-  alert_title() {
-    console.log('alert_title');
-  }
-
-  alert_description() {
-
-  }
-
+  // 
   alert_category() {
-
+    if (this.task.category == '') {
+      this.category = true;
+    }
   }
 
   // 
@@ -80,10 +71,6 @@ export class AddTaskComponent {
     if (this.task.assignedTo.length == 0) {
       this.assigned = true;
     }
-  }
-
-  alert_due_date() {
-
   }
 
   alert_prio() {
@@ -94,8 +81,6 @@ export class AddTaskComponent {
 
   timeout() {
     setTimeout(() => {
-      this.title = false;
-      this.description = false;
       this.category = false;
       this.assigned = false;
       this.dueDate = false;
@@ -167,42 +152,41 @@ export class AddTaskComponent {
   checkForm() {
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
-    console.log(this.taskForm.value.dueDate)
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
     };
     let formattedTitle = capitalizeFirstLetter(title);
-    let isValid = (value) => {
-      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
-      return allowedCharacters.test(value);
-    }
-
-    isValid(formattedTitle) && formattedTitle.length >= 3;
-    isValid(description) && description.length >= 3;
-
+    console.log(this.taskForm.value.dueDate);
     this.task.title = formattedTitle;
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
-    this.task.dueDate = this.taskForm.value.dueDate;
+this.handleDate();
 
     this.changeContactStatus();
     this.setId();
     this.setDate();
     this.checkValidation();
-    console.log(this.task);
   }
 
   // 
   checkValidation() {
-    this.taskCreated = true;
     this.handleAlerts();
-    // if (this.taskCreated) {
-    //   this.addTaskToDb();
-    // }
+    console.log(this.task.dueDate);
+    if (this.task.title.length > 4 &&
+      this.task.description.length > 8 &&
+      this.task.category &&
+      this.task.assignedTo.length > 0 &&
+      this.task.dueDate &&
+      this.task.priority
+    ) {
+      // debugger;
+      this.taskCreated = true;
+      this.addTaskToDb();
+    }
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
@@ -223,6 +207,25 @@ export class AddTaskComponent {
   setDate() {
     let date = new Date().getTime();
     this.task.createdAt = date;
+  }
+
+  handleDate() {
+    
+    // Beispiel-Input-String vom Datepicker
+    const input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
+
+    // Das Datum in ein JavaScript-Date-Objekt umwandeln
+    const date = new Date(input);
+
+    // Das gewünschte Datum-Format extrahieren
+    const month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Das Datum im gewünschten Format speichern
+    const output = `${month}/${day}/${year}`;
+    console.log(output); // Output: "3/14/2023"
+    this.task.dueDate = output;
   }
 
   // 
