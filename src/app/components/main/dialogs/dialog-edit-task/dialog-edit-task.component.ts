@@ -29,7 +29,7 @@ export class DialogEditTaskComponent implements OnInit {
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<DialogEditTaskComponent>,
-    // private firestore: AngularFirestore,
+    private firestore: AngularFirestore,
     public data: DataService
   ) { }
 
@@ -64,13 +64,16 @@ export class DialogEditTaskComponent implements OnInit {
 
   // SAVE EDITED TASK TO DB
   save() {
-    console.log('save called', this.checkedContacts);
+    // debugger;
+    // console.log('save called', this.task);
+    // console.log(this.firestore.collection);
+    // console.log(this.task.toJSON());
     this.checkAllAssignedContacts();
     this.close();
-    // this.firestore
-    //   .collection('allTasks')
-    //   .doc(this.taskId)
-    //   .update(this.task.toJSON());
+    this.firestore
+      .collection('allTasks')
+      .doc(this.taskId)
+      .update(this.task.toJSON());
   }
 
   // CLOSE EDIT DIALOG
@@ -85,7 +88,7 @@ export class DialogEditTaskComponent implements OnInit {
     for (let i = 0; i < this.data.allContacts.length; i++) {
       this.checkedContacts.push(this.checkAssignedContacts(i));
     }
-    console.log(this.checkedContacts);
+    // console.log(this.checkedContacts);
   }
 
   // CHECK ASSIGNED CONTACTS
