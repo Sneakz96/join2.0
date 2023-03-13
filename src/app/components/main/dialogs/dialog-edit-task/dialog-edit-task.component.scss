@@ -41,7 +41,7 @@
     width: 75%;
     background: white;
     box-sizing: border-box;
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--border);
     border-radius: 10px;
     gap: 10px;
     padding: 12px 14px;
@@ -52,7 +52,7 @@
     width: 75%;
     background: white;
     box-sizing: border-box;
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--border);
     border-radius: 10px;
     gap: 10px;
     padding: 12px 14px;
@@ -70,7 +70,7 @@
     input {
         background: white;
         box-sizing: border-box;
-        border: 1px solid #D1D1D1;
+        border: 1px solid var(--border);
         border-radius: 10px;
         gap: 10px;
         padding: 12px 14px;
@@ -168,7 +168,7 @@
 .assigned-field {
     background: white;
     box-sizing: border-box;
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--border);;
     border-radius: 10px;
     gap: 10px;
     padding: 12px 14px;

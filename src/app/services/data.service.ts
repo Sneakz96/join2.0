@@ -20,6 +20,7 @@ export class DataService implements OnInit {
   assigned = false;
   dueDate = false;
   prio = false;
+  subError = false;
   // TASKS
   task = new Task();
   taskForm!: FormGroup;
@@ -208,28 +209,15 @@ export class DataService implements OnInit {
     }, 3000);
   }
 
-  // LOG PRIO
-  setPrio(prio: string) {
-    this.task.priority = prio;
-    this.getPrio(prio);
+  // GIVE SUBTASK ERROR
+  handleSubError() {
+    this.subError = true;
+    setTimeout(() => {
+      this.subError = false;
+    }, 3000);
   }
 
-  // GET PRIO STATUS -> SET BOOLEAN
-  getPrio(prio: string) {
-    if (prio == 'Low') {
-      this.low = true;
-      this.medium = false;
-      this.high = false;
-    } else if (prio == 'Medium') {
-      this.low = false;
-      this.medium = true;
-      this.high = false;
-    } else if (prio == 'Urgent') {
-      this.low = false;
-      this.medium = false;
-      this.high = true;
-    }
-  }
+ 
 
 
 

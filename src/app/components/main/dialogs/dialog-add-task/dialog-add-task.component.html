@@ -1,21 +1,18 @@
 <!--#CREATE TASK SECTION-->
 <span class="headline">Add Task</span>
 <div class="create">
-    <img class="close-btn" src="./assets/img/icons/close.png" >
+    <img class="close-btn" src="./assets/img/icons/close.png" (click)="close()">
     <form class="create" [formGroup]="taskForm" ngNativeValidate>
                 <div class="row row-left">
-                    <!-- TITLE -->
                     <h5>Title</h5>
-                    <input class="input-field" type="text" id="title" formControlName="title"
+                    <input class="input-field" type="text" formControlName="title"
                         placeholder="Enter a title" required minlength="4" maxlength="20" pattern="[a-zA-Z+ ]+">    
-                    <!-- DESCRIPTION -->
                     <h5>Description</h5>
                     <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
                         required minlength="8" pattern="[a-zA-Z0-9 ]+">
                     </textarea>
-                    <!-- CATEGORY -->
                     <h5>Category</h5>
-                    <p class="alert" *ngIf="data.category">Please choose a category!</p>
+                    <p class="alert" *ngIf="category">Please choose a category!</p>
                     <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
                         placeholder="Select category">
                         <mat-option value="Management">Management</mat-option>
@@ -28,9 +25,8 @@
                         <mat-option value="Backoffice">Backoffice</mat-option>
                         <mat-option value="Sales">Sales</mat-option>
                     </mat-select>
-                    <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
-                    <p class="alert" *ngIf="data.assigned">Please assign a collegue!</p>
+                    <p class="alert" *ngIf="assigned">Please assign a collegue!</p>
                     <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
                         placeholder="Select contacts" multiple #assignedContacts >
                         <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
@@ -39,33 +35,29 @@
                 </div>
                 <div class="vector"></div>
                 <div class="row row-right">
-                    <!-- DUE_DATE -->
                     <h5>Due date</h5>
                     <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
                         placeholder="dd/mm/yyyy" formControlName="dueDate" required pattern="[0-9/]+">
                     <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
                     <mat-datepicker #datePicker disabled="false"></mat-datepicker>
-                    <!-- PRIORITY -->
                     <h5>Prio</h5>
-                    <p class="alert" *ngIf="data.prio">Please choose a priority!</p>
+                    <p class="alert" *ngIf="prio">Please choose a priority!</p>
                     <div class="priority">
-                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="data.setPrio('Urgent')">Urgent
+                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
                             <div [ngClass]="{'high': data.high}"></div>
                         </button>
-                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="data.setPrio('Medium')">Medium
+                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="setPrio('Medium')">Medium
                             <div [ngClass]="{'medium': data.medium}"></div>
                         </button>
-                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="data.setPrio('Low')">Low
+                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
                             <div [ngClass]="{'low': data.low}"></div>
                         </button>
                     </div>
-                    <!-- SUBTASKS -->
                     <h5>Subtasks</h5>
                     <div class="subtask">
                         <input class="input-field" type="text" placeholder="Add new subtask" id="sub-input" #subInput>
                         <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
                     </div>
-                    <!-- SUBALERT -->
                     <div class="sub-alert" *ngIf="subError">
                         <span>Input darf nicht leer sein!</span>
                     </div>
@@ -75,7 +67,6 @@
                             <label for="checkbox">{{ subtasks }}</label>
                         </div>
                     </div>
-                    <!-- BTN -->
                     <div class="btn-container">
                         <button class="clear-btn" (click)="resetForm()">Clear
                             <img src="/assets/img/icons/close.png">

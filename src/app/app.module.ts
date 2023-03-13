@@ -111,8 +111,8 @@ import { DataService } from './services/data.service';
     MatDatepickerModule,
     EditContactComponent,
     LoginComponent,
-    BoardComponent,
-    AddTaskComponent,
+    // BoardComponent,
+    // AddTaskComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],

@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
-import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { MatDialogRef } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dialog-add-task',
@@ -13,176 +13,227 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 
 export class DialogAddTaskComponent {
-//
-contact = new FormControl();
-assignedCollegues: string[] = [];
-// 
-task = new Task();
-taskForm!: FormGroup;
-choosenCategory: any;
-// 
-contactForm!: FormGroup;
-//
-@ViewChild('subInput') subInput: ElementRef;
-addedSubTasks: string[] = [];
-// 
-subError = false;
-taskCreated = false;
+  //CONTACTS
+  contact = new FormControl();
+  assignedCollegues: string[] = [];
+  // TASK
+  task = new Task();
+  taskForm!: FormGroup;
+  choosenCategory: any;
+  // SUBINPUT
+  @ViewChild('subInput') subInput: ElementRef;
+  addedSubTasks: string[] = [];
+  // ALERTS
+  category = false;
+  assigned = false;
+  dueDate = false;
+  prio = false;
+  subError = false;
+  taskCreated = false;
 
-// 
-constructor(
-  public data: DataService,
-  public router: Router,
-  private fire: Firestore,
-  public dialogRef: MatDialogRef<DialogAddTaskComponent>
-) {
-  this.setForm();
-}
-
-ngOnInit(): void {
-
-}
-
-
-
-
-
-
-
-
-
-// SET TASK FORM
-setForm() {
-  this.taskForm = new FormGroup({
-    'title': new FormControl(this.task.title),
-    'description': new FormControl(this.task.description),
-    'category': new FormControl(this.task.category),
-    'assignedTo': new FormControl(this.task.assignedTo),
-    'dueDate': new FormControl(this.task.dueDate),
-    'prio': new FormControl(this.task.priority),
-    'subTasks': new FormControl(this.task.subtasks),
-  });
-}
-
-
-
-
-
-// CREATE SUBTASK
-addSubTask() {
-  if (this.subInput.nativeElement.value == '') {
-    this.handleSubError();
-  } else {
-    this.addedSubTasks.push(this.subInput.nativeElement.value);
-    this.subInput.nativeElement.value = '';
-  }
-}
-
-// GIVE SUBTASK ERROR
-handleSubError() {
-  this.subError = true;
-  setTimeout(() => {
-    this.subError = false;
-  }, 3000);
-}
-
-// 
-checkForm() {
-  let title = this.taskForm.value.title.trim();
-  let description = this.taskForm.value.description.trim();
-
-  let capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-  let formattedTitle = capitalizeFirstLetter(title);
-  console.log(this.taskForm.value.dueDate);
-  this.task.title = formattedTitle;
-  this.task.description = description;
-  this.task.category = this.taskForm.value.category;
-  this.task.assignedTo = this.assignedCollegues;
-  this.task.priority = this.task.priority;
-  this.task.subtasks = this.addedSubTasks;
-  this.handleDate();
-
-  this.changeContactStatus();
-  this.setId();
-  this.setDate();
-  this.checkValidation();
-}
-
-// 
-checkValidation() {
-  this.data.handleAlerts();
-  console.log(this.task.dueDate);
-  if (this.task.title.length > 4 &&
-    this.task.description.length > 8 &&
-    this.task.category &&
-    this.task.assignedTo.length > 0 &&
-    this.task.dueDate &&
-    this.task.priority
+  //   
+  constructor(
+    public data: DataService,
+    public router: Router,
+    private fire: Firestore,
+    public dialogRef: MatDialogRef<DialogAddTaskComponent>
   ) {
-    // debugger;
-    this.taskCreated = true;
-    this.addTaskToDb();
+    this.setForm();
   }
-}
 
-// CHANGE STATUS OF ASSIGNED CONTACTS
-changeContactStatus() {
-  for (let i = 0; i < this.task.assignedTo.length; i++) {
-    let element = this.task.assignedTo[i];
-    element.selected = true;
+  // 
+  handleAlerts() {
+    this.alert_category();
+    this.alert_assigned();
+    this.alert_prio();
+    this.timeout();
   }
-}
 
-// SET TASK ID
-setId() {
-  let id = new Date().getTime();
-  this.task.id = id / 1000000000;
-}
+  // 
+  alert_category() {
+    if (this.task.category == '') {
+      this.category = true;
+    }
+  }
 
-// SET CREATION TIME
-setDate() {
-  let date = new Date().getTime();
-  this.task.createdAt = date;
-}
+  // 
+  alert_assigned() {
+    if (this.task.assignedTo.length == 0) {
+      this.assigned = true;
+    }
+  }
 
-// 
-handleDate() {
-  let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
-  let date = new Date(input);
-  let month = date.getMonth() + 1; 
-  let day = date.getDate();
-  let year = date.getFullYear();
+  // 
+  alert_prio() {
+    if (this.task.priority == '') {
+      this.prio = true;
+    }
+  }
 
-  let output = `${month}/${day}/${year}`;
-  this.task.dueDate = output;
-}
+  // 
+  timeout() {
+    setTimeout(() => {
+      this.category = false;
+      this.assigned = false;
+      this.dueDate = false;
+      this.prio = false;
+    }, 3000);
+  }
 
-// 
-resetForm() {
-  this.taskForm.reset();
-  this.subInput.nativeElement.value = '';
-  this.addedSubTasks = [];
-  this.task.priority = '';
-  // REMOVE ACTIVE CLASS
-  this.data.high = false;
-  this.data.medium = false;
-  this.data.low = false;
-}
+  // SET TASK FORM
+  setForm() {
+    this.taskForm = new FormGroup({
+      'title': new FormControl(this.task.title),
+      'description': new FormControl(this.task.description),
+      'category': new FormControl(this.task.category),
+      'assignedTo': new FormControl(this.task.assignedTo),
+      'dueDate': new FormControl(this.task.dueDate),
+      'prio': new FormControl(this.task.priority),
+      'subTasks': new FormControl(this.task.subtasks),
+    });
+  }
 
-// 
-addTaskToDb() {
-  this.data.alert = true;
-  this.saveTaskToFirestore();
-  this.resetForm();
-  this.dialogRef.close();
-}
+  // LOG PRIO
+  setPrio(prio: string) {
+    this.task.priority = prio;
+    this.getPrio(prio);
+  }
 
-// SAVE TASKS TO DB
-saveTaskToFirestore() {
-  let coll = collection(this.fire, 'allTasks');
-  setDoc(doc(coll), this.task.toJSON());
-}
+  // GET PRIO STATUS -> SET BOOLEAN
+  getPrio(prio: string) {
+    if (prio == 'Low') {
+      this.data.low = true;
+      this.data.medium = false;
+      this.data.high = false;
+    } else if (prio == 'Medium') {
+      this.data.low = false;
+      this.data.medium = true;
+      this.data.high = false;
+    } else if (prio == 'Urgent') {
+      this.data.low = false;
+      this.data.medium = false;
+      this.data.high = true;
+    }
+  }
 
+  // CREATE SUBTASK
+  addSubTask() {
+    if (this.subInput.nativeElement.value == '') {
+      this.handleSubError();
+    } else {
+      this.addedSubTasks.push(this.subInput.nativeElement.value);
+      this.subInput.nativeElement.value = '';
+    }
+  }
+
+  // GIVE SUBTASK ERROR
+  handleSubError() {
+    this.subError = true;
+    setTimeout(() => {
+      this.subError = false;
+    }, 3000);
+  }
+
+  // 
+  checkForm() {
+    let title = this.taskForm.value.title.trim();
+    let description = this.taskForm.value.description.trim();
+
+    let capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+    let formattedTitle = capitalizeFirstLetter(title);
+    this.task.title = formattedTitle;
+    this.task.description = description;
+    this.task.category = this.taskForm.value.category;
+    this.task.assignedTo = this.assignedCollegues;
+    this.task.priority = this.task.priority;
+    this.task.subtasks = this.addedSubTasks;
+
+    this.handleDate();
+    this.changeContactStatus();
+    this.setId();
+    this.setDate();
+    this.checkValidation();
+  }
+
+  // 
+  checkValidation() {
+    this.handleAlerts();
+    if (this.task.title.length > 4 &&
+      this.task.description.length > 8 &&
+      this.task.category &&
+      this.task.assignedTo.length > 0 &&
+      this.task.dueDate &&
+      this.task.priority
+    ) {
+      this.taskCreated = true;
+      this.addTaskToDb();
+    }
+  }
+
+  // CHANGE STATUS OF ASSIGNED CONTACTS
+  changeContactStatus() {
+    for (let i = 0; i < this.task.assignedTo.length; i++) {
+      let element = this.task.assignedTo[i];
+      element.selected = true;
+    }
+  }
+
+  // SET TASK ID
+  setId() {
+    let id = new Date().getTime();
+    this.task.id = id / 1000000000;
+  }
+
+  // SET CREATION TIME
+  setDate() {
+    let date = new Date().getTime();
+    this.task.createdAt = date;
+  }
+
+  // 
+  handleDate() {
+    let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
+    let date = new Date(input);
+    let month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let output = `${month}/${day}/${year}`;
+    this.task.dueDate = output;
+  }
+
+  // 
+  resetForm() {
+    this.taskForm.reset();
+    this.subInput.nativeElement.value = '';
+    this.addedSubTasks = [];
+    this.task.priority = '';
+    // REMOVE ACTIVE CLASS
+    this.data.high = false;
+    this.data.medium = false;
+    this.data.low = false;
+  }
+
+  // 
+  addTaskToDb() {
+    this.data.alert = true;
+    this.saveTaskToFirestore();
+    this.resetForm();
+    this.close();
+    setTimeout(() => {
+      this.router.navigate(['/kanbanboard/board']);
+    }, 2500);
+  }
+
+  // SAVE TASKS TO DB
+  saveTaskToFirestore() {
+    let coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.task.toJSON());
+  }
+
+  // CLOSE DIALOG
+  close() {
+    this.dialogRef.close();
+  }
 }

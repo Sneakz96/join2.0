@@ -19,21 +19,22 @@
     </div>
     <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
     <span class="assigned-to">Assigned To:</span>
-    <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
-        <div class="circle" [ngStyle]="{'background-color': contact.color}">
-            {{ contact.firstName?.charAt(0)}}
-            {{ contact.lastName?.charAt(0)}}
-        </div>
-        <div class="name">
-            {{ contact.firstName }}
-            {{ contact.lastName }}
+    <div class="assigned-contacts">
+
+        <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
+            <div class="circle" [ngStyle]="{'background-color': contact.color}">
+                {{ contact.firstName?.charAt(0)}}
+                {{ contact.lastName?.charAt(0)}}
+            </div>
+            <div class="name">
+                {{ contact.firstName }}
+                {{ contact.lastName }}
+            </div>
         </div>
     </div>
-  
+
     <div class="btn-container">
         <img class="edit-btn" src="./assets/img/icons/edit_white.png" (click)="editTask()">
-    </div>
-    <div class="delete-container">
         <img class="delete-btn" src="./assets/img/icons/trash_white.png" (click)="deleteTask(taskId)">
     </div>
 </div>

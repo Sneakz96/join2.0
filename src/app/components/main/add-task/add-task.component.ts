@@ -1,11 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
-import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
+import { Router } from '@angular/router';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { timeout } from 'rxjs';
-import { set } from '@angular/fire/database';
 
 @Component({
   selector: 'app-add-task',
@@ -19,15 +17,11 @@ export class AddTaskComponent {
   assignedCollegues: string[] = [];
   // 
   task = new Task();
-
+  taskForm!: FormGroup;
   choosenCategory: any;
   // 
-  contactForm!: FormGroup;
-  //
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: string[] = [];
-  // 
-  subError = false;
   taskCreated = false;
 
   // 
@@ -35,32 +29,38 @@ export class AddTaskComponent {
     public data: DataService,
     public router: Router,
     private fire: Firestore,
-  ) { }
+  ) {
+    this.setForm();
+  }
 
-
+  // SET TASK FORM
+  setForm() {
+    this.taskForm = new FormGroup({
+      'title': new FormControl(this.task.title),
+      'description': new FormControl(this.task.description),
+      'category': new FormControl(this.task.category),
+      'assignedTo': new FormControl(this.task.assignedTo),
+      'dueDate': new FormControl(this.task.dueDate),
+      'prio': new FormControl(this.task.priority),
+      'subTasks': new FormControl(this.task.subtasks),
+    });
+  }
 
   // CREATE SUBTASK
   addSubTask() {
     if (this.subInput.nativeElement.value == '') {
-      this.handleSubError();
+      this.data.handleSubError();
     } else {
       this.addedSubTasks.push(this.subInput.nativeElement.value);
       this.subInput.nativeElement.value = '';
     }
   }
 
-  // GIVE SUBTASK ERROR
-  handleSubError() {
-    this.subError = true;
-    setTimeout(() => {
-      this.subError = false;
-    }, 3000);
-  }
-
   // 
   checkForm() {
-    let title = this.data.taskForm.value.title.trim();
-    let description = this.data.taskForm.value.description.trim();
+    debugger;
+    let title = this.taskForm.value.title.trim();
+    let description = this.taskForm.value.description.trim();
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -69,33 +69,17 @@ export class AddTaskComponent {
 
     this.task.title = formattedTitle;
     this.task.description = description;
-    this.task.category = this.data.taskForm.value.category;
+    this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
-    
+
     this.handleDate();
     this.changeContactStatus();
     this.setId();
     this.setDate();
     this.checkValidation();
-  }
-
-  // 
-  checkValidation() {
-    this.data.handleAlerts();
-    console.log(this.task.dueDate);
-    if (this.task.title.length > 4 &&
-      this.task.description.length > 8 &&
-      this.task.category &&
-      this.task.assignedTo.length > 0 &&
-      this.task.dueDate &&
-      this.task.priority
-    ) {
-      // debugger;
-      this.taskCreated = true;
-      this.addTaskToDb();
-    }
+    console.log(this.task);
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
@@ -118,28 +102,72 @@ export class AddTaskComponent {
     this.task.createdAt = date;
   }
 
+  // LOG PRIO
+  setPrio(prio: string) {
+    this.task.priority = prio;
+    this.getPrio(prio);
+  }
+
+  // GET PRIO STATUS -> SET BOOLEAN
+  getPrio(prio: string) {
+    if (prio == 'Low') {
+      this.data.low = true;
+      this.data.medium = false;
+      this.data.high = false;
+    } else if (prio == 'Medium') {
+      this.data.low = false;
+      this.data.medium = true;
+      this.data.high = false;
+    } else if (prio == 'Urgent') {
+      this.data.low = false;
+      this.data.medium = false;
+      this.data.high = true;
+    }
+  }
+  
   handleDate() {
-
-    // Beispiel-Input-String vom Datepicker
-    const input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
-
-    // Das Datum in ein JavaScript-Date-Objekt umwandeln
-    const date = new Date(input);
-
-    // Das gewünschte Datum-Format extrahieren
-    const month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
-    const day = date.getDate();
-    const year = date.getFullYear();
-
-    // Das Datum im gewünschten Format speichern
-    const output = `${month}/${day}/${year}`;
-    console.log(output); // Output: "3/14/2023"
+    let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
+    let date = new Date(input);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let output = `${month}/${day}/${year}`;
     this.task.dueDate = output;
   }
 
   // 
+  checkValidation() {
+    this.data.handleAlerts();
+    console.log(this.task.dueDate);
+    if (this.task.title.length > 4 &&
+      this.task.description.length > 8 &&
+      this.task.category &&
+      this.task.assignedTo.length > 0 &&
+      this.task.dueDate &&
+      this.task.priority
+    ) {
+      this.taskCreated = true;
+      this.addTaskToDb();
+    }
+  }
+  // 
+  addTaskToDb() {
+    this.data.alert = true;
+    this.saveTaskToFirestore();
+    this.taskForm.reset();
+    setTimeout(() => {
+      this.router.navigate(['/kanbanboard/board']);
+    }, 2500);
+  }
+
+  // SAVE TASKS TO DB
+  saveTaskToFirestore() {
+    const coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.task.toJSON());
+  }
+  // 
   resetForm() {
-    this.data.taskForm.reset();
+    this.taskForm.reset();
     this.subInput.nativeElement.value = '';
     this.addedSubTasks = [];
     this.task.priority = '';
@@ -148,23 +176,4 @@ export class AddTaskComponent {
     this.data.medium = false;
     this.data.low = false;
   }
-
-  // 
-  addTaskToDb() {
-    this.data.alert = true;
-    this.saveTaskToFirestore();
-    this.resetForm();
-    setTimeout(() => {
-      this.router.navigate(['/kanbanboard/board']);
-    }, 2500);
-
-  }
-
-  // SAVE TASKS TO DB
-  saveTaskToFirestore() {
-    let coll = collection(this.fire, 'allTasks');
-    setDoc(doc(coll), this.task.toJSON());
-  }
 }
-
-

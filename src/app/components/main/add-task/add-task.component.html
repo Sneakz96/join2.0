@@ -2,7 +2,7 @@
     <h1>Add task</h1>
     <div class="create-new-task">
         <div class="create">
-            <form class="create" [formGroup]="data.taskForm" ngNativeValidate>
+            <form class="create" [formGroup]="taskForm" ngNativeValidate>
                 <div class="row row-left">
                     <!-- TITLE -->
                     <h5>Title</h5>
@@ -49,13 +49,13 @@
                     <h5>Prio</h5>
                     <p class="alert" *ngIf="data.prio">Please choose a priority!</p>
                     <div class="priority">
-                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="data.setPrio('Urgent')">Urgent
+                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
                             <div [ngClass]="{'high': data.high}"></div>
                         </button>
-                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="data.setPrio('Medium')">Medium
+                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="setPrio('Medium')">Medium
                             <div [ngClass]="{'medium': data.medium}"></div>
                         </button>
-                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="data.setPrio('Low')">Low
+                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
                             <div [ngClass]="{'low': data.low}"></div>
                         </button>
                     </div>
@@ -66,7 +66,7 @@
                         <img class="plus" src="/assets/img/icons/plus.png" (click)="addSubTask()">
                     </div>
                     <!-- SUBALERT -->
-                    <div class="sub-alert" *ngIf="subError">
+                    <div class="sub-alert" *ngIf="data.subError">
                         <span>Input darf nicht leer sein!</span>
                     </div>
                     <div class="subtasks" #subtasks>

@@ -35,8 +35,6 @@ export class DialogEditUserComponent {
         .collection('allContacts')
         .doc(this.userId)
         .update(this.user.toJSON());
-    } else{
-      // console.error('error');
     }
   }
 
