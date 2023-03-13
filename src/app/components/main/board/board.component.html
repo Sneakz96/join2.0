@@ -10,8 +10,6 @@
     </button>
   </div>
 
-
-
   <div class="overview" cdkDropListGroup>
     <!-- 1 -->
     <div class="column">
@@ -22,12 +20,12 @@
 
       <div class="content-container" id="dropList_0" #toDo cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-      
+
         <div class="drag-task" *ngFor="let taskToDo of data.allTasks" cdkDrag [cdkDragData]="taskToDo"
           [cdkDragDisabled]="taskToDo.visible">
           <div class="task" [ngClass]="taskToDo.visible ? 'task-shadow':'task'" *ngIf="taskToDo.status == 'toDo'"
             (click)="openTask(taskToDo)" [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
-            <div class="category">
+            <div class="category" [ngClass]="data.getCategoryColor(taskToDo.category)">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskToDo.category }}</span>
             </div>
@@ -63,11 +61,12 @@
       </div>
       <div class="content-container" id="dropList_1" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="drag-task" *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress" [cdkDragDisabled]="taskInProgress.visible">
+        <div class="drag-task" *ngFor="let taskInProgress of data.allTasks" cdkDrag [cdkDragData]="taskInProgress"
+          [cdkDragDisabled]="taskInProgress.visible">
           <div class="task" [ngClass]="taskInProgress.visible ? 'task-shadow':'task'"
             *ngIf="taskInProgress.status == 'inProgress'" (click)="openTask(taskInProgress)"
             [routerLink]="['/kanbanboard/board/' + taskInProgress.customIdName]">
-            <div class="category">
+            <div class="category" [ngClass]="data.getCategoryColor(taskInProgress.category)">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskInProgress.category }}</span>
             </div>
@@ -103,11 +102,12 @@
       </div>
       <div class="content-container" id="dropList_2" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="drag-task" *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag [cdkDragData]="taskAwaitingFeedback" [cdkDragDisabled]="taskAwaitingFeedback.visible">
+        <div class="drag-task" *ngFor="let taskAwaitingFeedback of data.allTasks" cdkDrag
+          [cdkDragData]="taskAwaitingFeedback" [cdkDragDisabled]="taskAwaitingFeedback.visible">
           <div class="task" [ngClass]="taskAwaitingFeedback.visible ? 'task-shadow':'task'"
             *ngIf="taskAwaitingFeedback.status == 'awaitingFeedback'" (click)="openTask(taskAwaitingFeedback)"
             [routerLink]="['/kanbanboard/board/' + taskAwaitingFeedback.customIdName]">
-            <div class="category">
+            <div class="category" [ngClass]="data.getCategoryColor(taskAwaitingFeedback.category)">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskAwaitingFeedback.category }}</span>
             </div>
@@ -143,10 +143,11 @@
       </div>
       <div class="content-container" id="dropList_3" cdkDropList [cdkDropListData]="data.allTasks"
         (cdkDropListDropped)="drop($event)">
-        <div class="drag-task" *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone" [cdkDragDisabled]="taskDone.visible">
+        <div class="drag-task" *ngFor="let taskDone of data.allTasks" cdkDrag [cdkDragData]="taskDone"
+          [cdkDragDisabled]="taskDone.visible">
           <div class="task" [ngClass]="taskDone.visible ? 'task-shadow':'task'" *ngIf="taskDone.status == 'done'"
             (click)="openTask(taskDone)" [routerLink]="['/kanbanboard/board/' + taskDone.customIdName]">
-            <div class="category">
+            <div class="category" [ngClass]="data.getCategoryColor(taskDone.category)">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskDone.category }}</span>
             </div>

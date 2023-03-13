@@ -1,6 +1,6 @@
 <div class="task">
     <img src="./assets/img/icons/close.png" class="close-btn" (click)="closeDialog()">
-    <div class="category">
+    <div class="category" [ngClass]="data.getCategoryColor(task.category)">
         <p class="task-category">{{ task.category }}</p>
     </div>
     <div class="task-content">

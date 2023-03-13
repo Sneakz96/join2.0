@@ -126,15 +126,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.075);
+    background-color: white;
     border-radius: 20px;
 }
 
 //CREATED TASKS
 .task {
-    margin: 3px;
     border-radius: 20px;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
     padding: 20px;
     height: fit-content;
     background-color: white;
@@ -157,16 +155,64 @@
 }
 
 .category {
-    margin-top: 20px;
+    // margin-top: 5px;
     margin-bottom: 20px;
+    background-color: var(--dark-navy);
+    padding: 5px 15px;
+    border-radius: 10px;
+    width: fit-content;
 }
 
 .task-category {
     color: white;
-    background-color: var(--dark-navy);
-    padding: 5px 15px;
-    border-radius: 10px;
+
+
 }
+
+
+.management {
+    background-color: var(--blue_t);
+}
+
+.customer-service {
+    background-color: var(--red);
+}
+
+.marketing {
+    background-color: var(--blue_t);
+}
+
+.team {
+    background-color: var(--purple_t);
+}
+
+.design {
+    background-color: var(--orange_t);
+}
+
+.it {
+    background-color: var(--mint_t);
+}
+
+.media {
+    background-color: var(--yellow_t);
+}
+
+.backoffice {
+    background-color: var(--mint_t);
+}
+
+.sales {
+    background-color: var(--pink_t);
+}
+
+
+
+
+
+
+
+
 
 .task-content {
     p {

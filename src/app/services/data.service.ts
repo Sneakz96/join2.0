@@ -86,8 +86,31 @@ export class DataService implements OnInit {
       });
   }
 
-// 
-
+  // 
+  getCategoryColor(category: string): any {
+    switch (category) {
+      case 'Management':
+        return 'management';
+      case 'Costumer Service':
+        return 'customer-service';
+      case 'Marketing':
+        return 'marketing';
+      case 'Team':
+        return 'team';
+      case 'Design':
+        return 'design';
+      case 'Backoffice':
+        return 'backoffice';
+      case 'Media':
+        return 'media';
+      case 'IT':
+        return 'it';
+      case 'Sales':
+        return 'sales';
+      default:
+        return '';
+    }
+  }
 
   // GET PRIORITY OF CURRENT TASK
   getPriority() {
@@ -113,7 +136,7 @@ export class DataService implements OnInit {
       element.selected = true;
     }
   }
-  
+
   // SET TASK ID
   setId() {
     let id = new Date().getTime();
@@ -260,6 +283,4 @@ export class DataService implements OnInit {
       .doc(task.customIdName)
       .update({ status: status });
   }
-
-
 }

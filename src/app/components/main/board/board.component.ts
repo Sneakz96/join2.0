@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board.component.scss']
 })
 
-export class BoardComponent {
+export class BoardComponent implements OnInit {
 
   dueDate: any;
   searchField: string;
@@ -24,6 +24,10 @@ export class BoardComponent {
     public data: DataService,
   ) { }
 
+  ngOnInit(): void {
+
+  }
+
   // SEARCH TASK ON BOARD
   search() {
     this.data.allTasks.forEach((task) => {
@@ -31,7 +35,7 @@ export class BoardComponent {
     });
   }
 
-  // 
+  // OPEN DIALOG
   openTask(taskToOpen: any) {
     let dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
@@ -40,19 +44,6 @@ export class BoardComponent {
     dialogRef.componentInstance.task = taskToOpen;
     dialogRef.componentInstance.taskId = taskToOpen.customIdName;
   }
-
-
-//  // 
-//  getDueDate(taskToOpen:any) {
-//   console.log(taskToOpen.dueDate)
-//   let date = t.dueDate;
-//   let day = date.getDate();
-//   let month = date.getMonth() + 1;
-//   let year = date.getFullYear();
-//   let formattedDate = `${month}/${day}/${year}`;
-// }
-
-
 
   // OPEN ADD TASK DIALOG
   addTask() {
