@@ -155,9 +155,7 @@
 }
 
 .category {
-    // margin-top: 5px;
     margin-bottom: 20px;
-    background-color: var(--dark-navy);
     padding: 5px 15px;
     border-radius: 10px;
     width: fit-content;
@@ -165,54 +163,7 @@
 
 .task-category {
     color: white;
-
-
 }
-
-
-.management {
-    background-color: var(--blue_t);
-}
-
-.customer-service {
-    background-color: var(--red);
-}
-
-.marketing {
-    background-color: var(--blue_t);
-}
-
-.team {
-    background-color: var(--purple_t);
-}
-
-.design {
-    background-color: var(--orange_t);
-}
-
-.it {
-    background-color: var(--mint_t);
-}
-
-.media {
-    background-color: var(--yellow_t);
-}
-
-.backoffice {
-    background-color: var(--mint_t);
-}
-
-.sales {
-    background-color: var(--pink_t);
-}
-
-
-
-
-
-
-
-
 
 .task-content {
     p {

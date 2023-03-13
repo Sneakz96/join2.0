@@ -24,6 +24,44 @@
     left: 0 !important;
 }
 
+// CATEGORY
+.management {
+    background-color: var(--blue_t);
+}
+
+.customer-service {
+    background-color: var(--red);
+}
+
+.marketing {
+    background-color: var(--blue_t);
+}
+
+.team {
+    background-color: var(--purple_t);
+}
+
+.design {
+    background-color: var(--orange_t);
+}
+
+.it {
+    background-color: var(--mint_t);
+}
+
+.media {
+    background-color: var(--yellow_t);
+}
+
+.backoffice {
+    background-color: var(--mint_t);
+}
+
+.sales {
+    background-color: var(--pink_t);
+}
+
+// URGENCY
 .low {
     color: white;
     background-color: rgb(122, 226, 41) !important;
@@ -133,12 +171,12 @@ h6 {
     --red: rgb(255, 0, 0);
     --green: rgb(0, 255, 17);
     --grey: rgb(129, 129, 125);
-    
+
     // CATEGORY COLORS
     --yellow_t: rgb(255, 199, 1);
     --orange_t: rgb(255, 122, 0);
     --mint_t: rgb(31, 215, 193);
     --purple_t: rgb(200, 0, 255);
-    --pink_t:rgb(252, 113, 255);
+    --pink_t: rgb(252, 113, 255);
     --blue_t: rgb(0, 56, 255);
 }
