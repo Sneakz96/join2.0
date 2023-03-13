@@ -73,6 +73,7 @@ export class AddTaskComponent {
     }
   }
 
+  // 
   alert_prio() {
     if (this.task.priority == '') {
       this.prio = true;
@@ -164,7 +165,7 @@ export class AddTaskComponent {
     this.task.assignedTo = this.assignedCollegues;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
-this.handleDate();
+    this.handleDate();
 
     this.changeContactStatus();
     this.setId();
@@ -210,7 +211,7 @@ this.handleDate();
   }
 
   handleDate() {
-    
+
     // Beispiel-Input-String vom Datepicker
     const input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
 

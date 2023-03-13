@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
+import { Task } from 'src/app/models/task.class';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-add-task',
@@ -11,136 +12,248 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class DialogAddTaskComponent {
-  // TASK
-  allTasks: any[] = [];
-  id!: number;
-  title: string = '';
-  description: string = '';
-  category: string = '';
-  assignedTo: [] = [];
-  dueDate: string = '';
-  priority: string = '';
-  createdAt!: number;
-  subtasks: string[] = [];
-  subInput: string = '';
-  // SUBTASKS
-  subTaskCreationStatus = 'no subtask created';
-  addSubInput: string = '';
-  addedSubTasks: string[] = [];
-  // CONTACTS
-  contactForm = new FormControl();
-  selectedContacts: string[] = [];
-  dropdownSettings: IDropdownSettings = {};
-  dropDownForm!: FormGroup;
-  assignedCollegues: string[] = [];
+//
+contact = new FormControl();
+assignedCollegues: string[] = [];
+// 
+task = new Task();
+taskForm!: FormGroup;
+choosenCategory: any;
+// 
+contactForm!: FormGroup;
+//
+@ViewChild('subInput') subInput: ElementRef;
+addedSubTasks: string[] = [];
+// 
+subError = false;
+taskCreated = false;
 
-  @ViewChild('title', { static: true }) titleElement: ElementRef;
-  @ViewChild('description', { static: true }) descriptionElement: ElementRef;
-  @ViewChild('category', { static: true }) categoryElement: ElementRef;
-  @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
-  @ViewChild('assignedContacts', { static: true }) assignedContacts: ElementRef;
-  @ViewChild('dueDate', { static: true }) dueDateElement: ElementRef;
-  @ViewChild('subInput', { static: true }) subInputElement: ElementRef;
-  @ViewChild('subtasks', { static: true }) subtasksElement: ElementRef;
 
-  // 
-  constructor(
-    titleElement: ElementRef,
-    descriptionElement: ElementRef,
-    categoryElement: ElementRef,
-    dueDateElement: ElementRef,
-    subInputElement: ElementRef,
-    substasksElement: ElementRef,
-    assignedContactsElement: ElementRef,
-    dropdown: ElementRef,
-    public dataService: DataService,
-    public dialogRef: MatDialogRef<any>,
-    public data: DataService
+
+// ALERTS
+category = false;
+assigned = false;
+dueDate = false;
+prio = false;
+
+// 
+constructor(
+  public data: DataService,
+  public router: Router,
+  private fire: Firestore,
+) {
+  this.setForm();
+}
+
+ngOnInit(): void {
+
+}
+
+// 
+handleAlerts() {
+  this.alert_category();
+  this.alert_assigned();
+  this.alert_prio();
+  this.timeout();
+}
+
+// 
+alert_category() {
+  if (this.task.category == '') {
+    this.category = true;
+  }
+}
+
+// 
+alert_assigned() {
+  if (this.task.assignedTo.length == 0) {
+    this.assigned = true;
+  }
+}
+
+// 
+alert_prio() {
+  if (this.task.priority == '') {
+    this.prio = true;
+  }
+}
+
+timeout() {
+  setTimeout(() => {
+    this.category = false;
+    this.assigned = false;
+    this.dueDate = false;
+    this.prio = false;
+  }, 3000);
+}
+
+
+
+
+
+
+
+// SET TASK FORM
+setForm() {
+  this.taskForm = new FormGroup({
+    'title': new FormControl(this.task.title),
+    'description': new FormControl(this.task.description),
+    'category': new FormControl(this.task.category),
+    'assignedTo': new FormControl(this.task.assignedTo),
+    'dueDate': new FormControl(this.task.dueDate),
+    'prio': new FormControl(this.task.priority),
+    'subTasks': new FormControl(this.task.subtasks),
+  });
+}
+
+// LOG PRIO
+setPrio(prio: string) {
+  this.task.priority = prio;
+  this.getPrio(prio);
+}
+
+// GET PRIO STATUS -> SET BOOLEAN
+getPrio(prio: string) {
+  if (prio == 'Low') {
+    this.data.low = true;
+    this.data.medium = false;
+    this.data.high = false;
+  } else if (prio == 'Medium') {
+    this.data.low = false;
+    this.data.medium = true;
+    this.data.high = false;
+  } else if (prio == 'Urgent') {
+    this.data.low = false;
+    this.data.medium = false;
+    this.data.high = true;
+  }
+}
+
+// CREATE SUBTASK
+addSubTask() {
+  if (this.subInput.nativeElement.value == '') {
+    this.handleSubError();
+  } else {
+    this.addedSubTasks.push(this.subInput.nativeElement.value);
+    this.subInput.nativeElement.value = '';
+  }
+}
+
+// GIVE SUBTASK ERROR
+handleSubError() {
+  this.subError = true;
+  setTimeout(() => {
+    this.subError = false;
+  }, 3000);
+}
+
+// 
+checkForm() {
+  let title = this.taskForm.value.title.trim();
+  let description = this.taskForm.value.description.trim();
+
+  let capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  let formattedTitle = capitalizeFirstLetter(title);
+  console.log(this.taskForm.value.dueDate);
+  this.task.title = formattedTitle;
+  this.task.description = description;
+  this.task.category = this.taskForm.value.category;
+  this.task.assignedTo = this.assignedCollegues;
+  this.task.priority = this.task.priority;
+  this.task.subtasks = this.addedSubTasks;
+  this.handleDate();
+
+  this.changeContactStatus();
+  this.setId();
+  this.setDate();
+  this.checkValidation();
+}
+
+// 
+checkValidation() {
+  this.handleAlerts();
+  console.log(this.task.dueDate);
+  if (this.task.title.length > 4 &&
+    this.task.description.length > 8 &&
+    this.task.category &&
+    this.task.assignedTo.length > 0 &&
+    this.task.dueDate &&
+    this.task.priority
   ) {
-    this.titleElement = titleElement;
-    this.descriptionElement = descriptionElement;
-    this.categoryElement = categoryElement;
-    this.dueDateElement = dueDateElement;
-    this.subInputElement = subInputElement;
-    this.subtasksElement = substasksElement;
-    this.assignedContacts = assignedContactsElement;
-    this.dropdown = dropdown;
+    // debugger;
+    this.taskCreated = true;
+    this.addTaskToDb();
   }
+}
 
-  // ADD TASK TO LOCAL STORAGE
-  addTask() {
-    this.getAllInputs();
-    if (this.data.taskCreated === true) {
-      this.data.changeContactStatus();
-      this.data.setId();
-      this.data.setDate();
-      this.clearAllValues();
-      this.data.alert = true;
-      this.data.saveTaskToFirestore();
-      setTimeout(() => {
-        this.dialogRef.close();
-      }, 2500);
-    }
+// CHANGE STATUS OF ASSIGNED CONTACTS
+changeContactStatus() {
+  for (let i = 0; i < this.task.assignedTo.length; i++) {
+    let element = this.task.assignedTo[i];
+    element.selected = true;
   }
+}
 
-  // CREATE SUBTASK
-  addSubTask() {
-    this.subTaskCreationStatus = 'sub created';
-    console.log(this.subTaskCreationStatus, this.addSubInput);
-    this.addedSubTasks.push(this.addSubInput);
-    this.addSubInput = '';
-  }
+// SET TASK ID
+setId() {
+  let id = new Date().getTime();
+  this.task.id = id / 1000000000;
+}
 
-  // GET TASK INPUTS
-  getAllInputs() {
-    this.data.newTask.title = this.titleElement.nativeElement.value;
-    this.data.newTask.description = this.descriptionElement.nativeElement.value;
-    this.data.newTask.category = this.categoryElement.nativeElement.value;
-    this.data.newTask.dueDate = this.dueDateElement.nativeElement.value;
-    this.data.newTask.assignedTo = this.assignedCollegues;
-    this.data.newTask.subtasks = this.addedSubTasks;
-    this.checkIfInputIsEmpty();
-    this.data.changeContactStatus();
-  }
+// SET CREATION TIME
+setDate() {
+  let date = new Date().getTime();
+  this.task.createdAt = date;
+}
 
-    // CHECK EMPTY INPUTS
-  checkIfInputIsEmpty() {
-    if (this.titleElement.nativeElement.value === '' ||
-      this.categoryElement.nativeElement.value === '' ||
-      this.descriptionElement.nativeElement.value === '' ||
-      this.dueDateElement.nativeElement.value === '' ||
-      this.data.newTask.priority === ''
-    ) {
-      this.data.taskCreated = false;
-      this.clearAllValues();
-    } else if (this.titleElement.nativeElement.value.length >= 1 &&
-      this.categoryElement.nativeElement.value.length == 1 &&
-      this.data.newTask.assignedTo.length > 0
-    ) {
-      this.data.taskCreated = true;
-    }
-  }
+handleDate() {
 
-  // DISPLAYS ALL CREATED SUBTASKS
-  updateSubTask(event: any) {
-    this.addSubInput = event.target.value;
-  }
+  // Beispiel-Input-String vom Datepicker
+  const input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
 
-  // CLEAR ALL INPUT.VALUES
-  clearAllValues() {
-    this.titleElement.nativeElement.value = '';
-    this.descriptionElement.nativeElement.value = '';
-    this.categoryElement.nativeElement.value = '';
-    this.assignedCollegues = [];
-    this.dueDateElement.nativeElement.value = '';
-    this.priority = '';
-    this.subInputElement.nativeElement.value = '';
-    this.addedSubTasks = [];
-    this.subtasks = [];
-  }
+  // Das Datum in ein JavaScript-Date-Objekt umwandeln
+  const date = new Date(input);
 
-  // EXIT ADD TASK DIALOG
-  close() {
-    this.dialogRef.close();
-  }
+  // Das gewünschte Datum-Format extrahieren
+  const month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  // Das Datum im gewünschten Format speichern
+  const output = `${month}/${day}/${year}`;
+  console.log(output); // Output: "3/14/2023"
+  this.task.dueDate = output;
+}
+
+// 
+resetForm() {
+  this.taskForm.reset();
+  this.subInput.nativeElement.value = '';
+  this.addedSubTasks = [];
+  this.task.priority = '';
+  // REMOVE ACTIVE CLASS
+  this.data.high = false;
+  this.data.medium = false;
+  this.data.low = false;
+}
+
+// 
+addTaskToDb() {
+  this.data.alert = true;
+  this.saveTaskToFirestore();
+  this.resetForm();
+  setTimeout(() => {
+    this.router.navigate(['/kanbanboard/board']);
+  }, 2500);
+
+}
+
+// SAVE TASKS TO DB
+saveTaskToFirestore() {
+  let coll = collection(this.fire, 'allTasks');
+  setDoc(doc(coll), this.task.toJSON());
+}
+
 }

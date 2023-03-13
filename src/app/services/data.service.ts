@@ -88,6 +88,7 @@ export class DataService implements OnInit {
 
   // 
   getCategoryColor(category: string): any {
+    console.log(category)
     switch (category) {
       case 'Management':
         return 'management';
