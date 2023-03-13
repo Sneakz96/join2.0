@@ -4,6 +4,8 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { timeout } from 'rxjs';
+import { set } from '@angular/fire/database';
 
 @Component({
   selector: 'app-add-task',
@@ -28,6 +30,16 @@ export class AddTaskComponent {
   subError = false;
   taskCreated = false;
 
+
+
+  // ALERTS
+  title = false;
+  description = false;
+  category = false;
+  assigned = false;
+  dueDate = false;
+  prio = false;
+
   // 
   constructor(
     public data: DataService,
@@ -38,6 +50,64 @@ export class AddTaskComponent {
   ngOnInit(): void {
     this.setForm();
   }
+
+
+
+  handleAlerts() {
+    this.alert_title();
+    this.alert_description();
+    this.alert_category();
+    this.alert_assigned();
+    this.alert_due_date();
+    this.alert_prio();
+    this.timeout();
+  }
+
+  alert_title() {
+    console.log('alert_title');
+  }
+
+  alert_description() {
+
+  }
+
+  alert_category() {
+
+  }
+
+  // 
+  alert_assigned() {
+    if (this.task.assignedTo.length == 0) {
+      this.assigned = true;
+    }
+  }
+
+  alert_due_date() {
+
+  }
+
+  alert_prio() {
+    if (this.task.priority == '') {
+      this.prio = true;
+    }
+  }
+
+  timeout() {
+    setTimeout(() => {
+      this.title = false;
+      this.description = false;
+      this.category = false;
+      this.assigned = false;
+      this.dueDate = false;
+      this.prio = false;
+    }, 3000);
+  }
+
+
+
+
+
+
 
   // SET TASK FORM
   setForm() {
@@ -107,13 +177,10 @@ export class AddTaskComponent {
       let allowedCharacters = /^[A-Za-z0-9+-]+$/;
       return allowedCharacters.test(value);
     }
-    let isValidDate = (value) => {
-      let expectedFormat = /^\w{3} \w{3} \d{1,2} \d{4} \d{2}:\d{2}:\d{2} GMT[+-]\d{4} \(.+\)$/;
-      return expectedFormat.test(value);
-    };
 
     isValid(formattedTitle) && formattedTitle.length >= 3;
     isValid(description) && description.length >= 3;
+
     this.task.title = formattedTitle;
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
@@ -121,22 +188,20 @@ export class AddTaskComponent {
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
     this.task.dueDate = this.taskForm.value.dueDate;
-    // this.getDueDate(); 
+
     this.changeContactStatus();
     this.setId();
     this.setDate();
-    this.checkValidation(this.task);
+    this.checkValidation();
     console.log(this.task);
   }
 
-
-  checkValidation(task: any) {
+  // 
+  checkValidation() {
     this.taskCreated = true;
-    console.log(task.title = '');
-    // if (task.) {
-    // }else{
+    this.handleAlerts();
+    // if (this.taskCreated) {
     //   this.addTaskToDb();
-
     // }
   }
 
@@ -147,16 +212,6 @@ export class AddTaskComponent {
       element.selected = true;
     }
   }
-
-  // // 
-  // getDueDate() {
-  //   let date = this.taskForm.value.dueDate;
-  //   let day = date.getDate();
-  //   let month = date.getMonth() + 1;
-  //   let year = date.getFullYear();
-  //   let formattedDate = `${month}/${day}/${year}`;
-  //   this.task.dueDate = formattedDate;
-  // }
 
   // SET TASK ID
   setId() {
@@ -192,31 +247,12 @@ export class AddTaskComponent {
     }, 2500);
 
   }
+
   // SAVE TASKS TO DB
   saveTaskToFirestore() {
     let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
-
-  // 
-  checkAlerts() {
-    console.log('alert');
-    if (this.task.dueDate == '') {
-      console.log('due date is missing!', this.task.dueDate);
-      this.taskCreated = false;
-    }
-    if (this.task.category == '') {
-      console.log('category is missing!', this.task.category);
-      this.taskCreated = false;
-    }
-    if (this.task.assignedTo = []) {
-      console.log('select a contact!', this.task.assignedTo);
-      this.taskCreated = false;
-    }
-  }
-
-
-
 }
 
 
