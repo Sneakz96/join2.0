@@ -19,7 +19,7 @@ export class AddTaskComponent {
   assignedCollegues: string[] = [];
   // 
   task = new Task();
-  taskForm!: FormGroup;
+
   choosenCategory: any;
   // 
   contactForm!: FormGroup;
@@ -30,106 +30,14 @@ export class AddTaskComponent {
   subError = false;
   taskCreated = false;
 
-
-
-  // ALERTS
-  category = false;
-  assigned = false;
-  dueDate = false;
-  prio = false;
-
   // 
   constructor(
     public data: DataService,
     public router: Router,
     private fire: Firestore,
-  ) {
-    this.setForm();
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  // 
-  handleAlerts() {
-    this.alert_category();
-    this.alert_assigned();
-    this.alert_prio();
-    this.timeout();
-  }
-
-  // 
-  alert_category() {
-    if (this.task.category == '') {
-      this.category = true;
-    }
-  }
-
-  // 
-  alert_assigned() {
-    if (this.task.assignedTo.length == 0) {
-      this.assigned = true;
-    }
-  }
-
-  // 
-  alert_prio() {
-    if (this.task.priority == '') {
-      this.prio = true;
-    }
-  }
-
-  timeout() {
-    setTimeout(() => {
-      this.category = false;
-      this.assigned = false;
-      this.dueDate = false;
-      this.prio = false;
-    }, 3000);
-  }
+  ) { }
 
 
-
-
-
-
-
-  // SET TASK FORM
-  setForm() {
-    this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title),
-      'description': new FormControl(this.task.description),
-      'category': new FormControl(this.task.category),
-      'assignedTo': new FormControl(this.task.assignedTo),
-      'dueDate': new FormControl(this.task.dueDate),
-      'prio': new FormControl(this.task.priority),
-      'subTasks': new FormControl(this.task.subtasks),
-    });
-  }
-
-  // LOG PRIO
-  setPrio(prio: string) {
-    this.task.priority = prio;
-    this.getPrio(prio);
-  }
-
-  // GET PRIO STATUS -> SET BOOLEAN
-  getPrio(prio: string) {
-    if (prio == 'Low') {
-      this.data.low = true;
-      this.data.medium = false;
-      this.data.high = false;
-    } else if (prio == 'Medium') {
-      this.data.low = false;
-      this.data.medium = true;
-      this.data.high = false;
-    } else if (prio == 'Urgent') {
-      this.data.low = false;
-      this.data.medium = false;
-      this.data.high = true;
-    }
-  }
 
   // CREATE SUBTASK
   addSubTask() {
@@ -151,22 +59,22 @@ export class AddTaskComponent {
 
   // 
   checkForm() {
-    let title = this.taskForm.value.title.trim();
-    let description = this.taskForm.value.description.trim();
+    let title = this.data.taskForm.value.title.trim();
+    let description = this.data.taskForm.value.description.trim();
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
     };
     let formattedTitle = capitalizeFirstLetter(title);
-    console.log(this.taskForm.value.dueDate);
+
     this.task.title = formattedTitle;
     this.task.description = description;
-    this.task.category = this.taskForm.value.category;
+    this.task.category = this.data.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
+    
     this.handleDate();
-
     this.changeContactStatus();
     this.setId();
     this.setDate();
@@ -175,7 +83,7 @@ export class AddTaskComponent {
 
   // 
   checkValidation() {
-    this.handleAlerts();
+    this.data.handleAlerts();
     console.log(this.task.dueDate);
     if (this.task.title.length > 4 &&
       this.task.description.length > 8 &&
@@ -231,7 +139,7 @@ export class AddTaskComponent {
 
   // 
   resetForm() {
-    this.taskForm.reset();
+    this.data.taskForm.reset();
     this.subInput.nativeElement.value = '';
     this.addedSubTasks = [];
     this.task.priority = '';

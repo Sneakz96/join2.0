@@ -347,6 +347,47 @@
     .mb-alert {
         display: none;
     }
+
+    .close-btn {
+        top: -25px;
+        right: 50px;
+    }
+
+    .vector {
+        display: none;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    .subtasks {
+        height: 60px;
+    }
+
+    .priority {
+        width: 100%;
+    }
+
+    .btn-container {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        right: 0;
+        bottom: 0;
+    }
+
+    .create-task-btn {
+        margin-top: 21px !important;
+        margin-left: 0 !important;
+    }
+
+    .mb-alert {
+        display: none;
+    }
 }
 
 @media(max-width: 860px) {
@@ -361,27 +402,106 @@
 
     .subtasks {
         width: 100%;
-        margin-bottom: var(--m50p);
+        // margin-bottom: var(--m50p);
     }
 
     .btn-container {
         margin-bottom: var(--m25p);
     }
 
+    .category {
+        width: 100%;
+    }
+
+    .assigned-to {
+        width: 100%;
+    }
+
     .mb-alert {
         display: flex;
         animation: move-up 1.2s forwards;
     }
-}
 
-@media(max-width: 420px) {
     .row {
+        input {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+        }
+    }
+
+    .textaria {
         width: 100%;
     }
 
+    .headline {
+        margin-left: 0;
+    }
+
     .btn-container {
-        position: absolute;
+        width: 100%;
+        height: 100px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         flex-direction: column;
+        right: 0;
+        margin-bottom: var(--m20p);
+    }
+
+    .create {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mb-alert {
+        display: flex;
+        margin-left: 55px;
+        animation: move-up 1.2s forwards;
+    }
+
+    ::ng-deep .mat-dialog-container {
+        border-radius: 0px !important;
+        bottom: 0px;
+    }
+
+    ::ng-deep .cdk-overlay-pane {
+        margin-top: 158px !important;
+        height: 100vh !important;
+        border-radius: 0px !important;
+        max-width: 100vw !important;
+        width: 100%;
+    }
+}
+
+@media(max-width: 420px) {
+    .btn-container {
+        width: 110%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        right: 0;
+    }
+
+    .close-btn {
+        top: -25px;
+        right: -20px;
+    }
+
+    .create {
+        width: 90%;
+    }
+
+    .mb-alert {
+        margin-left: 58px;
+    }
+
+    .row {
+        width: 100%;
     }
 
     .create-task-btn {
@@ -405,12 +525,6 @@
         height: 60px;
     }
 
-    .btn-container {
-        bottom: 0;
-        flex-direction: column;
-        position: unset;
-    }
-
     .create-task-btn {
         margin-top: var(--m5p);
         margin-left: 0;
@@ -419,5 +533,39 @@
     .mb-alert {
         margin-bottom: 75px;
         margin-left: 14px;
+    }
+
+    .btn-container {
+        margin-bottom: var(--m25p);
+    }
+
+    .create-task-btn {
+        margin-top: var(--m5p);
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mb-alert {
+        margin-bottom: 75px;
+        margin-left: 14px;
+    }
+
+    ::ng-deep .cdk-overlay-pane {
+        margin-top: 158px !important;
+        height: 100vh !important;
+        border-radius: 0px !important;
+        max-width: 100vw !important;
+    }
+}
+
+//ANIMATION
+
+@keyframes move-up {
+    from {
+        transform: translateY(200px);
+    }
+
+    to {
+        transform: translateY(0);
     }
 }

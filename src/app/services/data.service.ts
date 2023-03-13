@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
@@ -15,8 +16,13 @@ export class DataService implements OnInit {
   alert = false;
   taskCreated = true;
   contactCreated = false;
+  category = false;
+  assigned = false;
+  dueDate = false;
+  prio = false;
   // TASKS
-  newTask = new Task();
+  task = new Task();
+  taskForm!: FormGroup;
   taskId: any;
   id: string;
   allTasks = [];
@@ -36,7 +42,7 @@ export class DataService implements OnInit {
   // USERNAME
   userName: string = 'Guest';
   // BOARD
-  task: any;
+  // task: any;
 
   mbDevice = null;
   low = false;
@@ -53,6 +59,7 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
+    this.setForm();
   }
 
   // 
@@ -88,7 +95,6 @@ export class DataService implements OnInit {
 
   // 
   getCategoryColor(category: string): any {
-    console.log(category)
     switch (category) {
       case 'Management':
         return 'management';
@@ -113,47 +119,135 @@ export class DataService implements OnInit {
     }
   }
 
-  // GET PRIORITY OF CURRENT TASK
-  getPriority() {
-    if (this.newTask.priority == 'Low') {
+  // // GET PRIORITY OF CURRENT TASK
+  // getPriority() {
+  //   if (this.newTask.priority == 'Low') {
+  //     this.low = true;
+  //     this.medium = false;
+  //     this.high = false;
+  //   } else if (this.newTask.priority == 'Medium') {
+  //     this.low = false;
+  //     this.medium = true;
+  //     this.high = false;
+  //   } else if (this.newTask.priority == 'Urgent') {
+  //     this.low = false;
+  //     this.medium = false;
+  //     this.high = true;
+  //   }
+  // }
+
+  // // CHANGE STATUS OF ASSIGNED CONTACTS
+  // changeContactStatus() {
+  //   for (let i = 0; i < this.newTask.assignedTo.length; i++) {
+  //     let element = this.newTask.assignedTo[i];
+  //     element.selected = true;
+  //   }
+  // }
+
+  // // SET TASK ID
+  // setId() {
+  //   let id = new Date().getTime();
+  //   this.newTask.id = id / 1000000000;
+  // }
+
+  // // SET CREATION TIME
+  // setDate() {
+  //   let date = new Date().getTime();
+  //   this.newTask.createdAt = date;
+  // }
+
+
+  // SET TASK FORM
+  setForm() {
+    this.taskForm = new FormGroup({
+      'title': new FormControl(this.task.title),
+      'description': new FormControl(this.task.description),
+      'category': new FormControl(this.task.category),
+      'assignedTo': new FormControl(this.task.assignedTo),
+      'dueDate': new FormControl(this.task.dueDate),
+      'prio': new FormControl(this.task.priority),
+      'subTasks': new FormControl(this.task.subtasks),
+    });
+  }
+
+  // 
+  handleAlerts() {
+    this.alert_category();
+    this.alert_assigned();
+    this.alert_prio();
+    this.timeout();
+  }
+
+  // 
+  alert_category() {
+    if (this.task.category == '') {
+      this.category = true;
+    }
+  }
+
+  // 
+  alert_assigned() {
+    if (this.task.assignedTo.length == 0) {
+      this.assigned = true;
+    }
+  }
+
+  // 
+  alert_prio() {
+    if (this.task.priority == '') {
+      this.prio = true;
+    }
+  }
+
+  timeout() {
+    setTimeout(() => {
+      this.category = false;
+      this.assigned = false;
+      this.dueDate = false;
+      this.prio = false;
+    }, 3000);
+  }
+
+  // LOG PRIO
+  setPrio(prio: string) {
+    this.task.priority = prio;
+    this.getPrio(prio);
+  }
+
+  // GET PRIO STATUS -> SET BOOLEAN
+  getPrio(prio: string) {
+    if (prio == 'Low') {
       this.low = true;
       this.medium = false;
       this.high = false;
-    } else if (this.newTask.priority == 'Medium') {
+    } else if (prio == 'Medium') {
       this.low = false;
       this.medium = true;
       this.high = false;
-    } else if (this.newTask.priority == 'Urgent') {
+    } else if (prio == 'Urgent') {
       this.low = false;
       this.medium = false;
       this.high = true;
     }
   }
 
-  // CHANGE STATUS OF ASSIGNED CONTACTS
-  changeContactStatus() {
-    for (let i = 0; i < this.newTask.assignedTo.length; i++) {
-      let element = this.newTask.assignedTo[i];
-      element.selected = true;
-    }
-  }
 
-  // SET TASK ID
-  setId() {
-    let id = new Date().getTime();
-    this.newTask.id = id / 1000000000;
-  }
 
-  // SET CREATION TIME
-  setDate() {
-    let date = new Date().getTime();
-    this.newTask.createdAt = date;
-  }
+
+
+
+
+
+
+
+
+
+
 
   // SAVE TASKS TO DB
   saveTaskToFirestore() {
     const coll = collection(this.fire, 'allTasks');
-    setDoc(doc(coll), this.newTask.toJSON());
+    setDoc(doc(coll), this.task.toJSON());
   }
 
   // RESET ALL NUMBERS BEFORE COUNT ALL TASKS
@@ -267,7 +361,7 @@ export class DataService implements OnInit {
   // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {
     setTimeout(() => {
-      this.task = this.allTasks.filter(item => {
+      task = this.allTasks.filter(item => {
         let now = new Date();
         let diff = now.getTime() - task.createdAt.getTime();
         let days = diff / (1000 * 60 * 60 * 24);

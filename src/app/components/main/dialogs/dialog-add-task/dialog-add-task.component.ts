@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-add-task',
@@ -28,19 +29,12 @@ addedSubTasks: string[] = [];
 subError = false;
 taskCreated = false;
 
-
-
-// ALERTS
-category = false;
-assigned = false;
-dueDate = false;
-prio = false;
-
 // 
 constructor(
   public data: DataService,
   public router: Router,
   private fire: Firestore,
+  public dialogRef: MatDialogRef<DialogAddTaskComponent>
 ) {
   this.setForm();
 }
@@ -49,43 +43,7 @@ ngOnInit(): void {
 
 }
 
-// 
-handleAlerts() {
-  this.alert_category();
-  this.alert_assigned();
-  this.alert_prio();
-  this.timeout();
-}
 
-// 
-alert_category() {
-  if (this.task.category == '') {
-    this.category = true;
-  }
-}
-
-// 
-alert_assigned() {
-  if (this.task.assignedTo.length == 0) {
-    this.assigned = true;
-  }
-}
-
-// 
-alert_prio() {
-  if (this.task.priority == '') {
-    this.prio = true;
-  }
-}
-
-timeout() {
-  setTimeout(() => {
-    this.category = false;
-    this.assigned = false;
-    this.dueDate = false;
-    this.prio = false;
-  }, 3000);
-}
 
 
 
@@ -106,28 +64,9 @@ setForm() {
   });
 }
 
-// LOG PRIO
-setPrio(prio: string) {
-  this.task.priority = prio;
-  this.getPrio(prio);
-}
 
-// GET PRIO STATUS -> SET BOOLEAN
-getPrio(prio: string) {
-  if (prio == 'Low') {
-    this.data.low = true;
-    this.data.medium = false;
-    this.data.high = false;
-  } else if (prio == 'Medium') {
-    this.data.low = false;
-    this.data.medium = true;
-    this.data.high = false;
-  } else if (prio == 'Urgent') {
-    this.data.low = false;
-    this.data.medium = false;
-    this.data.high = true;
-  }
-}
+
+
 
 // CREATE SUBTASK
 addSubTask() {
@@ -173,7 +112,7 @@ checkForm() {
 
 // 
 checkValidation() {
-  this.handleAlerts();
+  this.data.handleAlerts();
   console.log(this.task.dueDate);
   if (this.task.title.length > 4 &&
     this.task.description.length > 8 &&
@@ -208,22 +147,15 @@ setDate() {
   this.task.createdAt = date;
 }
 
+// 
 handleDate() {
+  let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
+  let date = new Date(input);
+  let month = date.getMonth() + 1; 
+  let day = date.getDate();
+  let year = date.getFullYear();
 
-  // Beispiel-Input-String vom Datepicker
-  const input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
-
-  // Das Datum in ein JavaScript-Date-Objekt umwandeln
-  const date = new Date(input);
-
-  // Das gewünschte Datum-Format extrahieren
-  const month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
-  const day = date.getDate();
-  const year = date.getFullYear();
-
-  // Das Datum im gewünschten Format speichern
-  const output = `${month}/${day}/${year}`;
-  console.log(output); // Output: "3/14/2023"
+  let output = `${month}/${day}/${year}`;
   this.task.dueDate = output;
 }
 
@@ -244,10 +176,7 @@ addTaskToDb() {
   this.data.alert = true;
   this.saveTaskToFirestore();
   this.resetForm();
-  setTimeout(() => {
-    this.router.navigate(['/kanbanboard/board']);
-  }, 2500);
-
+  this.dialogRef.close();
 }
 
 // SAVE TASKS TO DB
