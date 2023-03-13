@@ -115,19 +115,9 @@
     background: var(--light-blue) !important;
 }
 
-// DUE DATE
-// .date-container {
-//     display: flex;
-//     position: relative;
-// }
-
-// .date {
-//     position: relative;
-// }
-
 .date-input {
     background-color: white;
-    border: none;
+    border: 1px solid var(--light-grey);
     color: black;
     position: relative;
 
@@ -392,7 +382,6 @@
     .btn-container {
         position: absolute;
         flex-direction: column;
-        // bottom: -27px;
     }
 
     .create-task-btn {

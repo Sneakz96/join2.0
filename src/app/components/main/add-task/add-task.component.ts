@@ -20,7 +20,7 @@ export class AddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // 
-  
+
   //
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: string[] = [];
@@ -97,7 +97,7 @@ export class AddTaskComponent {
   checkForm() {
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
-    let dueDate = this.taskForm.value.dueDate;
+    console.log(this.taskForm.value.dueDate)
 
     let capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -114,28 +114,30 @@ export class AddTaskComponent {
 
     isValid(formattedTitle) && formattedTitle.length >= 3;
     isValid(description) && description.length >= 3;
-    isValidDate(dueDate);
-
     this.task.title = formattedTitle;
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
-    this.task.dueDate = dueDate;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
-
+    this.task.dueDate = this.taskForm.value.dueDate;
+    // this.getDueDate(); 
     this.changeContactStatus();
     this.setId();
     this.setDate();
-    this.checkValidation();
+    this.checkValidation(this.task);
+    console.log(this.task);
   }
 
-  // 
-  checkValidation() {
+
+  checkValidation(task: any) {
     this.taskCreated = true;
-    if (this.taskCreated) {
-      this.addTaskToDb();
-    }
+    console.log(task.title = '');
+    // if (task.) {
+    // }else{
+    //   this.addTaskToDb();
+
+    // }
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
@@ -145,6 +147,16 @@ export class AddTaskComponent {
       element.selected = true;
     }
   }
+
+  // // 
+  // getDueDate() {
+  //   let date = this.taskForm.value.dueDate;
+  //   let day = date.getDate();
+  //   let month = date.getMonth() + 1;
+  //   let year = date.getFullYear();
+  //   let formattedDate = `${month}/${day}/${year}`;
+  //   this.task.dueDate = formattedDate;
+  // }
 
   // SET TASK ID
   setId() {
@@ -173,7 +185,8 @@ export class AddTaskComponent {
   // 
   addTaskToDb() {
     this.data.alert = true;
-    // this.saveTaskToFirestore();
+    this.saveTaskToFirestore();
+    this.resetForm();
     setTimeout(() => {
       this.router.navigate(['/kanbanboard/board']);
     }, 2500);
@@ -184,7 +197,7 @@ export class AddTaskComponent {
     let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
-  
+
   // 
   checkAlerts() {
     console.log('alert');
@@ -205,3 +218,5 @@ export class AddTaskComponent {
 
 
 }
+
+

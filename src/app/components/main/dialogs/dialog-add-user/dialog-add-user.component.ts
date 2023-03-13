@@ -104,7 +104,7 @@ export class DialogAddUserComponent implements OnInit {
   setColor() {
     switch (this.contact.lastName.charCodeAt(0) % 6) {
       case 0:
-        this.contact.color = 'lightgreen'
+        this.contact.color = '#02CF2F'
         break;
       case 1:
         this.contact.color = 'lightgrey'

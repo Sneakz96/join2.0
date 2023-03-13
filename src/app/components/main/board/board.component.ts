@@ -41,6 +41,19 @@ export class BoardComponent {
     dialogRef.componentInstance.taskId = taskToOpen.customIdName;
   }
 
+
+//  // 
+//  getDueDate(taskToOpen:any) {
+//   console.log(taskToOpen.dueDate)
+//   let date = t.dueDate;
+//   let day = date.getDate();
+//   let month = date.getMonth() + 1;
+//   let year = date.getFullYear();
+//   let formattedDate = `${month}/${day}/${year}`;
+// }
+
+
+
   // OPEN ADD TASK DIALOG
   addTask() {
     this.dialog.open(DialogAddTaskComponent);

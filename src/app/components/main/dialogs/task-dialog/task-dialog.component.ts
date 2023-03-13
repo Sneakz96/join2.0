@@ -42,7 +42,7 @@ export class TaskDialogComponent {
   }
 
   // DELETE TASK ON OVERLAY
-  deleteTask(task: any, taskId: any) {
+  deleteTask(taskId: any) {
     this.firestore.collection("allTasks").doc(taskId).delete()
       .then(() => {
         console.log("Aufgabe wurde erfolgreich gelöscht.");

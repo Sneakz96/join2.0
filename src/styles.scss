@@ -94,7 +94,7 @@ h6 {
 
 
 :root {
-    //FONT ROOT
+    // FONT ROOT
     --fs-s: 10px;
     --fs-sm: 13px;
     --fs-m: 18px;
@@ -102,7 +102,7 @@ h6 {
     --fs-xl: 30px;
     --fs-hl: 42px;
 
-    //MARGIN ROOT
+    // MARGIN ROOT
     --m5: 5px;
     --m5p: 5%;
     --m10: 10px;
@@ -114,7 +114,7 @@ h6 {
     --m50: 50px;
     --m50p: 50%;
 
-    //COLOR ROOT
+    // COLOR ROOT
     --dark-navy: rgb(42, 54, 71);
     --menu-active: rgb(9, 25, 49);
     --light-grey: rgb(205, 205, 205);
@@ -127,12 +127,17 @@ h6 {
     --blue: rgb(0, 124, 238);
     --active: rgb(0, 64, 255);
 
-    //CONTACTCOLORSERVICE
+    // COLORSERVICE
     --yellow: rgb(212, 255, 0);
-    --orange: rgb(255, 191, 0);
+    // --orange: rgb(255, 191, 0);
     --red: rgb(255, 0, 0);
-    --blue: rgb(0, 64, 255);
+    --blue: rgb(0, 56, 255);
     --green: rgb(0, 255, 17);
     --purple: rgb(200, 0, 255);
     --grey: rgb(129, 129, 125);
+    
+    // CATEGORY COLORS
+    --yellow: ;
+    --orange: rgb(255, 122, 0);
+    --mint: rgb(31, 215, 193);
 }
