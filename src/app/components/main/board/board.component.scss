@@ -110,6 +110,7 @@
 
 //CONTAINER STYLE FOR TS GENERATE 
 .content-container {
+    // gap: 32px;
     background-color: var(--white);
     display: flex;
     justify-content: flex-start;
@@ -122,16 +123,19 @@
     background-color: rgba(0, 0, 0, 0.02);
 }
 
+
 .drag-task {
     width: 100%;
     display: flex;
     align-items: center;
     background-color: white;
     border-radius: 20px;
+    max-width: 200px;
 }
 
 //CREATED TASKS
 .task {
+    max-width: 200px;
     border-radius: 20px;
     padding: 20px;
     height: fit-content;
@@ -206,18 +210,31 @@
 
 .assigned-to {
     width: 20px !important;
+    margin-right: 3px;
 
     div {
         height: 22px;
         width: 22px;
         padding: 5px;
         font-size: var(--fs-s);
-        color: rgb(0, 0, 0);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
+}
+
+.excess {
+    height: 22px;
+    width: 22px;
+    padding: 5px;
+    font-size: var(--fs-s);
+    color: white;
+    background-color: #2A3647;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cdk-drag-placeholder {

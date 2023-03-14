@@ -60,7 +60,7 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
-    this.setForm();
+    // this.setForm();
   }
 
   // 
@@ -120,56 +120,18 @@ export class DataService implements OnInit {
     }
   }
 
-  // // GET PRIORITY OF CURRENT TASK
-  // getPriority() {
-  //   if (this.newTask.priority == 'Low') {
-  //     this.low = true;
-  //     this.medium = false;
-  //     this.high = false;
-  //   } else if (this.newTask.priority == 'Medium') {
-  //     this.low = false;
-  //     this.medium = true;
-  //     this.high = false;
-  //   } else if (this.newTask.priority == 'Urgent') {
-  //     this.low = false;
-  //     this.medium = false;
-  //     this.high = true;
-  //   }
+  // // SET TASK FORM
+  // setForm() {
+  //   this.taskForm = new FormGroup({
+  //     'title': new FormControl(this.task.title),
+  //     'description': new FormControl(this.task.description),
+  //     'category': new FormControl(this.task.category),
+  //     'assignedTo': new FormControl(this.task.assignedTo),
+  //     'dueDate': new FormControl(this.task.dueDate),
+  //     'prio': new FormControl(this.task.priority),
+  //     'subTasks': new FormControl(this.task.subtasks),
+  //   });
   // }
-
-  // // CHANGE STATUS OF ASSIGNED CONTACTS
-  // changeContactStatus() {
-  //   for (let i = 0; i < this.newTask.assignedTo.length; i++) {
-  //     let element = this.newTask.assignedTo[i];
-  //     element.selected = true;
-  //   }
-  // }
-
-  // // SET TASK ID
-  // setId() {
-  //   let id = new Date().getTime();
-  //   this.newTask.id = id / 1000000000;
-  // }
-
-  // // SET CREATION TIME
-  // setDate() {
-  //   let date = new Date().getTime();
-  //   this.newTask.createdAt = date;
-  // }
-
-
-  // SET TASK FORM
-  setForm() {
-    this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title),
-      'description': new FormControl(this.task.description),
-      'category': new FormControl(this.task.category),
-      'assignedTo': new FormControl(this.task.assignedTo),
-      'dueDate': new FormControl(this.task.dueDate),
-      'prio': new FormControl(this.task.priority),
-      'subTasks': new FormControl(this.task.subtasks),
-    });
-  }
 
   // 
   handleAlerts() {
@@ -233,10 +195,10 @@ export class DataService implements OnInit {
 
 
   // SAVE TASKS TO DB
-  saveTaskToFirestore() {
-    const coll = collection(this.fire, 'allTasks');
-    setDoc(doc(coll), this.task.toJSON());
-  }
+  // saveTaskToFirestore() {
+  //   const coll = collection(this.fire, 'allTasks');
+  //   setDoc(doc(coll), this.task.toJSON());
+  // }
 
   // RESET ALL NUMBERS BEFORE COUNT ALL TASKS
   clear() {
@@ -315,9 +277,6 @@ export class DataService implements OnInit {
   loadContactListInAddTask() {
     let coll = collection(this.fire, 'allContacts');
     this.allContacts$ = collectionData(coll);
-    this.allContacts$.subscribe(() => {
-      // console.log(this.allContacts$);
-    });
   }
 
   // GET ALL FIRST NAMES OF CONTACT LIST

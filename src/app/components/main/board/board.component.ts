@@ -13,7 +13,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 
 export class BoardComponent implements OnInit {
-
+  
+  excess = false;
   dueDate: any;
   searchField: string;
 
@@ -37,6 +38,7 @@ export class BoardComponent implements OnInit {
 
   // OPEN DIALOG
   openTask(taskToOpen: any) {
+    console.log(taskToOpen);
     let dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
       data: { taskToOpen }
@@ -44,7 +46,7 @@ export class BoardComponent implements OnInit {
     dialogRef.componentInstance.task = taskToOpen;
     dialogRef.componentInstance.taskId = taskToOpen.customIdName;
   }
-  
+
   // OPEN ADD TASK DIALOG
   addTask() {
     console.log('open dialog called');

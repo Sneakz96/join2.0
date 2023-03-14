@@ -25,8 +25,6 @@
         </div>
     </div>
     <span class="label">Assigned To:</span>
-
-
     <mat-form-field class="assigned" appearance="fill">
         <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo"
             [placeholder]="'Select contact to assign'">
@@ -37,16 +35,16 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-
-
-    <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
-        <div class="circle" [ngStyle]="{'background-color': contact.color}">
-            {{ contact.firstName?.charAt(0)}}
-            {{ contact.lastName?.charAt(0)}}
-        </div>
-        <div class="name">
-            {{ contact.firstName }}
-            {{ contact.lastName }}
+    <div class="assigned-contacts">
+        <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
+            <div class="circle" [ngStyle]="{'background-color': contact.color}">
+                {{ contact.firstName?.charAt(0)}}
+                {{ contact.lastName?.charAt(0)}}
+            </div>
+            <div class="name">
+                {{ contact.firstName }}
+                {{ contact.lastName }}
+            </div>
         </div>
     </div>
     <button class="edit-btn" (click)="save()">
