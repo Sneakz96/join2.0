@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
+import { Subtask } from 'src/app/models/subtask.class';
 
 interface subtask {
   text: string;
@@ -26,6 +27,7 @@ export class DialogAddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // SUBINPUT
+  subtask = new Subtask();
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
@@ -125,7 +127,6 @@ export class DialogAddTaskComponent {
 
   // CREATE SUBTASK
   addSubTask() {
-
     if (this.subInput.nativeElement.value == '') {
       this.data.handleSubError();
     } else {
@@ -136,13 +137,8 @@ export class DialogAddTaskComponent {
         this.subLength = true;
         this.handleSubError();
       } else {
-        debugger;
-        let subtaskText = this.subInput.nativeElement.value;
-        let newSubtask = this.createNewSubtask(subtaskText);
-        console.log('add sub', newSubtask);
-        console.log(newSubtask.status);
-        this.addedSubTasks.push(newSubtask);
-        console.log(this.addedSubTasks);
+        this.subtask.text = this.subInput.nativeElement.value;
+        this.addedSubTasks.push(this.subtask);
         this.subInput.nativeElement.value = '';
       }
     }

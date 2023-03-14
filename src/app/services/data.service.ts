@@ -120,19 +120,6 @@ export class DataService implements OnInit {
     }
   }
 
-  // // SET TASK FORM
-  // setForm() {
-  //   this.taskForm = new FormGroup({
-  //     'title': new FormControl(this.task.title),
-  //     'description': new FormControl(this.task.description),
-  //     'category': new FormControl(this.task.category),
-  //     'assignedTo': new FormControl(this.task.assignedTo),
-  //     'dueDate': new FormControl(this.task.dueDate),
-  //     'prio': new FormControl(this.task.priority),
-  //     'subTasks': new FormControl(this.task.subtasks),
-  //   });
-  // }
-
   // 
   handleAlerts() {
     this.alert_category();

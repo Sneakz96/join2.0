@@ -17,14 +17,14 @@
             <img src="./assets/img/icons/{{ task.priority }}.png">
         </div>
     </div>
-    <p class="sub-task-header">Subtasks:</p>
     <div class="sub-progress" *ngIf="task.subtasks.length > 0">
+        <p class="sub-task-header">Subtasks:</p>
         <mat-progress-bar class="sub-progress-bar" mode="determinate" value="60"></mat-progress-bar>
         <p>3/{{ task.subtasks.length }} Done</p>
     </div>
     <div class="subtasks" *ngIf="task.subtasks.length > 0">
-        <div class="subtask" *ngFor="let sub of task.subtasks ">
-            <input type="checkbox" [checked]="aa">{{ sub }}
+        <div class="subtask" *ngFor="let sub of task.subtasks">
+            <input type="checkbox" (click)="handleCheck()" [(ngModel)]="checkedSubTasks">{{ sub }}
         </div>
     </div>
     <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->

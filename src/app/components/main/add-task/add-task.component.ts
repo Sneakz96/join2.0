@@ -4,11 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-
-interface subtask {
-  text: string;
-  status: string;
-}
+import { Subtask } from 'src/app/models/subtask.class';
 
 @Component({
   selector: 'app-add-task',
@@ -25,6 +21,7 @@ export class AddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // 
+  subtask = new Subtask();
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
@@ -36,6 +33,7 @@ export class AddTaskComponent {
     public data: DataService,
     public router: Router,
     private fire: Firestore,
+    public sub: Subtask,
   ) {
     this.setForm();
   }
@@ -64,24 +62,12 @@ export class AddTaskComponent {
       } else if (this.subInput.nativeElement.value.length <= 3) {
         this.subLength = true;
         this.handleSubError();
-      } else {
-        let subtaskText = this.subInput.nativeElement.value;
-        let newSubtask = this.createNewSubtask(subtaskText);
-        console.log('add sub', newSubtask);
-        console.log(newSubtask.status);
-        this.addedSubTasks.push(newSubtask);
-        console.log(this.addedSubTasks);
+      } else { 
+        this.subtask.text = this.subInput.nativeElement.value;
+        this.addedSubTasks.push(this.subtask);
         this.subInput.nativeElement.value = '';
       }
     }
-  }
-
-  //
-  createNewSubtask(text: string): subtask {
-    return {
-      text: text,
-      status: 'toDo'
-    };
   }
 
   // 

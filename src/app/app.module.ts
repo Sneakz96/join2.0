@@ -34,7 +34,7 @@ import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-t
 import { SignUpComponent } from './components/log/sign-up/sign-up.component';
 import { LoginComponent } from './components/log/login/login.component';
 import { WelcomeComponent } from './components/log/welcome/welcome.component';
-
+import { Subtask } from './models/subtask.class';
 // ANGULAR_MATERIAL_
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -56,7 +56,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
-import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -109,12 +108,13 @@ import { DataService } from './services/data.service';
     provideFirestore(() => getFirestore()),
   ],
   providers: [
+    // Subtask,
     TaskDialogComponent,
     MatDatepickerModule,
     EditContactComponent,
     LoginComponent,
-    // BoardComponent,
     // AddTaskComponent,
+    { provide: Subtask, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],

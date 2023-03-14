@@ -16,8 +16,8 @@ export class TaskDialogComponent {
 
   taskId = '';
   task: Task;
-  aa=true;
-
+  done = false;
+  checkedSubTasks = [];
   // 
   constructor(
     public dialog: MatDialog,
@@ -27,24 +27,21 @@ export class TaskDialogComponent {
     private firestore: AngularFirestore,
   ) { }
 
+  // 
+  handleCheck() {
+    console.log('check')
+  }
+
+  // get doneSubtasks(): number {
+  //   return this.task.subtasks.filter(subtask => subtask.status).length;
+  // }
+
+  // get progressValue(): number {
+  //   return (this.subtasksCompleted / this.subtasks.length) * 100;
+  // }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   // CLOSE DIALOG AND AND NAVIGATE TO BOARD
   closeDialog() {
     this.dialogRef.close();
