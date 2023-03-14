@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
+interface subtask {
+  text: string;
+  status: string;
+}
+
 @Component({
   selector: 'app-dialog-add-task',
   templateUrl: './dialog-add-task.component.html',
@@ -22,15 +27,16 @@ export class DialogAddTaskComponent {
   choosenCategory: any;
   // SUBINPUT
   @ViewChild('subInput') subInput: ElementRef;
-  addedSubTasks: string[] = [];
+  addedSubTasks: any[] = [];
   // ALERTS
   category = false;
   assigned = false;
   dueDate = false;
   prio = false;
-  subError = false;
   taskCreated = false;
-
+  subError = false;
+  subMax = false;
+  subLength = false;
   //   
   constructor(
     public data: DataService,
@@ -116,21 +122,44 @@ export class DialogAddTaskComponent {
     }
   }
 
+
   // CREATE SUBTASK
   addSubTask() {
+
     if (this.subInput.nativeElement.value == '') {
-      this.handleSubError();
+      this.data.handleSubError();
     } else {
-      this.addedSubTasks.push(this.subInput.nativeElement.value);
-      this.subInput.nativeElement.value = '';
+      if (this.addedSubTasks.length == 4) {
+        this.subMax = true;
+        this.handleSubError();
+      } else if (this.subInput.nativeElement.value.length <= 3) {
+        this.subLength = true;
+        this.handleSubError();
+      } else {
+        debugger;
+        let subtaskText = this.subInput.nativeElement.value;
+        let newSubtask = this.createNewSubtask(subtaskText);
+        console.log('add sub', newSubtask);
+        console.log(newSubtask.status);
+        this.addedSubTasks.push(newSubtask);
+        console.log(this.addedSubTasks);
+        this.subInput.nativeElement.value = '';
+      }
     }
   }
 
-  // GIVE SUBTASK ERROR
+  //
+  createNewSubtask(text: string): subtask {
+    return {
+      text: text,
+      status: 'toDo'
+    };
+  }
+  //
   handleSubError() {
-    this.subError = true;
     setTimeout(() => {
-      this.subError = false;
+      this.subLength = false;
+      this.subMax = false;
     }, 3000);
   }
 
@@ -155,6 +184,7 @@ export class DialogAddTaskComponent {
     this.setId();
     this.setDate();
     this.checkValidation();
+    console.log(this.task);
   }
 
   // 

@@ -34,7 +34,18 @@
               <span class="title">{{ taskToDo.title }}</span>
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskToDo.description }}</p>
+            </div>  
+
+
+            <div class="sub-progress" *ngIf="taskToDo.subtasks.length > 0">
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
+              <p>3/3 Done</p>
             </div>
+            
+            
+            
+            
+            
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -78,6 +89,10 @@
               <span class="title">{{ taskInProgress.title }}</span>
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskInProgress.description }}</p>
+            </div>
+            <div class="sub-progress" *ngIf="taskInProgress.subtasks.length > 0">
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
+              <p>3/3 Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -123,6 +138,10 @@
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskAwaitingFeedback.description }}</p>
             </div>
+            <div class="sub-progress" *ngIf="taskAwaitingFeedback.subtasks.length > 0">
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
+              <p>3/3 Done</p>
+            </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -165,6 +184,10 @@
               <span class="title">{{ taskDone.title }}</span>
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskDone.description }}</p>
+            </div>
+            <div class="sub-progress" *ngIf="taskDone.subtasks.length > 0">
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
+              <p>3/3 Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->

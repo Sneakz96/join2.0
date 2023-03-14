@@ -7,7 +7,7 @@
                     <!-- TITLE -->
                     <h5>Title</h5>
                     <input class="input-field" type="text" id="title" formControlName="title"
-                        placeholder="Enter a title" required minlength="4" maxlength="20" pattern="[a-zA-Z+ ]+">    
+                        placeholder="Enter a title" required minlength="4" maxlength="20" pattern="[a-zA-Z+ ]+">
                     <!-- DESCRIPTION -->
                     <h5>Description</h5>
                     <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
@@ -32,7 +32,7 @@
                     <h5>Assigned to</h5>
                     <p class="alert" *ngIf="data.assigned">Please assign a collegue!</p>
                     <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
-                        placeholder="Select contacts" multiple #assignedContacts >
+                        placeholder="Select contacts" multiple #assignedContacts>
                         <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                             {{contact.firstName}} {{contact.lastName}}</mat-option>
                     </mat-select>
@@ -69,10 +69,17 @@
                     <div class="sub-alert" *ngIf="data.subError">
                         <span>Input darf nicht leer sein!</span>
                     </div>
+                    <div class="sub-alert" *ngIf="subMax">
+                        <span>Maximum erreicht!</span>
+                    </div>
+                    <div class="sub-alert" *ngIf="subLength">
+                        <span>Input muss min. 4 Charakter haben!</span>
+                    </div>
+
                     <div class="subtasks" #subtasks>
-                        <div class="_2" *ngFor="let subtasks of addedSubTasks">
+                        <div class="_2" *ngFor="let subtask of addedSubTasks; index as i">
                             <input type="checkbox" checked>
-                            <label for="checkbox">{{ subtasks }}</label>
+                            <p>{{ subtask.text }}</p>
                         </div>
                     </div>
                     <!-- BTN -->

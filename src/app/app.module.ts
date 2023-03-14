@@ -44,6 +44,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // ANGULAR_FIRE_
 import { environment } from "src/environments/environment";
@@ -99,6 +100,7 @@ import { DataService } from './services/data.service';
     MatSelectModule,
     MatIconModule,
     MatMenuModule,
+    MatProgressBarModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

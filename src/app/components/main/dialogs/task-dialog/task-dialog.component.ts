@@ -16,6 +16,7 @@ export class TaskDialogComponent {
 
   taskId = '';
   task: Task;
+  aa=true;
 
   // 
   constructor(
@@ -26,6 +27,24 @@ export class TaskDialogComponent {
     private firestore: AngularFirestore,
   ) { }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   // CLOSE DIALOG AND AND NAVIGATE TO BOARD
   closeDialog() {
     this.dialogRef.close();

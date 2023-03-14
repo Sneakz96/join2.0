@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    width: 50%;
+    width: 70%;
 
     p {
         font-weight: bold;
@@ -43,7 +43,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    width: 50%;
+    width: 70%;
 
     p {
         font-weight: bold;
@@ -53,6 +53,34 @@
 .urgency-btn {
     border-radius: 10px;
     padding: 6px;
+}
+
+.sub-task-header {
+    font-weight: bold;
+}
+
+.sub-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sub-progress-bar {
+    border-radius: 2px;
+    width: 80%;
+}
+
+.subtasks {
+    height: 80px;
+    width: 80%;
+    margin-bottom: var(--m5p);
+}
+
+.subtask {
+    margin: 3px;
 }
 
 .assigned-to {

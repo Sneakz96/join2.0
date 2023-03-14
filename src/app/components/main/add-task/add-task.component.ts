@@ -5,6 +5,11 @@ import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 
+interface subtask {
+  text: string;
+  status: string;
+}
+
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -21,9 +26,11 @@ export class AddTaskComponent {
   choosenCategory: any;
   // 
   @ViewChild('subInput') subInput: ElementRef;
-  addedSubTasks: string[] = [];
+  addedSubTasks: any[] = [];
+  // ALERTS
   taskCreated = false;
-
+  subMax = false;
+  subLength = false;
   // 
   constructor(
     public data: DataService,
@@ -51,9 +58,38 @@ export class AddTaskComponent {
     if (this.subInput.nativeElement.value == '') {
       this.data.handleSubError();
     } else {
-      this.addedSubTasks.push(this.subInput.nativeElement.value);
-      this.subInput.nativeElement.value = '';
+      if (this.addedSubTasks.length == 4) {
+        this.subMax = true;
+        this.handleSubError();
+      } else if (this.subInput.nativeElement.value.length <= 3) {
+        this.subLength = true;
+        this.handleSubError();
+      } else {
+        let subtaskText = this.subInput.nativeElement.value;
+        let newSubtask = this.createNewSubtask(subtaskText);
+        console.log('add sub', newSubtask);
+        console.log(newSubtask.status);
+        this.addedSubTasks.push(newSubtask);
+        console.log(this.addedSubTasks);
+        this.subInput.nativeElement.value = '';
+      }
     }
+  }
+
+  //
+  createNewSubtask(text: string): subtask {
+    return {
+      text: text,
+      status: 'toDo'
+    };
+  }
+
+  // 
+  handleSubError() {
+    setTimeout(() => {
+      this.subLength = false;
+      this.subMax = false;
+    }, 3000);
   }
 
   // 
@@ -124,7 +160,7 @@ export class AddTaskComponent {
       this.data.high = true;
     }
   }
-  
+
   handleDate() {
     let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
     let date = new Date(input);
