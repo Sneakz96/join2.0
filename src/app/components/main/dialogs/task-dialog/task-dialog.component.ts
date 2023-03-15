@@ -25,7 +25,17 @@ export class TaskDialogComponent {
     private router: Router,
     public data: DataService,
     private firestore: AngularFirestore,
-  ) { }
+  ) {
+    this.log();
+  }
+
+  log() {
+    // for (let i = 0; i < this.task.subtasks.length; i++) {
+    //   const element = this.task.subtasks[i];
+    //   console.log(element);
+    // }
+  }
+
 
   // 
   handleCheck() {

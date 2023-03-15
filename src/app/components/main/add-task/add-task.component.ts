@@ -52,22 +52,25 @@ export class AddTaskComponent {
   }
 
   // CREATE SUBTASK
-  addSubTask() {
-    if (this.subInput.nativeElement.value == '') {
+  addSubTask(): void {
+    let subInputValue = this.subInput.nativeElement.value.trim();
+    if (!subInputValue) {
       this.data.handleSubError();
-    } else {
-      if (this.addedSubTasks.length == 4) {
-        this.subMax = true;
-        this.handleSubError();
-      } else if (this.subInput.nativeElement.value.length <= 3) {
-        this.subLength = true;
-        this.handleSubError();
-      } else { 
-        this.subtask.text = this.subInput.nativeElement.value;
-        this.addedSubTasks.push(this.subtask);
-        this.subInput.nativeElement.value = '';
-      }
+      return;
     }
+    if (this.addedSubTasks.length === 4) {
+      this.subMax = true;
+      this.handleSubError();
+      return;
+    }
+    if (subInputValue.length <= 3) {
+      this.subLength = true;
+      this.handleSubError();
+      return;
+    }
+    let subTask = { text: subInputValue };
+    this.addedSubTasks.push(subTask);
+    this.subInput.nativeElement.value = '';
   }
 
   // 
@@ -79,15 +82,10 @@ export class AddTaskComponent {
   }
 
   // 
-  checkForm() {
-    debugger;
+  checkForm(): void {
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
-
-    let capitalizeFirstLetter = (string) => {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-    let formattedTitle = capitalizeFirstLetter(title);
+    let formattedTitle = this.capitalizeFirstLetter(title);
 
     this.task.title = formattedTitle;
     this.task.description = description;
@@ -101,8 +99,13 @@ export class AddTaskComponent {
     this.setId();
     this.setDate();
     this.checkValidation();
-    console.log(this.task);
   }
+
+  // 
+  capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
   changeContactStatus() {
@@ -158,20 +161,23 @@ export class AddTaskComponent {
   }
 
   // 
-  checkValidation() {
+  checkValidation(): void {
     this.data.handleAlerts();
-    console.log(this.task.dueDate);
-    if (this.task.title.length > 4 &&
-      this.task.description.length > 8 &&
-      this.task.category &&
-      this.task.assignedTo.length > 0 &&
-      this.task.dueDate &&
-      this.task.priority
-    ) {
+    
+    let isTitleValid = this.task.title.length > 4;
+    let isDescriptionValid = this.task.description.length > 8;
+    let isCategoryValid = !!this.task.category;
+    let isAssignedToValid = this.task.assignedTo.length > 0;
+    let isDueDateValid = !!this.task.dueDate;
+    let isPriorityValid = !!this.task.priority;
+  
+    if (isTitleValid && isDescriptionValid && isCategoryValid &&
+        isAssignedToValid && isDueDateValid && isPriorityValid) {
       this.taskCreated = true;
       this.addTaskToDb();
     }
   }
+
   // 
   addTaskToDb() {
     this.data.alert = true;
@@ -184,7 +190,7 @@ export class AddTaskComponent {
 
   // SAVE TASKS TO DB
   saveTaskToFirestore() {
-    const coll = collection(this.fire, 'allTasks');
+    let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
   // 

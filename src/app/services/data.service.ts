@@ -11,7 +11,7 @@ import { Task } from '../models/task.class';
   providedIn: 'root'
 })
 
-export class DataService implements OnInit {
+export class DataService {
   // ALERTS
   alert = false;
   taskCreated = true;
@@ -60,11 +60,6 @@ export class DataService implements OnInit {
     this.loadTasks();
     this.loadContacts();
     this.loadContactListInAddTask();
-    // this.setForm();
-  }
-
-  // 
-  ngOnInit(): void {
   }
 
   // GET CURRENT DAY TIME
@@ -165,27 +160,6 @@ export class DataService implements OnInit {
       this.subError = false;
     }, 3000);
   }
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // SAVE TASKS TO DB
-  // saveTaskToFirestore() {
-  //   const coll = collection(this.fire, 'allTasks');
-  //   setDoc(doc(coll), this.task.toJSON());
-  // }
 
   // RESET ALL NUMBERS BEFORE COUNT ALL TASKS
   clear() {

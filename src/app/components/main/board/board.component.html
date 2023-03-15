@@ -34,18 +34,14 @@
               <span class="title">{{ taskToDo.title }}</span>
               <!--EDIT DESCRIPTION TO TASK -->
               <p>{{ taskToDo.description }}</p>
-            </div>  
+            </div>
 
 
             <div class="sub-progress" *ngIf="taskToDo.subtasks.length > 0">
               <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/3 Done</p>
+              <p>3/{{taskToDo.subtasks.length}} Done</p>
             </div>
-            
-            
-            
-            
-            
+
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
               <div class="assignedTo">
@@ -92,7 +88,7 @@
             </div>
             <div class="sub-progress" *ngIf="taskInProgress.subtasks.length > 0">
               <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/3 Done</p>
+              <p>3/{{taskInProgress.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -140,7 +136,7 @@
             </div>
             <div class="sub-progress" *ngIf="taskAwaitingFeedback.subtasks.length > 0">
               <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/3 Done</p>
+              <p>3/{{taskAwaitingFeedback.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -187,7 +183,7 @@
             </div>
             <div class="sub-progress" *ngIf="taskDone.subtasks.length > 0">
               <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/3 Done</p>
+              <p>3/{{taskDone.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
