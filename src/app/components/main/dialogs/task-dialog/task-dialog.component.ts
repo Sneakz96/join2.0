@@ -29,20 +29,39 @@ export class TaskDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.checkChecked();
   }
+
+  checkChecked() {
+    for (let i = 0; i < this.task.subtasks.length; i++) {
+      if (this.task.subtasks[i].done) {
+        this.checkedSubTasks.push(this.task.subtasks[i]);
+      }
+    }
+  }
+
 
   // HANDLE CHECK EVENT OF SUBTASKS
   handleCheck(i: number, event: Event) {
     event.stopPropagation();
     this.task.subtasks[i].done = !this.task.subtasks[i].done;
+
+    // Update the checkedSubTasks array
     if (this.task.subtasks[i].done) {
-      if (this.checkedSubTasks.indexOf(this.task.subtasks[i]) == -1) {
-        this.checkedSubTasks.push(this.task.subtasks[i]);
-      }
+      this.checkedSubTasks.push(this.task.subtasks[i]);
     } else {
-      this.checkedSubTasks.splice(this.checkedSubTasks.indexOf(this.task.subtasks[i]), 1);
+      const index = this.checkedSubTasks.indexOf(this.task.subtasks[i]);
+      if (index !== -1) {
+        this.checkedSubTasks.splice(index, 1);
+      }
     }
+
+    const updatedTask = {
+      title: this.task.title,
+      description: this.task.description,
+      subtasks: this.task.subtasks
+    };
+    this.data.updateTaskInFirebase(this.taskId, updatedTask);
   }
 
   // CLOSE DIALOG AND AND NAVIGATE TO BOARD

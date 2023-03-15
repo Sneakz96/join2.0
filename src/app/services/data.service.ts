@@ -289,4 +289,11 @@ export class DataService {
       .doc(task.customIdName)
       .update({ status: status });
   }
+
+  updateTaskInFirebase(taskId: string, updatedTask: any) {
+    this.firestore
+      .collection('allTasks')
+      .doc(taskId)
+      .update(updatedTask)
+  }
 }
