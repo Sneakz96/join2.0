@@ -14,9 +14,13 @@
         </div>
         <div class="right">
             <div class="close" (click)="closeDialog()"></div>
+
+
+
+
             <form class="name" [formGroup]="contactForm">
                 <div class="input-container">
-                    <input type="text" id="firstName" formControlName="firstName" placeholder="First name">
+                    <input type="text" id="firstName" formControlName="firstName" required placeholder="First name">
                     <mat-icon class="mat-icon">person_outline</mat-icon>
                 </div>
                 <div class="input-container">
@@ -32,6 +36,11 @@
                     <mat-icon class="mat-icon">phone</mat-icon>
                 </div>
             </form>
+
+
+
+
+
             <div class="btn-container">
                 <button class="cancel-btn" (click)="clearValues()">
                     Cancel

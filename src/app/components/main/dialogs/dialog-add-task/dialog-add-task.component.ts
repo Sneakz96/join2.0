@@ -1,15 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
-import { Subtask } from 'src/app/models/subtask.class';
 
-interface subtask {
-  text: string;
-  status: string;
+interface subtask{
+  text: any,
+  done: boolean,
 }
 
 @Component({
@@ -27,7 +26,7 @@ export class DialogAddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // SUBINPUT
-  subtask = new Subtask();
+  subtask: subtask;
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
@@ -141,9 +140,18 @@ export class DialogAddTaskComponent {
       this.handleSubError();
       return;
     }
-    let subTask = { text: subInputValue };
-    this.addedSubTasks.push(subTask);
+    let newSubtask = this.createNewSubtask(this.subInput.nativeElement.value);
+    this.addedSubTasks.push(newSubtask);
     this.subInput.nativeElement.value = '';
+  }
+
+  // 
+  createNewSubtask(text: string): any {
+    const newSubtask = {
+      text: text,
+      done: false
+    };
+    return newSubtask;
   }
 
   //
@@ -182,16 +190,16 @@ export class DialogAddTaskComponent {
   // 
   checkValidation(): void {
     this.handleAlerts();
-    
+
     let isTitleValid = this.task.title.length > 4;
     let isDescriptionValid = this.task.description.length > 8;
     let isCategoryValid = !!this.task.category;
     let isAssignedToValid = this.task.assignedTo.length > 0;
     let isDueDateValid = !!this.task.dueDate;
     let isPriorityValid = !!this.task.priority;
-  
+
     if (isTitleValid && isDescriptionValid && isCategoryValid &&
-        isAssignedToValid && isDueDateValid && isPriorityValid) {
+      isAssignedToValid && isDueDateValid && isPriorityValid) {
       this.taskCreated = true;
       this.addTaskToDb();
     }

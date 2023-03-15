@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { DialogEditTaskComponent } from '../dialog-edit-task/dialog-edit-task.co
   styleUrls: ['./task-dialog.component.scss']
 })
 
-export class TaskDialogComponent {
+export class TaskDialogComponent implements OnInit {
 
   taskId = '';
   task: Task;
@@ -26,14 +26,20 @@ export class TaskDialogComponent {
     public data: DataService,
     private firestore: AngularFirestore,
   ) {
+  }
+
+  ngOnInit(): void {
     this.log();
+
   }
 
   log() {
-    // for (let i = 0; i < this.task.subtasks.length; i++) {
-    //   const element = this.task.subtasks[i];
-    //   console.log(element);
-    // }
+    for (let i = 0; i < this.task.subtasks.length; i++) {
+      const element = this.task.subtasks[i];
+      console.log(element.done); 
+      console.log(element);
+      element.done = false
+    }
   }
 
 

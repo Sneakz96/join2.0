@@ -6,7 +6,7 @@ export class Task {
     assignedTo: any[] = [];
     dueDate: string;
     priority: string;
-    subtasks: string[] = [];
+    subtasks: any[] = [];
     createdAt: number;
     status: string;
     visible: boolean;

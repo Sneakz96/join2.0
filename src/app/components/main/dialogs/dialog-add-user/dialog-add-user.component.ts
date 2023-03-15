@@ -127,7 +127,7 @@ export class DialogAddUserComponent implements OnInit {
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
     this.data.contactCreated = true;
-    this.saveUserToFirestore();
+    // this.saveUserToFirestore();
     this.closeDialog();
     this.router.navigate(['/kanbanboard/contacts']);
     setTimeout(() => {

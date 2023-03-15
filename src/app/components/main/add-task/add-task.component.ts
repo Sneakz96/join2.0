@@ -4,7 +4,11 @@ import { DataService } from 'src/app/services/data.service';
 import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { Subtask } from 'src/app/models/subtask.class';
+
+interface subtask{
+  text: any,
+  done: boolean,
+}
 
 @Component({
   selector: 'app-add-task',
@@ -21,7 +25,7 @@ export class AddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // 
-  subtask = new Subtask();
+  subtask: subtask;
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
@@ -33,7 +37,6 @@ export class AddTaskComponent {
     public data: DataService,
     public router: Router,
     private fire: Firestore,
-    public sub: Subtask,
   ) {
     this.setForm();
   }
@@ -68,11 +71,17 @@ export class AddTaskComponent {
       this.handleSubError();
       return;
     }
-    let subTask = { text: subInputValue };
-    this.addedSubTasks.push(subTask);
+    let newSubtask = this.createNewSubtask(this.subInput.nativeElement.value);
+    this.addedSubTasks.push(newSubtask);
     this.subInput.nativeElement.value = '';
   }
-
+  createNewSubtask(text: string): any {
+    const newSubtask = {
+      text: text,
+      done: false
+    };
+    return newSubtask;
+  }
   // 
   handleSubError() {
     setTimeout(() => {

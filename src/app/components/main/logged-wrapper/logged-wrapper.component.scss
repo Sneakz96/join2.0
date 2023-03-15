@@ -7,23 +7,23 @@
     position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-
-    p {
-        margin-left: var(--m5p);
-    }
 }
+
 a{
     margin-left: var(--m5p);
 }
+
 .logo {
     display: none;
     height: 50px;
 }
 
 .img-content {
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
     margin-right: var(--m5p);
