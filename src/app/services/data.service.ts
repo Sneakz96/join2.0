@@ -23,10 +23,11 @@ export class DataService {
   subError = false;
   // TASKS
   task = new Task();
+  allTasks = [];
   taskForm!: FormGroup;
   taskId: any;
   id: string;
-  allTasks = [];
+  // BOARD
   todos!: number;
   inProgress!: number;
   feedback!: number;
@@ -35,15 +36,13 @@ export class DataService {
   deadline!: string;
   dayTime!: string;
   today: Date;
+  // USERNAME
+  userName: string = 'Guest';
   // CONTACTS
   allContacts = [];
   allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
-  // USERNAME
-  userName: string = 'Guest';
-  // BOARD
-  // task: any;
 
   mbDevice = null;
   low = false;
@@ -171,25 +170,29 @@ export class DataService {
   }
 
   // COUNT ALL.TASKS ON STATUS
-  count(task: any) {
-    task.forEach((task: any, index: any) => {
+  count(tasks: any[]): void {
+    tasks.forEach((task, index) => {
       this.getLowestDueDate(task, index);
-      if (task.status == 'toDo') {
-        this.todos++;
-      };
-      if (task.status == 'inProgress') {
-        this.inProgress++;
-      };
-      if (task.status == 'awaitingFeedback') {
-        this.feedback++;
-      };
-      if (task.status == 'done') {
-        this.done++;
-      };
-      if (task.priority == 'Urgent') {
+      switch (task.status) {
+        case 'toDo':
+          this.todos++;
+          break;
+        case 'inProgress':
+          this.inProgress++;
+          break;
+        case 'awaitingFeedback':
+          this.feedback++;
+          break;
+        case 'done':
+          this.done++;
+          break;
+        default:
+          break;
+      }
+      if (task.priority === 'Urgent') {
         this.urgent++;
       }
-    })
+    });
   }
 
   // GET LOWEST DUEDATE OF ALL TASKS

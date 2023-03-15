@@ -64,10 +64,6 @@ export class DialogEditTaskComponent implements OnInit {
 
   // SAVE EDITED TASK TO DB
   save() {
-    // debugger;
-    // console.log('save called', this.task);
-    // console.log(this.firestore.collection);
-    // console.log(this.task.toJSON());
     this.checkAllAssignedContacts();
     this.close();
     this.firestore
@@ -88,7 +84,6 @@ export class DialogEditTaskComponent implements OnInit {
     for (let i = 0; i < this.data.allContacts.length; i++) {
       this.checkedContacts.push(this.checkAssignedContacts(i));
     }
-    // console.log(this.checkedContacts);
   }
 
   // CHECK ASSIGNED CONTACTS

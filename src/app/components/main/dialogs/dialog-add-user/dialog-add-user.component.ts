@@ -56,28 +56,13 @@ export class DialogAddUserComponent implements OnInit {
     let email = this.contactForm.value.email.trim();
     let phone = this.contactForm.value.phone.trim();
   
-    // Ersten Buchstaben von Vor- und Nachnamen groß schreiben
-    let capitalizeFirstLetter = (string) => {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    let capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+    let isValidInput = (value) => /^[A-Za-z0-9+-]+$/.test(value);
+    let isValidEmail = (value) => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+    let isValidNumber = (value) => /^[0-9+/+]+$/.test(value);
   
     let formattedFirstName = capitalizeFirstLetter(firstName);
     let formattedLastName = capitalizeFirstLetter(lastName);
-  
-    let isValidInput = (value) => {
-      let allowedCharacters = /^[A-Za-z0-9+-]+$/;
-      return allowedCharacters.test(value);
-    };
-  
-    let isValidEmail = (value) => {
-      let allowedEmailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return allowedEmailFormat.test(value);
-    };
-  
-    let isValidNumber = (value) => {
-      let allowedNumbers = /^[0-9+/+]+$/;
-      return allowedNumbers.test(value);
-    };
   
     let isFirstNameValid = isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
     let isLastNameValid = isValidInput(formattedLastName) && formattedLastName.length >= 3;
@@ -85,11 +70,8 @@ export class DialogAddUserComponent implements OnInit {
     let isNumberValid = isValidNumber(phone);
   
     if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
-      console.log('error'); // Output: false
-      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isNumberValid); // Output: false
+      console.log('Error: Invalid input');
     } else {
-      console.log('it works', this.contact.selected); // Output: false
-      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isNumberValid); // Output: false
       this.contact.firstName = formattedFirstName;
       this.contact.lastName = formattedLastName;
       this.contact.email = email;
@@ -144,7 +126,6 @@ export class DialogAddUserComponent implements OnInit {
 
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
-    console.log('user added called', this.contact);
     this.data.contactCreated = true;
     this.saveUserToFirestore();
     this.closeDialog();

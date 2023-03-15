@@ -124,7 +124,6 @@ export class DialogAddTaskComponent {
     }
   }
 
-
   // CREATE SUBTASK
   addSubTask(): void {
     let subInputValue = this.subInput.nativeElement.value.trim();
@@ -222,7 +221,7 @@ export class DialogAddTaskComponent {
   handleDate() {
     let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
     let date = new Date(input);
-    let month = date.getMonth() + 1; // +1, da getMonth() mit 0 für Januar beginnt
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     let year = date.getFullYear();
     let output = `${month}/${day}/${year}`;

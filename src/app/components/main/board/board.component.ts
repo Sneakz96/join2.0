@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board.component.scss']
 })
 
-export class BoardComponent implements OnInit {
+export class BoardComponent {
   
   excess = false;
   dueDate: any;
@@ -25,10 +25,6 @@ export class BoardComponent implements OnInit {
     public data: DataService,
   ) { }
 
-  ngOnInit(): void {
-
-  }
-
   // SEARCH TASK ON BOARD
   search() {
     this.data.allTasks.forEach((task) => {
@@ -38,8 +34,6 @@ export class BoardComponent implements OnInit {
 
   // OPEN DIALOG
   openTask(taskToOpen: any) {
-    console.log(taskToOpen);
-    console.log(taskToOpen.subtasks[0].text);
     let dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '100%',
       data: { taskToOpen }
@@ -50,8 +44,6 @@ export class BoardComponent implements OnInit {
 
   // OPEN ADD TASK DIALOG
   addTask() {
-    console.log('open dialog called');
-    // debugger;
     this.dialog.open(DialogAddTaskComponent);
   }
 

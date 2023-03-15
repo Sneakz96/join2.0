@@ -42,6 +42,22 @@ export class TaskDialogComponent {
     console.log('check')
   }
 
+
+  // handleChecked(i: number, event: Event) {
+  //   event.stopPropagation();
+  //   if (this.checkedContacts[i] == true) {
+  //     this.task.assignedTo.push(this.data.allContacts[i]);
+  //   } else {
+  //     this.task.assignedTo.splice(this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id), 1);
+  //   }
+  //   this.checkAllAssignedContacts();
+  // }
+
+
+
+
+
+
   // get doneSubtasks(): number {
   //   return this.task.subtasks.filter(subtask => subtask.status).length;
   // }

@@ -106,7 +106,6 @@ export class AddTaskComponent {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-
   // CHANGE STATUS OF ASSIGNED CONTACTS
   changeContactStatus() {
     for (let i = 0; i < this.task.assignedTo.length; i++) {
@@ -150,6 +149,7 @@ export class AddTaskComponent {
     }
   }
 
+  // 
   handleDate() {
     let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
     let date = new Date(input);
@@ -193,6 +193,7 @@ export class AddTaskComponent {
     let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
+  
   // 
   resetForm() {
     this.taskForm.reset();

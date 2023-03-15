@@ -39,30 +39,21 @@ export class DialogEditUserComponent {
   }
 
   // CHECK FORM OF EDITED CONTACT
-  checkEditedForm(){
-    let firstName = this.user.firstName.replace(/\s/g, '');
-    let lastName = this.user.lastName.replace(/\s/g, '');
-    let mail = this.user.email.replace(/\s/g, '');
-    let phone = this.user.phone.replace(/\s/g, '');
-    let checkInputs = (value: string): boolean => {
-      const allowedCharacters = /^[A-Za-z0-9+-]+$/;
-      return allowedCharacters.test(value);
-    };
-    let checkMail = (value: string): boolean => {
-      const allowedNumbers = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return allowedNumbers.test(value);
-    };
-    let checkNumber = (value: string): boolean => {
-      const allowedNumbers = /^[0-9+/+]+$/;
-      return allowedNumbers.test(value);
-    };
-    let first = checkInputs(firstName);
-    let last = checkInputs(lastName);
-    let email = checkMail(mail);
-    let number = checkNumber(phone);
-    if (!first || !last || !email || !number) {
-      console.log('error'); // Output: false
-      console.log(first, last, mail, phone); // Output: false
+  checkEditedForm() {
+    let { firstName, lastName, email, phone } = this.user;
+  
+    let checkInputs = (value: string): boolean => /^[A-Za-z0-9+-]+$/.test(value);
+    let checkMail = (value: string): boolean => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+    let checkNumber = (value: string): boolean => /^[0-9+/+]+$/.test(value);
+  
+    let isFirstNameValid = checkInputs(firstName.replace(/\s/g, ''));
+    let isLastNameValid = checkInputs(lastName.replace(/\s/g, ''));
+    let isEmailValid = checkMail(email.replace(/\s/g, ''));
+    let isPhoneValid = checkNumber(phone.replace(/\s/g, ''));
+  
+    if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isPhoneValid) {
+      console.log('error');
+      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isPhoneValid);
       this.userEdited = false;
     } else {
       this.userEdited = true;

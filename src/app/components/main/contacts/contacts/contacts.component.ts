@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class ContactsComponent {
-
+  
   contact = new Contact();
 
   // 
