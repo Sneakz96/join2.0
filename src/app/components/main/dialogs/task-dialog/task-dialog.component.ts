@@ -17,7 +17,7 @@ export class TaskDialogComponent implements OnInit {
   taskId = '';
   task: Task;
   done = false;
-  checkedSubTasks = [];
+  checkedSubTasks: any = [];
   // 
   constructor(
     public dialog: MatDialog,
@@ -29,50 +29,21 @@ export class TaskDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.log();
 
   }
 
-  log() {
-    for (let i = 0; i < this.task.subtasks.length; i++) {
-      const element = this.task.subtasks[i];
-      console.log(element.done); 
-      console.log(element);
-      element.done = false
+  // HANDLE CHECK EVENT OF SUBTASKS
+  handleCheck(i: number, event: Event) {
+    event.stopPropagation();
+    this.task.subtasks[i].done = !this.task.subtasks[i].done;
+    if (this.task.subtasks[i].done) {
+      if (this.checkedSubTasks.indexOf(this.task.subtasks[i]) == -1) {
+        this.checkedSubTasks.push(this.task.subtasks[i]);
+      }
+    } else {
+      this.checkedSubTasks.splice(this.checkedSubTasks.indexOf(this.task.subtasks[i]), 1);
     }
   }
-
-
-  // 
-  handleCheck() {
-    console.log('check')
-  }
-
-
-  // handleChecked(i: number, event: Event) {
-  //   event.stopPropagation();
-  //   if (this.checkedContacts[i] == true) {
-  //     this.task.assignedTo.push(this.data.allContacts[i]);
-  //   } else {
-  //     this.task.assignedTo.splice(this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id), 1);
-  //   }
-  //   this.checkAllAssignedContacts();
-  // }
-
-
-
-
-
-
-  // get doneSubtasks(): number {
-  //   return this.task.subtasks.filter(subtask => subtask.status).length;
-  // }
-
-  // get progressValue(): number {
-  //   return (this.subtasksCompleted / this.subtasks.length) * 100;
-  // }
-
-
 
   // CLOSE DIALOG AND AND NAVIGATE TO BOARD
   closeDialog() {

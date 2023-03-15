@@ -22,15 +22,15 @@
 
     <div class="" *ngIf="task.subtasks.length > 0">
 
+        <p class="sub-task-header">Subtasks:</p>
         <div class="sub-progress">
-            <p class="sub-task-header">Subtasks:</p>
             <mat-progress-bar class="sub-progress-bar" mode="determinate" value="60"></mat-progress-bar>
             <p>3/{{ task.subtasks.length }} Done</p>
         </div>
 
         <div class="subtasks">
-            <div class="subtask" *ngFor="let sub of task.subtasks">
-                <input type="checkbox" (click)="handleCheck()" [(ngModel)]="checkedSubTasks">
+            <div class="subtask" *ngFor="let sub of task.subtasks; let i = index">
+                <input type="checkbox" (click)="handleCheck(i, $event)" >
                 {{ sub.text }}
             </div>
         </div>
