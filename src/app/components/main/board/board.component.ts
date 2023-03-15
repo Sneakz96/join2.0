@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 
 export class BoardComponent {
-  
+
   excess = false;
   dueDate: any;
   searchField: string;
@@ -79,4 +79,6 @@ export class BoardComponent {
     }
     this.data.updateTask(task, task.status);
   }
+
+
 }

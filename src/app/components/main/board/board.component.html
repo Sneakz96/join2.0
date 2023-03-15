@@ -34,8 +34,8 @@
               <p>{{ taskToDo.description }}</p>
             </div>
             <div class="sub-progress" *ngIf="taskToDo.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/{{taskToDo.subtasks.length}} Done</p>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskToDo) / taskToDo.subtasks.length * 100"></mat-progress-bar>
+              <p>{{data.checkChecked(taskToDo) }}/{{taskToDo.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -82,8 +82,8 @@
               <p>{{ taskInProgress.description }}</p>
             </div>
             <div class="sub-progress" *ngIf="taskInProgress.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/{{taskInProgress.subtasks.length}} Done</p>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskInProgress) / taskInProgress.subtasks.length * 100"></mat-progress-bar>
+              <p>{{data.checkChecked(taskInProgress) }}/{{taskInProgress.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -130,8 +130,8 @@
               <p>{{ taskAwaitingFeedback.description }}</p>
             </div>
             <div class="sub-progress" *ngIf="taskAwaitingFeedback.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/{{taskAwaitingFeedback.subtasks.length}} Done</p>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskAwaitingFeedback) / taskAwaitingFeedback.subtasks.length * 100"></mat-progress-bar>
+              <p>{{data.checkChecked(taskAwaitingFeedback) }}/{{taskAwaitingFeedback.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
@@ -177,8 +177,8 @@
               <p>{{ taskDone.description }}</p>
             </div>
             <div class="sub-progress" *ngIf="taskDone.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" value="40"></mat-progress-bar>
-              <p>3/{{taskDone.subtasks.length}} Done</p>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskDone) / taskDone.subtasks.length * 100"></mat-progress-bar>
+              <p>{{data.checkChecked(taskDone) }}/{{taskDone.subtasks.length}} Done</p>
             </div>
             <div class="labels">
               <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->

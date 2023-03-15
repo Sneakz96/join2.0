@@ -32,6 +32,7 @@ export class TaskDialogComponent implements OnInit {
     this.checkChecked();
   }
 
+  // 
   checkChecked() {
     for (let i = 0; i < this.task.subtasks.length; i++) {
       if (this.task.subtasks[i].done) {
@@ -39,7 +40,6 @@ export class TaskDialogComponent implements OnInit {
       }
     }
   }
-
 
   // HANDLE CHECK EVENT OF SUBTASKS
   handleCheck(i: number, event: Event) {

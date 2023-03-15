@@ -43,6 +43,9 @@ export class DataService {
   allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
+  // TASK DIALOG
+
+  // checkedSubtasks: any[] = [];
 
   mbDevice = null;
   low = false;
@@ -81,12 +84,34 @@ export class DataService {
     this.firestore
       .collection('allTasks')
       .valueChanges({ idField: 'customIdName' })
-      .subscribe((changes: any) => {
-        this.allTasks = changes;
+      .subscribe((task: any) => {
+        this.allTasks = task;
+
         this.clear();
         this.count(this.allTasks);
+        this.checkSubLength();
       });
   }
+
+  // 
+  checkSubLength() {
+    for (let i = 0; i < this.allTasks.length; i++) {
+      this.checkChecked(this.allTasks[i]);
+    }
+  }
+
+  // 
+  checkChecked(task: Task) {
+    let checkedSubtasks = [];
+    for (let i = 0; i < task.subtasks.length; i++) {
+      if (task.subtasks[i].done) {
+        checkedSubtasks.push(task.subtasks[i]);
+      }
+    }
+    return checkedSubtasks.length;
+  }
+
+
 
   // 
   getCategoryColor(category: string): any {
