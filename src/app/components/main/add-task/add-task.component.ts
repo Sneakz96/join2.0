@@ -192,6 +192,7 @@ export class AddTaskComponent {
     this.data.alert = true;
     this.saveTaskToFirestore();
     this.taskForm.reset();
+    this.addedSubTasks=[];
     setTimeout(() => {
       this.router.navigate(['/kanbanboard/board']);
     }, 2500);

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
-interface subtask{
+interface subtask {
   text: any,
   done: boolean,
 }
