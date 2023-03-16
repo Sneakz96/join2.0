@@ -19,8 +19,8 @@ export class DialogEditTaskComponent implements OnInit {
   taskId: string;
 
   contactForm = new FormControl();
-
-  checkedStatus: any[] = [];
+  selectedContacts: any[] = [];
+  checkedStatus = {};
 
   // BOOLEANS
   low = false;
@@ -44,15 +44,15 @@ export class DialogEditTaskComponent implements OnInit {
     console.log(this.data.allContacts);
     console.log(this.data.allContacts$);
     this.checkAssignedContacts();
-    console.log(this.checkedStatus);
+    this.check();
   }
 
   // 
-  checkAssignedContacts() {
-    const contacts = this.data.allContacts;
-    for (let contact of contacts) {
+  checkAssignedContacts(): void {
+    for (let contact of this.data.allContacts) {
       let isChecked = this.isContactAssigned(contact);
-      this.checkedStatus.push(isChecked);
+      this.checkedStatus[contact.id] = isChecked;
+
     }
   }
 
@@ -61,33 +61,29 @@ export class DialogEditTaskComponent implements OnInit {
     return this.task.assignedTo.some((assignedContact) => assignedContact.id === contact.id);
   }
 
+  // CHECK ASSIGNED CONTACTS AND PUSH IN ARRAW TO DISPLAY ON EDIT TASK
+  check() {
+    for (let i = 0; i < this.task.assignedTo.length; i++) {
+      let contact = this.task.assignedTo[i];
+      this.selectedContacts.push(contact)
+    }
+  }
 
+  // HANDLE CHECK EVENT FOR ASSIGNE CONTACT
   onContactSelected(index: number, event: Event): void {
     event.stopPropagation();
     this.checkedStatus[index] = !this.checkedStatus[index];
     this.data.allContacts[index].selected = !this.data.allContacts[index].selected;
-    console.log(this.checkedStatus, index);
-    console.log(this.data.allContacts[index].selected);
-    console.log(this.data.allContacts[index]);
-    console.log(this.task);
     if (this.data.allContacts[index].selected) {
-
+      this.selectedContacts.push(this.data.allContacts[index]);
+      console.log(this.task.assignedTo);
     } else {
-
+      let selectedContactIndex = this.selectedContacts.indexOf(this.data.allContacts[index]);
+      if (selectedContactIndex !== -1) {
+        this.selectedContacts.splice(selectedContactIndex, 1);
+      }
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   // GET PRIORITY OF CURRENT TASK
   getPriority() {
@@ -121,6 +117,7 @@ export class DialogEditTaskComponent implements OnInit {
   // SAVE EDITED TASK TO DB
   save() {
     this.close();
+    this.task.assignedTo = this.selectedContacts;
     this.firestore
       .collection('allTasks')
       .doc(this.taskId)

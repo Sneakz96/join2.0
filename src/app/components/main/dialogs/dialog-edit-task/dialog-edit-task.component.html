@@ -29,14 +29,14 @@
         <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo"
             [placeholder]="'Select contact to assign'">
             <mat-option *ngFor="let contact of data.allContacts; let i = index" [value]="contact">
-                <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="isContactAssigned(contact)"  (click)="onContactSelected(i, $event)">
+                <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="checkedStatus[contact.id]"  (click)="onContactSelected(i, $event)">
                 {{contact.firstName}}
                 {{contact.lastName}}
             </mat-option>
         </mat-select>
     </mat-form-field>
     <div class="assigned-contacts">
-        <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
+        <div class="assigned-contact" *ngFor="let contact of selectedContacts">
             <div class="circle" [ngStyle]="{'background-color': contact.color}">
                 {{ contact.firstName?.charAt(0)}}
                 {{ contact.lastName?.charAt(0)}}
