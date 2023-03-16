@@ -26,14 +26,15 @@
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo" [placeholder]="'Select contact to assign'">
-          <mat-option *ngFor="let contact of data.allContacts$ | async; let i = index" [value]="contact">
-            <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="checkedContacts[i]">
-            {{contact.firstName}}
-            {{contact.lastName}}
-          </mat-option>
+        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo"
+            [placeholder]="'Select contact to assign'">
+            <mat-option *ngFor="let contact of data.allContacts; let i = index" [value]="contact">
+                <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="isContactAssigned(contact)"  (click)="onContactSelected(i, $event)">
+                {{contact.firstName}}
+                {{contact.lastName}}
+            </mat-option>
         </mat-select>
-      </mat-form-field>
+    </mat-form-field>
     <div class="assigned-contacts">
         <div class="assigned-contact" *ngFor="let contact of task.assignedTo">
             <div class="circle" [ngStyle]="{'background-color': contact.color}">

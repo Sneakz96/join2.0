@@ -20,7 +20,7 @@ export class DialogEditTaskComponent implements OnInit {
 
   contactForm = new FormControl();
 
-  checkedContacts: any[] = [];
+  checkedStatus: any[] = [];
 
   // BOOLEANS
   low = false;
@@ -42,17 +42,18 @@ export class DialogEditTaskComponent implements OnInit {
     this.getPriority();
     console.log(this.task.assignedTo);
     console.log(this.data.allContacts);
+    console.log(this.data.allContacts$);
     this.checkAssignedContacts();
+    console.log(this.checkedStatus);
   }
 
   // 
   checkAssignedContacts() {
-    this.data.allContacts$.subscribe((contacts) => {
-      for (let contact of contacts) {
-        let isChecked = this.isContactAssigned(contact);
-        this.checkedContacts.push(isChecked);
-      }
-    });
+    const contacts = this.data.allContacts;
+    for (let contact of contacts) {
+      let isChecked = this.isContactAssigned(contact);
+      this.checkedStatus.push(isChecked);
+    }
   }
 
   // 
@@ -61,7 +62,20 @@ export class DialogEditTaskComponent implements OnInit {
   }
 
 
+  onContactSelected(index: number, event: Event): void {
+    event.stopPropagation();
+    this.checkedStatus[index] = !this.checkedStatus[index];
+    this.data.allContacts[index].selected = !this.data.allContacts[index].selected;
+    console.log(this.checkedStatus, index);
+    console.log(this.data.allContacts[index].selected);
+    console.log(this.data.allContacts[index]);
+    console.log(this.task);
+    if (this.data.allContacts[index].selected) {
 
+    } else {
+
+    }
+  }
 
 
 
