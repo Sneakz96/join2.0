@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
@@ -110,8 +110,6 @@ export class DataService {
     }
     return checkedSubtasks.length;
   }
-
-
 
   // 
   getCategoryColor(category: string): any {

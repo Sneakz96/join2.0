@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormControl } from '@angular/forms';
+import { Contact } from 'src/app/models/contact.class';
 
 @Component({
   selector: 'app-dialog-edit-task',
@@ -16,14 +17,17 @@ export class DialogEditTaskComponent implements OnInit {
 
   task: Task;
   taskId: string;
+
   contactForm = new FormControl();
+
   checkedContacts: any[] = [];
+
   // BOOLEANS
   low = false;
   medium = false;
   high = false;
-  checked = false;
-  selected = false;
+  // checked = false;
+  // selected = false;
 
   // 
   constructor(
@@ -36,8 +40,40 @@ export class DialogEditTaskComponent implements OnInit {
   // 
   ngOnInit(): void {
     this.getPriority();
-    this.checkAllAssignedContacts();
+    console.log(this.task.assignedTo);
+    console.log(this.data.allContacts);
+    this.checkAssignedContacts();
   }
+
+  // 
+  checkAssignedContacts() {
+    this.data.allContacts$.subscribe((contacts) => {
+      for (let contact of contacts) {
+        let isChecked = this.isContactAssigned(contact);
+        this.checkedContacts.push(isChecked);
+      }
+    });
+  }
+
+  // 
+  isContactAssigned(contact: Contact) {
+    return this.task.assignedTo.some((assignedContact) => assignedContact.id === contact.id);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // GET PRIORITY OF CURRENT TASK
   getPriority() {
@@ -62,47 +98,18 @@ export class DialogEditTaskComponent implements OnInit {
     this.getPriority();
   }
 
-  // SAVE EDITED TASK TO DB
-  save() {
-    this.checkAllAssignedContacts();
-    this.close();
-    this.firestore
-      .collection('allTasks')
-      .doc(this.taskId)
-      .update(this.task.toJSON());
-  }
-
   // CLOSE EDIT DIALOG
   close() {
     this.dialogRef.close();
     this.router.navigate(['/kanbanboard/board']);
   }
 
-  // 
-  checkAllAssignedContacts() {
-    this.checkedContacts = [];
-    for (let i = 0; i < this.data.allContacts.length; i++) {
-      this.checkedContacts.push(this.checkAssignedContacts(i));
-    }
-  }
-
-  // CHECK ASSIGNED CONTACTS
-  checkAssignedContacts(i: number) {
-    if (this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id) == -1) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  // 
-  handleChecked(i: number, event: Event) {
-    event.stopPropagation();
-    if (this.checkedContacts[i] == true) {
-      this.task.assignedTo.push(this.data.allContacts[i]);
-    } else {
-      this.task.assignedTo.splice(this.task.assignedTo.findIndex((elem) => elem.id == this.data.allContacts[i].id), 1);
-    }
-    this.checkAllAssignedContacts();
+  // SAVE EDITED TASK TO DB
+  save() {
+    this.close();
+    this.firestore
+      .collection('allTasks')
+      .doc(this.taskId)
+      .update(this.task.toJSON());
   }
 }
