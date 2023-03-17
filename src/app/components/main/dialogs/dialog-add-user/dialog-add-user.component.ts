@@ -70,6 +70,7 @@ export class DialogAddUserComponent implements OnInit {
     this.setUserID();
     this.data.setColor();
     this.addUser();
+    this.contactForm.reset();
   }
 
   private capitalizeFirstLetter(string: string): string {
@@ -90,14 +91,7 @@ export class DialogAddUserComponent implements OnInit {
 
   // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {
-    let firstName = document.getElementById("firstName") as HTMLInputElement;
-    let lastName = document.getElementById("lastName") as HTMLInputElement;
-    let mail = document.getElementById("mail") as HTMLInputElement;
-    let phone = document.getElementById("phone") as HTMLInputElement;
-    firstName.value = '';
-    lastName.value = '';
-    mail.value = '';
-    phone.value = '';
+    this.contactForm.reset();
   }
 
   // SAVE NEW USER TO DB
