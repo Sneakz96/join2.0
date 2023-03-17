@@ -40,7 +40,7 @@ export class DataService {
   // USERNAME
   userName: string = 'Guest';
   // CONTACTS
-  user: Contact;
+  user = new Contact();
   allContacts = [];
   allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
@@ -350,6 +350,6 @@ export class DataService {
     this.firestore
       .collection('allTasks')
       .doc(taskId)
-      .update(updatedTask)
+      .update(updatedTask);
   }
 }

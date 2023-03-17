@@ -15,6 +15,7 @@ export class DialogEditUserComponent {
   user: Contact;
   userId: string;
   userEdited = false;
+  
   // 
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
@@ -61,6 +62,4 @@ export class DialogEditUserComponent {
       this.userEdited = true;
     }
   }
-
-
 }

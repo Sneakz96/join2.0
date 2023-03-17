@@ -51,35 +51,53 @@ export class DialogAddUserComponent implements OnInit {
 
   // CHECK SENDED USER FORM (ADD USER)
   checkForm() {
-    let firstName = this.contactForm.value.firstName.trim();
-    let lastName = this.contactForm.value.lastName.trim();
-    let email = this.contactForm.value.email.trim();
-    let phone = this.contactForm.value.phone.trim();
-  
-    let capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-    let isValidInput = (value) => /^[A-Za-z0-9+-]+$/.test(value);
-    let isValidEmail = (value) => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-    let isValidNumber = (value) => /^[0-9+/+]+$/.test(value);
-  
-    let formattedFirstName = capitalizeFirstLetter(firstName);
-    let formattedLastName = capitalizeFirstLetter(lastName);
-  
-    let isFirstNameValid = isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
-    let isLastNameValid = isValidInput(formattedLastName) && formattedLastName.length >= 3;
-    let isEmailValid = isValidEmail(email);
-    let isNumberValid = isValidNumber(phone);
-  
+    let { firstName, lastName, email, phone } = this.contactForm.value;
+    let formattedFirstName = this.capitalizeFirstLetter(firstName.trim());
+    let formattedLastName = this.capitalizeFirstLetter(lastName.trim());
+    let isFirstNameValid = this.isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
+    let isLastNameValid = this.isValidInput(formattedLastName) && formattedLastName.length >= 3;
+    let isEmailValid = this.isValidEmail(email.trim());
+    let isNumberValid = this.isValidNumber(phone.trim());
+
     if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
-      console.log('Error: Invalid input');
-    } else {
-      this.user.firstName = formattedFirstName;
-      this.user.lastName = formattedLastName;
-      this.user.email = email;
-      this.user.phone = phone;
-      this.setUserID();
-      this.data.setColor();
-      this.addUser();
+      console.error('Error: Invalid input');
+      return;
     }
+    this.user.firstName = formattedFirstName;
+    this.user.lastName = formattedLastName;
+    this.user.email = email.trim();
+    this.user.phone = phone.trim();
+    this.setUserID();
+    this.data.setColor();
+    this.addUser();
+  }
+
+  private capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  private isValidInput(value: string): boolean {
+    return /^[A-Za-z0-9+-]+$/.test(value);
+  }
+
+  private isValidEmail(value: string): boolean {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+  }
+
+  private isValidNumber(value: string): boolean {
+    return /^[0-9+/+]+$/.test(value);
+  }
+
+  // SHOULD CLEAR VALUES OF DIALOG
+  clearValues() {
+    let firstName = document.getElementById("firstName") as HTMLInputElement;
+    let lastName = document.getElementById("lastName") as HTMLInputElement;
+    let mail = document.getElementById("mail") as HTMLInputElement;
+    let phone = document.getElementById("phone") as HTMLInputElement;
+    firstName.value = '';
+    lastName.value = '';
+    mail.value = '';
+    phone.value = '';
   }
 
   // SAVE NEW USER TO DB
@@ -102,17 +120,5 @@ export class DialogAddUserComponent implements OnInit {
     setTimeout(() => {
       this.data.contactCreated = false;
     }, 3000);
-  }
-
-  // SHOULD CLEAR VALUES OF DIALOG
-  clearValues() {
-    let firstName = document.getElementById("firstName") as HTMLInputElement;
-    let lastName = document.getElementById("lastName") as HTMLInputElement;
-    let mail = document.getElementById("mail") as HTMLInputElement;
-    let phone = document.getElementById("phone") as HTMLInputElement;
-    firstName.value = '';
-    lastName.value = '';
-    mail.value = '';
-    phone.value = '';
   }
 }
