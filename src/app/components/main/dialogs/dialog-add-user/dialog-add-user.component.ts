@@ -15,7 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 
 export class DialogAddUserComponent implements OnInit {
 
-  contact = new Contact();
+  user = new Contact();
   contactForm!: FormGroup;
   userOnDialog: any;
 
@@ -37,16 +37,16 @@ export class DialogAddUserComponent implements OnInit {
   // SET FORM OF NEW CONTACT
   setUserForm() {
     this.contactForm = new FormGroup({
-      'firstName': new FormControl(this.contact.firstName),
-      'lastName': new FormControl(this.contact.lastName),
-      'email': new FormControl(this.contact.email),
-      'phone': new FormControl(this.contact.phone),
+      'firstName': new FormControl(this.user.firstName),
+      'lastName': new FormControl(this.user.lastName),
+      'email': new FormControl(this.user.email),
+      'phone': new FormControl(this.user.phone),
     });
   }
 
   // GIVE NEW USER RANDOM ID
   setUserID() {
-    this.contact.id = 20000 * Math.random();
+    this.user.id = 20000 * Math.random();
   }
 
   // CHECK SENDED USER FORM (ADD USER)
@@ -72,51 +72,20 @@ export class DialogAddUserComponent implements OnInit {
     if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
       console.log('Error: Invalid input');
     } else {
-      this.contact.firstName = formattedFirstName;
-      this.contact.lastName = formattedLastName;
-      this.contact.email = email;
-      this.contact.phone = phone;
+      this.user.firstName = formattedFirstName;
+      this.user.lastName = formattedLastName;
+      this.user.email = email;
+      this.user.phone = phone;
       this.setUserID();
-      this.setColor();
+      this.data.setColor();
       this.addUser();
-    }
-  }
-
-  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
-  setColor() {
-    switch (this.contact.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.contact.color = '#02CF2F'
-        break;
-      case 1:
-        this.contact.color = 'lightgrey'
-        break;
-      case 2:
-        this.contact.color = 'lightblue'
-        break;
-      case 3:
-        this.contact.color = 'red'
-        break;
-      case 4:
-        this.contact.color = 'yellow'
-        break;
-      case 5:
-        this.contact.color = 'orange'
-        break;
-      case 6:
-        this.contact.color = 'purple'
-        break;
-      case 7:
-        this.contact.color = 'pink'
-        break;
-      default:
     }
   }
 
   // SAVE NEW USER TO DB
   saveUserToFirestore() {
     let coll = collection(this.firestore, 'allContacts');
-    setDoc(doc(coll), this.contact.toJSON());
+    setDoc(doc(coll), this.user.toJSON());
   }
 
   // CLOSE DIALOG TO CREATE NEW USER
@@ -127,7 +96,7 @@ export class DialogAddUserComponent implements OnInit {
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
     this.data.contactCreated = true;
-    // this.saveUserToFirestore();
+    this.saveUserToFirestore();
     this.closeDialog();
     this.router.navigate(['/kanbanboard/contacts']);
     setTimeout(() => {

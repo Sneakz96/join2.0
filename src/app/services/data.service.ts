@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { DialogAddUserComponent } from '../components/main/dialogs/dialog-add-user/dialog-add-user.component';
+import { Contact } from '../models/contact.class';
 import { Task } from '../models/task.class';
 
 @Injectable({
@@ -39,6 +40,7 @@ export class DataService {
   // USERNAME
   userName: string = 'Guest';
   // CONTACTS
+  user: Contact;
   allContacts = [];
   allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
@@ -288,6 +290,37 @@ export class DataService {
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
+  setColor() {
+    switch (this.user.lastName.charCodeAt(0) % 6) {
+      case 0:
+        this.user.color = 'lightgreen'
+        break;
+      case 1:
+        this.user.color = 'lightgrey'
+        break;
+      case 2:
+        this.user.color = 'lightblue'
+        break;
+      case 3:
+        this.user.color = 'rgb(203, 87, 87)'
+        break;
+      case 4:
+        this.user.color = '#d0d046'//YELLOW
+        break;
+      case 5:
+        this.user.color = 'orange'
+        break;
+      case 6:
+        this.user.color = 'purple'
+        break;
+      case 7:
+        this.user.color = 'pink'
+        break;
+      default:
+    }
   }
 
   //--BOARD--//

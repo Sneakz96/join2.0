@@ -40,23 +40,18 @@ export class DialogEditTaskComponent implements OnInit {
   // 
   ngOnInit(): void {
     this.getPriority();
-    console.log(this.task.assignedTo);
-    console.log(this.data.allContacts);
-    console.log(this.data.allContacts$);
     this.checkAssignedContacts();
     this.check();
   }
 
-  // 
+  // CHECK IF CONTACt IS ASSIGNED
   checkAssignedContacts(): void {
     for (let contact of this.data.allContacts) {
-      let isChecked = this.isContactAssigned(contact);
-      this.checkedStatus[contact.id] = isChecked;
-
+      this.checkedStatus[contact.id] = this.isContactAssigned(contact);
     }
   }
 
-  // 
+  // RETURN BOOLEAN
   isContactAssigned(contact: Contact) {
     return this.task.assignedTo.some((assignedContact) => assignedContact.id === contact.id);
   }
