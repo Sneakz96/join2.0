@@ -1,24 +1,24 @@
 <div class="wrapper">
-    <img src="/assets/img/logo/logo1.png" class="logo">
-    <div class="form-container pos-r">
+    <img src="/assets/img/logo/logo1.png" class="logo">   
+    <div class="form-container">
         <p>Sign up</p>
         <mat-icon class="arrow-back" routerLink="/login">arrow_back</mat-icon>
         <form [formGroup]="authService.signForm" class="reg-form" ngNativeValidate>
             <div class="blue-line"></div>
-            <mat-form-field class="pos-r" appearance="outline">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput #nameField formControlName="displayName">
-                <mat-icon class="icon">person_outline</mat-icon>
+                <mat-icon class="icon" matSuffix>person_outline</mat-icon>
             </mat-form-field>
-            <mat-form-field class="pos-r" appearance="outline">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="email" #emailField formControlName="email">
-                <mat-icon class="icon">mail_outline</mat-icon>
+                <mat-icon class="icon" matSuffix>mail_outline</mat-icon>
             </mat-form-field>
-            <mat-form-field class="pos-r" appearance="outline">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" #passwordField formControlName="password">
-                <mat-icon class="icon">lock</mat-icon>
+                <mat-icon class="icon" matSuffix>lock</mat-icon>
             </mat-form-field>
             <div class="button-container">
                 <button mat-raised-button type="submit" class="sign-up-btn" (click)="authService.signUp()">Sign up</button>

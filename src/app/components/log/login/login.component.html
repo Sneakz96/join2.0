@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper"> 
     <img src="/assets/img/logo/logo1.png" class="logo">
     <div class="sign-up-container">
         <p>Not a Join user?</p>
@@ -7,19 +7,19 @@
     <div class="form-container">
         <p>Log in</p>
         <div class="blue-line"></div>
-        <form [formGroup]="authService.loginForm" class="reg-form outline" ngNativeValidate>
-            <mat-form-field class="pos-r" appearance="outline">
+        <form [formGroup]="authService.loginForm" class="reg-form" ngNativeValidate>
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Email</mat-label>
-                <mat-icon class="mail-icon">mail_outline</mat-icon>
                 <input formControlName="email" matInput type="email">
+                <mat-icon class="mail-icon" matSuffix>mail_outline</mat-icon>
             </mat-form-field>
-            <mat-form-field class="pos-r" appearance="outline">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input formControlName="password" matInput type="password">
-                <mat-icon class="pw-icon">remove_red_eye</mat-icon>
+                <mat-icon class="pw-icon" matSuffix>remove_red_eye</mat-icon>
             </mat-form-field>
             <div class="forgot-pw-container">
-                <a href="#">Forgot my password</a>
+                <a (click)="alert()">Forgot my password</a>
             </div>
             <div class="btn-container">
                 <button mat-raised-button class="login-btn" (click)="authService.loginUser()">Login</button>

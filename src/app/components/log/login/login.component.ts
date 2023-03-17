@@ -15,4 +15,7 @@ export class LoginComponent {
     public authService: AuthService,
     ) {
   }
+  alert(){
+    alert('Service is not available!');
+  }
 }

@@ -1,11 +1,12 @@
 ::ng-deep .mat-dialog-container {
     border-radius: 20px;
-    overflow-y: scroll !important;
+    // overflow-y: scroll !important;
 }
 
 .task {
-    overflow-y: scroll !important;
+    // overflow-y: scroll !important;
     padding: 20px;
+    max-width: 500px;
 }
 
 .task-category {
@@ -162,7 +163,13 @@
 
 @media(max-width: 1080px) {}
 
-@media(max-width: 760px) {}
+@media(max-width: 760px) {
+    ::ng-deep .mat-dialog-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
 
 @media(max-width: 420px) {
     .task {
@@ -191,6 +198,10 @@
     }
 
     .assigned-contact {
+        width: 100%;
+    }
+
+    .sub-progress {
         width: 100%;
     }
 

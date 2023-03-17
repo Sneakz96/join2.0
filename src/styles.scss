@@ -7,6 +7,19 @@
     font-size: var(--fs-m);
 }
 
+/*SCROLLBAR*/ 
+::-webkit-scrollbar {
+    width: 4px;
+    overflow-y: scroll;
+    background: var(--placeholder);
+    box-shadow: inset 0 0 4px var(--placeholder);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border-radius: 10px;
+}
+
 //CLASSES
 .d-none {
     display: none;

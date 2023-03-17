@@ -66,8 +66,6 @@ export class DataService {
     this.loadContactListInAddTask();
   }
 
-
-
   // LOAD ALL TASKS FROM FIRESTORE
   loadTasks() {
     this.firestore
@@ -78,6 +76,7 @@ export class DataService {
         this.clear();
         this.count(this.allTasks);
         this.checkSubLength();
+        this.sort();
       });
   }
 
@@ -217,6 +216,7 @@ export class DataService {
       }
       if (task.priority === 'Urgent') {
         this.urgent++;
+        this.deleteDoneTasks(task);
       }
     });
   }
@@ -347,6 +347,38 @@ export class DataService {
   }
 
   //--BOARD--//
+  toDo = [];
+  awaitingFeedback = [];
+  progress = [];
+  did = [];
+
+  sort() {
+    console.log('sort called')
+    // debugger;
+    this.toDo = [];
+    this.awaitingFeedback = [];
+    this.progress = [];
+    this.did = [];
+    for (let i = 0; i < this.allTasks.length; i++) {
+      let task = this.allTasks[i];
+
+      if (this.allTasks[i].status === 'toDo') {
+        this.toDo.push(task);
+      } else if (this.allTasks[i].status === 'awaitingFeedback') {
+        this.awaitingFeedback.push(task);
+      } else if (this.allTasks[i].status === 'inProgress' || this.allTasks[i].status === 'dropList_2') {
+        this.progress.push(task);
+      } else if (this.allTasks[i].status === 'done') {
+        this.did.push(task);
+      }
+
+    }
+    console.log('toDo:', this.toDo);
+    console.log('awaitingFeedback:', this.awaitingFeedback);
+    console.log('inProgress:', this.progress);
+    console.log('done:', this.did);
+  }
+
   // GET COLOR OF CURRENT CATEGORY
   getCategoryColor(category: string): any {
     switch (category) {

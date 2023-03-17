@@ -87,6 +87,8 @@ export class DialogAddUserComponent implements OnInit {
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
     this.data.contactCreated = true;
+    this.data.allContacts = [];
+    this.data.loadContacts();
     this.saveUserToFirestore();
     this.clearValues();
     this.closeDialog();

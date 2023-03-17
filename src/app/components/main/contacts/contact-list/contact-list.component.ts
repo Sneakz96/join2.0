@@ -14,7 +14,7 @@ import { EditContactComponent } from 'src/app/components/main/contacts/edit-cont
 export class ContactListComponent {
 
   constructor(
-    public dataService: DataService,
+    public data: DataService,
     public dialog: MatDialog,
     private edit: EditContactComponent,
   ) { }
@@ -31,7 +31,7 @@ export class ContactListComponent {
 
   // CHECK MB DEVICE - WHAT TO OPEN
   open(userToOpen: any) {
-    if (this.dataService.mbDevice == null) {
+    if (this.data.mbDevice == null) {
     } else {
       let dialogRef = this.dialog.open(DialogEditUserComponent);
       dialogRef.componentInstance.user = userToOpen;

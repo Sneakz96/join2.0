@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -12,18 +12,34 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board.component.scss']
 })
 
-export class BoardComponent {
+export class BoardComponent implements AfterViewInit {
 
   excess = false;
   dueDate: any;
   searchField: string;
+
+
+
 
   // 
   constructor(
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
-  ) { }
+  ) {
+    this.sort();
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  checkActiveTasks() {
+    for (let i = 0; i < this.data.allTasks.length; i++) {
+      const element = this.data.allTasks[i];
+      console.log(element)
+    }
+  }
 
   // SEARCH TASK ON BOARD
   search() {
@@ -69,6 +85,7 @@ export class BoardComponent {
   changeStatusByDrop(task: any, status: any) {
     if (status === 'dropList_0') {
       task.status = 'toDo';
+      this.toDo
     } else if (status === 'dropList_1') {
       task.status = 'inProgress';
     } else if (status === 'dropList_2') {
@@ -78,5 +95,45 @@ export class BoardComponent {
       this.data.deleteDoneTasks(task);
     }
     this.data.updateTask(task, task.status);
+    this.sort();
   }
+
+
+
+  toDo = [];
+  awaitingFeedback = [];
+  inProgress = [];
+  done = [];
+
+  sort() {
+
+
+    this.toDo = [];
+    this.awaitingFeedback = [];
+    this.inProgress = [];
+    this.done = [];
+    for (let i = 0; i < this.data.allTasks.length; i++) {
+      let task = this.data.allTasks[i];
+
+      if (this.data.allTasks[i].status == 'toDo') {
+        this.toDo.push(task);
+      }
+      if (this.data.allTasks[i].status == 'awaitingFeedback') {
+        this.awaitingFeedback.push(task);
+      }
+      if (this.data.allTasks[i].status == 'inProgress') {
+        this.inProgress.push(task);
+      }
+      if (this.data.allTasks[i].status == 'done') {
+        this.done.push(task);
+      }
+    
+    }
+    console.log('toDo:', this.toDo);
+    console.log('awaitingFeedback:', this.awaitingFeedback);
+    console.log('inProgress:', this.inProgress);
+    console.log('done:', this.done);
+  }
+
+
 }

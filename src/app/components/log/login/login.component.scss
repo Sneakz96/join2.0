@@ -23,6 +23,7 @@
     right: 50px;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     p {
         margin-right: var(--m10);
@@ -32,7 +33,7 @@
 
 .sign-up-btn {
     background-color: var(--dark-navy) !important;
-    color: #fff !important;
+    color: white !important;
     border: none;
     border-radius: 8px;
     padding: 8px;
@@ -46,23 +47,23 @@
     }
 }
 
-input,
-::placeholder,
-mat-label {
-    color: var(--light-grey);
-    font-size: 12px !important;
-}
+// input,
+// ::placeholder,
+// mat-label {
+//     color: var(--light-grey);
+//     font-size: 12px !important;
+// }
 
-::ng-deep .mat-form-field-wrapper {
-    margin: 0 0 !important;
-    padding-bottom: 0;
-}
+// ::ng-deep .mat-form-field-wrapper {
+//     margin: 0 0 !important;
+//     padding-bottom: 0;
+// }
 
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25%;
+    width: 450px;
     font-size: 16px;
     gap: 32px;
     background-color: white;
@@ -87,39 +88,11 @@ mat-label {
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 
-::ng-deep .mail-icon {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    color: var(--dark-navy);
-
-    &:hover {
-        transform: scale(1.05);
-        transition: 125ms ease-in-out;
-    }
-}
-
-.pos-r {
-    position: relative;
-    margin: 8px;
-}
-
-::ng-deep .pw-icon {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    color: var(--dark-navy);
-
-    &:hover {
-        transform: scale(1.05);
-        transition: 125ms ease-in-out;
-    }
-}
-
-::ng-deep .mat-form-field-outline {
-    height: 70px !important;
+.input-field {
+    width: 100%;
 }
 
 .forgot-pw-container {
@@ -188,11 +161,16 @@ mat-label {
 @media(max-width: 1080px) {
     .form-container {
         margin-top: 70px;
-        width: 200px !important;
+        width: 60%;
     }
 }
 
 @media(max-width: 760px) {
+    .form-container {
+        width: 60%;
+        min-width: 200px;
+    }
+
     .guest-login-btn {
         width: 75%;
     }
@@ -217,26 +195,37 @@ mat-label {
         left: 20px;
         height: 75px;
     }
+
+    .reg-form {
+        width: 100%;
+    }
 }
 
-@media(max-width: 420px) {}
+@media(max-width: 420px) {
+    .form-container {
+        min-width: unset;
+    }
+
+    .reg-form {
+        width: 120%;
+    }
+}
 
 @media(max-width: 300px) {
+    .form-container {
+        width: 55%;
+    }
+
     .sign-up-container {
-        display: none;
+        left: 44px;
+        flex-direction: column;
 
         p {
             display: none;
         }
     }
 
-    .form-container {
-        margin-top: 160px;
-        max-width: 50% !important;
-        gap: 8px !important;
-    }
-
-    .reg-form {
-        width: 150%;
+    .sign-up-btn {
+        min-width: 150px;
     }
 }
