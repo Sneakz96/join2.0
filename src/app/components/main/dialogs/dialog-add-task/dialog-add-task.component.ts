@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -42,7 +41,6 @@ export class DialogAddTaskComponent {
   constructor(
     public data: DataService,
     public router: Router,
-    private fire: Firestore,
     public dialogRef: MatDialogRef<DialogAddTaskComponent>
   ) {
     this.setForm();
@@ -103,24 +101,7 @@ export class DialogAddTaskComponent {
   // LOG PRIO
   setPrio(prio: string) {
     this.task.priority = prio;
-    this.getPrio(prio);
-  }
-
-  // GET PRIO STATUS -> SET BOOLEAN
-  getPrio(prio: string) {
-    if (prio == 'Low') {
-      this.data.low = true;
-      this.data.medium = false;
-      this.data.high = false;
-    } else if (prio == 'Medium') {
-      this.data.low = false;
-      this.data.medium = true;
-      this.data.high = false;
-    } else if (prio == 'Urgent') {
-      this.data.low = false;
-      this.data.medium = false;
-      this.data.high = true;
-    }
+    this.data.getPrio(prio);
   }
 
   // CREATE SUBTASK
@@ -172,7 +153,7 @@ export class DialogAddTaskComponent {
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
-    this.task.priority = this.task.priority;
+    // this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
 
     this.handleDate();
@@ -237,6 +218,15 @@ export class DialogAddTaskComponent {
   }
 
   // 
+  addTaskToDb() {
+    this.data.alert = true;
+    this.data.saveTaskToFirestore();
+    this.taskForm.reset();
+    this.close();
+    this.router.navigate(['/kanbanboard/board']);
+  }
+
+  // 
   resetForm() {
     this.taskForm.reset();
     this.subInput.nativeElement.value = '';
@@ -246,23 +236,6 @@ export class DialogAddTaskComponent {
     this.data.high = false;
     this.data.medium = false;
     this.data.low = false;
-  }
-
-  // 
-  addTaskToDb() {
-    this.data.alert = true;
-    this.saveTaskToFirestore();
-    this.resetForm();
-    this.close();
-    setTimeout(() => {
-      this.router.navigate(['/kanbanboard/board']);
-    }, 2500);
-  }
-
-  // SAVE TASKS TO DB
-  saveTaskToFirestore() {
-    let coll = collection(this.fire, 'allTasks');
-    setDoc(doc(coll), this.task.toJSON());
   }
 
   // CLOSE DIALOG

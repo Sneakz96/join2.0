@@ -44,20 +44,15 @@ export class DialogAddUserComponent implements OnInit {
     });
   }
 
-  // GIVE NEW USER RANDOM ID
-  setUserID() {
-    this.user.id = 20000 * Math.random();
-  }
-
   // CHECK SENDED USER FORM (ADD USER)
   checkForm() {
     let { firstName, lastName, email, phone } = this.contactForm.value;
-    let formattedFirstName = this.capitalizeFirstLetter(firstName.trim());
-    let formattedLastName = this.capitalizeFirstLetter(lastName.trim());
-    let isFirstNameValid = this.isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
-    let isLastNameValid = this.isValidInput(formattedLastName) && formattedLastName.length >= 3;
-    let isEmailValid = this.isValidEmail(email.trim());
-    let isNumberValid = this.isValidNumber(phone.trim());
+    let formattedFirstName = this.data.capitalizeFirstLetter(firstName.trim());
+    let formattedLastName = this.data.capitalizeFirstLetter(lastName.trim());
+    let isFirstNameValid = this.data.isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
+    let isLastNameValid = this.data.isValidInput(formattedLastName) && formattedLastName.length >= 3;
+    let isEmailValid = this.data.isValidEmail(email.trim());
+    let isNumberValid = this.data.isValidNumber(phone.trim());
 
     if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
       console.error('Error: Invalid input');
@@ -67,26 +62,10 @@ export class DialogAddUserComponent implements OnInit {
     this.user.lastName = formattedLastName;
     this.user.email = email.trim();
     this.user.phone = phone.trim();
-    this.setUserID();
+    this.data.setUserID();
     this.data.setColor();
     this.addUser();
     this.contactForm.reset();
-  }
-
-  private capitalizeFirstLetter(string: string): string {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  private isValidInput(value: string): boolean {
-    return /^[A-Za-z0-9+-]+$/.test(value);
-  }
-
-  private isValidEmail(value: string): boolean {
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-  }
-
-  private isValidNumber(value: string): boolean {
-    return /^[0-9+/+]+$/.test(value);
   }
 
   // SHOULD CLEAR VALUES OF DIALOG
@@ -109,6 +88,7 @@ export class DialogAddUserComponent implements OnInit {
   addUser() {
     this.data.contactCreated = true;
     this.saveUserToFirestore();
+    this.clearValues();
     this.closeDialog();
     this.router.navigate(['/kanbanboard/contacts']);
     setTimeout(() => {

@@ -66,20 +66,7 @@ export class DataService {
     this.loadContactListInAddTask();
   }
 
-  // GET CURRENT DAY TIME
-  getDayTime() {
-    let day = new Date();
-    day.getDate();
-    this.today = day;
-    let curHr = day.getHours();
-    if (curHr < 12) {
-      this.dayTime = 'Good morning';
-    } else if (curHr < 18) {
-      this.dayTime = 'Good afternoon'
-    } else {
-      this.dayTime = 'Good evening'
-    }
-  }
+
 
   // LOAD ALL TASKS FROM FIRESTORE
   loadTasks() {
@@ -88,21 +75,20 @@ export class DataService {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((task: any) => {
         this.allTasks = task;
-
         this.clear();
         this.count(this.allTasks);
         this.checkSubLength();
       });
   }
 
-  // 
+  // CHECK LENTGTH OF ADDED SUBTASKS
   checkSubLength() {
     for (let i = 0; i < this.allTasks.length; i++) {
       this.checkChecked(this.allTasks[i]);
     }
   }
 
-  // 
+  // CHECK MARKED SUBTASKS
   checkChecked(task: Task) {
     let checkedSubtasks = [];
     for (let i = 0; i < task.subtasks.length; i++) {
@@ -113,33 +99,8 @@ export class DataService {
     return checkedSubtasks.length;
   }
 
-  // 
-  getCategoryColor(category: string): any {
-    switch (category) {
-      case 'Management':
-        return 'management';
-      case 'Costumer Service':
-        return 'customer-service';
-      case 'Marketing':
-        return 'marketing';
-      case 'Team':
-        return 'team';
-      case 'Design':
-        return 'design';
-      case 'Backoffice':
-        return 'backoffice';
-      case 'Media':
-        return 'media';
-      case 'IT':
-        return 'it';
-      case 'Sales':
-        return 'sales';
-      default:
-        return '';
-    }
-  }
-
-  // 
+  // ADD TASK
+  // HANDLE ALERTS_ADDING TASKS
   handleAlerts() {
     this.alert_category();
     this.alert_assigned();
@@ -168,6 +129,7 @@ export class DataService {
     }
   }
 
+  // 
   timeout() {
     setTimeout(() => {
       this.category = false;
@@ -183,6 +145,45 @@ export class DataService {
     setTimeout(() => {
       this.subError = false;
     }, 3000);
+  }
+
+  // GET PRIO STATUS -> SET BOOLEAN
+  getPrio(prio: string) {
+    if (prio == 'Low') {
+      this.low = true;
+      this.medium = false;
+      this.high = false;
+    } else if (prio == 'Medium') {
+      this.low = false;
+      this.medium = true;
+      this.high = false;
+    } else if (prio == 'Urgent') {
+      this.low = false;
+      this.medium = false;
+      this.high = true;
+    }
+  }
+
+  // SAVE TASKS TO DB
+  saveTaskToFirestore() {
+    let coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.task.toJSON());
+  }
+
+  // SUMMARY
+  // GET CURRENT DAY TIME
+  getDayTime() {
+    let day = new Date();
+    day.getDate();
+    this.today = day;
+    let curHr = day.getHours();
+    if (curHr < 12) {
+      this.dayTime = 'Good morning';
+    } else if (curHr < 18) {
+      this.dayTime = 'Good afternoon'
+    } else {
+      this.dayTime = 'Good evening'
+    }
   }
 
   // RESET ALL NUMBERS BEFORE COUNT ALL TASKS
@@ -237,6 +238,7 @@ export class DataService {
     return month + ' ' + day + ', ' + year;
   }
 
+  // CONTACTS
   // LOAD ALL CONTACTS FROM FIRESTORE
   loadContacts() {
     this.firestore
@@ -287,6 +289,11 @@ export class DataService {
     });
   }
 
+  // GIVE NEW USER RANDOM ID
+  setUserID() {
+    this.user.id = 20000 * Math.random();
+  }
+
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
@@ -323,7 +330,48 @@ export class DataService {
     }
   }
 
+  public capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  public isValidInput(value: string): boolean {
+    return /^[A-Za-z0-9+-]+$/.test(value);
+  }
+
+  public isValidEmail(value: string): boolean {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+  }
+
+  public isValidNumber(value: string): boolean {
+    return /^[0-9+/+]+$/.test(value);
+  }
+
   //--BOARD--//
+  // GET COLOR OF CURRENT CATEGORY
+  getCategoryColor(category: string): any {
+    switch (category) {
+      case 'Management':
+        return 'management';
+      case 'Costumer Service':
+        return 'customer-service';
+      case 'Marketing':
+        return 'marketing';
+      case 'Team':
+        return 'team';
+      case 'Design':
+        return 'design';
+      case 'Backoffice':
+        return 'backoffice';
+      case 'Media':
+        return 'media';
+      case 'IT':
+        return 'it';
+      case 'Sales':
+        return 'sales';
+      default:
+        return '';
+    }
+  }
 
   // DELETE TASK AFTER 3 DAYS IF IT'S DONE
   deleteDoneTasks(task: any) {

@@ -3,9 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
-import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 
-interface subtask{
+interface subtask {
   text: any,
   done: boolean,
 }
@@ -36,7 +35,6 @@ export class AddTaskComponent {
   constructor(
     public data: DataService,
     public router: Router,
-    private fire: Firestore,
   ) {
     this.setForm();
   }
@@ -75,6 +73,8 @@ export class AddTaskComponent {
     this.addedSubTasks.push(newSubtask);
     this.subInput.nativeElement.value = '';
   }
+
+  // 
   createNewSubtask(text: string): any {
     const newSubtask = {
       text: text,
@@ -82,6 +82,7 @@ export class AddTaskComponent {
     };
     return newSubtask;
   }
+
   // 
   handleSubError() {
     setTimeout(() => {
@@ -102,7 +103,6 @@ export class AddTaskComponent {
     this.task.assignedTo = this.assignedCollegues;
     this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
-
     this.handleDate();
     this.changeContactStatus();
     this.setId();
@@ -138,7 +138,7 @@ export class AddTaskComponent {
   // LOG PRIO
   setPrio(prio: string) {
     this.task.priority = prio;
-    this.getPrio(prio);
+    this.data.getPrio(prio);
   }
 
   // GET PRIO STATUS -> SET BOOLEAN
@@ -158,10 +158,9 @@ export class AddTaskComponent {
     }
   }
 
-  // 
+  // HANDLE DATE FOR TASK
   handleDate() {
-    let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
-    let date = new Date(input);
+    let date = new Date();
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let year = date.getFullYear();
@@ -169,42 +168,34 @@ export class AddTaskComponent {
     this.task.dueDate = output;
   }
 
-  // 
+  // CHECK VALIDATION
   checkValidation(): void {
     this.data.handleAlerts();
-    
+
     let isTitleValid = this.task.title.length > 4;
     let isDescriptionValid = this.task.description.length > 8;
     let isCategoryValid = !!this.task.category;
     let isAssignedToValid = this.task.assignedTo.length > 0;
     let isDueDateValid = !!this.task.dueDate;
     let isPriorityValid = !!this.task.priority;
-  
+
     if (isTitleValid && isDescriptionValid && isCategoryValid &&
-        isAssignedToValid && isDueDateValid && isPriorityValid) {
+      isAssignedToValid && isDueDateValid && isPriorityValid) {
       this.taskCreated = true;
       this.addTaskToDb();
     }
   }
 
-  // 
+  // ADD TO DB
   addTaskToDb() {
     this.data.alert = true;
-    this.saveTaskToFirestore();
-    this.taskForm.reset();
-    this.addedSubTasks=[];
-    setTimeout(() => {
-      this.router.navigate(['/kanbanboard/board']);
-    }, 2500);
+    this.data.saveTaskToFirestore();
+    this.resetForm();
+    this.addedSubTasks = [];
+    this.router.navigate(['/kanbanboard/board']);
   }
 
-  // SAVE TASKS TO DB
-  saveTaskToFirestore() {
-    let coll = collection(this.fire, 'allTasks');
-    setDoc(doc(coll), this.task.toJSON());
-  }
-  
-  // 
+  // RESET FORM
   resetForm() {
     this.taskForm.reset();
     this.subInput.nativeElement.value = '';
