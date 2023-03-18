@@ -47,18 +47,6 @@
     }
 }
 
-// input,
-// ::placeholder,
-// mat-label {
-//     color: var(--light-grey);
-//     font-size: 12px !important;
-// }
-
-// ::ng-deep .mat-form-field-wrapper {
-//     margin: 0 0 !important;
-//     padding-bottom: 0;
-// }
-
 .form-container {
     display: flex;
     flex-direction: column;
@@ -154,8 +142,6 @@
         transform: scale(1.05);
         transition: 125ms ease-in-out;
     }
-
-
 }
 
 @media(max-width: 1080px) {

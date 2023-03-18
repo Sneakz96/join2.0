@@ -16,11 +16,10 @@
         </div>
         <div class="right">
             <div class="close" (click)="closeDialog()"></div>
-
             <div class="name">
                 <div class="input-container">
                     <input class="input" type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'">
-                    <mat-icon class="mat-icon" matSuffix>person_outline</mat-icon>
+                    <mat-icon class="mat-icon">person_outline</mat-icon>
                 </div>
                 <div class="input-container">
                     <input class="input" type="text" matInput [(ngModel)]="user.lastName" [placeholder]="'Last name'">
