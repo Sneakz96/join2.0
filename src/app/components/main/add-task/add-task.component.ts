@@ -182,7 +182,8 @@ export class AddTaskComponent {
     if (isTitleValid && isDescriptionValid && isCategoryValid &&
       isAssignedToValid && isDueDateValid && isPriorityValid) {
       this.taskCreated = true;
-      this.addTaskToDb();
+      console.log('task created', this.task);
+      // this.addTaskToDb();
     }
   }
 

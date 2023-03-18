@@ -299,36 +299,7 @@ export class DataService {
     this.dialog.open(DialogAddUserComponent);
   }
 
-  // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
-  setColor() {
-    switch (this.user.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.user.color = 'lightgreen'
-        break;
-      case 1:
-        this.user.color = 'lightgrey'
-        break;
-      case 2:
-        this.user.color = 'lightblue'
-        break;
-      case 3:
-        this.user.color = 'rgb(203, 87, 87)'
-        break;
-      case 4:
-        this.user.color = '#d0d046'//YELLOW
-        break;
-      case 5:
-        this.user.color = 'orange'
-        break;
-      case 6:
-        this.user.color = 'purple'
-        break;
-      case 7:
-        this.user.color = 'pink'
-        break;
-      default:
-    }
-  }
+
 
   public capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);

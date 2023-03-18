@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -39,6 +40,7 @@ export class DialogAddTaskComponent {
   subLength = false;
   //   
   constructor(
+    private fire: Firestore,
     public data: DataService,
     public router: Router,
     public dialogRef: MatDialogRef<DialogAddTaskComponent>
@@ -182,6 +184,7 @@ export class DialogAddTaskComponent {
     if (isTitleValid && isDescriptionValid && isCategoryValid &&
       isAssignedToValid && isDueDateValid && isPriorityValid) {
       this.taskCreated = true;
+      console.log('task created', this.task);
       this.addTaskToDb();
     }
   }
@@ -220,10 +223,16 @@ export class DialogAddTaskComponent {
   // 
   addTaskToDb() {
     this.data.alert = true;
-    this.data.saveTaskToFirestore();
-    this.taskForm.reset();
+    this.saveTaskToFirestore();
+    this.resetForm();
     this.close();
     this.router.navigate(['/kanbanboard/board']);
+  }
+
+  // SAVE TASKS TO DB
+  saveTaskToFirestore() {
+    let coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.task.toJSON());
   }
 
   // 

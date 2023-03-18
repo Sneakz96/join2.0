@@ -243,7 +243,6 @@
     flex-direction: column;
     width: 90%;
     height: 120px;
-    overflow-y: scroll;
     margin-bottom: var(--m10p);
 
     div {
@@ -402,7 +401,6 @@
 
     .subtasks {
         width: 100%;
-        // margin-bottom: var(--m50p);
     }
 
     .btn-container {
