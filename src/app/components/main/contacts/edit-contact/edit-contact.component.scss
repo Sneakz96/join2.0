@@ -61,7 +61,7 @@
 }
 
 .name {
-    margin-left: var(--m5p);
+    margin: var(--m5p);
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -109,10 +109,6 @@
         font-weight: 400;
         margin-top: var(--m10);
         color: var(--blue);
-
-        &:hover {
-            cursor: pointer;
-        }
     }
 }
 
@@ -126,10 +122,6 @@
         font-weight: 400;
         margin-top: var(--m10);
         color: black;
-
-        &:hover {
-            cursor: pointer;
-        }
     }
 }
 
