@@ -62,7 +62,7 @@ export class DialogAddUserComponent implements OnInit {
     this.user.lastName = formattedLastName;
     this.user.email = email.trim();
     this.user.phone = phone.trim();
-    this.data.setUserID();
+    this.setUserID();
     this.setColor();
     this.addUser();
     this.contactForm.reset();
@@ -82,6 +82,11 @@ export class DialogAddUserComponent implements OnInit {
   // CLOSE DIALOG TO CREATE NEW USER
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  // GIVE NEW USER RANDOM ID
+  setUserID() {
+    this.user.id = 20000 * Math.random();
   }
   
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME

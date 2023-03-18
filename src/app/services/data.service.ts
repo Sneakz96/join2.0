@@ -289,17 +289,10 @@ export class DataService {
     });
   }
 
-  // GIVE NEW USER RANDOM ID
-  setUserID() {
-    this.user.id = 20000 * Math.random();
-  }
-
   // OPEN ADD_CONTACT_OVERLAY
   addNewContact() {
     this.dialog.open(DialogAddUserComponent);
   }
-
-
 
   public capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);

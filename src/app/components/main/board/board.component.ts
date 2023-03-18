@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-board',
@@ -22,12 +23,13 @@ export class BoardComponent {
   excess = false;
   dueDate: any;
   searchField: string;
-
+  @ViewChild('scrollElement') private childEl: ElementRef;
   // 
   constructor(
     public firestore: AngularFirestore,
     public dialog: MatDialog,
     public data: DataService,
+    public ui: UIService,
   ) {
     this.sort();
   }
@@ -56,6 +58,7 @@ export class BoardComponent {
 
   // DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
+    // this.ui.scrollOffset();
     let index = event.currentIndex;
     let indexBefore = event.previousIndex;
     if (event.previousContainer === event.container) {
@@ -116,5 +119,10 @@ export class BoardComponent {
     console.log('awaitingFeedback:', this.awaitingFeedback);
     console.log('inProgress:', this.inProgress);
     console.log('done:', this.done);
+  }
+
+  setScrollTop() {
+    console.log('scroll');
+    this.childEl.nativeElement.scrollTop = 50;
   }
 }

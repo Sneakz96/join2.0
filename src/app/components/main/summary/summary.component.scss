@@ -237,6 +237,14 @@
 }
 
 @media(max-width: 760px) {
+    .headline {
+        margin-bottom: 100px;
+    }
+
+    .summary {
+        margin-top: var(--m5p);
+    }
+
     .container {
         width: 90px;
         height: 110px;
@@ -259,9 +267,14 @@
 }
 
 @media(max-width: 420px) {
-    h1{
+    .summary {
+        margin-bottom: var(--m10p);
+    }
+
+    h1 {
         font-size: 47px !important;
     }
+
     .container {
         width: 40%;
         margin: 10px;
@@ -272,7 +285,15 @@
     }
 }
 
-@media(max-width: 300px) {
+@media(max-width: 350px) {
+    .headline {
+        margin-bottom: 0;
+
+        p {
+            display: none;
+        }
+    }
+
     .container {
         width: 30% !important;
         margin: 5px;
