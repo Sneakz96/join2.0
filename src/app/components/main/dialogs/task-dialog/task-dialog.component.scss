@@ -2,12 +2,13 @@
     border-radius: 20px;
 }
 
-::ng-deep .cdk-overlay-pane {
-    max-width: 550px !important;
-}
+// ::ng-deep .cdk-overlay-pane {
+//     max-width: 550px !important;
+// }
 
 .task {
     padding: 20px;
+    max-width: 500px;
     max-width: 550px;
 }
 

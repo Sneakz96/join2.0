@@ -115,6 +115,10 @@
     background: var(--light-blue) !important;
 }
 
+::ng-deep .cdk-overlay-pane {
+    max-width: 750px !important;
+}
+
 .date-input {
     background-color: white;
     border: 1px solid var(--light-grey);
