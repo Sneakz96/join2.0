@@ -1,11 +1,10 @@
 ::ng-deep .mat-dialog-container {
     border-radius: 20px;
-    // overflow-y: scroll !important;
 }
 
 .task {
-    // overflow-y: scroll !important;
     padding: 20px;
+    // width: 500px;
     max-width: 500px;
 }
 
@@ -32,7 +31,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    width: 70%;
+    // width: 70%;
 
     p {
         font-weight: bold;
@@ -44,7 +43,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    width: 70%;
+    // width: 70%;
 
     p {
         font-weight: bold;
@@ -64,19 +63,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    // width: 70%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .sub-progress-bar {
     border-radius: 2px;
-    width: 80%;
+    // width: 80%;
 }
 
 .subtasks {
     height: 80px;
-    width: 80%;
+    // width: 80%;
     margin-bottom: var(--m5p);
 }
 
@@ -101,7 +100,7 @@
 }
 
 .assigned-contact {
-    width: 50%;
+    // width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-start;

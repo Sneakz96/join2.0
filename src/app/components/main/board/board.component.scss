@@ -5,6 +5,7 @@
     bottom: 0;
     left: 175px;
     background-color: var(--white);
+    overflow-y: scroll;
 }
 
 .box {
@@ -320,7 +321,7 @@
     }
 
     .column {
-        width: 100%;
+        width: 90%;
         max-width: none;
     }
 

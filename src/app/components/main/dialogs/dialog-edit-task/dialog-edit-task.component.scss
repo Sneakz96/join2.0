@@ -14,7 +14,6 @@
 }
 
 ::ng-deep .mat-form-field-wrapper {
-    width: 100%;
     position: unset;
 }
 
@@ -23,9 +22,10 @@
 }
 
 .task {
-    width: 60vw !important;
     padding: 20px;
     height: fit-content;
+    max-width: 500px;
+    width: 500px;
 }
 
 .task-content {
