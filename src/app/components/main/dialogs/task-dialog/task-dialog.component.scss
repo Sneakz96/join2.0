@@ -2,10 +2,13 @@
     border-radius: 20px;
 }
 
+::ng-deep .cdk-overlay-pane {
+    max-width: 550px !important;
+}
+
 .task {
     padding: 20px;
-    // width: 500px;
-    max-width: 500px;
+    max-width: 550px;
 }
 
 .task-category {
@@ -31,7 +34,6 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    // width: 70%;
 
     p {
         font-weight: bold;
@@ -63,19 +65,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // width: 70%;
     margin-top: 10px;
     margin-bottom: 10px;
+
+    p {
+        margin-left: 3px;
+    }
 }
 
 .sub-progress-bar {
     border-radius: 2px;
-    // width: 80%;
+    width: 80%;
 }
 
 .subtasks {
     height: 80px;
-    // width: 80%;
     margin-bottom: var(--m5p);
 }
 
@@ -100,7 +104,6 @@
 }
 
 .assigned-contact {
-    // width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -166,7 +169,12 @@
     ::ng-deep .mat-dialog-container {
         position: absolute;
         left: 0;
-        top: 0;
+        top: 80px;
+        border-radius: 0;
+    }
+
+    .subtasks {
+        margin-bottom: 0;
     }
 }
 
@@ -203,12 +211,10 @@
     .sub-progress {
         width: 100%;
     }
-
-    .btn-container {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
 }
 
-@media(max-width: 300px) {}
+@media(max-width: 300px) {
+    .sub-progress-bar {
+        width: 70%;
+    }
+}
