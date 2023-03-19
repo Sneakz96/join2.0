@@ -9,6 +9,7 @@
     background-color: white;
     max-width: 850px;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .contact {
@@ -121,14 +122,26 @@
 .input-container {
     display: flex;
     position: relative;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .input {
     margin-top: var(--m10);
-    width: 120%;
+    width: 90%;
     border-radius: 5px;
     border: 1px solid var(--border);
     padding: 12px 34px 12px 12px;
+
+    &.ng-touched,
+    &.ng-dirty{
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+        &.ng-valid {
+            border: 1px solid green;
+        }
+    }
 }
 
 .mat-icon {
@@ -136,6 +149,11 @@
     top: 54%;
     transform: translateY(-50%);
     right: 12px;
+}
+
+small {
+    color: red;
+    // margin-left: var(--m5p);
 }
 
 .btn-container {
