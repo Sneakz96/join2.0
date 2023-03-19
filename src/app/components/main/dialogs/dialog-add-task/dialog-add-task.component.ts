@@ -46,6 +46,7 @@ export class DialogAddTaskComponent {
     public dialogRef: MatDialogRef<DialogAddTaskComponent>
   ) {
     this.setForm();
+    this.taskForm.valueChanges.subscribe(console.log);
   }
 
   // 
@@ -90,7 +91,7 @@ export class DialogAddTaskComponent {
   // SET TASK FORM
   setForm() {
     this.taskForm = new FormGroup({
-      'title': new FormControl('',[
+      'title': new FormControl(this.task.title,[
         Validators.required,
         Validators.minLength(3),
         Validators.pattern(/^[a-zA-Z]+$/)
