@@ -14,39 +14,54 @@
         </div>
         <div class="right">
             <div class="close" (click)="closeDialog()"></div>
-
-
-
-
             <form class="name" [formGroup]="contactForm">
                 <div class="input-container">
-                    <input class="input" type="text" required id="firstName" formControlName="firstName"
+                    <input class="input" type="text" required id="firstName" formControlName="firstName" maxlength="20"
                         placeholder="First name">
                     <mat-icon class="mat-icon" matSuffix>person_outline</mat-icon>
-                    <small class="" *ngIf="contactForm.invalid">*Hello, please help me</small>
+                    <ng-container
+                        *ngIf="contactForm.controls['firstName'].dirty || contactForm.controls['firstName'].touched">
+                        <small *ngIf="contactForm.controls['firstName'].errors?.['required']">*Please insert your first
+                            name.</small>
+                        <small *ngIf="contactForm.controls['firstName'].errors?.['minlength']">*Please insert a min. of
+                            3 characters.</small>
+                        <small *ngIf="contactForm.controls['firstName'].errors?.['pattern']">*Only letters are
+                            allowed.</small>
+                    </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" id="lastName" formControlName="lastName" placeholder="Last name">
-                    <mat-icon class="mat-icon">person_outline</mat-icon>
-                    <small class="">*Hello, please help me</small>
-
+                    <input class="input" type="text" id="lastName" formControlName="lastName" placeholder="Last name" maxlength="20">
+                    <mat-icon class="mat-icon" [ngClass]="{'error': contactForm.controls['lastName'].invalid && (contactForm.controls['lastName'].dirty || contactForm.controls['lastName'].touched)}">person_outline</mat-icon>
+                    <ng-container
+                        *ngIf="contactForm.controls['lastName'].dirty || contactForm.controls['lastName'].touched">
+                        <small *ngIf="contactForm.controls['lastName'].errors?.['required']">*Please insert your last
+                            name.</small>
+                        <small *ngIf="contactForm.controls['lastName'].errors?.['minlength']">*Please insert a min. of 3
+                            characters.</small>
+                        <small *ngIf="contactForm.controls['lastName'].errors?.['pattern']">*Only letters are
+                            allowed.</small>
+                    </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" id="mail" formControlName="email" placeholder="E-mail">
+                    <input class="input" type="text" id="mail" formControlName="email" placeholder="E-mail" maxlength="20">
                     <mat-icon class="mat-icon">mail_outline</mat-icon>
-                    <small class="">*Hello, please help me</small>
+                    <ng-container *ngIf="contactForm.controls['email'].dirty || contactForm.controls['email'].touched">
+                        <small *ngIf="contactForm.controls['email'].errors?.['required']">*Please insert your
+                            e-mail.</small>
+                        <small *ngIf="contactForm.controls['email'].errors?.['email']">*Please insert a e-mail form,
+                            including a @.</small>
+                    </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" id="phone" formControlName="phone" placeholder="Phone number">
+                    <input class="input" type="text" id="phone" formControlName="phone" placeholder="Phone number" maxlength="20">
                     <mat-icon class="mat-icon">phone</mat-icon>
-                    <small class="">*Hello, please help me</small>
+                    <ng-container *ngIf="contactForm.controls['phone'].dirty || contactForm.controls['phone'].touched">
+                        <small *ngIf="contactForm.controls['phone'].errors?.['required']">*Please insert your
+                            phone number.</small>
+                        <small *ngIf="contactForm.controls['phone'].errors?.['pattern']">*Please use only numbers or + is also available.</small>
+                    </ng-container>
                 </div>
             </form>
-
-
-
-
-
             <div class="btn-container">
                 <button class="cancel-btn" (click)="clearValues()">
                     Cancel

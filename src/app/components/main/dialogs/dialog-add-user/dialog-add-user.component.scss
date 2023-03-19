@@ -1,7 +1,5 @@
 ::ng-deep .mat-dialog-container {
     border-radius: 30px;
-    // height: 400px !important;
-    // min-height: unset !important;
     padding: 0px;
 }
 
@@ -115,7 +113,7 @@
     width: fit-content;
     display: flex;
     flex-direction: column;
-    margin-top: var(--m5p);
+    margin-top: var(--m10p);
     width: 80%;
 }
 
@@ -124,6 +122,7 @@
     position: relative;
     justify-content: center;
     flex-direction: column;
+    width: 90%;
 }
 
 .input {
@@ -134,10 +133,11 @@
     padding: 12px 34px 12px 12px;
 
     &.ng-touched,
-    &.ng-dirty{
+    &.ng-dirty {
         &.ng-invalid {
             border: 1px solid red;
         }
+
         &.ng-valid {
             border: 1px solid green;
         }
@@ -148,7 +148,11 @@
     position: absolute;
     top: 54%;
     transform: translateY(-50%);
-    right: 12px;
+    right: -10px;
+}
+
+.error {
+    top: 48% !important;
 }
 
 small {
