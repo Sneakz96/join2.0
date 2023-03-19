@@ -2,15 +2,32 @@
 <span class="headline">Add Task</span>
 <div class="create">
     <img class="close-btn" src="./assets/img/icons/close.png" (click)="close()">
-    <form class="create" [formGroup]="taskForm" ngNativeValidate>
+
+    <form class="create" [formGroup]="taskForm">
         <div class="row row-left">
             <h5>Title</h5>
-            <input class="input-field" type="text" formControlName="title" placeholder="Enter a title" required
-                minlength="4" maxlength="20" pattern="[a-zA-Z+ ]+">
+            <div class="field">
+                <input class="input-field" type="text" formControlName="title" placeholder="Enter a title"
+                    maxlength="20">
+                <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
+                    <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert your first
+                        name.</small>
+                    <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
+                        3 characters.</small>
+                    <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
+                        allowed.</small>
+                </ng-container>
+            </div>
+
+
             <h5>Description</h5>
-            <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
-                required minlength="8" pattern="[a-zA-Z0-9 ]+">
+            <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description">
                     </textarea>
+
+
+
+
+
             <h5>Category</h5>
             <div class="field">
                 <mat-select class="category" [(value)]="choosenCategory" formControlName="category"

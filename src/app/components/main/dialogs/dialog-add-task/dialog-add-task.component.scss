@@ -60,11 +60,27 @@
     &::placeholder {
         color: var(--placeholder);
     }
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
+    }
 }
 
 .field {
     width: 90%;
     margin-bottom: var(--m20);
+}
+
+small {
+    color: red;
+    font-size: 10px;
 }
 
 // DESCRIPTION

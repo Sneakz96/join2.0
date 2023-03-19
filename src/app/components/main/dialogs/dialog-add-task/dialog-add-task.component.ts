@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -90,7 +90,11 @@ export class DialogAddTaskComponent {
   // SET TASK FORM
   setForm() {
     this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title),
+      'title': new FormControl('',[
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[a-zA-Z]+$/)
+      ]),
       'description': new FormControl(this.task.description),
       'category': new FormControl(this.task.category),
       'assignedTo': new FormControl(this.task.assignedTo),
