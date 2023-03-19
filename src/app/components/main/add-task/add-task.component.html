@@ -70,10 +70,19 @@
                 <div class="row row-right">
                     <!-- DUE_DATE -->
                     <h5>Due date</h5>
-                    <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
-                        placeholder="dd/mm/yyyy" formControlName="dueDate" required pattern="[0-9/]+">
-                    <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+                    <div class="field">
+                        <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
+                            placeholder="mm/dd/yyyy" formControlName="dueDate">
+                        <mat-datepicker-toggle class="calendar" matIconSuffix
+                            [for]="datePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+                    </div>
+
+
+
+
+
+
                     <!-- PRIORITY -->
                     <h5>Prio</h5>
                     <div class="field">

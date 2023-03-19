@@ -102,17 +102,16 @@ export class DialogAddTaskComponent {
         Validators.maxLength(100)
       ]),
       'category': new FormControl(this.task.category, [
-        Validators.required,
+        Validators.required
       ]),
       'assignedTo': new FormControl(this.task.assignedTo, [
-        Validators.required,
+        Validators.required
       ]),
-      'dueDate': new FormControl('', [
-        Validators.required,
-        // Validators.pattern(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/)
+      'dueDate': new FormControl(this.task.dueDate, [
+        Validators.required
       ]),
       'prio': new FormControl(this.task.priority, [
-        Validators.required,
+        Validators.required
       ]),
       'subTasks': new FormControl(this.task.subtasks),
     });
@@ -165,8 +164,6 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
-
-    console.log('checkup');
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -183,7 +180,17 @@ export class DialogAddTaskComponent {
     this.setId();
     this.handleAlerts();
 
-
+    // Überprüfen, ob das Formular gültig ist
+    if (formattedTitle.length > 3,
+      description.length > 3,
+      this.taskForm.value.category.length > 0,
+      this.assignedCollegues.length > 0,
+      this.task.dueDate) {
+      console.log(this.task)
+      this.taskCreated = true;
+      this.addTaskToDb();
+      this.close();
+    }
   }
 
 
@@ -223,15 +230,9 @@ export class DialogAddTaskComponent {
   }
 
   addTask() {
-    this.checkForm();
-    console.log(this.task);
-    if (this.task.title.length >= 3
-    ) {
-      this.taskCreated = true;
-      // this.addTaskToDb();
-      // this.close();
-    }
+
   }
+
 
   // 
   addTaskToDb() {

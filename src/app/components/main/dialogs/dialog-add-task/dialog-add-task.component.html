@@ -46,7 +46,7 @@
                     <mat-option value="Backoffice">Backoffice</mat-option>
                     <mat-option value="Sales">Sales</mat-option>
                 </mat-select>
-                    <small class="alert" *ngIf="category">*Please choose a category!</small>
+                <small class="alert" *ngIf="category">*Please choose a category!</small>
             </div>
             <h5>Assigned to</h5>
             <div class="field">
@@ -63,16 +63,13 @@
             <h5>Due date</h5>
             <div class="field">
                 <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
-                placeholder="mm/dd/yyyy" formControlName="dueDate">
+                    placeholder="mm/dd/yyyy" formControlName="dueDate">
                 <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
-                <mat-datepicker #datePicker disabled="false"></mat-datepicker>
-                <ng-container
-                    *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
+                <mat-datepicker #datePicker></mat-datepicker>
+                <ng-container *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
                     <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a due-date.</small>
-                    <!-- <small *ngIf="taskForm.controls['dueDate'].errors?.['pattern']">*Pattern.</small> -->
                 </ng-container>
             </div>
-
             <h5>Prio</h5>
             <div class="field">
                 <div class="priority">
@@ -103,6 +100,7 @@
             <div class="sub-alert" *ngIf="subLength">
                 <small>*Input should have at least a min. of 4 characters!</small>
             </div>
+            <!-- ADDED SUBTASKS -->
             <div class="subtasks" #subtasks>
                 <div class="_2" *ngFor="let subtask of addedSubTasks; index as i">
                     <input type="checkbox" checked>
@@ -113,7 +111,7 @@
                 <button class="clear-btn" (click)="resetForm()">Clear
                     <img src="/assets/img/icons/close.png">
                 </button>
-                <button class="create-task-btn" (click)="addTask()">Create Task
+                <button class="create-task-btn" (click)="checkForm()">Create Task
                     <img src="/assets/img/icons/create.png">
                 </button>
             </div>

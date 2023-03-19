@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ export class AddTaskComponent {
   task = new Task();
   taskForm!: FormGroup;
   choosenCategory: any;
+  datePattern: string = '^\\d{2}\\/\\d{2}\\/\\d{4}$'
   // 
   subtask: subtask;
   @ViewChild('subInput') subInput: ElementRef;
@@ -42,16 +43,33 @@ export class AddTaskComponent {
   // SET TASK FORM
   setForm() {
     this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title),
-      'description': new FormControl(this.task.description),
-      'category': new FormControl(this.task.category),
-      'assignedTo': new FormControl(this.task.assignedTo),
-      'dueDate': new FormControl(this.task.dueDate),
-      'prio': new FormControl(this.task.priority),
+      'title': new FormControl(this.task.title, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[a-zA-Z ]+$/)
+      ]),
+      'description': new FormControl(this.task.description, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100)
+      ]),
+      'category': new FormControl(this.task.category, [
+        Validators.required,
+      ]),
+      'assignedTo': new FormControl(this.task.assignedTo, [
+        Validators.required,
+      ]),
+      'dueDate': new FormControl(this.task.dueDate, [
+        Validators.required,
+        // Validators.pattern(this.datePattern)
+      ]),
+      'prio': new FormControl(this.task.priority, [
+        Validators.required,
+      ]),
       'subTasks': new FormControl(this.task.subtasks),
     });
   }
-
+  
   // CREATE SUBTASK
   addSubTask(): void {
     let subInputValue = this.subInput.nativeElement.value.trim();
@@ -101,7 +119,6 @@ export class AddTaskComponent {
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
-    this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
     this.handleDate();
     this.changeContactStatus();

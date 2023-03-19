@@ -26,6 +26,11 @@
     font-size: 10px;
 }
 
+small {
+    color: red;
+    font-size: 10px;
+}
+
 .vector {
     position: absolute;
     width: 0px;
@@ -47,7 +52,6 @@
 // TITLE
 .input-field {
     box-sizing: border-box;
-    margin-bottom: var(--m20);
     width: 100%;
     padding: 13px 21px;
     background-color: white;
@@ -60,13 +64,23 @@
     &::placeholder {
         color: var(--placeholder);
     }
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
+    }
 }
 
 // DESCRIPTION
 .textaria {
     box-sizing: border-box;
     background: white;
-    margin-bottom: var(--m20);
     width: 100%;
     height: 120px;
     padding: 13px 21px;
@@ -75,6 +89,17 @@
 
     &::placeholder {
         color: var(--placeholder);
+    }
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
     }
 }
 
@@ -92,7 +117,6 @@
 .category {
     background-color: white;
     box-sizing: border-box;
-
     width: 100%;
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
@@ -100,6 +124,17 @@
 
     &:focus {
         border: 2px solid var(--active);
+    }
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
     }
 }
 
@@ -112,6 +147,17 @@
 
     &:focus {
         border: 2px solid var(--active) !important;
+    }
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
     }
 }
 
