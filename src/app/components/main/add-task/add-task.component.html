@@ -15,27 +15,31 @@
                     </textarea>
                     <!-- CATEGORY -->
                     <h5>Category</h5>
-                    <p class="alert" *ngIf="data.category">Please choose a category!</p>
-                    <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
-                        placeholder="Select category">
-                        <mat-option value="Management">Management</mat-option>
-                        <mat-option value="Costumer Service">Costumer Service</mat-option>
-                        <mat-option value="Marketing">Marketing</mat-option>
-                        <mat-option value="Team">Team</mat-option>
-                        <mat-option value="Design">Design</mat-option>
-                        <mat-option value="IT">It</mat-option>
-                        <mat-option value="Media">Media</mat-option>
-                        <mat-option value="Backoffice">Backoffice</mat-option>
-                        <mat-option value="Sales">Sales</mat-option>
-                    </mat-select>
+                    <div class="field">
+                        <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
+                            placeholder="Select category">
+                            <mat-option value="Management">Management</mat-option>
+                            <mat-option value="Costumer Service">Costumer Service</mat-option>
+                            <mat-option value="Marketing">Marketing</mat-option>
+                            <mat-option value="Team">Team</mat-option>
+                            <mat-option value="Design">Design</mat-option>
+                            <mat-option value="IT">It</mat-option>
+                            <mat-option value="Media">Media</mat-option>
+                            <mat-option value="Backoffice">Backoffice</mat-option>
+                            <mat-option value="Sales">Sales</mat-option>
+                        </mat-select>
+                        <p class="alert" *ngIf="data.category">*Please choose a category!</p>
+                    </div>
                     <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
-                    <p class="alert" *ngIf="data.assigned">Please assign a collegue!</p>
-                    <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
-                        placeholder="Select contacts" multiple #assignedContacts>
-                        <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
-                            {{contact.firstName}} {{contact.lastName}}</mat-option>
-                    </mat-select>
+                    <div class="field">
+                        <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
+                            placeholder="Select contacts" multiple #assignedContacts>
+                            <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
+                                {{contact.firstName}} {{contact.lastName}}</mat-option>
+                        </mat-select>
+                        <p class="alert" *ngIf="data.assigned">*Please assign a collegue!</p>
+                    </div>
                 </div>
                 <div class="vector"></div>
                 <div class="row row-right">
@@ -47,17 +51,20 @@
                     <mat-datepicker #datePicker disabled="false"></mat-datepicker>
                     <!-- PRIORITY -->
                     <h5>Prio</h5>
-                    <p class="alert" *ngIf="data.prio">Please choose a priority!</p>
-                    <div class="priority">
-                        <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
-                            <div [ngClass]="{'high': data.high}"></div>
-                        </button>
-                        <button id="addMedium" [ngClass]="{'medium': data.medium}" (click)="setPrio('Medium')">Medium
-                            <div [ngClass]="{'medium': data.medium}"></div>
-                        </button>
-                        <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
-                            <div [ngClass]="{'low': data.low}"></div>
-                        </button>
+                    <div class="field">
+                        <div class="priority">
+                            <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
+                                <div [ngClass]="{'high': data.high}"></div>
+                            </button>
+                            <button id="addMedium" [ngClass]="{'medium': data.medium}"
+                                (click)="setPrio('Medium')">Medium
+                                <div [ngClass]="{'medium': data.medium}"></div>
+                            </button>
+                            <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
+                                <div [ngClass]="{'low': data.low}"></div>
+                            </button>
+                        </div>
+                        <p class="alert" *ngIf="data.prio">*Please choose a priority!</p>
                     </div>
                     <!-- SUBTASKS -->
                     <h5>Subtasks</h5>
@@ -67,15 +74,14 @@
                     </div>
                     <!-- SUBALERT -->
                     <div class="sub-alert" *ngIf="data.subError">
-                        <span>Input darf nicht leer sein!</span>
+                        <span>*Input darf nicht leer sein!</span>
                     </div>
                     <div class="sub-alert" *ngIf="subMax">
-                        <span>Maximum erreicht!</span>
+                        <span>*Maximum erreicht!</span>
                     </div>
                     <div class="sub-alert" *ngIf="subLength">
-                        <span>Input muss min. 4 Charakter haben!</span>
+                        <span>*Input muss min. 4 Charakter haben!</span>
                     </div>
-
                     <div class="subtasks" #subtasks>
                         <div class="_2" *ngFor="let subtask of addedSubTasks; index as i">
                             <input type="checkbox" checked>

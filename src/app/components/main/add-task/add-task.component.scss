@@ -21,6 +21,11 @@
     display: flex;
 }
 
+.alert {
+    color: red;
+    font-size: 10px;
+}
+
 .vector {
     position: absolute;
     width: 0px;
@@ -73,12 +78,17 @@
     }
 }
 
+.field {
+    width: 90%;
+    margin-bottom: var(--m20);
+}
+
 // CATEGORY
 .category {
     background-color: white;
     box-sizing: border-box;
-    margin-bottom: var(--m20);
-    width: 90%;
+
+    width: 100%;
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
@@ -91,8 +101,6 @@
 .assigned-to {
     background-color: white;
     box-sizing: border-box;
-    margin-bottom: var(--m20);
-    width: 90%;
     padding: 13px 21px;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
@@ -150,11 +158,9 @@
 
 // PRIO
 .priority {
-    margin-bottom: var(--m20);
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 90%;
 
     button {
         padding: 13px 18px;
@@ -243,7 +249,6 @@
     flex-direction: column;
     width: 90%;
     height: 120px;
-    // overflow-y: scroll;
     margin-bottom: var(--m10p);
 
     div {
@@ -256,6 +261,11 @@
             margin-top: 10px;
         }
     }
+}
+
+.sub-alert {
+    color: red;
+    font-size: 10px;
 }
 
 .btn-container {

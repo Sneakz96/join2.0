@@ -20,26 +20,26 @@
 
             <form class="name" [formGroup]="contactForm">
                 <div class="input-container">
-                    <input class="input" type="text" id="firstName" formControlName="firstName"
+                    <input class="input" type="text" required id="firstName" formControlName="firstName"
                         placeholder="First name">
                     <mat-icon class="mat-icon" matSuffix>person_outline</mat-icon>
-                    <small class="" *ngIf="">Hello, please help me</small>
-                    <small class="d-none">Hello, please help me</small>
+                    <small class="" *ngIf="contactForm.invalid">*Hello, please help me</small>
                 </div>
                 <div class="input-container">
                     <input class="input" type="text" id="lastName" formControlName="lastName" placeholder="Last name">
                     <mat-icon class="mat-icon">person_outline</mat-icon>
+                    <small class="">*Hello, please help me</small>
 
                 </div>
                 <div class="input-container">
                     <input class="input" type="text" id="mail" formControlName="email" placeholder="E-mail">
                     <mat-icon class="mat-icon">mail_outline</mat-icon>
-
+                    <small class="">*Hello, please help me</small>
                 </div>
                 <div class="input-container">
                     <input class="input" type="text" id="phone" formControlName="phone" placeholder="Phone number">
                     <mat-icon class="mat-icon">phone</mat-icon>
-               
+                    <small class="">*Hello, please help me</small>
                 </div>
             </form>
 
