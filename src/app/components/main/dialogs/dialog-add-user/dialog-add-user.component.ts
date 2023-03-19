@@ -52,28 +52,21 @@ export class DialogAddUserComponent implements OnInit {
     let { firstName, lastName, email, phone } = this.contactForm.value;
     let formattedFirstName = this.data.capitalizeFirstLetter(firstName.trim());
     let formattedLastName = this.data.capitalizeFirstLetter(lastName.trim());
-    let isFirstNameValid = this.data.isValidInput(formattedFirstName) && formattedFirstName.length >= 3;
-    let isLastNameValid = this.data.isValidInput(formattedLastName) && formattedLastName.length >= 3;
-    let isEmailValid = this.data.isValidEmail(email.trim());
-    let isNumberValid = this.data.isValidNumber(phone.trim());
-
-    if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isNumberValid) {
-      // alert('Error: Invalid input');
-      // FORMALERT HERE?
-
-      return;
-    } else if(this.contactForm.valid){
+    
+    if (this.contactForm.valid) {
 
       this.user.firstName = formattedFirstName;
       this.user.lastName = formattedLastName;
       this.user.email = email.trim();
       this.user.phone = phone.trim();
+
       this.setUserID();
       this.setColor();
-      // this.addUser();
+      this.addUser();
+
       this.contactForm.reset();
     }
-}
+  }
 
   // SHOULD CLEAR VALUES OF DIALOG
   clearValues() {

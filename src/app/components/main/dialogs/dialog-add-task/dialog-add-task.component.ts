@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -32,9 +32,10 @@ export class DialogAddTaskComponent {
   // ALERTS
   category = false;
   assigned = false;
-  dueDate = false;
   prio = false;
+  // 
   taskCreated = false;
+  // 
   subError = false;
   subMax = false;
   subLength = false;
@@ -83,7 +84,6 @@ export class DialogAddTaskComponent {
     setTimeout(() => {
       this.category = false;
       this.assigned = false;
-      this.dueDate = false;
       this.prio = false;
     }, 3000);
   }
@@ -91,16 +91,29 @@ export class DialogAddTaskComponent {
   // SET TASK FORM
   setForm() {
     this.taskForm = new FormGroup({
-      'title': new FormControl(this.task.title,[
+      'title': new FormControl(this.task.title, [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[a-zA-Z]+$/)
+        Validators.pattern(/^[a-zA-Z ]+$/)
       ]),
-      'description': new FormControl(this.task.description),
-      'category': new FormControl(this.task.category),
-      'assignedTo': new FormControl(this.task.assignedTo),
-      'dueDate': new FormControl(this.task.dueDate),
-      'prio': new FormControl(this.task.priority),
+      'description': new FormControl(this.task.description, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100)
+      ]),
+      'category': new FormControl(this.task.category, [
+        Validators.required,
+      ]),
+      'assignedTo': new FormControl(this.task.assignedTo, [
+        Validators.required,
+      ]),
+      'dueDate': new FormControl('', [
+        Validators.required,
+        // Validators.pattern(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/)
+      ]),
+      'prio': new FormControl(this.task.priority, [
+        Validators.required,
+      ]),
       'subTasks': new FormControl(this.task.subtasks),
     });
   }
@@ -152,6 +165,8 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
+
+    console.log('checkup');
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -160,38 +175,21 @@ export class DialogAddTaskComponent {
     this.task.description = description;
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
-    // this.task.priority = this.task.priority;
     this.task.subtasks = this.addedSubTasks;
 
-    this.handleDate();
+    this.setCreationDate();
+    this.getDueDate();
     this.changeContactStatus();
     this.setId();
-    this.setDate();
-    this.checkValidation();
+    this.handleAlerts();
+
+
   }
+
 
   // 
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  // 
-  checkValidation(): void {
-    this.handleAlerts();
-
-    let isTitleValid = this.task.title.length > 4;
-    let isDescriptionValid = this.task.description.length > 8;
-    let isCategoryValid = !!this.task.category;
-    let isAssignedToValid = this.task.assignedTo.length > 0;
-    let isDueDateValid = !!this.task.dueDate;
-    let isPriorityValid = !!this.task.priority;
-
-    if (isTitleValid && isDescriptionValid && isCategoryValid &&
-      isAssignedToValid && isDueDateValid && isPriorityValid) {
-      this.taskCreated = true;
-      console.log('task created', this.task);
-      this.addTaskToDb();
-    }
   }
 
   // CHANGE STATUS OF ASSIGNED CONTACTS
@@ -209,20 +207,30 @@ export class DialogAddTaskComponent {
   }
 
   // SET CREATION TIME
-  setDate() {
+  setCreationDate() {
     let date = new Date().getTime();
     this.task.createdAt = date;
   }
 
   // 
-  handleDate() {
-    let input = "Tue Mar 14 2023 00:00:00 GMT+0100 (Mitteleuropäische Normalzeit)";
-    let date = new Date(input);
+  getDueDate() {
+    let date = new Date(this.taskForm.value.dueDate);
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let year = date.getFullYear();
     let output = `${month}/${day}/${year}`;
     this.task.dueDate = output;
+  }
+
+  addTask() {
+    this.checkForm();
+    console.log(this.task);
+    if (this.task.title.length >= 3
+    ) {
+      this.taskCreated = true;
+      // this.addTaskToDb();
+      // this.close();
+    }
   }
 
   // 

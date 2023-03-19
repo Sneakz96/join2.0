@@ -2,7 +2,6 @@
 <span class="headline">Add Task</span>
 <div class="create">
     <img class="close-btn" src="./assets/img/icons/close.png" (click)="close()">
-
     <form class="create" [formGroup]="taskForm">
         <div class="row row-left">
             <h5>Title</h5>
@@ -10,26 +9,29 @@
                 <input class="input-field" type="text" formControlName="title" placeholder="Enter a title"
                     maxlength="20">
                 <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
-                    <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert your first
-                        name.</small>
+                    <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of your
+                        task.</small>
                     <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
                         3 characters.</small>
                     <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
                         allowed.</small>
                 </ng-container>
             </div>
-
-
             <h5>Description</h5>
             <div class="field">
-                <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description">
+                <textarea class="description textaria" rows="10" placeholder="Enter a Description"
+                    formControlName="description">
                 </textarea>
+                <ng-container
+                    *ngIf="taskForm.controls['description'].dirty || taskForm.controls['description'].touched">
+                    <small *ngIf="taskForm.controls['description'].errors?.['required']">*Please insert a description of
+                        your task.</small>
+                    <small *ngIf="taskForm.controls['description'].errors?.['minlength']">*Please insert a min. of
+                        3 characters.</small>
+                    <small *ngIf="taskForm.controls['description'].errors?.['maxlength']">*Your input have reached limit
+                        of 100 characters.</small>
+                </ng-container>
             </div>
-
-
-
-
-
             <h5>Category</h5>
             <div class="field">
                 <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
@@ -44,9 +46,8 @@
                     <mat-option value="Backoffice">Backoffice</mat-option>
                     <mat-option value="Sales">Sales</mat-option>
                 </mat-select>
-                <p class="alert" *ngIf="category">Please choose a category!</p>
+                    <small class="alert" *ngIf="category">*Please choose a category!</small>
             </div>
-
             <h5>Assigned to</h5>
             <div class="field">
                 <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
@@ -54,16 +55,24 @@
                     <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                         {{contact.firstName}} {{contact.lastName}}</mat-option>
                 </mat-select>
-                <p class="alert" *ngIf="assigned">Please assign a collegue!</p>
+                <p class="alert" *ngIf="assigned">*Please assign a min. of 1 collegue!</p>
             </div>
         </div>
         <div class="vector"></div>
         <div class="row row-right">
             <h5>Due date</h5>
-            <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
-                placeholder="dd/mm/yyyy" formControlName="dueDate" required pattern="[0-9/]+">
-            <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
-            <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+            <div class="field">
+                <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
+                placeholder="mm/dd/yyyy" formControlName="dueDate">
+                <mat-datepicker-toggle class="calendar" matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+                <ng-container
+                    *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
+                    <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a due-date.</small>
+                    <!-- <small *ngIf="taskForm.controls['dueDate'].errors?.['pattern']">*Pattern.</small> -->
+                </ng-container>
+            </div>
+
             <h5>Prio</h5>
             <div class="field">
                 <div class="priority">
@@ -86,15 +95,14 @@
             </div>
             <!-- SUBALERT -->
             <div class="sub-alert" *ngIf="data.subError">
-                <span>Input darf nicht leer sein!</span>
+                <small>*Input shouldn't be empty!</small>
             </div>
             <div class="sub-alert" *ngIf="subMax">
-                <span>Maximum erreicht!</span>
+                <small>*The limit of 4 subtasks is reached!</small>
             </div>
             <div class="sub-alert" *ngIf="subLength">
-                <span>Input muss min. 4 Charakter haben!</span>
+                <small>*Input should have at least a min. of 4 characters!</small>
             </div>
-
             <div class="subtasks" #subtasks>
                 <div class="_2" *ngFor="let subtask of addedSubTasks; index as i">
                     <input type="checkbox" checked>
@@ -105,7 +113,7 @@
                 <button class="clear-btn" (click)="resetForm()">Clear
                     <img src="/assets/img/icons/close.png">
                 </button>
-                <button class="create-task-btn" (click)="checkForm()">Create Task
+                <button class="create-task-btn" (click)="addTask()">Create Task
                     <img src="/assets/img/icons/create.png">
                 </button>
             </div>

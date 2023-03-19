@@ -6,13 +6,38 @@
                 <div class="row row-left">
                     <!-- TITLE -->
                     <h5>Title</h5>
-                    <input class="input-field" type="text" id="title" formControlName="title"
-                        placeholder="Enter a title" required minlength="4" maxlength="20" pattern="[a-zA-Z+ ]+">
+                    <div class="field">
+                        <input class="input-field" type="text" id="title" formControlName="title"
+                            placeholder="Enter a title">
+                        <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
+                            <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of
+                                your
+                                task.</small>
+                            <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
+                                3 characters.</small>
+                            <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
+                                allowed.</small>
+                        </ng-container>
+                    </div>
                     <!-- DESCRIPTION -->
                     <h5>Description</h5>
-                    <textarea class="textaria" rows="10" placeholder="Enter a Description" formControlName="description"
-                        required minlength="8" pattern="[a-zA-Z0-9 ]+">
-                    </textarea>
+                    <div class="field">
+                        <textarea class="textaria" rows="10" placeholder="Enter a Description"
+                            formControlName="description">
+                         </textarea>
+                        <ng-container
+                            *ngIf="taskForm.controls['description'].dirty || taskForm.controls['description'].touched">
+                            <small *ngIf="taskForm.controls['description'].errors?.['required']">*Please insert a
+                                description of
+                                your task.</small>
+                            <small *ngIf="taskForm.controls['description'].errors?.['minlength']">*Please insert a min.
+                                of
+                                3 characters.</small>
+                            <small *ngIf="taskForm.controls['description'].errors?.['maxlength']">*Your input have
+                                reached limit
+                                of 100 characters.</small>
+                        </ng-container>
+                    </div>
                     <!-- CATEGORY -->
                     <h5>Category</h5>
                     <div class="field">
