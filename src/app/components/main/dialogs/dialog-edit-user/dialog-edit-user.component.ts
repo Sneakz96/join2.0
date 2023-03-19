@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contact.class';
 import { DataService } from 'src/app/services/data.service';
@@ -10,10 +11,11 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-edit-user.component.scss']
 })
 
-export class DialogEditUserComponent {
+export class DialogEditUserComponent implements OnInit, OnChanges {
 
   user: Contact;
   userId: string;
+  userForm: FormGroup;
   userEdited = false;
 
   // 
@@ -21,7 +23,40 @@ export class DialogEditUserComponent {
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
     private firestore: AngularFirestore,
     public data: DataService,
-  ) { }
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.setUserForm();
+    this.userForm.valueChanges.subscribe(console.log);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
+
+  setUserForm() {
+    this.userForm = new FormGroup({
+      'firstName': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[a-zA-Z]+$/)
+      ]),
+      'lastName': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[a-zA-Z]+$/)
+      ]),
+      'email': new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+      'phone': new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\+?\d{6,}$/)
+      ])
+    });
+  }
 
   // CLOSE DIALOG
   closeDialog() {
@@ -42,7 +77,7 @@ export class DialogEditUserComponent {
         .update(this.user.toJSON());
     }
   }
-  
+
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
   setColor() {
     switch (this.user.lastName.charCodeAt(0) % 6) {
@@ -76,7 +111,7 @@ export class DialogEditUserComponent {
 
   // CHECK FORM OF EDITED CONTACT
   checkEditedForm() {
-    let { firstName, lastName, email, phone } = this.user;
+    let { firstName, lastName, email, phone } = this.userForm.value;
 
     let checkInputs = (value: string): boolean => /^[A-Za-z0-9+-]+$/.test(value);
     let checkMail = (value: string): boolean => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);

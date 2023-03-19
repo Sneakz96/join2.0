@@ -16,24 +16,59 @@
         </div>
         <div class="right">
             <div class="close" (click)="closeDialog()"></div>
-            <div class="name">
+            <form class="name" [formGroup]="userForm">
                 <div class="input-container">
-                    <input class="input" type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'">
+                    <input class="input" type="text" matInput [(ngModel)]="user.firstName" [placeholder]="'First name'"
+                        maxlength="20" formControlName="firstName">
                     <mat-icon class="mat-icon">person_outline</mat-icon>
+                    <ng-container
+                        *ngIf="userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched">
+                        <small *ngIf="userForm.controls['firstName'].errors?.['required']">*Please insert your first
+                            name.</small>
+                        <small *ngIf="userForm.controls['firstName'].errors?.['minlength']">*Please insert a min. of
+                            3 characters.</small>
+                        <small *ngIf="userForm.controls['firstName'].errors?.['pattern']">*Only letters are
+                            allowed.</small>
+                    </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" matInput [(ngModel)]="user.lastName" [placeholder]="'Last name'">
+                    <input class="input" type="text" matInput [(ngModel)]="user.lastName" [placeholder]="'Last name'"
+                        maxlength="20" formControlName="lastName">
                     <mat-icon class="mat-icon" matSuffix>person_outline</mat-icon>
+                    <ng-container
+                    *ngIf="userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched">
+                    <small *ngIf="userForm.controls['lastName'].errors?.['required']">*Please insert your last
+                        name.</small>
+                    <small *ngIf="userForm.controls['lastName'].errors?.['minlength']">*Please insert a min. of 3
+                        characters.</small>
+                    <small *ngIf="userForm.controls['lastName'].errors?.['pattern']">*Only letters are
+                        allowed.</small>
+                </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" matInput [(ngModel)]="user.email" [placeholder]="'E-mail'">
+                    <input class="input" type="text" matInput [(ngModel)]="user.email" [placeholder]="'E-mail'"
+                        maxlength="20" formControlName="email">
                     <mat-icon class="mat-icon" matSuffix>mail_outline</mat-icon>
+                    <ng-container *ngIf="userForm.controls['email'].dirty || userForm.controls['email'].touched">
+                        <small *ngIf="userForm.controls['email'].errors?.['required']">*Please insert your
+                            e-mail.</small>
+                        <small *ngIf="userForm.controls['email'].errors?.['email']">*Please insert a e-mail form,
+                            including a @.</small>
+                    </ng-container>
                 </div>
                 <div class="input-container">
-                    <input class="input" type="text" matInput [(ngModel)]="user.phone" [placeholder]="'Phone number'">
+                    <input class="input" type="text" matInput [(ngModel)]="user.phone" [placeholder]="'Phone number'"
+                        maxlength="20" formControlName="phone">
                     <mat-icon class="mat-icon">phone</mat-icon>
+                    <ng-container *ngIf="userForm.controls['phone'].dirty || userForm.controls['phone'].touched">
+                        <small *ngIf="userForm.controls['phone'].errors?.['required']">*Please insert your
+                            phone number.</small>
+                        <small *ngIf="userForm.controls['phone'].errors?.['pattern']">*Please use only numbers or + is also available.</small>
+                    </ng-container>
                 </div>
-            </div>
+            </form>
+
+
             <div class="btn-container">
                 <button class="save-btn" (click)="save()">
                     Save

@@ -128,21 +128,40 @@
 .input-container {
     display: flex;
     position: relative;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
 }
 
 .input {
     margin-top: var(--m10);
-    width: 120%;
+    width: 90%;
     border-radius: 5px;
     border: 1px solid var(--border);
     padding: 12px 34px 12px 12px;
+
+    &.ng-touched,
+    &.ng-dirty {
+        &.ng-invalid {
+            border: 1px solid red;
+        }
+
+        &.ng-valid {
+            border: 1px solid green;
+        }
+    }
 }
 
 .mat-icon {
     position: absolute;
     top: 54%;
     transform: translateY(-50%);
-    right: 12px;
+    right: 10px;
+}
+
+small {
+    color: red;
+    font-size: 10px;
 }
 
 .btn-container {

@@ -42,8 +42,8 @@ export class DialogAddUserComponent implements OnInit {
     this.contactForm = new FormGroup({
       'firstName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]),
       'lastName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]),
-      'email': new FormControl(this.user.email, [Validators.required, Validators.email], []),
-      'phone': new FormControl(this.user.phone, [Validators.required, Validators.pattern(/^\+?\d{6,}$/)]),
+      'email': new FormControl('', [Validators.required, Validators.email], []),
+      'phone': new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{6,}$/)]),
     });
   }
 
