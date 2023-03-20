@@ -2,24 +2,22 @@
 <span class="headline">Add Task</span>
 <div class="create">
     <img class="close-btn" src="./assets/img/icons/close.png" (click)="close()">
-    <form class="create-form" [formGroup]="taskForm" (ngSubmit)="checkForm()">
+    <form class="create-form" [formGroup]="taskForm">
         <div class="row row-left">
             <h5>Title</h5>
             <div class="field">
-                <input class="input-field" type="text" formControlName="title" placeholder="Enter a title"
+                <input class="input-field" type="text" formControlName="title" placeholder="Enter a title" 
                     maxlength="20">
-                <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
                     <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of your
                         task.</small>
                     <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
                         3 characters.</small>
                     <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
                         allowed.</small>
-                </ng-container>
             </div>
             <h5>Description</h5>
             <div class="field">
-                <textarea class="description textaria" rows="10" placeholder="Enter a Description"
+                <textarea class="description textaria" rows="10" placeholder="Enter a Description" [ngClass]="{'alert-border': description}"
                     formControlName="description">
                 </textarea>
                 <ng-container
@@ -31,10 +29,12 @@
                     <small *ngIf="taskForm.controls['description'].errors?.['maxlength']">*Your input have reached limit
                         of 100 characters.</small>
                 </ng-container>
+                <small *ngIf="description">*Please insert a description of
+                    your task.</small>
             </div>
             <h5>Category</h5>
             <div class="field">
-                <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
+                <mat-select class="category" [(value)]="choosenCategory" formControlName="category" [ngClass]="{'alert-border': category}"
                     placeholder="Select category">
                     <mat-option value="Management">Management</mat-option>
                     <mat-option value="Costumer Service">Costumer Service</mat-option>
@@ -50,7 +50,7 @@
             </div>
             <h5>Assigned to</h5>
             <div class="field">
-                <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
+                <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo" [ngClass]="{'alert-border': assigned}"
                     placeholder="Select contacts" multiple #assignedContacts>
                     <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                         {{contact.firstName}} {{contact.lastName}}</mat-option>
@@ -64,14 +64,14 @@
 
             <h5>Due date</h5>
             <div class="field">
-                <input matInput class="input-field" [matDatepicker]="datePicker" [min]="data.today"
+                <input matInput class="input-field" [matDatepicker]="datePicker" [min]="data.today" [ngClass]="{'alert-border': dueDate}"
                     placeholder="mm/dd/yyyy" formControlName="dueDate">
                 <mat-datepicker-toggle class="calendar" matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
                 <ng-container *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
                     <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a due-date.</small>
                 </ng-container>
-                {{taskForm.value.dueDate | json}}
+                <small *ngIf="dueDate">*Please insert a due-date.</small>
             </div>
 
 
@@ -120,7 +120,6 @@
                 <button class="create-task-btn" (click)="checkForm()">Create Task
                     <img src="/assets/img/icons/create.png">
                 </button>
-                <button type="submit">send</button>
             </div>
             <button class="mb-alert" *ngIf="taskCreated">Task added to Board
                 <img src="./assets/img/icons/task_added_mb.png">

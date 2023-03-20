@@ -12,6 +12,7 @@
     </div>
     <div class="priority">
         <p class="label">Priority:</p>
+
         <div class="priority-btn">
             <button id="low" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
                 <div [ngClass]="{'low': low}"></div>
@@ -23,6 +24,7 @@
                 <div [ngClass]="{'high': high}"></div>
             </button>
         </div>
+
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
@@ -48,8 +50,10 @@
             </div>
         </div>
     </div>
-    <button class="edit-btn" (click)="save()">
-        Ok
-        <img src="./assets/img/icons/create.png">
-    </button>
+    <div class="btn-container">
+        <button class="save-btn" (click)="save()">
+            Ok
+            <img src="./assets/img/icons/create.png">
+        </button>
+    </div>
 </div>

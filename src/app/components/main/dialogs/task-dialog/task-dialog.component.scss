@@ -3,6 +3,7 @@
     align-items: center;
     display: flex;
     width: fit-content;
+    overflow-x: hidden;
 }
 
 ::ng-deep .cdk-overlay-pane {
@@ -13,7 +14,7 @@
     padding: 20px;
     width: 500px;
     max-width: 550px;
-    background-color: rgb(56, 215, 162);
+    background-color: rgb(255, 255, 255);
 }
 
 .task-category {
@@ -150,7 +151,7 @@
     margin-left: 17px;
 
     &:hover {
-        transform: scale(1.005);
+        transform: scale(1.05);
         cursor: pointer;
     }
 }
@@ -162,7 +163,7 @@
     margin: 3px;
 
     &:hover {
-        transform: scale(1.005);
+        transform: scale(1.05);
         cursor: pointer;
     }
 }
@@ -174,25 +175,18 @@
         display: unset;
         align-items: unset;
         width: 100%;
-        background-color: green;
         position: absolute;
         left: 0;
         top: 80px;
         border-radius: 0;
         right: 0;
-        overflow-y: scroll;
     }
 
     .task {
-        background-color: burlywood;
         width: 100%;
         max-width: 100%;
         height: 100%;
         padding: 0px;
-    }
-
-    .subtasks {
-        margin-bottom: 0;
     }
 }
 

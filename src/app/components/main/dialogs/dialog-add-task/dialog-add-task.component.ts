@@ -31,8 +31,10 @@ export class DialogAddTaskComponent {
   addedSubTasks: any[] = [];
   // ALERTS
   category = false;
+  dueDate = false;
   assigned = false;
   prio = false;
+  description = false;
   // 
   taskCreated = false;
   // 
@@ -52,16 +54,32 @@ export class DialogAddTaskComponent {
 
   // 
   handleAlerts() {
+    this.alert_description();
     this.alert_category();
     this.alert_assigned();
+    this.alert_dueDate();
     this.alert_prio();
     this.timeout();
+  }
+
+  // 
+  alert_description() {
+    if (this.task.description == '') {
+      this.description = true;
+    }
   }
 
   // 
   alert_category() {
     if (this.task.category == '') {
       this.category = true;
+    }
+  }
+
+  // 
+  alert_dueDate() {
+    if (this.task.dueDate == '') {
+      this.dueDate = true;
     }
   }
 
@@ -82,8 +100,10 @@ export class DialogAddTaskComponent {
   // 
   timeout() {
     setTimeout(() => {
+      this.description = false;
       this.category = false;
       this.assigned = false;
+      this.dueDate = false;
       this.prio = false;
     }, 3000);
   }
@@ -172,13 +192,13 @@ export class DialogAddTaskComponent {
     this.changeContactStatus();
     this.setId();
     this.handleAlerts();
+    this.getDueDate();
 
     // Überprüfen, ob das Formular gültig ist
     if (formattedTitle.length > 3 &&
       description.length > 3 &&
       this.taskForm.value.category.length > 0 &&
       this.assignedCollegues.length > 0) {
-      this.getDueDate();
       console.log(this.task)
       this.taskCreated = true;
       this.addTaskToDb();
