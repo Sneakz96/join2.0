@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Task } from 'src/app/models/task.class';
 import { Router } from '@angular/router';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 interface subtask {
   text: any,
@@ -23,14 +24,16 @@ export class AddTaskComponent {
   task = new Task();
   taskForm!: FormGroup;
   choosenCategory: any;
-  datePattern: string = '^\\d{2}\\/\\d{2}\\/\\d{4}$'
   // 
   subtask: subtask;
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
+  title = false;
+  description = false;
   category = false;
   assigned = false;
+  dueDate = false;
   prio = false;
   // 
   low = false;
@@ -44,13 +47,13 @@ export class AddTaskComponent {
   subLength = false;
   // 
   constructor(
+    private fire: Firestore,
     public data: DataService,
     public router: Router,
   ) {
     this.setForm();
     this.taskForm.valueChanges.subscribe(console.log);
   }
-
 
   // SET TASK FORM
   setForm() {
@@ -122,7 +125,6 @@ export class AddTaskComponent {
 
   // 
   checkForm(): void {
-    console.log(this.task.priority)
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -138,13 +140,12 @@ export class AddTaskComponent {
     this.changeContactStatus();
     this.setId();
     this.handleAlerts();
-    console.log(this.task)
-    // Überprüfen, ob das Formular gültig ist
+
     if (this.task.title.length > 3 &&
       this.task.description.length > 3 &&
       this.taskForm.value.category.length >= 1 &&
-      this.assignedCollegues.length >= 1) {
-      console.log(this.task)
+      this.assignedCollegues.length >= 1 &&
+      this.taskForm.value.dueDate != 'NaN/Nan/Nan') {
       this.taskCreated = true;
       this.addTaskToDb();
     }
@@ -177,7 +178,6 @@ export class AddTaskComponent {
 
   // LOG PRIO
   setPrio(prio: string) {
-    console.log(prio);
     this.task.priority = prio;
     this.getPrio(prio);
   }
@@ -208,61 +208,67 @@ export class AddTaskComponent {
     let output = `${month}/${day}/${year}`;
     this.task.dueDate = output;
   }
-
-  // CHECK VALIDATION
-  checkValidation(): void {
-    this.data.handleAlerts();
-
-    let isTitleValid = this.task.title.length >= 3;
-    let isDescriptionValid = this.task.description.length >= 3;
-    let isCategoryValid = !!this.task.category;
-    let isAssignedToValid = this.task.assignedTo.length > 0;
-    let isDueDateValid = !!this.task.dueDate;
-    let isPriorityValid = !!this.task.priority;
-
-    if (isTitleValid && isDescriptionValid && isCategoryValid &&
-      isAssignedToValid && isDueDateValid && isPriorityValid) {
-      this.taskCreated = true;
-      console.log('task created', this.task);
-      // this.addTaskToDb();
-    }
-  }
-
+  
   // ADD TO DB
   addTaskToDb() {
     this.data.alert = true;
-    this.data.saveTaskToFirestore();
+    this.saveTaskToFirestore();
     this.resetForm();
     this.addedSubTasks = [];
     this.router.navigate(['/kanbanboard/board']);
   }
-
+  saveTaskToFirestore() {
+    let coll = collection(this.fire, 'allTasks');
+    setDoc(doc(coll), this.task.toJSON());
+  }
   // RESET FORM
   resetForm() {
     this.taskForm.reset();
     this.subInput.nativeElement.value = '';
     this.addedSubTasks = [];
     this.task.priority = '';
-    // REMOVE ACTIVE CLASS
     this.high = false;
     this.medium = false;
     this.low = false;
   }
 
-  // FORM_CHECKS
-
+  // FORM & ALERT CHECKS
   // 
   handleAlerts() {
+    this.alert_title();
+    this.alert_description();
     this.alert_category();
+    this.alert_dueDate();
     this.alert_assigned();
     this.alert_prio();
     this.timeout();
   }
 
   // 
+  alert_title() {
+    if (this.task.title == '') {
+      this.title = true;
+    }
+  }
+
+  // 
+  alert_description() {
+    if (this.task.description == '') {
+      this.description = true;
+    }
+  }
+
+  // 
   alert_category() {
     if (this.task.category == '') {
       this.category = true;
+    }
+  }
+
+  // 
+  alert_dueDate() {
+    if (this.task.dueDate == 'NaN/NaN/NaN') {
+      this.dueDate = true;
     }
   }
 
@@ -283,10 +289,12 @@ export class AddTaskComponent {
   // 
   timeout() {
     setTimeout(() => {
+      this.title = false;
+      this.description = false;
       this.category = false;
       this.assigned = false;
+      this.dueDate = false;
       this.prio = false;
     }, 3000);
   }
-
 }

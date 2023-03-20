@@ -20,48 +20,42 @@
 
       <div class="content-container" id="dropList_0" #toDo cdkDropList [cdkDropListData]="data.toDo"
         (cdkDropListDropped)="drop($event)">
-        
+
         <div class="drag-task" *ngFor="let taskToDo of data.toDo" cdkDrag [cdkDragData]="taskToDo"
           [cdkDragDisabled]="taskToDo.visible">
-          <div class="task" [ngClass]="taskToDo.visible ? 'task-shadow':'task'" 
-            (click)="openTask(taskToDo)" [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
+          
+          <div class="task" [ngClass]="taskToDo.visible ? 'task-shadow':'task'" (click)="openTask(taskToDo)"
+            [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
             <div class="category" [ngClass]="data.getCategoryColor(taskToDo.category)">
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskToDo.category }}</span>
             </div>
-            <div class="task-content">
-              <!--EDIT TITLE TO VARIABLES FROM JSON-->
-              <span class="title">{{ taskToDo.title }}</span>
-              <!--EDIT DESCRIPTION TO TASK -->
-              <p>{{ taskToDo.description }}</p>
-            </div>
+            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+            <span class="title">{{ taskToDo.title }}</span>
+            <!--EDIT DESCRIPTION TO TASK -->
+            <p class="description">{{ taskToDo.description }}</p>
             <div class="sub-progress" *ngIf="taskToDo.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskToDo) / taskToDo.subtasks.length * 100"></mat-progress-bar>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate"
+                [value]="data.checkChecked(taskToDo) / taskToDo.subtasks.length * 100"></mat-progress-bar>
               <p>{{data.checkChecked(taskToDo) }}/{{taskToDo.subtasks.length}} Done</p>
             </div>
-            <div class="labels">
-              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-              <div class="assignedTo">
-                <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo; let i=index">
-                  <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
-                  </div>
-                  <div class="excess" *ngIf="i === 3 && taskToDo.assignedTo.length > 3">
-                    +{{ taskToDo.assignedTo.length - 3 }}
-                  </div>
+            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+            <div class="assignedTo">
+              <div class="assigned-to" *ngFor="let contact of taskToDo.assignedTo; let i=index">
+                <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
+                  {{ contact.firstName.charAt(0) }}
+                  {{ contact.lastName.charAt(0) }}
+                </div>
+                <div class="excess" *ngIf="i === 3 && taskToDo.assignedTo.length > 3">
+                  +{{ taskToDo.assignedTo.length - 3 }}
                 </div>
               </div>
-              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-              <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
             </div>
+            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+            <img src="/assets/img/icons/{{ taskToDo.priority }}.png" class="urgency">
           </div>
         </div>
       </div>
-
-
-
-      
     </div>
     <!-- 1 -->
     <!-- 2 -->
@@ -81,32 +75,29 @@
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskInProgress.category }}</span>
             </div>
-            <div class="task-content">
-              <!--EDIT TITLE TO VARIABLES FROM JSON-->
-              <span class="title">{{ taskInProgress.title }}</span>
-              <!--EDIT DESCRIPTION TO TASK -->
-              <p>{{ taskInProgress.description }}</p>
-            </div>
+            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+            <span class="title">{{ taskInProgress.title }}</span>
+            <!--EDIT DESCRIPTION TO TASK -->
+            <p class="description">{{ taskInProgress.description }}</p>
             <div class="sub-progress" *ngIf="taskInProgress.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskInProgress) / taskInProgress.subtasks.length * 100"></mat-progress-bar>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate"
+                [value]="data.checkChecked(taskInProgress) / taskInProgress.subtasks.length * 100"></mat-progress-bar>
               <p>{{data.checkChecked(taskInProgress) }}/{{taskInProgress.subtasks.length}} Done</p>
             </div>
-            <div class="labels">
-              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-              <div class="assignedTo">
-                <div class="assigned-to" *ngFor="let contact of taskInProgress.assignedTo; let i=index">
-                  <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
-                  </div>
-                  <div class="excess" *ngIf="i === 3 && taskInProgress.assignedTo.length > 3">
-                    +{{ taskInProgress.assignedTo.length - 3 }}
-                  </div>
+            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+            <div class="assignedTo">
+              <div class="assigned-to" *ngFor="let contact of taskInProgress.assignedTo; let i=index">
+                <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
+                  {{ contact.firstName.charAt(0) }}
+                  {{ contact.lastName.charAt(0) }}
+                </div>
+                <div class="excess" *ngIf="i === 3 && taskInProgress.assignedTo.length > 3">
+                  +{{ taskInProgress.assignedTo.length - 3 }}
                 </div>
               </div>
-              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-              <img src="/assets/img/icons/{{ taskInProgress.priority }}.png" class="urgency">
             </div>
+            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+            <img src="/assets/img/icons/{{ taskInProgress.priority }}.png" class="urgency">
           </div>
         </div>
       </div>
@@ -129,32 +120,29 @@
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskAwaitingFeedback.category }}</span>
             </div>
-            <div class="task-content">
-              <!--EDIT TITLE TO VARIABLES FROM JSON-->
-              <span class="title">{{ taskAwaitingFeedback.title }}</span>
-              <!--EDIT DESCRIPTION TO TASK -->
-              <p>{{ taskAwaitingFeedback.description }}</p>
-            </div>
+            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+            <span class="title">{{ taskAwaitingFeedback.title }}</span>
+            <!--EDIT DESCRIPTION TO TASK -->
+            <p class="description">{{ taskAwaitingFeedback.description }}</p>
             <div class="sub-progress" *ngIf="taskAwaitingFeedback.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskAwaitingFeedback) / taskAwaitingFeedback.subtasks.length * 100"></mat-progress-bar>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate"
+                [value]="data.checkChecked(taskAwaitingFeedback) / taskAwaitingFeedback.subtasks.length * 100"></mat-progress-bar>
               <p>{{data.checkChecked(taskAwaitingFeedback) }}/{{taskAwaitingFeedback.subtasks.length}} Done</p>
             </div>
-            <div class="labels">
-              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-              <div class="assignedTo">
-                <div class="assigned-to" *ngFor="let contact of taskAwaitingFeedback.assignedTo; let i=index">
-                  <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
-                  </div>
-                  <div class="excess" *ngIf="i === 3 && taskAwaitingFeedback.assignedTo.length > 3">
-                    +{{ taskAwaitingFeedback.assignedTo.length - 3 }}
-                  </div>
+            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+            <div class="assignedTo">
+              <div class="assigned-to" *ngFor="let contact of taskAwaitingFeedback.assignedTo; let i=index">
+                <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
+                  {{ contact.firstName.charAt(0) }}
+                  {{ contact.lastName.charAt(0) }}
+                </div>
+                <div class="excess" *ngIf="i === 3 && taskAwaitingFeedback.assignedTo.length > 3">
+                  +{{ taskAwaitingFeedback.assignedTo.length - 3 }}
                 </div>
               </div>
-              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-              <img src="/assets/img/icons/{{ taskAwaitingFeedback.priority }}.png" class="urgency">
             </div>
+            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+            <img src="/assets/img/icons/{{ taskAwaitingFeedback.priority }}.png" class="urgency">
           </div>
         </div>
       </div>
@@ -176,32 +164,29 @@
               <!--EDIT CATEGORY TO VARIABLES FROM JSON-->
               <span class="task-category">{{ taskDone.category }}</span>
             </div>
-            <div class="task-content">
-              <!--EDIT TITLE TO VARIABLES FROM JSON-->
-              <span class="title">{{ taskDone.title }}</span>
-              <!--EDIT DESCRIPTION TO TASK -->
-              <p>{{ taskDone.description }}</p>
-            </div>
+            <!--EDIT TITLE TO VARIABLES FROM JSON-->
+            <span class="title">{{ taskDone.title }}</span>
+            <!--EDIT DESCRIPTION TO TASK -->
+            <p class="description">{{ taskDone.description }}</p>
             <div class="sub-progress" *ngIf="taskDone.subtasks.length > 0">
-              <mat-progress-bar class="sub-progress-bar" mode="determinate" [value]="data.checkChecked(taskDone) / taskDone.subtasks.length * 100"></mat-progress-bar>
+              <mat-progress-bar class="sub-progress-bar" mode="determinate"
+                [value]="data.checkChecked(taskDone) / taskDone.subtasks.length * 100"></mat-progress-bar>
               <p>{{data.checkChecked(taskDone) }}/{{taskDone.subtasks.length}} Done</p>
             </div>
-            <div class="labels">
-              <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
-              <div class="assignedTo">
-                <div class="assigned-to" *ngFor="let contact of taskDone.assignedTo; let i=index">
-                  <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
-                    {{ contact.firstName.charAt(0) }}
-                    {{ contact.lastName.charAt(0) }}
-                  </div>
-                  <div class="excess" *ngIf="i === 3 && taskDone.assignedTo.length > 3">
-                    +{{ taskDone.assignedTo.length - 3 }}
-                  </div>
+            <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
+            <div class="assignedTo">
+              <div class="assigned-to" *ngFor="let contact of taskDone.assignedTo; let i=index">
+                <div [ngStyle]="{ 'background-color': contact.color }" *ngIf="i < 3">
+                  {{ contact.firstName.charAt(0) }}
+                  {{ contact.lastName.charAt(0) }}
+                </div>
+                <div class="excess" *ngIf="i === 3 && taskDone.assignedTo.length > 3">
+                  +{{ taskDone.assignedTo.length - 3 }}
                 </div>
               </div>
-              <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
-              <img src="/assets/img/icons/{{ taskDone.priority }}.png" class="urgency">
             </div>
+            <!--EDIT IMG SRC TO VARIABLE FROM JSON-->
+            <img src="/assets/img/icons/{{ taskDone.priority }}.png" class="urgency">
           </div>
         </div>
       </div>

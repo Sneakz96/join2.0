@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contact } from 'src/app/models/contact.class';
 
 @Component({
@@ -14,21 +14,18 @@ import { Contact } from 'src/app/models/contact.class';
 })
 
 export class DialogEditTaskComponent implements OnInit {
-
+  // 
   task: Task;
+  taskForm!: FormGroup;
   taskId: string;
-
+  // 
   contactForm = new FormControl();
   selectedContacts: any[] = [];
   checkedStatus = {};
-
-  // BOOLEANS
+  //
   low = false;
   medium = false;
   high = false;
-  // checked = false;
-  // selected = false;
-
   // 
   constructor(
     private router: Router,
@@ -39,9 +36,29 @@ export class DialogEditTaskComponent implements OnInit {
 
   // 
   ngOnInit(): void {
+    this.setForm();
     this.getPriority();
     this.checkAssignedContacts();
     this.check();
+    this.taskForm.valueChanges.subscribe(console.log);
+  }
+
+  // SET TASK FORM
+  setForm() {
+    this.taskForm = new FormGroup({
+      'title': new FormControl(this.task.title, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+        Validators.pattern(/^[a-zA-Z ]+$/),
+      ]),
+      'description': new FormControl(this.task.description, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100),
+      ]),
+      'dueDate': new FormControl('', [Validators.required])
+    });
   }
 
   // CHECK IF CONTACt IS ASSIGNED
@@ -111,11 +128,16 @@ export class DialogEditTaskComponent implements OnInit {
 
   // SAVE EDITED TASK TO DB
   save() {
-    this.close();
-    this.task.assignedTo = this.selectedContacts;
-    this.firestore
-      .collection('allTasks')
-      .doc(this.taskId)
-      .update(this.task.toJSON());
+    if (this.task.title.length > 3 &&
+      this.task.description.length > 3 &&
+      this.task.dueDate != null &&
+      this.task.dueDate != '/NaN/NaN/NaN/') {
+      this.close();
+      this.task.assignedTo = this.selectedContacts;
+      this.firestore
+        .collection('allTasks')
+        .doc(this.taskId)
+        .update(this.task.toJSON());
+    }
   }
 }

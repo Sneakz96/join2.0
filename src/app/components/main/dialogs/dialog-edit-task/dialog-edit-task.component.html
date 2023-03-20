@@ -1,18 +1,46 @@
-<div class="task">
+<form class="task" [formGroup]="taskForm">
     <img src="./assets/img/icons/close.png" class="close-btn" (click)="close()">
-
     <p class="label">Title</p>
-    <input class="input" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
-    <p class="label">Description</p>
-    <input class="input" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
+    <div class="field">
+        <input class="input" type="text" formControlName="title" matInput [(ngModel)]="task.title"
+            [placeholder]="'Title'">
+            <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
+                <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert a title of
+                    your task.
+                </small>
+                <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
+                    3 characters.
+                </small>
+                <small *ngIf="taskForm.controls['title'].errors?.['maxlength']">*Your input have reached limit
+                    of 20 characters.
+                </small>
+            </ng-container>
+    </div>
 
+
+    <p class="label">Description</p>
+    <div class="field">
+        <input class="input" type="text" formControlName="description" matInput [(ngModel)]="task.description"
+            [placeholder]="'Description'">
+        <ng-container *ngIf="taskForm.controls['description'].dirty || taskForm.controls['description'].touched">
+            <small *ngIf="taskForm.controls['description'].errors?.['required']">*Please insert a description of
+                your task.
+            </small>
+            <small *ngIf="taskForm.controls['description'].errors?.['minlength']">*Please insert a min. of
+                3 characters.
+            </small>
+            <small *ngIf="taskForm.controls['description'].errors?.['maxlength']">*Your input have reached limit
+                of 100 characters.
+            </small>
+        </ng-container>
+    </div>
     <div class="due-date">
         <p class="label">Due Date:</p>
-        <input type="text" matInput [(ngModel)]="task.dueDate" [placeholder]="'Due Date'">
+        <input type="text" formControlName="dueDate" matInput [(ngModel)]="task.dueDate" [placeholder]="'mm/dd/yyyy'">
+        <small *ngIf="task.dueDate == ''">*Please insert a due-date.</small>
     </div>
     <div class="priority">
         <p class="label">Priority:</p>
-
         <div class="priority-btn">
             <button id="low" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
                 <div [ngClass]="{'low': low}"></div>
@@ -24,7 +52,6 @@
                 <div [ngClass]="{'high': high}"></div>
             </button>
         </div>
-
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
@@ -52,8 +79,8 @@
     </div>
     <div class="btn-container">
         <button class="save-btn" (click)="save()">
-            Ok
+            <span>Save</span>
             <img src="./assets/img/icons/create.png">
         </button>
     </div>
-</div>
+</form>

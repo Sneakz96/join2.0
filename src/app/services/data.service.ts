@@ -49,15 +49,11 @@ export class DataService {
   allContacts$: Observable<any>;
   firstNames: string[] = this.allContacts.map(allContacts => allContacts.firstName);
   initialsFirstNames: string[] = [];
-  // TASK DIALOG
-
-  // checkedSubtasks: any[] = [];
-
+  //
   mbDevice = null;
   low = false;
   medium = false;
   high = false;
-
   // 
   constructor(
     private fire: Firestore,

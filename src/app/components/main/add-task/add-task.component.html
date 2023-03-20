@@ -8,7 +8,7 @@
                     <h5>Title</h5>
                     <div class="field">
                         <input class="input-field" type="text" formControlName="title"
-                            placeholder="Enter a title">
+                            [ngClass]="{'alert-border': title }" placeholder="Enter a title">
                         <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
                             <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of
                                 your task.</small>
@@ -17,12 +17,13 @@
                             <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
                                 allowed.</small>
                         </ng-container>
+                        <small *ngIf="title">*Please insert the titel of your task.</small>
                     </div>
                     <!-- DESCRIPTION -->
                     <h5>Description</h5>
                     <div class="field">
                         <textarea class="textaria" rows="10" placeholder="Enter a Description"
-                            formControlName="description">
+                            [ngClass]="{'alert-border': description}" formControlName="description">
                          </textarea>
                         <ng-container
                             *ngIf="taskForm.controls['description'].dirty || taskForm.controls['description'].touched">
@@ -36,12 +37,14 @@
                                 reached limit
                                 of 100 characters.</small>
                         </ng-container>
+                        <small class="alert" *ngIf="description">*Please insert a
+                            description of your task.</small>
                     </div>
                     <!-- CATEGORY -->
                     <h5>Category</h5>
                     <div class="field">
                         <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
-                            placeholder="Select category">
+                            [ngClass]="{'alert-border': category}" placeholder="Select category">
                             <mat-option value="Management">Management</mat-option>
                             <mat-option value="Costumer Service">Costumer Service</mat-option>
                             <mat-option value="Marketing">Marketing</mat-option>
@@ -52,17 +55,23 @@
                             <mat-option value="Backoffice">Backoffice</mat-option>
                             <mat-option value="Sales">Sales</mat-option>
                         </mat-select>
-                        <small class="alert" *ngIf="data.category">*Please choose a category!</small>
+                        <ng-container
+                            *ngIf="taskForm.controls['category'].dirty || taskForm.controls['category'].touched">
+                            <small class="alert" *ngIf="taskForm.controls['category'].errors?.['required']">*Please
+                                choose a category!</small>
+                        </ng-container>
+                        <small class="alert" *ngIf="category">*Please choose a category!</small>
                     </div>
                     <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
                     <div class="field">
                         <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
-                            placeholder="Select contacts" multiple #assignedContacts>
+                            [ngClass]="{'alert-border': assigned}" placeholder="Select contacts" multiple
+                            #assignedContacts>
                             <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                                 {{contact.firstName}} {{contact.lastName}}</mat-option>
                         </mat-select>
-                        <small class="alert" *ngIf="data.assigned">*Please assign a collegue!</small>
+                        <small class="alert" *ngIf="assigned">*Please assign a collegue!</small>
                     </div>
                 </div>
                 <div class="vector"></div>
@@ -71,13 +80,16 @@
                     <h5>Due date</h5>
                     <div class="field">
                         <input matInput class="date-input input-field" [matDatepicker]="datePicker" [min]="data.today"
-                            placeholder="mm/dd/yyyy" formControlName="dueDate">
+                            [ngClass]="{'alert-border': dueDate}" placeholder="mm/dd/yyyy" formControlName="dueDate">
                         <mat-datepicker-toggle class="calendar" matIconSuffix
                             [for]="datePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #datePicker disabled="false"></mat-datepicker>
-                        <ng-container *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
-                            <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a due-date.</small>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                        <ng-container
+                            *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
+                            <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a
+                                due-date.</small>
                         </ng-container>
+                        <small *ngIf="dueDate">*Please insert a due-date.</small>
                     </div>
                     <!-- PRIORITY -->
                     <h5>Prio</h5>
@@ -86,15 +98,14 @@
                             <button id="addHigh" [ngClass]="{'high': high}" (click)="setPrio('Urgent')">Urgent
                                 <div [ngClass]="{'high': high}"></div>
                             </button>
-                            <button id="addMedium" [ngClass]="{'medium': medium}"
-                                (click)="setPrio('Medium')">Medium
+                            <button id="addMedium" [ngClass]="{'medium': medium}" (click)="setPrio('Medium')">Medium
                                 <div [ngClass]="{'medium': medium}"></div>
                             </button>
                             <button id="addLow" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
                                 <div [ngClass]="{'low': low}"></div>
                             </button>
                         </div>
-                        <small class="alert" *ngIf="data.prio">*Please choose a priority!</small>
+                        <small *ngIf="prio">*Please choose a priority!</small>
                     </div>
                     <!-- SUBTASKS -->
                     <h5>Subtasks</h5>
@@ -123,7 +134,7 @@
                         <button class="clear-btn" (click)="resetForm()">Clear
                             <img src="/assets/img/icons/close.png">
                         </button>
-                        <button class="create-task-btn" (submit)="checkForm()">Create Task
+                        <button class="create-task-btn" (click)="checkForm()">Create Task
                             <img src="/assets/img/icons/create.png">
                         </button>
                     </div>

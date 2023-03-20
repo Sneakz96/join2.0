@@ -84,7 +84,6 @@
 }
 
 .column {
-    max-width: 300px;
     width: 20%;
     display: flex;
     align-items: center;
@@ -118,7 +117,6 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    // overflow-y: scroll;
     width: 100%;
     height: 60vh;
     border-radius: 20px;
@@ -128,10 +126,9 @@
 
 .drag-task {
     width: 100%;
-    max-width: 280px;
+    max-width: 100%;
     display: flex;
     align-items: center;
-    background-color: white;
     border-radius: 20px;
 }
 
@@ -142,13 +139,13 @@
     height: fit-content;
     background-color: rgb(255, 255, 255);
     width: 100%;
-    // max-width: 280px;
+    position: relative;
 
     &:hover {
         cursor: pointer;
         transform: scale(1.005);
     }
-    
+
 }
 
 .task-shadow {
@@ -172,23 +169,15 @@
     color: white;
 }
 
-.task-content {
-    p {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        color: gray;
-    }
+.description {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: gray;
 }
 
 .title {
     font-weight: bold;
-
-}
-
-.labels {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
 }
 
 .sub-progress {
@@ -218,16 +207,20 @@
 
 .assignedTo {
     max-height: 20px;
-    width: 100%;
+    max-width: 70%;
+    width: 70%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
 }
 
 .urgency {
-    margin-right: 5%;
+    position: absolute;
     height: 12px;
     width: 16px;
+    bottom: 30px;
+    right: 30px;
 }
 
 .assignedContact {

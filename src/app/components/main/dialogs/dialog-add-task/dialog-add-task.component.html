@@ -6,36 +6,41 @@
         <div class="row row-left">
             <h5>Title</h5>
             <div class="field">
-                <input class="input-field" type="text" formControlName="title" placeholder="Enter a title" 
-                    maxlength="20">
-                    <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of your
-                        task.</small>
-                    <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
-                        3 characters.</small>
-                    <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
-                        allowed.</small>
+                <input class="input-field" type="text" formControlName="title" placeholder="Enter a title">
+                <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of your
+                    task.
+                </small>
+                <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
+                    3 characters.
+                </small>
+                <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
+                    allowed.
+                </small>
             </div>
             <h5>Description</h5>
             <div class="field">
-                <textarea class="description textaria" rows="10" placeholder="Enter a Description" [ngClass]="{'alert-border': description}"
-                    formControlName="description">
+                <textarea class="description textaria" rows="10" placeholder="Enter a Description"
+                    [ngClass]="{'alert-border': description}" formControlName="description">
                 </textarea>
                 <ng-container
                     *ngIf="taskForm.controls['description'].dirty || taskForm.controls['description'].touched">
                     <small *ngIf="taskForm.controls['description'].errors?.['required']">*Please insert a description of
-                        your task.</small>
+                        your task.
+                    </small>
                     <small *ngIf="taskForm.controls['description'].errors?.['minlength']">*Please insert a min. of
-                        3 characters.</small>
+                        3 characters.
+                    </small>
                     <small *ngIf="taskForm.controls['description'].errors?.['maxlength']">*Your input have reached limit
-                        of 100 characters.</small>
+                        of 100 characters.
+                    </small>
                 </ng-container>
                 <small *ngIf="description">*Please insert a description of
                     your task.</small>
             </div>
             <h5>Category</h5>
             <div class="field">
-                <mat-select class="category" [(value)]="choosenCategory" formControlName="category" [ngClass]="{'alert-border': category}"
-                    placeholder="Select category">
+                <mat-select class="category" [(value)]="choosenCategory" formControlName="category"
+                    [ngClass]="{'alert-border': category}" placeholder="Select category">
                     <mat-option value="Management">Management</mat-option>
                     <mat-option value="Costumer Service">Costumer Service</mat-option>
                     <mat-option value="Marketing">Marketing</mat-option>
@@ -50,8 +55,8 @@
             </div>
             <h5>Assigned to</h5>
             <div class="field">
-                <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo" [ngClass]="{'alert-border': assigned}"
-                    placeholder="Select contacts" multiple #assignedContacts>
+                <mat-select class="assigned-to" [(value)]="assignedCollegues" formControlName="assignedTo"
+                    [ngClass]="{'alert-border': assigned}" placeholder="Select contacts" multiple #assignedContacts>
                     <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                         {{contact.firstName}} {{contact.lastName}}</mat-option>
                 </mat-select>
@@ -60,12 +65,10 @@
         </div>
         <div class="vector"></div>
         <div class="row row-right">
-
-
             <h5>Due date</h5>
             <div class="field">
-                <input matInput class="input-field" [matDatepicker]="datePicker" [min]="data.today" [ngClass]="{'alert-border': dueDate}"
-                    placeholder="mm/dd/yyyy" formControlName="dueDate">
+                <input matInput class="input-field" [matDatepicker]="datePicker" [min]="data.today"
+                    [ngClass]="{'alert-border': dueDate}" placeholder="mm/dd/yyyy" formControlName="dueDate">
                 <mat-datepicker-toggle class="calendar" matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
                 <ng-container *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
@@ -73,9 +76,6 @@
                 </ng-container>
                 <small *ngIf="dueDate">*Please insert a due-date.</small>
             </div>
-
-
-
             <h5>Prio</h5>
             <div class="field">
                 <div class="priority">
