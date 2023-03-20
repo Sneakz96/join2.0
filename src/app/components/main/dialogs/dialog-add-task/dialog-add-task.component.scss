@@ -30,7 +30,7 @@
 .create-form {
     position: relative;
     display: flex;
-    background-color: wheat;
+    background-color: white;
 }
 
 .alert {
@@ -301,7 +301,7 @@ small {
 .plus {
     position: absolute;
     top: 15px;
-    left: 79%;
+    left: 90%;
 
     &:hover {
         cursor: pointer;
@@ -425,16 +425,13 @@ small {
         display: none;
     }
 
-    .row {
-        width: 100%;
-    }
-
     .subtasks {
         height: 60px;
     }
 
     .priority {
-        width: 100%;
+        flex-direction: column;
+        align-items: revert;
     }
 
     .btn-container {
@@ -459,6 +456,11 @@ small {
 }
 
 @media(max-width: 860px) {
+    .priority {
+        flex-direction: row;
+        align-items: center;
+    }
+
     .create-form {
         flex-direction: column;
         align-items: center;
@@ -469,6 +471,9 @@ small {
     }
 
     .row {
+        width: 100%;
+        margin-bottom: 0;
+
         input {
             width: 100%;
         }
@@ -492,10 +497,6 @@ small {
 
     .subtasks {
         width: 100%;
-    }
-
-    .btn-container {
-        margin-bottom: var(--m25p);
     }
 
     .category {
@@ -570,10 +571,6 @@ small {
         margin-left: 0;
     }
 
-    .mb-alert {
-        margin-left: 58px;
-    }
-
     .priority {
         flex-direction: column;
         align-items: revert;
@@ -582,7 +579,7 @@ small {
 
 @media(max-width: 300px) {
     .subtasks {
-        height: 60px;
+        height: 80px;
     }
 
     .create-task-btn {
@@ -596,12 +593,7 @@ small {
     }
 
     .btn-container {
-        margin-bottom: var(--m25p);
-    }
-
-    .create-task-btn {
-        margin-top: var(--m5p);
-        margin-left: 0;
+        margin-bottom: var(--m20p);
     }
 
     .mb-alert {

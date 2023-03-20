@@ -1,11 +1,19 @@
 ::ng-deep .mat-dialog-container {
     border-radius: 20px;
+    align-items: center;
+    display: flex;
+    width: fit-content;
+}
+
+::ng-deep .cdk-overlay-pane {
+    justify-content: center;
 }
 
 .task {
     padding: 20px;
     width: 500px;
     max-width: 550px;
+    background-color: rgb(56, 215, 162);
 }
 
 .task-category {
@@ -163,10 +171,24 @@
 
 @media(max-width: 760px) {
     ::ng-deep .mat-dialog-container {
+        display: unset;
+        align-items: unset;
+        width: 100%;
+        background-color: green;
         position: absolute;
         left: 0;
         top: 80px;
         border-radius: 0;
+        right: 0;
+        overflow-y: scroll;
+    }
+
+    .task {
+        background-color: burlywood;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        padding: 0px;
     }
 
     .subtasks {
@@ -175,10 +197,6 @@
 }
 
 @media(max-width: 420px) {
-    .task {
-        height: 100%;
-    }
-
     .category {
         margin-bottom: var(--m10p);
     }
@@ -190,22 +208,6 @@
 
     .description {
         margin-bottom: var(--m10p);
-    }
-
-    .due-date {
-        width: 100%;
-    }
-
-    .priority {
-        width: 100%;
-    }
-
-    .assigned-contact {
-        width: 100%;
-    }
-
-    .sub-progress {
-        width: 100%;
     }
 }
 

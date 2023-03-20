@@ -94,25 +94,17 @@ export class DialogAddTaskComponent {
       'title': new FormControl(this.task.title, [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[a-zA-Z ]+$/)
+        Validators.pattern(/^[a-zA-Z ]+$/),
       ]),
       'description': new FormControl(this.task.description, [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(100)
+        Validators.maxLength(100),
       ]),
-      'category': new FormControl(this.task.category, [
-        Validators.required
-      ]),
-      'assignedTo': new FormControl(this.task.assignedTo, [
-        Validators.required
-      ]),
-      'dueDate': new FormControl(this.task.dueDate, [
-        Validators.required
-      ]),
-      'prio': new FormControl(this.task.priority, [
-        Validators.required
-      ]),
+      'category': new FormControl(this.task.category, [Validators.required]),
+      'assignedTo': new FormControl(this.task.assignedTo, [Validators.required]),
+      'dueDate': new FormControl('', [Validators.required]),
+      'prio': new FormControl(this.task.priority, [Validators.required]),
       'subTasks': new FormControl(this.task.subtasks),
     });
   }
@@ -164,6 +156,7 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
+    debugger;
     console.log(this.task)
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
@@ -176,7 +169,6 @@ export class DialogAddTaskComponent {
     this.task.subtasks = this.addedSubTasks;
 
     this.setCreationDate();
-    this.getDueDate();
     this.changeContactStatus();
     this.setId();
     this.handleAlerts();
@@ -185,8 +177,8 @@ export class DialogAddTaskComponent {
     if (formattedTitle.length > 3 &&
       description.length > 3 &&
       this.taskForm.value.category.length > 0 &&
-      this.assignedCollegues.length > 0 &&
-      this.task.dueDate) {
+      this.assignedCollegues.length > 0) {
+      this.getDueDate();
       console.log(this.task)
       this.taskCreated = true;
       this.addTaskToDb();

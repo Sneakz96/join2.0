@@ -1,11 +1,11 @@
 <div class="task">
     <img src="./assets/img/icons/close.png" class="close-btn" (click)="close()">
-    <div class="task-content">
-        <p class="label">Title</p>
-        <input class="title" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
-        <p class="label">Description</p>
-        <input class="description" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
-    </div>
+
+    <p class="label">Title</p>
+    <input class="input" type="text" matInput [(ngModel)]="task.title" [placeholder]="'Title'">
+    <p class="label">Description</p>
+    <input class="input" type="text" matInput [(ngModel)]="task.description" [placeholder]="'Description'">
+
     <div class="due-date">
         <p class="label">Due Date:</p>
         <input type="text" matInput [(ngModel)]="task.dueDate" [placeholder]="'Due Date'">
@@ -23,14 +23,14 @@
                 <div [ngClass]="{'high': high}"></div>
             </button>
         </div>
-        
     </div>
     <span class="label">Assigned To:</span>
     <mat-form-field class="assigned" appearance="fill">
-        <mat-select id="collegueMenu" class="assigned-field" #assignedContacts [(value)]="task.assignedTo"
+        <mat-select id="collegueMenu" class="input" #assignedContacts [(value)]="task.assignedTo"
             [placeholder]="'Select contact to assign'">
             <mat-option *ngFor="let contact of data.allContacts; let i = index" [value]="contact">
-                <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="checkedStatus[contact.id]"  (click)="onContactSelected(i, $event)">
+                <input id="contact{{i}}" class="example-margin" type="checkbox" [checked]="checkedStatus[contact.id]"
+                    (click)="onContactSelected(i, $event)">
                 {{contact.firstName}}
                 {{contact.lastName}}
             </mat-option>

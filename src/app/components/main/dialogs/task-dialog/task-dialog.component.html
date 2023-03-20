@@ -17,9 +17,6 @@
             <img src="./assets/img/icons/{{ task.priority }}.png">
         </div>
     </div>
-
-
-
     <div *ngIf="task.subtasks.length > 0">
         <p class="sub-task-header">Subtasks:</p>
         <div class="sub-progress">
@@ -33,13 +30,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
     <!--EDIT ASSIGNED TO VARIABLES FROM JSON-->
     <span class="assigned-to">Assigned To:</span>
     <div class="assigned-contacts">
@@ -54,7 +44,6 @@
             </div>
         </div>
     </div>
-
     <div class="btn-container">
         <img class="edit-btn" src="./assets/img/icons/edit_white.png" (click)="editTask()">
         <img class="delete-btn" src="./assets/img/icons/trash_white.png" (click)="deleteTask(taskId)">
