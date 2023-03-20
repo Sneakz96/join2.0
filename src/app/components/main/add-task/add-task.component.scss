@@ -195,6 +195,12 @@ small {
     }
 }
 
+::ng-deep .mat-datepicker-content {
+    background-color: white;
+    width: 296px;
+    height: 354px;
+}
+
 ::ng-deep .mat-calendar-body-cell-content {
     background-color: rgba(0, 0, 0, 0.1) !important;
 
@@ -281,13 +287,13 @@ small {
 .subtask {
     position: relative;
     display: flex;
-    width: 100%;
+    width: 90%;
 }
 
 .plus {
     position: absolute;
     top: 15px;
-    left: 79%;
+    left: 90%;
 
     &:hover {
         cursor: pointer;

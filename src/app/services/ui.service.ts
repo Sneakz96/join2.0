@@ -10,8 +10,7 @@ export class UIService {
   // 
   constructor(
     private data: DataService,
-  ) {
-  }
+  ) { }
 
   // CHECK WIDTH OF DISPLAY FOR MB_MENU ON PROFILE
   checkDisplayWidth() {
@@ -49,7 +48,4 @@ export class UIService {
       }
     });
   }
-
-
-
 }

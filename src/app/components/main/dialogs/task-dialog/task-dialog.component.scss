@@ -2,10 +2,6 @@
     border-radius: 20px;
 }
 
-// ::ng-deep .cdk-overlay-pane {
-//     max-width: 550px !important;
-// }
-
 .task {
     padding: 20px;
     width: 500px;
@@ -46,7 +42,6 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--m5p);
-    // width: 70%;
 
     p {
         font-weight: bold;

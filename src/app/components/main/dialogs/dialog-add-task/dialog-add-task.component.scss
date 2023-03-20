@@ -16,9 +16,21 @@
     }
 }
 
+::ng-deep .mat-dialog-container {
+    border-radius: 20px;
+    padding: 20px;
+}
+
 .create {
+    width: 880px;
     position: relative;
     display: flex;
+}
+
+.create-form {
+    position: relative;
+    display: flex;
+    background-color: wheat;
 }
 
 .alert {
@@ -173,10 +185,6 @@ small {
 
 ::ng-deep .mat-pseudo-checkbox-checked {
     background: var(--light-blue) !important;
-}
-
-::ng-deep .cdk-overlay-pane {
-    max-width: 750px !important;
 }
 
 .date-input {
@@ -391,9 +399,12 @@ small {
     }
 }
 
-@media(max-width: 1080px) {
-    .content {
-        left: 0;
+@media(max-width: 1160px) {
+    .create {
+        width: 100%;
+    }
+
+    .create-form {
         width: 100%;
     }
 
@@ -408,11 +419,6 @@ small {
 
     .mb-alert {
         display: none;
-    }
-
-    .close-btn {
-        top: -25px;
-        right: 50px;
     }
 
     .vector {
@@ -453,13 +459,35 @@ small {
 }
 
 @media(max-width: 860px) {
-    .create {
+    .create-form {
         flex-direction: column;
         align-items: center;
     }
 
+    .field {
+        width: 100%;
+    }
+
+    .row {
+        input {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+        }
+    }
+
+    .textaria {
+        width: 100%;
+    }
+
     .vector {
         display: none;
+    }
+
+    .subtask {
+        width: 100%;
     }
 
     .subtasks {
@@ -483,20 +511,6 @@ small {
         animation: move-up 1.2s forwards;
     }
 
-    .row {
-        input {
-            width: 100%;
-        }
-
-        select {
-            width: 100%;
-        }
-    }
-
-    .textaria {
-        width: 100%;
-    }
-
     .headline {
         margin-left: 0;
     }
@@ -511,11 +525,6 @@ small {
         flex-direction: column;
         right: 0;
         margin-bottom: var(--m20p);
-    }
-
-    .create {
-        flex-direction: column;
-        align-items: center;
     }
 
     .mb-alert {
@@ -539,30 +548,21 @@ small {
 }
 
 @media(max-width: 420px) {
-    .btn-container {
-        width: 110%;
-        position: relative;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        right: 0;
-    }
-
-    .close-btn {
-        top: -25px;
-        right: -20px;
-    }
-
-    .create {
-        width: 90%;
+    .field {
+        width: 100%;
     }
 
     .mb-alert {
         margin-left: 58px;
     }
 
-    .row {
+    .btn-container {
         width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        right: 0;
     }
 
     .create-task-btn {
@@ -576,8 +576,7 @@ small {
 
     .priority {
         flex-direction: column;
-        align-items: flex-start;
-        margin-left: var(--m5);
+        align-items: revert;
     }
 }
 
@@ -603,7 +602,6 @@ small {
     .create-task-btn {
         margin-top: var(--m5p);
         margin-left: 0;
-        width: 100%;
     }
 
     .mb-alert {

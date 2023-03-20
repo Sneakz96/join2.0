@@ -2,17 +2,16 @@
     <h1>Add task</h1>
     <div class="create-new-task">
         <div class="create">
-            <form class="create" [formGroup]="taskForm" ngNativeValidate>
+            <form class="create" [formGroup]="taskForm">
                 <div class="row row-left">
                     <!-- TITLE -->
                     <h5>Title</h5>
                     <div class="field">
-                        <input class="input-field" type="text" id="title" formControlName="title"
+                        <input class="input-field" type="text" formControlName="title"
                             placeholder="Enter a title">
                         <ng-container *ngIf="taskForm.controls['title'].dirty || taskForm.controls['title'].touched">
                             <small *ngIf="taskForm.controls['title'].errors?.['required']">*Please insert the titel of
-                                your
-                                task.</small>
+                                your task.</small>
                             <small *ngIf="taskForm.controls['title'].errors?.['minlength']">*Please insert a min. of
                                 3 characters.</small>
                             <small *ngIf="taskForm.controls['title'].errors?.['pattern']">*Only letters are
@@ -53,7 +52,7 @@
                             <mat-option value="Backoffice">Backoffice</mat-option>
                             <mat-option value="Sales">Sales</mat-option>
                         </mat-select>
-                        <p class="alert" *ngIf="data.category">*Please choose a category!</p>
+                        <small class="alert" *ngIf="data.category">*Please choose a category!</small>
                     </div>
                     <!-- ASSIGNED -->
                     <h5>Assigned to</h5>
@@ -63,7 +62,7 @@
                             <mat-option *ngFor="let contact of data.allContacts$ | async" [value]="contact">
                                 {{contact.firstName}} {{contact.lastName}}</mat-option>
                         </mat-select>
-                        <p class="alert" *ngIf="data.assigned">*Please assign a collegue!</p>
+                        <small class="alert" *ngIf="data.assigned">*Please assign a collegue!</small>
                     </div>
                 </div>
                 <div class="vector"></div>
@@ -76,29 +75,26 @@
                         <mat-datepicker-toggle class="calendar" matIconSuffix
                             [for]="datePicker"></mat-datepicker-toggle>
                         <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+                        <ng-container *ngIf="taskForm.controls['dueDate'].dirty || taskForm.controls['dueDate'].touched">
+                            <small *ngIf="taskForm.controls['dueDate'].errors?.['required']">*Please insert a due-date.</small>
+                        </ng-container>
                     </div>
-
-
-
-
-
-
                     <!-- PRIORITY -->
                     <h5>Prio</h5>
                     <div class="field">
                         <div class="priority">
-                            <button id="addHigh" [ngClass]="{'high': data.high}" (click)="setPrio('Urgent')">Urgent
-                                <div [ngClass]="{'high': data.high}"></div>
+                            <button id="addHigh" [ngClass]="{'high': high}" (click)="setPrio('Urgent')">Urgent
+                                <div [ngClass]="{'high': high}"></div>
                             </button>
-                            <button id="addMedium" [ngClass]="{'medium': data.medium}"
+                            <button id="addMedium" [ngClass]="{'medium': medium}"
                                 (click)="setPrio('Medium')">Medium
-                                <div [ngClass]="{'medium': data.medium}"></div>
+                                <div [ngClass]="{'medium': medium}"></div>
                             </button>
-                            <button id="addLow" [ngClass]="{'low': data.low}" (click)="setPrio('Low')">Low
-                                <div [ngClass]="{'low': data.low}"></div>
+                            <button id="addLow" [ngClass]="{'low': low}" (click)="setPrio('Low')">Low
+                                <div [ngClass]="{'low': low}"></div>
                             </button>
                         </div>
-                        <p class="alert" *ngIf="data.prio">*Please choose a priority!</p>
+                        <small class="alert" *ngIf="data.prio">*Please choose a priority!</small>
                     </div>
                     <!-- SUBTASKS -->
                     <h5>Subtasks</h5>
@@ -108,13 +104,13 @@
                     </div>
                     <!-- SUBALERT -->
                     <div class="sub-alert" *ngIf="data.subError">
-                        <span>*Input darf nicht leer sein!</span>
+                        <small>*Input darf nicht leer sein!</small>
                     </div>
                     <div class="sub-alert" *ngIf="subMax">
-                        <span>*Maximum erreicht!</span>
+                        <small>*Maximum erreicht!</small>
                     </div>
                     <div class="sub-alert" *ngIf="subLength">
-                        <span>*Input muss min. 4 Charakter haben!</span>
+                        <small>*Input muss min. 4 Charakter haben!</small>
                     </div>
                     <div class="subtasks" #subtasks>
                         <div class="_2" *ngFor="let subtask of addedSubTasks; index as i">
@@ -127,7 +123,7 @@
                         <button class="clear-btn" (click)="resetForm()">Clear
                             <img src="/assets/img/icons/close.png">
                         </button>
-                        <button class="create-task-btn" (click)="checkForm()">Create Task
+                        <button class="create-task-btn" (submit)="checkForm()">Create Task
                             <img src="/assets/img/icons/create.png">
                         </button>
                     </div>

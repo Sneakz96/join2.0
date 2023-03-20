@@ -36,7 +36,7 @@ export class DialogAddTaskComponent {
   // 
   taskCreated = false;
   // 
-  subError = false;
+
   subMax = false;
   subLength = false;
   //   
@@ -164,6 +164,7 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
+    console.log(this.task)
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -181,10 +182,10 @@ export class DialogAddTaskComponent {
     this.handleAlerts();
 
     // Überprüfen, ob das Formular gültig ist
-    if (formattedTitle.length > 3,
-      description.length > 3,
-      this.taskForm.value.category.length > 0,
-      this.assignedCollegues.length > 0,
+    if (formattedTitle.length > 3 &&
+      description.length > 3 &&
+      this.taskForm.value.category.length > 0 &&
+      this.assignedCollegues.length > 0 &&
       this.task.dueDate) {
       console.log(this.task)
       this.taskCreated = true;
@@ -192,7 +193,6 @@ export class DialogAddTaskComponent {
       this.close();
     }
   }
-
 
   // 
   capitalizeFirstLetter(str: string): string {
@@ -228,11 +228,6 @@ export class DialogAddTaskComponent {
     let output = `${month}/${day}/${year}`;
     this.task.dueDate = output;
   }
-
-  addTask() {
-
-  }
-
 
   // 
   addTaskToDb() {

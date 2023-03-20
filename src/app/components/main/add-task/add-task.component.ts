@@ -29,7 +29,17 @@ export class AddTaskComponent {
   @ViewChild('subInput') subInput: ElementRef;
   addedSubTasks: any[] = [];
   // ALERTS
+  category = false;
+  assigned = false;
+  prio = false;
+  // 
+  low = false;
+  medium = false;
+  high = false;
+  // 
   taskCreated = false;
+  // 
+  subError = false;
   subMax = false;
   subLength = false;
   // 
@@ -38,7 +48,9 @@ export class AddTaskComponent {
     public router: Router,
   ) {
     this.setForm();
+    this.taskForm.valueChanges.subscribe(console.log);
   }
+
 
   // SET TASK FORM
   setForm() {
@@ -61,7 +73,6 @@ export class AddTaskComponent {
       ]),
       'dueDate': new FormControl(this.task.dueDate, [
         Validators.required,
-        // Validators.pattern(this.datePattern)
       ]),
       'prio': new FormControl(this.task.priority, [
         Validators.required,
@@ -69,7 +80,7 @@ export class AddTaskComponent {
       'subTasks': new FormControl(this.task.subtasks),
     });
   }
-  
+
   // CREATE SUBTASK
   addSubTask(): void {
     let subInputValue = this.subInput.nativeElement.value.trim();
@@ -111,6 +122,7 @@ export class AddTaskComponent {
 
   // 
   checkForm(): void {
+    console.log(this.task.priority)
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -120,11 +132,22 @@ export class AddTaskComponent {
     this.task.category = this.taskForm.value.category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.subtasks = this.addedSubTasks;
-    this.handleDate();
+
+    this.setCreationDate();
+    this.getDueDate();
     this.changeContactStatus();
     this.setId();
-    this.setDate();
-    this.checkValidation();
+    this.handleAlerts();
+    console.log(this.task)
+    // Überprüfen, ob das Formular gültig ist
+    if (this.task.title.length > 3 &&
+      this.task.description.length > 3 &&
+      this.taskForm.value.category.length >= 1 &&
+      this.assignedCollegues.length >= 1) {
+      console.log(this.task)
+      this.taskCreated = true;
+      this.addTaskToDb();
+    }
   }
 
   // 
@@ -147,37 +170,38 @@ export class AddTaskComponent {
   }
 
   // SET CREATION TIME
-  setDate() {
+  setCreationDate() {
     let date = new Date().getTime();
     this.task.createdAt = date;
   }
 
   // LOG PRIO
   setPrio(prio: string) {
+    console.log(prio);
     this.task.priority = prio;
-    this.data.getPrio(prio);
+    this.getPrio(prio);
   }
 
   // GET PRIO STATUS -> SET BOOLEAN
   getPrio(prio: string) {
     if (prio == 'Low') {
-      this.data.low = true;
-      this.data.medium = false;
-      this.data.high = false;
+      this.low = true;
+      this.medium = false;
+      this.high = false;
     } else if (prio == 'Medium') {
-      this.data.low = false;
-      this.data.medium = true;
-      this.data.high = false;
+      this.low = false;
+      this.medium = true;
+      this.high = false;
     } else if (prio == 'Urgent') {
-      this.data.low = false;
-      this.data.medium = false;
-      this.data.high = true;
+      this.low = false;
+      this.medium = false;
+      this.high = true;
     }
   }
 
   // HANDLE DATE FOR TASK
-  handleDate() {
-    let date = new Date();
+  getDueDate() {
+    let date = new Date(this.taskForm.value.dueDate);
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let year = date.getFullYear();
@@ -189,8 +213,8 @@ export class AddTaskComponent {
   checkValidation(): void {
     this.data.handleAlerts();
 
-    let isTitleValid = this.task.title.length > 4;
-    let isDescriptionValid = this.task.description.length > 8;
+    let isTitleValid = this.task.title.length >= 3;
+    let isDescriptionValid = this.task.description.length >= 3;
     let isCategoryValid = !!this.task.category;
     let isAssignedToValid = this.task.assignedTo.length > 0;
     let isDueDateValid = !!this.task.dueDate;
@@ -220,8 +244,49 @@ export class AddTaskComponent {
     this.addedSubTasks = [];
     this.task.priority = '';
     // REMOVE ACTIVE CLASS
-    this.data.high = false;
-    this.data.medium = false;
-    this.data.low = false;
+    this.high = false;
+    this.medium = false;
+    this.low = false;
   }
+
+  // FORM_CHECKS
+
+  // 
+  handleAlerts() {
+    this.alert_category();
+    this.alert_assigned();
+    this.alert_prio();
+    this.timeout();
+  }
+
+  // 
+  alert_category() {
+    if (this.task.category == '') {
+      this.category = true;
+    }
+  }
+
+  // 
+  alert_assigned() {
+    if (this.task.assignedTo.length == 0) {
+      this.assigned = true;
+    }
+  }
+
+  // 
+  alert_prio() {
+    if (this.task.priority == '') {
+      this.prio = true;
+    }
+  }
+
+  // 
+  timeout() {
+    setTimeout(() => {
+      this.category = false;
+      this.assigned = false;
+      this.prio = false;
+    }, 3000);
+  }
+
 }

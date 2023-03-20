@@ -14,7 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
 })
 
 export class BoardComponent {
-
+  // 
   toDo = [];
   awaitingFeedback = [];
   inProgress = [];
@@ -23,7 +23,6 @@ export class BoardComponent {
   excess = false;
   dueDate: any;
   searchField: string;
-  @ViewChild('scrollElement') private childEl: ElementRef;
   // 
   constructor(
     public firestore: AngularFirestore,
@@ -58,7 +57,6 @@ export class BoardComponent {
 
   // DRAG AND DROP FUNCTION
   drop(event: CdkDragDrop<any>) {
-    // this.ui.scrollOffset();
     let index = event.currentIndex;
     let indexBefore = event.previousIndex;
     if (event.previousContainer === event.container) {
@@ -92,7 +90,7 @@ export class BoardComponent {
     this.sort();
   }
 
-  // 
+  // SORT ALL_TASKS BY THEIR STATUS
   sort() {
     this.toDo = [];
     this.awaitingFeedback = [];
@@ -100,7 +98,6 @@ export class BoardComponent {
     this.done = [];
     for (let i = 0; i < this.data.allTasks.length; i++) {
       let task = this.data.allTasks[i];
-
       if (this.data.allTasks[i].status == 'toDo') {
         this.toDo.push(task);
       }
@@ -113,16 +110,6 @@ export class BoardComponent {
       if (this.data.allTasks[i].status == 'done') {
         this.done.push(task);
       }
-
     }
-    console.log('toDo:', this.toDo);
-    console.log('awaitingFeedback:', this.awaitingFeedback);
-    console.log('inProgress:', this.inProgress);
-    console.log('done:', this.done);
-  }
-
-  setScrollTop() {
-    console.log('scroll');
-    this.childEl.nativeElement.scrollTop = 50;
   }
 }

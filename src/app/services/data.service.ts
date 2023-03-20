@@ -29,6 +29,10 @@ export class DataService {
   taskId: any;
   id: string;
   // BOARD
+  toDo = [];
+  awaitingFeedback = [];
+  progress = [];
+  did = [];
   todos!: number;
   inProgress!: number;
   feedback!: number;
@@ -311,21 +315,13 @@ export class DataService {
   }
 
   //--BOARD--//
-  toDo = [];
-  awaitingFeedback = [];
-  progress = [];
-  did = [];
-
   sort() {
-    console.log('sort called')
-    // debugger;
     this.toDo = [];
     this.awaitingFeedback = [];
     this.progress = [];
     this.did = [];
     for (let i = 0; i < this.allTasks.length; i++) {
       let task = this.allTasks[i];
-
       if (this.allTasks[i].status === 'toDo') {
         this.toDo.push(task);
       } else if (this.allTasks[i].status === 'awaitingFeedback') {
@@ -335,12 +331,7 @@ export class DataService {
       } else if (this.allTasks[i].status === 'done') {
         this.did.push(task);
       }
-
     }
-    console.log('toDo:', this.toDo);
-    console.log('awaitingFeedback:', this.awaitingFeedback);
-    console.log('inProgress:', this.progress);
-    console.log('done:', this.did);
   }
 
   // GET COLOR OF CURRENT CATEGORY
@@ -390,6 +381,7 @@ export class DataService {
       .update({ status: status });
   }
 
+  // 
   updateTaskInFirebase(taskId: string, updatedTask: any) {
     this.firestore
       .collection('allTasks')
