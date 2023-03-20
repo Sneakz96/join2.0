@@ -176,8 +176,6 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
-    debugger;
-    console.log(this.task)
     let title = this.taskForm.value.title.trim();
     let description = this.taskForm.value.description.trim();
     let formattedTitle = this.capitalizeFirstLetter(title);
@@ -195,11 +193,11 @@ export class DialogAddTaskComponent {
     this.getDueDate();
 
     // Überprüfen, ob das Formular gültig ist
-    if (formattedTitle.length > 3 &&
-      description.length > 3 &&
-      this.taskForm.value.category.length > 0 &&
-      this.assignedCollegues.length > 0) {
-      console.log(this.task)
+    if (this.task.title.length > 3 &&
+      this.task.description.length > 3 &&
+      this.taskForm.value.category.length >= 1 &&
+      this.assignedCollegues.length >= 1 &&
+      this.taskForm.value.dueDate != 'NaN/Nan/Nan') {
       this.taskCreated = true;
       this.addTaskToDb();
       this.close();

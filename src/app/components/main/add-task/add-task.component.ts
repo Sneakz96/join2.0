@@ -68,19 +68,11 @@ export class AddTaskComponent {
         Validators.minLength(3),
         Validators.maxLength(100)
       ]),
-      'category': new FormControl(this.task.category, [
-        Validators.required,
-      ]),
-      'assignedTo': new FormControl(this.task.assignedTo, [
-        Validators.required,
-      ]),
-      'dueDate': new FormControl(this.task.dueDate, [
-        Validators.required,
-      ]),
-      'prio': new FormControl(this.task.priority, [
-        Validators.required,
-      ]),
-      'subTasks': new FormControl(this.task.subtasks),
+      'category': new FormControl(this.task.category, [Validators.required,]),
+      'assignedTo': new FormControl(this.task.assignedTo, [Validators.required,]),
+      'dueDate': new FormControl(this.task.dueDate, [Validators.required,]),
+      'prio': new FormControl(this.task.priority, [Validators.required,]),
+      'subTasks': new FormControl(this.task.subtasks)
     });
   }
 
@@ -101,22 +93,21 @@ export class AddTaskComponent {
       this.handleSubError();
       return;
     }
-    let newSubtask = this.createNewSubtask(this.subInput.nativeElement.value);
+    let newSubtask = this.createNewSubtask(subInputValue);
     this.addedSubTasks.push(newSubtask);
     this.subInput.nativeElement.value = '';
   }
 
   // 
-  createNewSubtask(text: string): any {
-    const newSubtask = {
-      text: text,
-      done: false
+  createNewSubtask(text: string): { text: string; done: boolean } {
+    return {
+      text,
+      done: false,
     };
-    return newSubtask;
   }
 
   // 
-  handleSubError() {
+  handleSubError(): void {
     setTimeout(() => {
       this.subLength = false;
       this.subMax = false;
@@ -125,30 +116,54 @@ export class AddTaskComponent {
 
   // 
   checkForm(): void {
-    let title = this.taskForm.value.title.trim();
-    let description = this.taskForm.value.description.trim();
-    let formattedTitle = this.capitalizeFirstLetter(title);
-
+    let formattedTitle = this.getFormattedTitle();
+    let assignedTo = this.getAssignedTo();
+    let subtasks = this.getSubtasks();
+  
     this.task.title = formattedTitle;
-    this.task.description = description;
+    this.task.description = this.taskForm.value.description.trim();
     this.task.category = this.taskForm.value.category;
-    this.task.assignedTo = this.assignedCollegues;
-    this.task.subtasks = this.addedSubTasks;
-
+    this.task.assignedTo = assignedTo;
+    this.task.subtasks = subtasks;
+  
     this.setCreationDate();
     this.getDueDate();
     this.changeContactStatus();
     this.setId();
     this.handleAlerts();
-
-    if (this.task.title.length > 3 &&
-      this.task.description.length > 3 &&
-      this.taskForm.value.category.length >= 1 &&
-      this.assignedCollegues.length >= 1 &&
-      this.taskForm.value.dueDate != 'NaN/Nan/Nan') {
+  
+    if (this.isTaskValid()) {
       this.taskCreated = true;
       this.addTaskToDb();
     }
+  }
+  
+  getFormattedTitle(): string {
+    let title = this.taskForm.value.title.trim();
+    return this.capitalizeFirstLetter(title);
+  }
+  
+  getAssignedTo(): string[] {
+    return this.assignedCollegues;
+  }
+  
+  getSubtasks(): { text: string; done: boolean }[] {
+    return this.addedSubTasks;
+  }
+  
+  isTaskValid(): boolean {
+    let { title, description, category } = this.taskForm.value;
+    let { assignedTo, subtasks } = this.task;
+    let dueDate = this.taskForm.value.dueDate;
+  
+    return (
+      title.length > 3 &&
+      description.length > 3 &&
+      category.length >= 1 &&
+      assignedTo.length >= 1 &&
+      subtasks.length >= 0 &&
+      dueDate !== 'NaN/Nan/Nan'
+    );
   }
 
   // 
@@ -217,10 +232,13 @@ export class AddTaskComponent {
     this.addedSubTasks = [];
     this.router.navigate(['/kanbanboard/board']);
   }
+
+  // 
   saveTaskToFirestore() {
     let coll = collection(this.fire, 'allTasks');
     setDoc(doc(coll), this.task.toJSON());
   }
+  
   // RESET FORM
   resetForm() {
     this.taskForm.reset();

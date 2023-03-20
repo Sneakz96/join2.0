@@ -33,6 +33,7 @@ export class DataService {
   awaitingFeedback = [];
   progress = [];
   did = [];
+  // SUMMARY
   todos!: number;
   inProgress!: number;
   feedback!: number;
@@ -51,6 +52,7 @@ export class DataService {
   initialsFirstNames: string[] = [];
   //
   mbDevice = null;
+  // URGENCY
   low = false;
   medium = false;
   high = false;
@@ -96,46 +98,6 @@ export class DataService {
       }
     }
     return checkedSubtasks.length;
-  }
-
-  // ADD TASK
-  // HANDLE ALERTS_ADDING TASKS
-  handleAlerts() {
-    this.alert_category();
-    this.alert_assigned();
-    this.alert_prio();
-    this.timeout();
-  }
-
-  // 
-  alert_category() {
-    if (this.task.category == '') {
-      this.category = true;
-    }
-  }
-
-  // 
-  alert_assigned() {
-    if (this.task.assignedTo.length == 0) {
-      this.assigned = true;
-    }
-  }
-
-  // 
-  alert_prio() {
-    if (this.task.priority == '') {
-      this.prio = true;
-    }
-  }
-
-  // 
-  timeout() {
-    setTimeout(() => {
-      this.category = false;
-      this.assigned = false;
-      this.dueDate = false;
-      this.prio = false;
-    }, 3000);
   }
 
   // GIVE SUBTASK ERROR
