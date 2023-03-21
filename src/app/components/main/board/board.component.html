@@ -20,10 +20,8 @@
 
       <div class="content-container" id="dropList_0" #toDo cdkDropList [cdkDropListData]="data.toDo"
         (cdkDropListDropped)="drop($event)">
-
         <div class="drag-task" *ngFor="let taskToDo of data.toDo" cdkDrag [cdkDragData]="taskToDo"
           [cdkDragDisabled]="taskToDo.visible">
-          
           <div class="task" [ngClass]="taskToDo.visible ? 'task-shadow':'task'" (click)="openTask(taskToDo)"
             [routerLink]="['/kanbanboard/board/' + taskToDo.customIdName]">
             <div class="category" [ngClass]="data.getCategoryColor(taskToDo.category)">

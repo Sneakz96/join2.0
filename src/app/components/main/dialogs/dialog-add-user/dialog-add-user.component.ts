@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
+import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -18,7 +19,11 @@ export class DialogAddUserComponent implements OnInit {
   user = new Contact();
   public contactForm!: FormGroup;
   userOnDialog: any;
-
+  // 
+  lastName = false;
+  email = false;
+  phone = false;
+  // 
   @Output() sideSelect = new EventEmitter<string>();
 
   // 
@@ -27,9 +32,7 @@ export class DialogAddUserComponent implements OnInit {
     private firestore: Firestore,
     public data: DataService,
     public dialogRef: MatDialogRef<DialogAddUserComponent>
-  ) {
-
-  }
+  ) { }
 
   // 
   ngOnInit(): void {
@@ -40,10 +43,23 @@ export class DialogAddUserComponent implements OnInit {
   // SET FORM OF NEW CONTACT
   setUserForm() {
     this.contactForm = new FormGroup({
-      'firstName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]),
-      'lastName': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]),
-      'email': new FormControl('', [Validators.required, Validators.email], []),
-      'phone': new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{6,}$/)]),
+      'firstName': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(12),
+        Validators.pattern(/^[a-zA-Z]+$/)]),
+      'lastName': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(12),
+        Validators.pattern(/^[a-zA-Z]+$/)]),
+      'email': new FormControl('', [
+        Validators.required,
+        Validators.email], []),
+      'phone': new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\+?\d{6,}$/)
+      ]),
     });
   }
 
@@ -52,7 +68,7 @@ export class DialogAddUserComponent implements OnInit {
     let { firstName, lastName, email, phone } = this.contactForm.value;
     let formattedFirstName = this.data.capitalizeFirstLetter(firstName.trim());
     let formattedLastName = this.data.capitalizeFirstLetter(lastName.trim());
-    
+    this.checkInputs();
     if (this.contactForm.valid) {
 
       this.user.firstName = formattedFirstName;
@@ -66,6 +82,25 @@ export class DialogAddUserComponent implements OnInit {
 
       this.contactForm.reset();
     }
+  }
+
+  // 
+  checkInputs() {
+    if (this.contactForm.value.lastName == '') {
+      this.lastName = true;
+    }
+    if (this.contactForm.value.email == '') {
+      this.email = true;
+    }
+    if (this.contactForm.value.phone == '') {
+      this.phone = true;
+    }
+
+    setTimeout(() => {
+      this.lastName = false;
+      this.email = false;
+      this.phone = false;
+    }, 3000)
   }
 
   // SHOULD CLEAR VALUES OF DIALOG
