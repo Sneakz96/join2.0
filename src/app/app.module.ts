@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 // ROUTER_
 import { AppRoutingModule } from './app-routing.module';
-
 // COMPONENTS_
 import { AppComponent } from './app.component';
 // MAIN
@@ -34,7 +32,6 @@ import { DialogEditTaskComponent } from './components/main/dialogs/dialog-edit-t
 import { SignUpComponent } from './components/log/sign-up/sign-up.component';
 import { LoginComponent } from './components/log/login/login.component';
 import { WelcomeComponent } from './components/log/welcome/welcome.component';
-
 // ANGULAR_MATERIAL_
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -45,7 +42,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 // ANGULAR_FIRE_
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
@@ -108,12 +104,10 @@ import { HttpClientModule } from '@angular/common/http';
     provideFirestore(() => getFirestore()),
   ],
   providers: [
-    // Subtask,
     TaskDialogComponent,
     MatDatepickerModule,
     EditContactComponent,
     LoginComponent,
-    // AddTaskComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' }
   ],
