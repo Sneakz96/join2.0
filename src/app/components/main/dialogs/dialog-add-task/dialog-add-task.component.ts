@@ -182,7 +182,6 @@ export class DialogAddTaskComponent {
     this.handleAlerts();
     this.getDueDate();
 
-    // Check if form is valid
     let isFormValid =
       this.task.title.length > 3 &&
       this.task.description.length > 3 &&
@@ -222,7 +221,7 @@ export class DialogAddTaskComponent {
     this.task.createdAt = date;
   }
 
-  // 
+  // GET DUE DATE FOR TASK
   getDueDate() {
     let date = new Date(this.taskForm.value.dueDate);
     let month = date.getMonth() + 1;
@@ -232,7 +231,7 @@ export class DialogAddTaskComponent {
     this.task.dueDate = output;
   }
 
-  // 
+  // ADD CURRENT TASK TO DB
   addTaskToDb() {
     this.data.alert = true;
     this.saveTaskToFirestore();
@@ -247,7 +246,7 @@ export class DialogAddTaskComponent {
     setDoc(doc(coll), this.task.toJSON());
   }
 
-  // 
+  // RESET TASK FORM
   resetForm() {
     this.taskForm.reset();
     this.subInput.nativeElement.value = '';

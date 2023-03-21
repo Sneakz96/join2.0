@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     providedIn: 'root'
 })
 
-export class AuthService implements OnInit {
+export class AuthService {
 
     loginForm!: FormGroup;
     signForm!: FormGroup;
@@ -22,10 +22,6 @@ export class AuthService implements OnInit {
     }
 
     // 
-    ngOnInit(): void {
-    }
-
-    // 
     setLoginForm() {
         this.loginForm = new FormGroup({
             'email': new FormControl('', [Validators.required, Validators.email]),
@@ -37,12 +33,11 @@ export class AuthService implements OnInit {
     loginUser() {
         this.afAuth
             .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
-            .then(res => {
+            .then(() => {
                 this.router.navigate(['/kanbanboard']);
-                console.log('login successfull', res);
             })
-            .catch(err => {
-                console.log('Something went wrong:', err.message);
+            .catch(() => {
+                alert('Something went wrong!');
             });
     }
 
@@ -57,7 +52,6 @@ export class AuthService implements OnInit {
 
     // SIGN UP TO DB
     signUp() {
-        console.log('signUp called');
         if (this.signForm.invalid) {
             return;
         }
@@ -66,12 +60,11 @@ export class AuthService implements OnInit {
             .then(res => {
                 if (res.credential == null) {
                     res.user.updateProfile({ displayName: this.signForm.value.displayName });
-                    console.log('You are Successfully signed up!', res);
                     this.router.navigate(['/kanbanboard/summary']);
                 }
             })
-            .catch(error => {
-                console.log('Something is wrong:', error.message);
+            .catch(() => {
+                alert('Something is wrong!');
             });
     }
 }

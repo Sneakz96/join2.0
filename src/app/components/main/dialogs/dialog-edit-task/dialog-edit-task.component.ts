@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -40,7 +40,6 @@ export class DialogEditTaskComponent implements OnInit {
     this.getPriority();
     this.checkAssignedContacts();
     this.check();
-    this.taskForm.valueChanges.subscribe(console.log);
   }
 
   // SET TASK FORM
@@ -88,7 +87,6 @@ export class DialogEditTaskComponent implements OnInit {
     this.data.allContacts[index].selected = !this.data.allContacts[index].selected;
     if (this.data.allContacts[index].selected) {
       this.selectedContacts.push(this.data.allContacts[index]);
-      console.log(this.task.assignedTo);
     } else {
       let selectedContactIndex = this.selectedContacts.indexOf(this.data.allContacts[index]);
       if (selectedContactIndex !== -1) {
@@ -126,12 +124,19 @@ export class DialogEditTaskComponent implements OnInit {
     this.router.navigate(['/kanbanboard/board']);
   }
 
-  // SAVE EDITED TASK TO DB
-  save() {
-    if (this.task.title.length > 3 &&
+  // VALIDATE CURRENT FORM
+  validateForm(): boolean {
+    return (
+      this.task.title.length > 3 &&
       this.task.description.length > 3 &&
       this.task.dueDate != null &&
-      this.task.dueDate != '/NaN/NaN/NaN/') {
+      this.task.dueDate != '/NaN/NaN/NaN/'
+    );
+  }
+
+  // SAVE EDITED TASK TO DB
+  save(): void {
+    if (this.validateForm()) {
       this.close();
       this.task.assignedTo = this.selectedContacts;
       this.firestore

@@ -52,7 +52,6 @@ export class AddTaskComponent {
     public router: Router,
   ) {
     this.setForm();
-    this.taskForm.valueChanges.subscribe(console.log);
   }
 
   // SET TASK FORM

@@ -13,7 +13,7 @@ import { DialogEditTaskComponent } from '../dialog-edit-task/dialog-edit-task.co
 })
 
 export class TaskDialogComponent implements OnInit {
-
+  // 
   taskId = '';
   task: Task;
   done = false;
@@ -25,15 +25,15 @@ export class TaskDialogComponent implements OnInit {
     private router: Router,
     public data: DataService,
     private firestore: AngularFirestore,
-  ) {
-  }
+  ) { }
 
+  // 
   ngOnInit(): void {
-    this.checkChecked();
+    this.checkCheckedUsers();
   }
 
   // 
-  checkChecked() {
+  checkCheckedUsers() {
     for (let i = 0; i < this.task.subtasks.length; i++) {
       if (this.task.subtasks[i].done) {
         this.checkedSubTasks.push(this.task.subtasks[i]);
@@ -50,13 +50,13 @@ export class TaskDialogComponent implements OnInit {
     if (this.task.subtasks[i].done) {
       this.checkedSubTasks.push(this.task.subtasks[i]);
     } else {
-      const index = this.checkedSubTasks.indexOf(this.task.subtasks[i]);
+      let index = this.checkedSubTasks.indexOf(this.task.subtasks[i]);
       if (index !== -1) {
         this.checkedSubTasks.splice(index, 1);
       }
     }
 
-    const updatedTask = {
+    let updatedTask = {
       title: this.task.title,
       description: this.task.description,
       subtasks: this.task.subtasks
@@ -83,11 +83,10 @@ export class TaskDialogComponent implements OnInit {
   deleteTask(taskId: any) {
     this.firestore.collection("allTasks").doc(taskId).delete()
       .then(() => {
-        console.log("Aufgabe wurde erfolgreich gelöscht.");
         this.closeDialog();
       })
-      .catch((error) => {
-        console.error("Fehler beim Löschen der Aufgabe:", error);
+      .catch(() => {
+        alert("Fehler beim Löschen der Aufgabe!");
       });
   }
 }

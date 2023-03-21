@@ -27,7 +27,6 @@ export class DialogEditUserComponent implements OnInit {
   // 
   ngOnInit(): void {
     this.setUserForm();
-    this.userForm.valueChanges.subscribe(console.log);
   }
 
   // 
