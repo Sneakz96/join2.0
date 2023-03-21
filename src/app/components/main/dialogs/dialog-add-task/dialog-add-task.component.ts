@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
@@ -18,7 +18,7 @@ interface subtask {
 })
 
 export class DialogAddTaskComponent {
-  //CONTACTS
+  // CONTACTS
   contact = new FormControl();
   assignedCollegues: string[] = [];
   // TASK
@@ -26,19 +26,17 @@ export class DialogAddTaskComponent {
   taskForm!: FormGroup;
   choosenCategory: any;
   // SUBINPUT
-  subtask: subtask;
   @ViewChild('subInput') subInput: ElementRef;
+  // 
+  subtask: subtask;
   addedSubTasks: any[] = [];
-  // ALERTS
+  //
   category = false;
   dueDate = false;
   assigned = false;
   prio = false;
   description = false;
-  // 
   taskCreated = false;
-  // 
-
   subMax = false;
   subLength = false;
   //   
@@ -49,7 +47,6 @@ export class DialogAddTaskComponent {
     public dialogRef: MatDialogRef<DialogAddTaskComponent>
   ) {
     this.setForm();
-    this.taskForm.valueChanges.subscribe(console.log);
   }
 
   // 
@@ -159,11 +156,7 @@ export class DialogAddTaskComponent {
 
   // 
   createNewSubtask(text: string): any {
-    const newSubtask = {
-      text: text,
-      done: false
-    };
-    return newSubtask;
+    return { text, done: false };
   }
 
   //
@@ -176,28 +169,28 @@ export class DialogAddTaskComponent {
 
   // 
   checkForm(): void {
-    let title = this.taskForm.value.title.trim();
-    let description = this.taskForm.value.description.trim();
-    let formattedTitle = this.capitalizeFirstLetter(title);
+    let { title, description, category, dueDate } = this.taskForm.value;
 
-    this.task.title = formattedTitle;
-    this.task.description = description;
-    this.task.category = this.taskForm.value.category;
+    this.task.title = this.capitalizeFirstLetter(title.trim());
+    this.task.description = description.trim();
+    this.task.category = category;
     this.task.assignedTo = this.assignedCollegues;
     this.task.subtasks = this.addedSubTasks;
-
     this.setCreationDate();
     this.changeContactStatus();
     this.setId();
     this.handleAlerts();
     this.getDueDate();
 
-    // Überprüfen, ob das Formular gültig ist
-    if (this.task.title.length > 3 &&
+    // Check if form is valid
+    let isFormValid =
+      this.task.title.length > 3 &&
       this.task.description.length > 3 &&
-      this.taskForm.value.category.length >= 1 &&
+      category.length >= 1 &&
       this.assignedCollegues.length >= 1 &&
-      this.taskForm.value.dueDate != 'NaN/Nan/Nan') {
+      !isNaN(new Date(dueDate).getTime());
+
+    if (isFormValid) {
       this.taskCreated = true;
       this.addTaskToDb();
       this.close();
@@ -260,7 +253,6 @@ export class DialogAddTaskComponent {
     this.subInput.nativeElement.value = '';
     this.addedSubTasks = [];
     this.task.priority = '';
-    // REMOVE ACTIVE CLASS
     this.data.high = false;
     this.data.medium = false;
     this.data.low = false;

@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.class';
-import { Task } from 'src/app/models/task.class';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -15,9 +14,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class DialogAddUserComponent implements OnInit {
-
+  // 
   user = new Contact();
-  public contactForm!: FormGroup;
+  contactForm!: FormGroup;
   userOnDialog: any;
   // 
   lastName = false;
@@ -25,7 +24,6 @@ export class DialogAddUserComponent implements OnInit {
   phone = false;
   // 
   @Output() sideSelect = new EventEmitter<string>();
-
   // 
   constructor(
     private router: Router,
@@ -37,7 +35,6 @@ export class DialogAddUserComponent implements OnInit {
   // 
   ngOnInit(): void {
     this.setUserForm();
-    this.contactForm.valueChanges.subscribe(console.log)
   }
 
   // SET FORM OF NEW CONTACT
@@ -95,7 +92,11 @@ export class DialogAddUserComponent implements OnInit {
     if (this.contactForm.value.phone == '') {
       this.phone = true;
     }
+    this.timeout();
+  }
 
+  // TIMEOUT
+  timeout() {
     setTimeout(() => {
       this.lastName = false;
       this.email = false;
@@ -126,38 +127,14 @@ export class DialogAddUserComponent implements OnInit {
 
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
   setColor() {
-    switch (this.user.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.user.color = 'lightgreen'
-        break;
-      case 1:
-        this.user.color = 'lightgrey'
-        break;
-      case 2:
-        this.user.color = 'lightblue'
-        break;
-      case 3:
-        this.user.color = 'rgb(203, 87, 87)'
-        break;
-      case 4:
-        this.user.color = '#d0d046'//YELLOW
-        break;
-      case 5:
-        this.user.color = 'orange'
-        break;
-      case 6:
-        this.user.color = 'purple'
-        break;
-      case 7:
-        this.user.color = 'pink'
-        break;
-      default:
-    }
+    let colors = ['lightgreen', 'lightgrey', 'lightblue', 'rgb(203, 87, 87)', '#d0d046', 'orange', 'purple', 'pink'];
+    let charCode = this.user.lastName.charCodeAt(0);
+    let colorIndex = charCode % colors.length;
+    this.user.color = colors[colorIndex];
   }
 
   // CHECK FORM VALIDATION AND ADD CREATED USER TO CONTACT-LIST
   addUser() {
-    debugger;
     this.data.contactCreated = true;
     this.data.allContacts = [];
     this.data.loadContacts();

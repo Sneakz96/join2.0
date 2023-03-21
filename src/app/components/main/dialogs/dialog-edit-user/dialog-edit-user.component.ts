@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -11,30 +11,26 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dialog-edit-user.component.scss']
 })
 
-export class DialogEditUserComponent implements OnInit, OnChanges {
-
+export class DialogEditUserComponent implements OnInit {
+  // 
   user: Contact;
   userId: string;
   userForm: FormGroup;
   userEdited = false;
-
   // 
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
     private firestore: AngularFirestore,
     public data: DataService,
-  ) {
-  }
+  ) { }
 
+  // 
   ngOnInit(): void {
     this.setUserForm();
     this.userForm.valueChanges.subscribe(console.log);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-  }
-
+  // 
   setUserForm() {
     this.userForm = new FormGroup({
       'firstName': new FormControl('', [
@@ -80,33 +76,10 @@ export class DialogEditUserComponent implements OnInit, OnChanges {
 
   // SET BG_COLOR OF CIRCLE BY FIRST LETTER OF LAST NAME
   setColor() {
-    switch (this.user.lastName.charCodeAt(0) % 6) {
-      case 0:
-        this.user.color = 'lightgreen'
-        break;
-      case 1:
-        this.user.color = 'lightgrey'
-        break;
-      case 2:
-        this.user.color = 'lightblue'
-        break;
-      case 3:
-        this.user.color = 'rgb(203, 87, 87)'
-        break;
-      case 4:
-        this.user.color = '#d0d046'//YELLOW
-        break;
-      case 5:
-        this.user.color = 'orange'
-        break;
-      case 6:
-        this.user.color = 'purple'
-        break;
-      case 7:
-        this.user.color = 'pink'
-        break;
-      default:
-    }
+    let colors = ['lightgreen', 'lightgrey', 'lightblue', 'rgb(203, 87, 87)', '#d0d046', 'orange', 'purple', 'pink'];
+    let charCode = this.user.lastName.charCodeAt(0);
+    let colorIndex = charCode % colors.length;
+    this.user.color = colors[colorIndex];
   }
 
   // CHECK FORM OF EDITED CONTACT
@@ -123,8 +96,6 @@ export class DialogEditUserComponent implements OnInit, OnChanges {
     let isPhoneValid = checkNumber(phone.replace(/\s/g, ''));
 
     if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isPhoneValid) {
-      console.log('error');
-      console.log(isFirstNameValid, isLastNameValid, isEmailValid, isPhoneValid);
       this.userEdited = false;
     } else {
       this.userEdited = true;

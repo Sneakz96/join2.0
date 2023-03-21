@@ -116,16 +116,11 @@ export class AddTaskComponent {
 
   // 
   checkForm(): void {
-    let formattedTitle = this.getFormattedTitle();
-    let assignedTo = this.getAssignedTo();
-    let subtasks = this.getSubtasks();
-  
-    this.task.title = formattedTitle;
+    this.task.title = this.getFormattedTitle();
     this.task.description = this.taskForm.value.description.trim();
     this.task.category = this.taskForm.value.category;
-    this.task.assignedTo = assignedTo;
-    this.task.subtasks = subtasks;
-  
+    this.task.assignedTo = this.getAssignedTo();
+    this.task.subtasks = this.getSubtasks();
     this.setCreationDate();
     this.getDueDate();
     this.changeContactStatus();

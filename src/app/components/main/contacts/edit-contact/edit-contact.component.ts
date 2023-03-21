@@ -13,10 +13,9 @@ import { DialogEditUserComponent } from '../../dialogs/dialog-edit-user/dialog-e
 })
 
 export class EditContactComponent implements OnInit {
-
+  // 
   userId = '';
   user: any = {};
-
   // 
   constructor(
     private firestore: AngularFirestore,

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
@@ -15,14 +15,14 @@ import { UIService } from 'src/app/services/ui.service';
 
 export class BoardComponent {
   // 
-  toDo = [];
-  awaitingFeedback = [];
-  inProgress = [];
-  done = [];
+  toDo: any[] = [];
+  awaitingFeedback: any[] = [];
+  inProgress: any[] = [];
+  done: any[] = [];
   // 
   excess = false;
   dueDate: any;
-  searchField: string;
+  searchField = '';
   // 
   constructor(
     public firestore: AngularFirestore,
@@ -30,7 +30,7 @@ export class BoardComponent {
     public data: DataService,
     public ui: UIService,
   ) {
-    this.sort();
+    this.updateBoard();
   }
 
   // SEARCH TASK ON BOARD
@@ -77,7 +77,6 @@ export class BoardComponent {
   changeStatusByDrop(task: any, status: any) {
     if (status === 'dropList_0') {
       task.status = 'toDo';
-      this.toDo
     } else if (status === 'dropList_1') {
       task.status = 'inProgress';
     } else if (status === 'dropList_2') {
@@ -87,29 +86,14 @@ export class BoardComponent {
       this.data.deleteDoneTasks(task);
     }
     this.data.updateTask(task, task.status);
-    this.sort();
+    this.updateBoard();
   }
 
   // SORT ALL_TASKS BY THEIR STATUS
-  sort() {
-    this.toDo = [];
-    this.awaitingFeedback = [];
-    this.inProgress = [];
-    this.done = [];
-    for (let i = 0; i < this.data.allTasks.length; i++) {
-      let task = this.data.allTasks[i];
-      if (this.data.allTasks[i].status == 'toDo') {
-        this.toDo.push(task);
-      }
-      if (this.data.allTasks[i].status == 'awaitingFeedback') {
-        this.awaitingFeedback.push(task);
-      }
-      if (this.data.allTasks[i].status == 'inProgress') {
-        this.inProgress.push(task);
-      }
-      if (this.data.allTasks[i].status == 'done') {
-        this.done.push(task);
-      }
-    }
+  updateBoard() {
+    this.toDo = this.data.allTasks.filter(task => task.status === 'toDo');
+    this.awaitingFeedback = this.data.allTasks.filter(task => task.status === 'awaitingFeedback');
+    this.inProgress = this.data.allTasks.filter(task => task.status === 'inProgress');
+    this.done = this.data.allTasks.filter(task => task.status === 'done');
   }
 }
